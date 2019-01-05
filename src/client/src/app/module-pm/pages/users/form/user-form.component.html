@@ -1,0 +1,23 @@
+<div class="ui-g ui-fluid" >
+	<div class="ui-g-12">
+		<label for="firstName">First Name</label>
+		<input pInputText id="firstName" size="60" class="ui-inputtext" [(ngModel)]="config.data.item.firstName"/>
+	</div>
+	<div class="ui-g-12">
+		<label for="lastName">Last Name</label>
+		<input pInputText id="lastName" size="40" class="ui-inputtext" [(ngModel)]="config.data.item.lastName"/>
+	</div>
+	<div class="ui-g-12">
+		<label for="email">Email</label>
+		<input pInputText id="email" type="email" size="40" class="ui-inputtext" [(ngModel)]="config.data.item.email"/>
+	</div>
+</div>
+<p-footer>
+	<div class="ui-dialog-buttonpane">
+		<button type="button"
+				  pButton icon="fa fa-check" (click)="config.data.save(config.data.isNewItem, config.data.source, config.data.item)" [label]="config.data.uiConfig.labels.save"></button>
+		<button type="button"
+				  [disabled]="config.data.isNewItem"
+				  pButton icon="fa fa-close" (click)="config.data.delete(config.data.source)" [label]="config.data.uiConfig.labels.delete"></button>
+	</div>
+</p-footer>

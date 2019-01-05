@@ -1,0 +1,20 @@
+/* You can addColumn global styles to this file, and also import other style files */
+@import "~primeicons/primeicons.css";
+@import "~primeng/resources/themes/nova-colored/theme.css";
+@import "~primeng/resources/primeng.min.css";
+@import "app/styles/p-table.css";
+@import "app/styles/general.css";
+@import "app/styles/form.css";
+
+body .mat-sidenav .ui-panelmenu .ui-panelmenu-content {
+  border: none;
+}
+body .ui-dataview .ui-dataview-header {
+  border:none;
+  background-color: transparent;
+  padding:0;
+}
+body .ui-dataview .ui-dataview-content{
+  border:none;
+}
+

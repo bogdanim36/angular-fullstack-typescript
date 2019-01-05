@@ -1,0 +1,6 @@
+.ui-dialog .ui-dialog-buttonpane button {
+	float: initial;
+}
+.ui-dialog .ui-dialog-buttonpane {
+	padding: 0 7px;
+}

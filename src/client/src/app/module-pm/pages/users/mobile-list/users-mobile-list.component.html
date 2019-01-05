@@ -1,0 +1,22 @@
+<div style="position: relative;line-height:50px;padding:5px 15px;">
+	<label style="font-size: 120%">{{parent.uiConfig.labels.list}}</label>
+	<p-button icon="fa fa-plus"
+				 style="position: absolute;right:15px;top:5px;"
+				 (click)="parent.showDialogToAdd()"
+				 [label]="parent.uiConfig.labels.addItem"></p-button>
+</div>
+<p-dataView [value]="parent.service.items">
+	<ng-template let-item pTemplate="listItem">
+		<div style="border-bottom: 1px solid lightgray;display: inline-flex">
+			<div style="width:100%">
+				<div *ngFor="let column of parent.uiConfig.columns">
+					<label>{{column.header}}: </label>{{item[column.field]}}
+				</div>
+			</div>
+			<div style="width:50px;line-height: 50px;text-align: center">
+				<i class="fa fa-edit"
+					(click)="parent.showDialogToEdit($event,item)"></i>
+			</div>
+		</div>
+	</ng-template>
+</p-dataView>

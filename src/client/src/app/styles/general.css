@@ -1,0 +1,25 @@
+.is-button {
+	cursor: pointer;
+}
+
+.is-button:hover, .app-toolbar button[mat-icon-button]:hover  {
+	background-color: #1281e0;
+	color: white;
+}
+
+i.is-button {
+	height: 30px;
+	width: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.is-button[disabled] {
+	cursor: not-allowed;
+}
+
+.app-toolbar button[mat-icon-button] {
+	background-color: transparent;
+	color: white;
+}
+

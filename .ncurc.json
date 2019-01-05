@@ -1,0 +1,7 @@
+{
+  "upgrade": false,
+  "filter": "express",
+  "reject": [
+    "typescript"
+  ]
+}
