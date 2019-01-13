@@ -18,3 +18,6 @@ Objectives:
 <br>  10. Run npm client:start. This will run ng serve with proxy config (src/client/proxy.conf.json).
 <br>  11. View app on http://localhost:4201
 <br>  12. For production build run gulp build-prod. This will ruin build for client and server side and copy source files in dist folder
+<br>Please visit other project of mine about same thing:
+<a href='https://github.com/bogdanim36/project-manager'>Project manager</a>
+
