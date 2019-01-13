@@ -1,4 +1,5 @@
 /* You can addColumn global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~primeicons/primeicons.css";
 @import "~primeng/resources/themes/nova-colored/theme.css";
 @import "~primeng/resources/primeng.min.css";
@@ -17,4 +18,3 @@ body .ui-dataview .ui-dataview-header {
 body .ui-dataview .ui-dataview-content{
   border:none;
 }
-

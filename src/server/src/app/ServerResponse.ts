@@ -17,7 +17,7 @@ export class ServerResponse {
             data: err,
             message: err.message || 'Server internal error'
         };
-        console.error("server-response-error", err);
+        console.error("server-response-error", err.message);
         res.send(response);
     }
 

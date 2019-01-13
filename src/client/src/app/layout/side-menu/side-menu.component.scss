@@ -8,17 +8,6 @@
   right: 0;
 }
 
-app-main-toolbar.mat-toolbar {
-  padding-left: 0;
-}
-
-.mat-toolbar {
-  background-color: #47a1ef !important;
-  color: white !important;
-}
-.mat-toolbar-row, .mat-toolbar-single-row {
-  height: 40px !important;
-}
 
 
 .sidenav-container {
@@ -37,6 +26,7 @@ app-main-toolbar.mat-toolbar {
 .is-mobile mat-sidenav {
   width: 100% !important;
   top:40px !important;
+  background-color: white;
 }
 
 
@@ -45,4 +35,21 @@ a{
 }
 :host ::ng-deep .mat-drawer-inner-container{
   overflow-y: scroll;
+}
+
+app-main-toolbar.mat-toolbar {
+  padding-left: 0;
+}
+
+.mat-toolbar {
+  background-color: #1a4163 !important;
+  color: white !important;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 40px !important;
+  min-height: 40px !important;
+  padding:0;
+}
+mat-sidenav-content{
+  padding:10px;
 }

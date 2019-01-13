@@ -25,9 +25,6 @@
       ],
       "@server/*": [
         "../server/src/*"
-      ],
-      "*": [
-        "./node_modules/@types"
       ]
     }
   }

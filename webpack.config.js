@@ -4,13 +4,13 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = function (env, argv) {
 	console.log("env", env);
 	return {
-		mode: env.production ? 'production' : 'development',
-		devtool: env.production ? 'source-maps' : 'eval',
+		mode: 'development',
+		devtool: 'eval',
 		target: "node",
 		entry: './src/server/src/index.ts',
-		watch: true,
+		watch: env.developement,
 		output: {
-			path: path.resolve(__dirname, 'src/server/dist'),
+			path: path.resolve(__dirname, 'src/server/dist', env.production ? 'prod' : 'dev'),
 			filename: "server.js",
 			libraryTarget: 'commonjs'
 		},
@@ -23,14 +23,7 @@ module.exports = function (env, argv) {
 			Buffer: false,
 			setImmediate: true
 		},
-		externals: [fs.readdirSync("./node_modules")
-			.reduce(function (acc, mod) {
-				if (mod === ".bin") {
-					return acc
-				}
-				acc[mod] = "commonjs " + mod;
-				return acc
-			}, {}), nodeExternals()],
+		externals: [nodeExternals()],
 		resolve: {
 			extensions: [
 				'.webpack.js',
@@ -48,22 +41,33 @@ module.exports = function (env, argv) {
 		module: {
 			rules: [
 				{
-					test: /\.tsx?$/,
+					test: /\.ts?$/,
 					use: 'ts-loader',
-					exclude: [/node_modules/, path.resolve(__dirname, './src/client')]
+					exclude: [/node_modules/, path.resolve(__dirname, './src/client'), path.resolve(__dirname, './src/templates')]
+				},
+				{
+					test: /\.js?$/,
+					use: 'babel-loader',
+					exclude: [/node_modules/, path.resolve(__dirname, './src/client'), path.resolve(__dirname, './src/templates')]
 				}
 			]
 		},
 		devServer: {
-			contentBase: false,
 			compress: false,
-			port: 9000,
+			contentBase: path.join(__dirname, "./dist"),
+			port: 9001,
 			historyApiFallback: true,
-			open: false,
+			open: true,
+			proxy: {
+				'/api/*': 'http://127.0.0.1:8010',
+				"changeOrigin": true
+			},
 			overlay: {
 				warnings: true,
-				errors: true
+				errors:
+					true
 			}
 		}
-	};
+	}
+		;
 };

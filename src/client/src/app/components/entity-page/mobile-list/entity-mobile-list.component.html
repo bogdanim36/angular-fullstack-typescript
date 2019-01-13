@@ -1,0 +1,22 @@
+<div  class="mobile-list-header box-shadow">
+	<label style="font-size: 120%">{{parentRef.uiConfig.labels.list}}</label>
+	<p-button icon="fa fa-plus"
+
+				 (click)="parentRef.showDialogToAdd()"
+				 [label]="parentRef.uiConfig.labels.addItem"></p-button>
+</div>
+<p-dataView [value]="parentRef.service.items">
+	<ng-template let-item pTemplate="listItem">
+		<div  class="item-panel box-shadow" >
+			<div style="width:100%">
+				<div *ngFor="let column of parentRef.uiConfig.columns">
+					<label>{{column.header}}: </label>{{item[column.field]}}
+				</div>
+			</div>
+			<div class="edit-btn" (click)="parentRef.showDialogToEdit($event,item)">
+				<i class="fa fa-edit"
+					></i>
+			</div>
+		</div>
+	</ng-template>
+</p-dataView>

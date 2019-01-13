@@ -6,31 +6,31 @@ import {MenuItem} from 'primeng/api';
 
 export class BasePanelMenuItem {
 
-    handleClick(event, item) {
-        if (item.disabled) {
-            event.preventDefault();
-            return;
-        }
+	handleClick(event, item) {
+		if (item.disabled) {
+			event.preventDefault();
+			return;
+		}
 
-        item.expanded = !item.expanded;
+		item.expanded = !item.expanded;
 
-        if (!item.url) {
-            event.preventDefault();
-        }
+		if (!item.url) {
+			event.preventDefault();
+		}
 
-        if (item.command) {
-            item.command({
-                originalEvent: event,
-                item: item
-            });
-        }
-    }
+		if (item.command) {
+			item.command({
+				originalEvent: event,
+				item: item
+			});
+		}
+	}
 }
 
 @Component({
-    selector: 'p-panelMenuSub',
-    styleUrls: ['./panelmenu.css'],
-    template: `
+	selector: 'p-panelMenuSub',
+	styleUrls: ['./panelmenu.css'],
+	template: `
 		 <ul class="ui-submenu-list" [@submenu]="expanded ? {value: 'visible', params: {transitionParams: transitionOptions}} : {value: 'hidden', params: {transitionParams: transitionOptions}}">
 			 <ng-template ngFor let-child [ngForOf]="item.items">
 				 <li *ngIf="child.separator" class="ui-menu-separator ui-widget-content">
@@ -38,14 +38,14 @@ export class BasePanelMenuItem {
 					 <a *ngIf="!child.routerLink" [href]="child.url||'#'" class="ui-menuitem-link ui-corner-all" [attr.tabindex]="item.expanded ? null : '-1'" [attr.id]="child.id"
 						 [ngClass]="{'ui-state-disabled':child.disabled}"
 						 (click)="handleClick($event,child)" [attr.target]="child.target" [attr.title]="child.title">
-                        <span class="ui-panelmenu-icon pi pi-fw" [ngClass]="{'pi-caret-right':!child.expanded,'pi-caret-down':child.expanded}" *ngIf="child.items"></span
+						<span class="ui-panelmenu-icon pi pi-fw" [ngClass]="{'pi-caret-right':!child.expanded,'pi-caret-down':child.expanded}" *ngIf="child.items"></span
 								><span class="ui-menuitem-icon" [ngClass]="child.icon" *ngIf="child.icon"></span
 					 ><span class="ui-menuitem-text">{{child.label}}</span>
 					 </a>
 					 <a *ngIf="child.routerLink" [routerLink]="child.routerLink" [queryParams]="child.queryParams" [routerLinkActive]="'ui-state-active'" [routerLinkActiveOptions]="child.routerLinkActiveOptions||{exact:false}" class="ui-menuitem-link ui-corner-all"
 						 [ngClass]="{'ui-state-disabled':child.disabled}" [attr.tabindex]="item.expanded ? null : '-1'" [attr.id]="child.id"
 						 (click)="handleClick($event,child)" [attr.target]="child.target" [attr.title]="child.title">
-                        <span class="ui-panelmenu-icon pi pi-fw" [ngClass]="{'pi-caret-right':!child.expanded,'pi-caret-down':child.expanded}" *ngIf="child.items"></span
+						<span class="ui-panelmenu-icon pi pi-fw" [ngClass]="{'pi-caret-right':!child.expanded,'pi-caret-down':child.expanded}" *ngIf="child.items"></span
 								><span class="ui-menuitem-icon" [ngClass]="child.icon" *ngIf="child.icon"></span
 					 ><span class="ui-menuitem-text">{{child.label}}</span>
 					 </a>
@@ -53,40 +53,40 @@ export class BasePanelMenuItem {
 				 </li>
 			 </ng-template>
 		 </ul>
-    `,
-    animations: [
-        trigger('submenu', [
-            state('hidden', style({
-                height: '0px'
-            })),
-            state('visible', style({
-                height: '*'
-            })),
-            transition('visible => hidden', animate('{{transitionParams}}')),
-            transition('hidden => visible', animate('{{transitionParams}}'))
-        ])
-    ]
+	`,
+	animations: [
+		trigger('submenu', [
+			state('hidden', style({
+				height: '0px'
+			})),
+			state('visible', style({
+				height: '*'
+			})),
+			transition('visible => hidden', animate('{{transitionParams}}')),
+			transition('hidden => visible', animate('{{transitionParams}}'))
+		])
+	]
 })
 export class PanelMenuSub extends BasePanelMenuItem {
 
-    @Input() item: MenuItem;
+	@Input() item: MenuItem;
 
-    @Input() expanded: boolean;
+	@Input() expanded: boolean;
 
-    @Input() transitionOptions: string;
+	@Input() transitionOptions: string;
 }
 
 @Component({
-    selector: 'p-panelMenu',
-    template: `
+	selector: 'p-panelMenu',
+	template: `
 		 <div [class]="styleClass" [ngStyle]="style" [ngClass]="'ui-panelmenu ui-widget'">
 			 <ng-container *ngFor="let item of model;let f=first;let l=last;">
 				 <div class="ui-panelmenu-panel" [ngClass]="{'ui-helper-hidden': item.visible === false}">
 					 <div [ngClass]="{'ui-widget ui-panelmenu-header ui-state-default':true,'ui-corner-top':f,'ui-corner-bottom':l&&!item.expanded,
-                    'ui-state-disabled':item.disabled}" [class]="item.styleClass" [ngStyle]="item.style">
+					'ui-state-disabled':item.disabled}" [class]="item.styleClass" [ngStyle]="item.style">
 						 <a *ngIf="!item.routerLink" [href]="item.url||'#'" (click)="handleClick($event,item)"
 							 [attr.target]="item.target" [attr.title]="item.title" class="ui-panelmenu-header-link">
-                        <span *ngIf="item.items" class="ui-panelmenu-icon pi pi-fw" [ngClass]="{'pi-caret-right':!item.expanded,'pi-caret-down':item.expanded}"></span
+						<span *ngIf="item.items" class="ui-panelmenu-icon pi pi-fw" [ngClass]="{'pi-caret-right':!item.expanded,'pi-caret-down':item.expanded}"></span
 								><span class="ui-menuitem-icon" [ngClass]="item.icon" *ngIf="item.icon"></span
 						 ><span class="ui-menuitem-text">{{item.label}}</span>
 						 </a>
@@ -107,66 +107,66 @@ export class PanelMenuSub extends BasePanelMenuItem {
 				 </div>
 			 </ng-container>
 		 </div>
-    `,
-    styleUrls: ['./panelmenu.css'],
-    animations: [
-        trigger('rootItem', [
-            state('hidden', style({
-                height: '0px'
-            })),
-            state('visible', style({
-                height: '*'
-            })),
-            transition('visible => hidden', animate('{{transitionParams}}')),
-            transition('hidden => visible', animate('{{transitionParams}}'))
-        ])
-    ]
+	`,
+	styleUrls: ['./panelmenu.css'],
+	animations: [
+		trigger('rootItem', [
+			state('hidden', style({
+				height: '0px'
+			})),
+			state('visible', style({
+				height: '*'
+			})),
+			transition('visible => hidden', animate('{{transitionParams}}')),
+			transition('hidden => visible', animate('{{transitionParams}}'))
+		])
+	]
 })
 export class PanelMenu extends BasePanelMenuItem {
 
-    @Input() model: MenuItem[];
+	@Input() model: MenuItem[];
 
-    @Input() style: any;
+	@Input() style: any;
 
-    @Input() styleClass: string;
+	@Input() styleClass: string;
 
-    @Input() multiple: boolean = true;
+	@Input() multiple: boolean = true;
 
-    @Input() transitionOptions: string = '400ms cubic-bezier(0.86, 0, 0.07, 1)';
+	@Input() transitionOptions: string = '400ms cubic-bezier(0.86, 0, 0.07, 1)';
 
-    public animating: boolean;
+	public animating: boolean;
 
-    collapseAll() {
-        for (let item of this.model) {
-            if (item.expanded) {
-                item.expanded = false;
-            }
-        }
-    }
+	collapseAll() {
+		for (let item of this.model) {
+			if (item.expanded) {
+				item.expanded = false;
+			}
+		}
+	}
 
-    handleClick(event, item) {
-        if (!this.multiple) {
-            for (let modelItem of this.model) {
-                if (item !== modelItem && modelItem.expanded) {
-                    modelItem.expanded = false;
-                }
-            }
-        }
+	handleClick(event, item) {
+		if (!this.multiple) {
+			for (let modelItem of this.model) {
+				if (item !== modelItem && modelItem.expanded) {
+					modelItem.expanded = false;
+				}
+			}
+		}
 
-        this.animating = true;
-        super.handleClick(event, item);
-    }
+		this.animating = true;
+		super.handleClick(event, item);
+	}
 
-    onToggleDone() {
-        this.animating = false;
-    }
+	onToggleDone() {
+		this.animating = false;
+	}
 
 }
 
 @NgModule({
-    imports: [CommonModule, RouterModule],
-    exports: [PanelMenu, RouterModule],
-    declarations: [PanelMenu, PanelMenuSub]
+	imports: [CommonModule, RouterModule],
+	exports: [PanelMenu, RouterModule],
+	declarations: [PanelMenu, PanelMenuSub]
 })
 export class PanelMenuModule {
 }

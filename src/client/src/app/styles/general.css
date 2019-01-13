@@ -1,8 +1,16 @@
+html {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
 .is-button {
 	cursor: pointer;
 }
 
-.is-button:hover, .app-toolbar button[mat-icon-button]:hover  {
+.is-button:hover, .app-toolbar button[mat-icon-button]:hover {
 	background-color: #1281e0;
 	color: white;
 }
@@ -22,4 +30,15 @@ i.is-button {
 	background-color: transparent;
 	color: white;
 }
+
+.box-shadow {
+	border-right: 1px solid rgba(0, 0, 0, .15);
+	border-bottom: 1px solid rgba(0, 0, 0, .15);
+	-webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, .175);
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, .175);
+}
+label{
+	font-weight: bold;
+}
+
 

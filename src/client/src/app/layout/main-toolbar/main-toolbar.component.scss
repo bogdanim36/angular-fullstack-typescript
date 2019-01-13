@@ -9,8 +9,6 @@ app-main-toolbar {
   white-space: nowrap;
 }
 
-
-
 .is-mobile .app-toolbar {
   position: fixed;
   /* Make sure the toolbar will stay on top of the content as it scrolls past. */
@@ -18,5 +16,8 @@ app-main-toolbar {
 }
 
 h1.app-name {
-  margin: 0 0 0 15px;
+  margin: 0 0 0 10px;
+  font-size: 140%;
 }
+
+

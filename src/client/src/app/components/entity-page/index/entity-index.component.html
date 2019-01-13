@@ -1,0 +1,7 @@
+<div *ngIf="isHandset">
+	<app-entity-mobile-list [parentRef]="ref"></app-entity-mobile-list>
+</div>
+<div *ngIf="!isHandset">
+	<app-entity-table-list [parentRef]="ref"></app-entity-table-list>
+</div>
+

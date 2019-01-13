@@ -15,7 +15,7 @@ export class ServerServiceController<M, S extends ServerService<M, R>, R extends
     getAll(req: Request, res: Response, next: NextFunction) {
         this.service.getAll().then((data: Array<M>) => {
             ServerResponse.success(res, data);
-        }, (error) => ServerResponse.error(error, res));
+        }, (error) => ServerResponse.error(res, error ));
     }
 
     delete(req: Request, res: Response) {
