@@ -10,7 +10,7 @@ Objectives:
  
 <h2>Installing and run project</h2>
 <br>  01. Clone this repository.
-<br>  02. Create database with db-scripts/init-db.sql (change db name, user and password as desired).
+<br>  02. Create database with src/scripts/init-db.sql (change db name, user and password as desired).
 <br>  05. Change extends in root tslint.json to you general tslint.json file, or delete extend.
 <br>  06. Change server port in src/server/src/ConfigApi.ts and in src/client/proxy.conf.json to the desired one.
 <br>  07. Change angular dev server port in src/client/angular.json, serve.port to the desired one.
@@ -19,5 +19,7 @@ Objectives:
 <br>  10. Run npm client:start. This will run ng serve with proxy config (src/client/proxy.conf.json).
 <br>  11. View app on http://localhost:4201
 <br>  12. For production build run gulp build-prod. This will ruin build for client and server side and copy source files in dist folder
+<br>  13. For create simple page, you must create a template in src/templates/entity/. There are some samples to follows.
+Run task with gulp gen:entity --config ./src/templates/entity/templateName.js
 
 
