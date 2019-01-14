@@ -15,13 +15,11 @@ import {InputSwitchModule, InputTextareaModule, InputTextModule, ToggleButtonMod
 @NgModule({
     declarations: [
         EntityTableListComponent,
-        EntityMobileListComponent,
-		EntityFormComponent,
+        EntityMobileListComponent
     ],
     exports:[
         EntityTableListComponent,
-        EntityMobileListComponent,
-		EntityFormComponent
+        EntityMobileListComponent
     ],
     imports: [
         BrowserModule,
