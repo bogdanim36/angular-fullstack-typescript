@@ -14,7 +14,8 @@
     "build-prod": "gulp build-prod",
     "client:start-prod": "webpack-dev-server --config webpack.config.js --env.production",
     "server:build-prod": "webpack --config webpack.config.js --env.production",
-    "server:start-prod": "SET prod = true && SET port=8010 && node ./dist/server.js"
+    "server:start-prod": "SET prod = true && SET port=8010 && node ./dist/server.js",
+    "create-users": "gulp gen:entity --config ./src/templates/entity/configs/users.js"
   },
   "private": false,
   "dependencies": {

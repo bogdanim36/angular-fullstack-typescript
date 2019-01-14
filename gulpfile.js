@@ -147,12 +147,13 @@ let addClientModule = function (config) {
 	// console.log('before', contentBefore);
 	// console.log('to change', contentToChange);
 	// console.log('after', contentAfter);
-	let routingArrayString = contentToChange.split(":")[1].trim();
+	let routingArrayString = contentToChange.split(":")[1].trim().substring(1).replace(']','').trim();
 	let routingArray = routingArrayString.split(",");
-	routingArray.splice(routingArray.length - 1, 0, "\n\t\t" + EntitiesToImport);
- 	routingArray.splice(routingArray.length - 1, 1);
- 	content = contentBefore + "\n" + contentToChange.split(":")[0] + " : " + routingArray + "\n\t]" + contentAfter;
-	// console.log('content', routingArray);
+	routingArray.splice(routingArray.length, 0, "\n\t\t" + EntitiesToImport);
+ 	// routingArray.splice(routingArray.length - 1, 1);
+ 	content = contentBefore + "\n" + contentToChange.split(":")[0] + " : [" + routingArray + "\n\t]" + contentAfter;
+	// console.log('routingArrayString', routingArrayString);
+	// console.log('routingArray', routingArray);
 	// console.log('content', content);
 	fs.write(config.paths.files.appModule, content);
 
