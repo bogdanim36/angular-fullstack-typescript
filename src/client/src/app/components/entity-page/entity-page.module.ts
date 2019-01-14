@@ -16,10 +16,12 @@ import {InputSwitchModule, InputTextareaModule, InputTextModule, ToggleButtonMod
     declarations: [
         EntityTableListComponent,
         EntityMobileListComponent,
+		EntityFormComponent,
     ],
     exports:[
         EntityTableListComponent,
-        EntityMobileListComponent
+        EntityMobileListComponent,
+		EntityFormComponent
     ],
     imports: [
         BrowserModule,

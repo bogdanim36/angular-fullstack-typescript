@@ -11,6 +11,7 @@
     "client:start-dev": "cd src/client && ng serve --proxy-config proxy.conf.json",
     "server:build-dev": "webpack --config webpack.config.js --env.developement",
     "server:start-dev": "SET port=8001 && SET dev = true && nodemon --inspect ./src/server/dist/dev/server.js",
+    "build-prod": "gulp build-prod",
     "client:start-prod": "webpack-dev-server --config webpack.config.js --env.production",
     "server:build-prod": "webpack --config webpack.config.js --env.production",
     "server:start-prod": "SET prod = true && SET port=8010 && node ./dist/server.js"
