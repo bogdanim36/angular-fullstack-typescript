@@ -1,5 +1,5 @@
 # Fullstack Typescript project
-Please visit other project of mine about same thing: <a href='https://github.com/bogdanim36/project-manager'>Project manager</a>
+Please visit other project of mine about same thing: <a href='https://github.com/bogdanim36/project-manager'>Project manager</a>, or <a href='https://ionescu.io/blog'>my blog</a>.
 <br>I create this project as a start-kit for projects using: Typescript with Angular7 and Express NodeJS, Webpack, PrimeNg.
 Objectives:
  - using typescript not only on client side, but server side too, and having a shared folder for models and other useful code on both sides.
