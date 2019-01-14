@@ -11,8 +11,9 @@ import {AppSharedService} from '@app/core/app-shared.service';
 	declarations: [
 		AppComponent,
 	],
-	
-imports : [
+
+
+	imports: [
 		BrowserModule,
 		HttpClientModule,
 		AppRoutingModule,

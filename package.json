@@ -7,11 +7,11 @@
   "scripts": {
     "ng": "ng",
     "install": "npm i typescript@3.1.6",
-    "install-all": "npm i typescript@3.1.6 && cd src\\server && npm i && cd.. && cd client && npm i",
+    "install-all": "mkdir logs && npm i && cd src\\server && npm i && cd.. && cd client && npm i ",
     "client:start-dev": "cd src/client && ng serve --proxy-config proxy.conf.json",
-    "client:start-prod": "webpack-dev-server --config webpack.config.js --env.production",
     "server:build-dev": "webpack --config webpack.config.js --env.developement",
     "server:start-dev": "SET port=8001 && SET dev = true && nodemon --inspect ./src/server/dist/dev/server.js",
+    "client:start-prod": "webpack-dev-server --config webpack.config.js --env.production",
     "server:build-prod": "webpack --config webpack.config.js --env.production",
     "server:start-prod": "SET prod = true && SET port=8010 && node ./dist/server.js"
   },

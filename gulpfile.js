@@ -112,11 +112,16 @@ let addClientRooting = function (config) {
 	let contentBefore = content.substr(0, positionToInsert);
 	let contentToChange = content.substring(positionToInsert, positionEnds);
 	let contentAfter = content.substring(positionEnds + 1);
-	let routingArrayString = contentToChange.split("=")[1].trim();
-	let routingArray = routingArrayString.split(",");
-	routingArray.splice(routingArray.length - 1, 0, "\n\t{path: '" + config.entities.paramCase + "', component:" + EntitiesToImport + "}");
-	content = contentBefore + "\n" + contentToChange.split("=")[0] + " = " + routingArray + ";\n" + contentAfter;
-	// console.log('content', content);
+		// console.log('before', contentBefore);
+	// console.log('to change', contentToChange);
+	// console.log('after', contentAfter
+	let routingArrayString = contentToChange.split("=")[1].trim().substring(1).replace(']','').trim();
+	let routingArray = routingArrayString === ""? []: routingArrayString.split(",");
+	routingArray.push( "\n\t{path: '" + config.entities.paramCase + "', component:" + EntitiesToImport + "}");
+	routingArrayString = "[" + routingArray.join(",")+"\n\t];";
+	content = contentBefore +  contentToChange.split("=")[0] + " = " + routingArrayString +  contentAfter;
+	// console.log('routingArrayString', routingArrayString, routingArray);
+	console.log('content:\n',  content);
 	fs.write(config.paths.files.appRoutingModule, content);
 
 	console.log("Added client routing ", config.entities.paramCase, " to ", config.paths.files.appRoutingModule);
@@ -151,6 +156,6 @@ let addClientModule = function (config) {
 	// console.log('content', content);
 	fs.write(config.paths.files.appModule, content);
 
-	console.log("Added client routing ", config.entities.paramCase, " to ", config.paths.files.appRoutingModule);
+	console.log("Added client module ", config.entities.paramCase, " to ", config.paths.files.appRoutingModule);
 };
 
