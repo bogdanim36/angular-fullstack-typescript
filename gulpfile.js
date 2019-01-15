@@ -17,21 +17,24 @@ gulp.task('build-prod', (callback) => {
 	console.log("start building");
 	exec('ng build --prod', (err, stdout, sterr) => {
 		console.log(stdout);
-		console.log(sterr);
+		console.error(sterr);
 		cb('err');
+		if (sterr) return callback();
+
 		process.chdir('../..');
 		exec('npm run  server:build-prod', (err, stdout, sterr) => {
 			console.log("server build finished");
 			console.log(stdout);
-			console.log(sterr);
+			console.error(sterr);
 			cb('err');
+			if (sterr) return callback();
 			fs.copy('src/server/dist/prod/server.js', 'dist/server.js');
 			fs.copy('src/server/dist/prod/server.js.map', 'dist/server.js.map');
 			fs.copy('src/server/package.json', 'dist/package.json');
 			process.chdir('dist');
 			exec('npm install --only=prod', (err, stdout, sterr) => {
 				console.log(stdout);
-				console.log(sterr);
+				console.error(sterr);
 				cb('err');
 				callback();
 			});
@@ -92,7 +95,7 @@ let addControllerToServerIndex = function (config) {
 	stringToInsert = "\nconst " + config.entities.pascalCase + " = new " + EntitiesToImport + "(app, server.store);\n";
 	content = content.substring(0, positionToInsert - 1) + stringToInsert + content.substring(positionToInsert);
 	fs.write(config.paths.files.serverIndex, content);
-	console.log("Added controller ", EntitiesToImport , " to ", config.paths.files.serverIndex);
+	console.log("Added controller ", EntitiesToImport, " to ", config.paths.files.serverIndex);
 };
 
 let addClientRooting = function (config) {
@@ -112,16 +115,16 @@ let addClientRooting = function (config) {
 	let contentBefore = content.substr(0, positionToInsert);
 	let contentToChange = content.substring(positionToInsert, positionEnds);
 	let contentAfter = content.substring(positionEnds + 1);
-		// console.log('before', contentBefore);
+	// console.log('before', contentBefore);
 	// console.log('to change', contentToChange);
 	// console.log('after', contentAfter
-	let routingArrayString = contentToChange.split("=")[1].trim().substring(1).replace(']','').trim();
-	let routingArray = routingArrayString === ""? []: routingArrayString.split(",");
-	routingArray.push( "\n\t{path: '" + config.entities.paramCase + "', component:" + EntitiesToImport + "}");
-	routingArrayString = "[" + routingArray.join(",")+"\n\t];";
-	content = contentBefore +  contentToChange.split("=")[0] + " = " + routingArrayString +  contentAfter;
+	let routingArrayString = contentToChange.split("=")[1].trim().substring(1).replace(']', '').trim();
+	let routingArray = routingArrayString === "" ? [] : routingArrayString.split(",");
+	routingArray.push("\n\t{path: '" + config.entities.paramCase + "', component:" + EntitiesToImport + "}");
+	routingArrayString = "[" + routingArray.join(",") + "\n\t];";
+	content = contentBefore + contentToChange.split("=")[0] + " = " + routingArrayString + contentAfter;
 	// console.log('routingArrayString', routingArrayString, routingArray);
-	console.log('content:\n',  content);
+	console.log('content:\n', content);
 	fs.write(config.paths.files.appRoutingModule, content);
 
 	console.log("Added client routing ", config.entities.paramCase, " to ", config.paths.files.appRoutingModule);
@@ -147,11 +150,11 @@ let addClientModule = function (config) {
 	// console.log('before', contentBefore);
 	// console.log('to change', contentToChange);
 	// console.log('after', contentAfter);
-	let routingArrayString = contentToChange.split(":")[1].trim().substring(1).replace(']','').trim();
+	let routingArrayString = contentToChange.split(":")[1].trim().substring(1).replace(']', '').trim();
 	let routingArray = routingArrayString.split(",");
 	routingArray.splice(routingArray.length, 0, "\n\t\t" + EntitiesToImport);
- 	// routingArray.splice(routingArray.length - 1, 1);
- 	content = contentBefore + "\n" + contentToChange.split(":")[0] + " : [" + routingArray + "\n\t]" + contentAfter;
+	// routingArray.splice(routingArray.length - 1, 1);
+	content = contentBefore + "\n" + contentToChange.split(":")[0] + " : [" + routingArray + "\n\t]" + contentAfter;
 	// console.log('routingArrayString', routingArrayString);
 	// console.log('routingArray', routingArray);
 	// console.log('content', content);

@@ -4,6 +4,7 @@ import {EntityDialogData} from '@app/components/entity-page/entityDialogData';
 
 @Component({
     selector: 'app-entity-form',
+	templateUrl:'./entity-form.component.html',
     styleUrls:["./entity-form.component.scss"]
 })
 export class EntityFormComponent<M,C,S, I> implements OnInit {

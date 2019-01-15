@@ -13,35 +13,37 @@ import {BrowserModule} from '@angular/platform-browser';
 import {InputSwitchModule, InputTextareaModule, InputTextModule, ToggleButtonModule} from 'primeng/primeng';
 
 @NgModule({
-    declarations: [
-        EntityTableListComponent,
-        EntityMobileListComponent
-    ],
-    exports:[
-        EntityTableListComponent,
-        EntityMobileListComponent
-    ],
-    imports: [
-        BrowserModule,
-        TableModule,
-        ButtonModule,
-        TableModule,
-        ButtonModule,
-        DataViewModule,
-        DialogModule,
-        DynamicDialogModule,
-        FormsModule,
-        InputTextModule,
-        InputSwitchModule,
-        InputTextareaModule,
-        ToggleButtonModule,
+	declarations: [
+		EntityTableListComponent,
+		EntityMobileListComponent,
+		EntityFormComponent,
+	],
+	exports:[
+		EntityTableListComponent,
+		EntityMobileListComponent,
+		EntityFormComponent
+	],
+	imports: [
+		BrowserModule,
+		TableModule,
+		ButtonModule,
+		TableModule,
+		ButtonModule,
+		DataViewModule,
+		DialogModule,
+		DynamicDialogModule,
+		FormsModule,
+		InputTextModule,
+		InputSwitchModule,
+		InputTextareaModule,
+		ToggleButtonModule,
 
-    ],
-    providers: [
-        EntityFormComponent,
-        DialogService,
-        DynamicDialogRef,
-    ]
+	],
+	providers: [
+		EntityFormComponent,
+		DialogService,
+		DynamicDialogRef,
+	]
 })
 
 export class EntityPageModule {
