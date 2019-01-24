@@ -1,9 +1,9 @@
 /* You can addColumn global styles to this file, and also import other style files */
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
-@import "~primeicons/primeicons.css";
-@import "~primeng/resources/themes/nova-colored/theme.css";
-@import "~primeng/resources/primeng.min.css";
-@import "app/styles/p-table.css";
+@import '~angular-tree-component/dist/angular-tree-component.css';
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-material.css";
+@import "app/styles/ag-grid-material.css";
 @import "app/styles/general.css";
 @import "app/styles/form.css";
 

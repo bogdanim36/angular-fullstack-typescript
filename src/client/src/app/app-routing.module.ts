@@ -1,7 +1,10 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import {UsersIndexComponent} from '@app/module/pages/users/index/users-index.component';
 
-const routes: Routes   = [];
+const routes: Routes    = [
+	{path: 'users', component:UsersIndexComponent}
+	];
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,11 @@
+<tree-root [nodes]="menuItems" [focused]="true" [options]="options">
+	<ng-template #treeNodeTemplate let-node let-index="index">
+		<button class="nav-node-btn"
+				  (click)="node.toggleExpanded($event)"
+				  >
+			<div class="node-label" [ngClass]="'level'+node.level">{{node.data.label}}</div>
+			<mat-icon *ngIf="node.hasChildren"
+				class="mat-icon material-icons mat-icon-no-color expandable" role="img" aria-hidden="true">keyboard_arrow_up</mat-icon>
+		</button>
+  </ng-template>
+</tree-root>

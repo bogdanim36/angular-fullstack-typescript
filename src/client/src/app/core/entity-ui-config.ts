@@ -1,7 +1,11 @@
 import {TableColumn} from '@app/core/table-column';
+import {GridOptions} from 'ag-grid-community';
 
 export class EntityUiConfig {
 	columns: TableColumn[] = [];
+	components:any;
+	gridRowHeight:number;
+	gridRowHeaderHeight:number;
 	labels: {
 		save: string,
 		list: string,
@@ -20,5 +24,11 @@ export class EntityUiConfig {
 
 	addColumn(column: Partial<TableColumn>) {
 		this.columns.push(new TableColumn(column));
+	}
+	setGridOptions(grid:GridOptions){
+		grid.rowHeight = this.gridRowHeight;
+		grid.headerHeight = this.gridRowHeaderHeight;
+		grid.columnDefs = this.columns;
+		grid.components = this.components;
 	}
 }

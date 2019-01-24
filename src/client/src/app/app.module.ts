@@ -6,18 +6,20 @@ import {AppComponent} from './app.component';
 
 import {AppLayoutModule} from '@app/layout/app-layout.module';
 import {AppSharedService} from '@app/core/app-shared.service';
+import {UsersPageModule} from '@app/module/pages/users/users-page.module';
+import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
+		ModalConfirmComponent,
 	],
 
-
-	imports: [
-		BrowserModule,
+imports : [BrowserModule,
 		HttpClientModule,
 		AppRoutingModule,
-		AppLayoutModule
+		AppLayoutModule,
+		UsersPageModule
 	],
 	bootstrap: [AppComponent],
 	providers: [AppSharedService]

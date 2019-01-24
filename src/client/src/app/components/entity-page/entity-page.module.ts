@@ -1,49 +1,29 @@
 import {NgModule} from '@angular/core';
 import {EntityTableListComponent} from './table-list/entity-table-list.component';
-import {TableModule} from 'primeng/table';
-import {ButtonModule} from 'primeng/button';
-import {EntityMobileListComponent} from './mobile-list/entity-mobile-list.component';
-import {EntityFormComponent} from './form/entity-form.component';
-import {DataViewModule} from 'primeng/dataview';
-import {DialogModule} from 'primeng/dialog';
-import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {FormsModule} from '@angular/forms';
-import {DialogService, DynamicDialogRef} from 'primeng/api';
 import {BrowserModule} from '@angular/platform-browser';
-import {InputSwitchModule, InputTextareaModule, InputTextModule, ToggleButtonModule} from 'primeng/primeng';
+import {AgGridModule} from 'ag-grid-angular';
+import {MatButtonModule, MatCardModule, MatIconModule, MatToolbarModule} from "@angular/material";
+import {GridActionColumnComponent} from "@app/components/entity-page/index/grid-action-column.component";
 
 @NgModule({
 	declarations: [
 		EntityTableListComponent,
-		EntityMobileListComponent,
-		EntityFormComponent,
+		GridActionColumnComponent
 	],
-	exports:[
+	exports: [
 		EntityTableListComponent,
-		EntityMobileListComponent,
-		EntityFormComponent
 	],
 	imports: [
 		BrowserModule,
-		TableModule,
-		ButtonModule,
-		TableModule,
-		ButtonModule,
-		DataViewModule,
-		DialogModule,
-		DynamicDialogModule,
 		FormsModule,
-		InputTextModule,
-		InputSwitchModule,
-		InputTextareaModule,
-		ToggleButtonModule,
-
+		MatButtonModule,
+		MatIconModule,
+		MatToolbarModule,
+		MatCardModule,
+		AgGridModule.withComponents([GridActionColumnComponent])
 	],
-	providers: [
-		EntityFormComponent,
-		DialogService,
-		DynamicDialogRef,
-	]
+	providers: []
 })
 
 export class EntityPageModule {

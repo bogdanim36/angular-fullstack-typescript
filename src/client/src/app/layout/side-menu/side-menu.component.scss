@@ -9,7 +9,6 @@
 }
 
 
-
 .sidenav-container {
   /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
      causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
@@ -25,15 +24,16 @@
 
 .is-mobile mat-sidenav {
   width: 100% !important;
-  top:40px !important;
+  top: 40px !important;
   background-color: white;
 }
 
 
-a{
-	border: 1px solid red;
+a {
+  border: 1px solid red;
 }
-:host ::ng-deep .mat-drawer-inner-container{
+
+:host ::ng-deep .mat-drawer-inner-container {
   overflow-y: scroll;
 }
 
@@ -45,11 +45,14 @@ app-main-toolbar.mat-toolbar {
   background-color: #1a4163 !important;
   color: white !important;
 }
+
 .mat-toolbar-row, .mat-toolbar-single-row {
   height: 40px !important;
   min-height: 40px !important;
-  padding:0;
+  padding: 0;
 }
-mat-sidenav-content{
-  padding:10px;
+
+mat-sidenav-content {
+  padding: 10px;
+  box-sizing: border-box;
 }

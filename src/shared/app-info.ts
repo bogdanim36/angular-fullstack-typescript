@@ -1,5 +1,5 @@
 export const appInfo = {
-	name: "Project Manager",
+	name: "Starter kitt",
 	version: "1.0.0",
 	build: 1
 };

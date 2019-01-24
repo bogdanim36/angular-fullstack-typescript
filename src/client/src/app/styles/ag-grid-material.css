@@ -1,0 +1,101 @@
+.ag-theme-material .ag-cell {
+	line-height: 28px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 14px;
+}
+
+.ag-theme-material .ag-header-cell, .ag-theme-material .ag-header-group-cell {
+	line-height: 34px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.ag-theme-material .ag-cell-inline-editing {
+	line-height: 28px;
+	padding: 0 5px;
+	height: 30px;
+}
+
+.ag-theme-material .ag-cell-inline-editing input[type="text"], .ag-theme-material .ag-cell-inline-editing input[type="tel"], .ag-theme-material .ag-cell-inline-editing input[type="date"], .ag-theme-material .ag-cell-inline-editing input[type="datetime-local"] {
+	height: 30px;
+	padding-bottom: 0;
+}
+
+.ag-theme-material .ag-cell-inline-editing input[type="text"]:focus, .ag-theme-material .ag-cell-inline-editing input[type="tel"]:focus, .ag-theme-material .ag-cell-inline-editing input[type="date"]:focus, .ag-theme-material .ag-cell-inline-editing input[type="datetime-local"]:focus {
+	padding-bottom: 0;
+}
+
+.ag-theme-material .ag-header-cell-menu-button .ag-icon-menu {
+	height: 34px;
+}
+
+.ag-pinned-right-cols-container {
+	padding-left: 1px;
+}
+
+.ag-filter {
+	background-color: lightgrey;
+}
+
+ag-grid-angular {
+	border: 1px solid lightgrey;
+}
+
+.ag-theme-material .ag-header {
+	background-color: #ccc;
+	color: black;
+}
+ag-grid-angular .ag-row mat-icon{
+	color:gray;
+	cursor:pointer;
+	font-size: 20px;
+	line-height: 28px;
+}
+.ag-theme-material .ag-row{
+	border-color:transparent;
+}
+.ag-header-cell{
+	border-right:1px solid white;
+	border-bottom: none;
+	border-top: none;
+}
+.ag-theme-material .ag-cell{
+	border:none;
+}
+.ag-row > .ag-cell, .ag-theme-material .ag-ltr .ag-cell-no-focus{
+	border-right:1px solid lightgrey;
+}
+mat-toolbar.grid-toolbar {
+	width: 100%;
+	position: relative;
+	display: inline-block;
+	background-color: #ccc;
+	line-height: 45px;
+	height: 47px;
+	padding: 0;
+}
+
+mat-toolbar.grid-toolbar .right-side {
+	position: absolute;
+	display: inline-block;
+	right: 0;
+	top: 0;
+	padding: 0 5px;
+}
+
+mat-toolbar.grid-toolbar .right-side > * {
+	margin: auto 5px auto 0;
+}
+
+mat-toolbar.grid-toolbar .left-side, mat-toolbar.grid-toolbar .scroller {
+	display: inline-flex;
+	position: relative;
+}
+
+.grid-title {
+	font-weight: bold;
+	padding-left: 10px;
+}

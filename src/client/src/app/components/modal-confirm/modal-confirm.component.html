@@ -1,0 +1,6 @@
+<div mat-dialog-title>{{data.title}}</div>
+<div mat-dialog-content>{{data.text}}</div>
+<div mat-dialog-action>
+	<button mat-button (click)="onNoClick()" *ngIf="data.cancelLabel">{{data.cancelLabel}}</button>
+	<button mat-button cdkFocusInitial>{{data.okLabel}}</button>
+</div>
