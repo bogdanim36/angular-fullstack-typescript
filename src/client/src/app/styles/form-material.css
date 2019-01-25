@@ -1,0 +1,40 @@
+.ui-dialog .ui-dialog-buttonpane button {
+	float: initial;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+	padding: 0 7px;
+}
+
+.mat-card.form:not([class*=mat-elevation-z]) {
+	box-shadow: none;
+	background-color: initial;
+	padding: 0;
+	position: relative;
+}
+.mat-card.form .form-body{
+	position: absolute;
+	top:53px;
+	left:0px;right:0px;bottom: 0;
+	border:1px solid lightgrey;
+	padding:0;
+}
+.mat-card > mat-toolbar.grid-toolbar{
+	padding:0 10px;
+}
+.mat-card.form mat-card-content{
+	padding:10px;
+	margin:0;
+	overflow: auto;
+	box-sizing: border-box;
+}
+.mat-card.form mat-card-actions{
+	position: absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	margin:0;
+	padding:10px;
+	border-top:1px solid lightgrey;
+}
+

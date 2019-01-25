@@ -40,7 +40,7 @@
 	background-color: lightgrey;
 }
 
-ag-grid-angular {
+.grid-body {
 	border: 1px solid lightgrey;
 }
 
@@ -48,26 +48,32 @@ ag-grid-angular {
 	background-color: #ccc;
 	color: black;
 }
-ag-grid-angular .ag-row mat-icon{
-	color:gray;
-	cursor:pointer;
+
+ag-grid-angular .ag-row mat-icon {
+	color: gray;
+	cursor: pointer;
 	font-size: 20px;
 	line-height: 28px;
 }
-.ag-theme-material .ag-row{
-	border-color:transparent;
+
+.ag-theme-material .ag-row {
+	border-color: transparent;
 }
-.ag-header-cell{
-	border-right:1px solid white;
+
+.ag-header-cell {
+	border-right: 1px solid white;
 	border-bottom: none;
 	border-top: none;
 }
-.ag-theme-material .ag-cell{
-	border:none;
+
+.ag-theme-material .ag-cell {
+	border: none;
 }
-.ag-row > .ag-cell, .ag-theme-material .ag-ltr .ag-cell-no-focus{
-	border-right:1px solid lightgrey;
+
+.ag-row > .ag-cell, .ag-theme-material .ag-ltr .ag-cell-no-focus {
+	border-right: 1px solid lightgrey;
 }
+
 mat-toolbar.grid-toolbar {
 	width: 100%;
 	position: relative;
@@ -76,6 +82,17 @@ mat-toolbar.grid-toolbar {
 	line-height: 45px;
 	height: 47px;
 	padding: 0;
+}
+
+mat-toolbar.grid-toolbar[role=footer] {
+	background-color: transparent;
+	height: initial;
+	line-height: 50px;
+	padding: 10px;
+	border-top: 1px solid lightgrey;
+}
+mat-toolbar .info{
+	font-size: 80%;
 }
 
 mat-toolbar.grid-toolbar .right-side {

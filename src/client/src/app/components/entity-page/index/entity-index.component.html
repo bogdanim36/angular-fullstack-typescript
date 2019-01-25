@@ -4,37 +4,50 @@
 </div>
 <div *ngIf="!isHandset">
 	<div style="position: relative;width:100%;height: 100%;display: flex;flex-direction: row">
-		<div class="grid-panel" style="position: relative;height:100%;width:calc(100% - 420px)">
+		<div class="grid-panel" style="position: relative;height:100%;width:calc(100% - 410px)">
 
 			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
 				<span class="grid-title">{{uiConfig.labels.list}}</span>
-				<div class="right-side">
-					<button mat-flat-button color="primary" (click)="grid.api.sizeColumnsToFit()">
-						<mat-icon>add</mat-icon>
-						Size columns
-					</button>
-					<button mat-flat-button color="primary" (click)="autoSizeAll()">
-						<mat-icon>add</mat-icon>
-						Auto Size All
-					</button>
-					<button mat-flat-button color="primary" (click)="grid.api.selectAll()">
-						<mat-icon>add</mat-icon>
-						{{uiConfig.labels.addItem}}</button>
+				<div class="right-side info">
+					{{service.items.length}} records
 				</div>
 
 			</mat-toolbar>
-			<ag-grid-angular
-				style="position:absolute; top:53px;left:0px;right:0px;bottom: 0px"
-				class="ag-theme-material box-shadow"
-				[gridOptions]="grid"
-				[rowData]="service.items">
-			</ag-grid-angular>
+			<div class="grid-body box-shadow" style="position:absolute; top:53px;left:0px;right:0px;bottom: 0px">
+				<ag-grid-angular
+					style="width:100%;height:calc(100% - 57px)"
+					class="ag-theme-material "
+					[gridOptions]="grid"
+					[rowData]="service.items">
+				</ag-grid-angular>
+				<mat-toolbar class="grid-toolbar" role="footer">
+					<div class="right-side">
+						<button mat-flat-button color="primary" (click)="grid.api.sizeColumnsToFit()">
+							<mat-icon>add</mat-icon>
+							Size columns
+						</button>
+						<button mat-flat-button color="primary" (click)="grid.api.selectAll()">
+							<mat-icon>add</mat-icon>
+							{{uiConfig.labels.addItem}}</button>
+					</div>
+				</mat-toolbar>
+			</div>
+
 		</div>
-		<div class="form-panel">
-			<mat-card style="width:400px;margin-left:10px;height:calc(100% - 20px)">
-form
-			</mat-card>
-		</div>
+		<mat-card class="form" style="width:400px;margin-left:10px;height:100%;">
+			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
+				Form
+			</mat-toolbar>
+			<div class="form-body box-shadow">
+				<mat-card-content style="width:100%;height:calc(100% - 57px)">Content
+				</mat-card-content>
+				<mat-toolbar class="grid-toolbar" role="footer">
+					<div class="right-side">
+						<button mat-flat-button color="primary">Button</button>
+					</div>
+				</mat-toolbar>
+			</div>
+		</mat-card>
 	</div>
 </div>
 
