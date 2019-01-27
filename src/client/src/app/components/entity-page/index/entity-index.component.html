@@ -2,25 +2,24 @@
 	<app-entity-table-list [parentRef]="ref"></app-entity-table-list>
 </div>
 <div *ngIf="!isHandset">
-	<div class="table-container" >
-		<div class="grid-panel" >
+	<div class="table-container">
+		<div class="grid-panel">
 			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
 				<span class="grid-title">{{uiConfig.labels.list}}</span>
 				<div class="right-side info">
 					{{service.items.length}} records
 				</div>
 			</mat-toolbar>
-			<div class="grid-body box-shadow" >
+			<div class="grid-body box-shadow">
 				<ag-grid-angular
 					class="ag-theme-material"
 					[gridOptions]="grid"
 					[rowData]="service.items">
 				</ag-grid-angular>
-				<mat-toolbar class="grid-toolbar" role="footer" [innerHTML]="gridToolbar">
-				</mat-toolbar>
+				<app-grid-toolbar></app-grid-toolbar>
 			</div>
 		</div>
-		<mat-card class="form-panel" >
+		<mat-card class="form-panel">
 			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
 				<span class="grid-title">User form</span>
 			</mat-toolbar>

@@ -1,5 +1,5 @@
 import {PageComponent} from '@app/core/page.component';
-import {OnInit} from '@angular/core';
+import {ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {ClientService} from '@app/core/client-service';
 import {AppSharedService} from '@app/core/app-shared.service';
 import {GridOptions} from 'ag-grid-community';
@@ -11,7 +11,8 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 	protected service: ClientService<M>;
 	protected uiConfig: C;
 	grid: GridOptions;
-	gridToolbar = `<div class="right-side">
+	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbarAnchor;
+	gridToolbar1 = `<div class="right-side">
 						<button mat-flat-button color="primary" (click)="grid.api.sizeColumnsToFit()">
 							<mat-icon>add</mat-icon>
 							Size columns
@@ -25,7 +26,7 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 	// protected dialogService: DialogService;
 	ref: any;
 
-	constructor(protected appShared: AppSharedService, protected formClass: any, uiConfig) {
+	constructor(protected appShared: AppSharedService, protected formClass: any, uiConfig,private componentFactoryResolver: ComponentFactoryResolver) {
 		super(appShared);
 		this.ref = this;
 		this.grid = <GridOptions>{
