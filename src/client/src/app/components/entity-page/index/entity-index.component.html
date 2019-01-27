@@ -1,45 +1,31 @@
 <div *ngIf="isHandset">
 	<app-entity-table-list [parentRef]="ref"></app-entity-table-list>
-	<
 </div>
 <div *ngIf="!isHandset">
-	<div style="position: relative;width:100%;height: 100%;display: flex;flex-direction: row">
-		<div class="grid-panel" style="position: relative;height:100%;width:calc(100% - 410px)">
-
+	<div class="table-container" >
+		<div class="grid-panel" >
 			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
 				<span class="grid-title">{{uiConfig.labels.list}}</span>
 				<div class="right-side info">
 					{{service.items.length}} records
 				</div>
-
 			</mat-toolbar>
-			<div class="grid-body box-shadow" style="position:absolute; top:53px;left:0px;right:0px;bottom: 0px">
+			<div class="grid-body box-shadow" >
 				<ag-grid-angular
-					style="width:100%;height:calc(100% - 57px)"
-					class="ag-theme-material "
+					class="ag-theme-material"
 					[gridOptions]="grid"
 					[rowData]="service.items">
 				</ag-grid-angular>
-				<mat-toolbar class="grid-toolbar" role="footer">
-					<div class="right-side">
-						<button mat-flat-button color="primary" (click)="grid.api.sizeColumnsToFit()">
-							<mat-icon>add</mat-icon>
-							Size columns
-						</button>
-						<button mat-flat-button color="primary" (click)="grid.api.selectAll()">
-							<mat-icon>add</mat-icon>
-							{{uiConfig.labels.addItem}}</button>
-					</div>
+				<mat-toolbar class="grid-toolbar" role="footer" [innerHTML]="gridToolbar">
 				</mat-toolbar>
 			</div>
-
 		</div>
-		<mat-card class="form" style="width:400px;margin-left:10px;height:100%;">
+		<mat-card class="form-panel" >
 			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
-				Form
+				<span class="grid-title">User form</span>
 			</mat-toolbar>
 			<div class="form-body box-shadow">
-				<mat-card-content style="width:100%;height:calc(100% - 57px)">Content
+				<mat-card-content>Content
 				</mat-card-content>
 				<mat-toolbar class="grid-toolbar" role="footer">
 					<div class="right-side">

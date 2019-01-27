@@ -11,6 +11,16 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 	protected service: ClientService<M>;
 	protected uiConfig: C;
 	grid: GridOptions;
+	gridToolbar = `<div class="right-side">
+						<button mat-flat-button color="primary" (click)="grid.api.sizeColumnsToFit()">
+							<mat-icon>add</mat-icon>
+							Size columns
+						</button>
+						<button mat-flat-button color="primary" (click)="grid.api.selectAll()">
+							<mat-icon>add</mat-icon>
+							{{uiConfig.labels.addItem}}</button>
+					</div>
+`;
 
 	// protected dialogService: DialogService;
 	ref: any;
@@ -22,7 +32,7 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 			context: {
 				componentParent: this
 			},
-			defaultColDef:{resizable:true}
+			defaultColDef: {resizable: true}
 		};
 		uiConfig.setGridOptions(this.grid);
 	}
