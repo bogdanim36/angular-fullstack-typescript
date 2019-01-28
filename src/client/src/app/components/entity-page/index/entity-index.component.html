@@ -16,7 +16,8 @@
 					[gridOptions]="grid"
 					[rowData]="service.items">
 				</ag-grid-angular>
-				<app-grid-toolbar></app-grid-toolbar>
+				<app-grid-toolbar [templateHTML]="gridToolbar1">
+				</app-grid-toolbar>
 			</div>
 		</div>
 		<mat-card class="form-panel">

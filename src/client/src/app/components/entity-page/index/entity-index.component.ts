@@ -1,5 +1,5 @@
 import {PageComponent} from '@app/core/page.component';
-import {ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {ClientService} from '@app/core/client-service';
 import {AppSharedService} from '@app/core/app-shared.service';
 import {GridOptions} from 'ag-grid-community';
@@ -11,7 +11,7 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 	protected service: ClientService<M>;
 	protected uiConfig: C;
 	grid: GridOptions;
-	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbarAnchor;
+	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar;
 	gridToolbar1 = `<div class="right-side">
 						<button mat-flat-button color="primary" (click)="grid.api.sizeColumnsToFit()">
 							<mat-icon>add</mat-icon>
@@ -26,7 +26,7 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 	// protected dialogService: DialogService;
 	ref: any;
 
-	constructor(protected appShared: AppSharedService, protected formClass: any, uiConfig,private componentFactoryResolver: ComponentFactoryResolver) {
+	constructor(protected appShared: AppSharedService, protected formClass: any, uiConfig) {
 		super(appShared);
 		this.ref = this;
 		this.grid = <GridOptions>{
@@ -46,6 +46,10 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 
 	ngOnInit() {
 		this.service.getAll().then((data) => console.log('get data', data), console.error);
+		// this.gridToolbar.nativeElement.innerHTML = this.gridToolbar1;
+	}
+
+	ngAfterViewInit() {
 	}
 
 	showDialogToAdd() {
