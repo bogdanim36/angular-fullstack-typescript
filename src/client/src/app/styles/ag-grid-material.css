@@ -86,8 +86,8 @@ mat-toolbar.grid-toolbar {
 
 mat-toolbar.grid-toolbar[role=footer] {
 	background-color: transparent;
-	height: initial;
 	line-height: 50px;
+	height:55px;
 	padding: 10px;
 	border-top: 1px solid lightgrey;
 }

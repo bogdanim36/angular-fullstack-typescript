@@ -1,6 +1,6 @@
-<div *ngIf="isHandset">
-	<app-entity-table-list [parentRef]="ref"></app-entity-table-list>
-</div>
+<!--<div *ngIf="isHandset">-->
+	<!--<app-entity-table-list [parentRef]="ref"></app-entity-table-list>-->
+<!--</div>-->
 <div *ngIf="!isHandset">
 	<div class="table-container">
 		<div class="grid-panel">
@@ -16,8 +16,7 @@
 					[gridOptions]="grid"
 					[rowData]="service.items">
 				</ag-grid-angular>
-				<app-grid-toolbar [templateHTML]="gridToolbar1">
-				</app-grid-toolbar>
+				<ng-container #gridToolbar ></ng-container>
 			</div>
 		</div>
 		<mat-card class="form-panel">

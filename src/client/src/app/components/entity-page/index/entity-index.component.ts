@@ -1,5 +1,5 @@
 import {PageComponent} from '@app/core/page.component';
-import {OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {ClientService} from '@app/core/client-service';
 import {AppSharedService} from '@app/core/app-shared.service';
 import {GridOptions} from 'ag-grid-community';
@@ -11,20 +11,10 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 	protected service: ClientService<M>;
 	protected uiConfig: C;
 	grid: GridOptions;
-	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar;
-	gridToolbar1 = `<div class="right-side">
-						<button mat-flat-button color="primary" (click)="grid.api.sizeColumnsToFit()">
-							<mat-icon>add</mat-icon>
-							Size columns
-						</button>
-						<button mat-flat-button color="primary" (click)="grid.api.selectAll()">
-							<mat-icon>add</mat-icon>
-							{{uiConfig.labels.addItem}}</button>
-					</div>
-`;
-
+	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
 	// protected dialogService: DialogService;
 	ref: any;
+
 
 	constructor(protected appShared: AppSharedService, protected formClass: any, uiConfig) {
 		super(appShared);
@@ -40,7 +30,6 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 
 	public gridActions(action, rowIndex, headerName) {
 		let dataRow = this.grid.api.getDisplayedRowAtIndex(rowIndex);
-		console.log("datarow", dataRow);
 		alert(`"Parent Component Method from ${dataRow.data.email}! ${action}`);
 	}
 
