@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ComponentFactoryResolver, OnChanges, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 
 import {AppSharedService} from '@app/core/app-shared.service';
 import {EntityIndexComponent} from '@app/components/entity-page/index/entity-index.component';
@@ -27,14 +27,12 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) set gridToolbarContent(content: ViewContainerRef) {
 		this.gridToolbar = content;
-		console.log(this.gridToolbar);
-		setTimeout(()=>{
-		let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UsersGridToolbarComponent);
-		this.gridToolbar.clear();
-		let componentRef = this.gridToolbar.createComponent(componentFactory);
-		componentRef.instance.uiConfig = this.uiConfig;
-		componentRef.instance.grid = this.grid;
-		// (<DynamicContentDirective>componentRef.instance).data = adItem.data;
+		setTimeout(() => {
+			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UsersGridToolbarComponent);
+			this.gridToolbar.clear();
+			let componentRef = this.gridToolbar.createComponent(componentFactory);
+			componentRef.instance.uiConfig = this.uiConfig;
+			componentRef.instance.grid = this.grid;
 		});
 	}
 
