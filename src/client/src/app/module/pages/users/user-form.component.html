@@ -1,0 +1,38 @@
+<mat-card-content>
+	<mat-form-field appearance="standard">
+		<mat-label>{{uiConfig.labels.specific.firstName}}</mat-label>
+		<input matInput autocomplete="off" [(ngModel)]="item.firstName">
+		<mat-error *ngIf="errors.firstName">
+			<p *ngFor="let msg of errors.firstName">{{msg}}</p>
+		</mat-error>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>{{uiConfig.labels.specific.lastName}}</mat-label>
+		<input matInput autocomplete="off" [(ngModel)]="item.lastName">
+		<mat-error *ngIf="errors.lastName">
+			<p *ngFor="let msg of errors.lastName">{{msg}}</p>
+		</mat-error>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>{{uiConfig.labels.specific.email}}</mat-label>
+		<input matInput autocomplete="off" [(ngModel)]="item.email">
+		<mat-error *ngIf="errors.email">
+			<p *ngFor="let msg of errors.email">{{msg}}</p>
+		</mat-error>
+	</mat-form-field>
+	<div *ngIf="errorMessages.length" class="errors">
+		<ul class="ui-corner-all">
+			<li *ngFor="let message of errorMessages">{{message}}</li>
+		</ul>
+	</div>
+</mat-card-content>
+<mat-toolbar class="grid-toolbar" role="footer">
+	<div class="right-side">
+		<button mat-flat-button (click)='save(isNewItem, source, item)'>
+			<mat-icon>check</mat-icon>
+			{{uiConfig.labels.save}}</button>
+		<button mat-flat-button icon='fa fa-close' [disabled]='isNewItem' (click)='delete(source)'>
+			<mat-icon>add</mat-icon>
+			{{uiConfig.labels.delete}}</button>
+	</div>
+</mat-toolbar>

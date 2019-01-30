@@ -12,14 +12,16 @@ export class EntityUiConfig {
 		addItem: string,
 		delete: string,
 		itemDetails: string,
-		actions:string
+		actions:string,
+		specific:any
 	} = {
 		save: 'Save',
 		list: 'List of items',
 		addItem: 'Add Item',
 		delete: 'Delete',
 		itemDetails: 'Item Details',
-		actions:"Actions"
+		actions:"Actions",
+		specific:{}
 	};
 
 	addColumn(column: Partial<TableColumn>) {

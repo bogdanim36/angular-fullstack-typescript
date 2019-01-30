@@ -12,6 +12,7 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 	protected uiConfig: C;
 	grid: GridOptions;
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
+	@ViewChild('gridForm', {read: ViewContainerRef}) gridForm: ViewContainerRef;
 	// protected dialogService: DialogService;
 	ref: any;
 
@@ -36,6 +37,10 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 	ngOnInit() {
 		this.service.getAll().then((data) => console.log('get data', data), console.error);
 		// this.gridToolbar.nativeElement.innerHTML = this.gridToolbar1;
+	}
+
+	gridSelectionChanged(event: any) {
+		console.log('sel c', event);
 	}
 
 	ngAfterViewInit() {

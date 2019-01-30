@@ -1,44 +1,58 @@
-.form-panel .form-body > mat-card-content {
-  width: 100%;
-  height: calc(100% - 57px);
+.form-panel app-entity-form > mat-card-content {
+	width: 100%;
+	height: calc(100% - 73px);
 }
 
 mat-card.form-panel {
-  width: 400px;;
-  margin-left: 10px;
-  height: 100%;
+	width: 400px;;
+	margin-left: 10px;
+	height: 100%;
 }
+
 .mat-card.form-panel:not([class*=mat-elevation-z]) {
 	box-shadow: none;
 	background-color: initial;
 	padding: 0;
 	position: relative;
 }
-.mat-card.form-panel .form-body{
+
+.mat-card.form-panel app-entity-form {
 	position: absolute;
-	top:53px;
-	left:0;
-	right:0;
+	top: 53px;
+	left: 0;
+	right: 0;
 	bottom: 0;
-	border:1px solid lightgrey;
-	padding:0;
+	border: 1px solid lightgrey;
+	padding: 0;
+	border-right: 1px solid rgba(0, 0, 0, .15);
+	border-bottom: 1px solid rgba(0, 0, 0, .15);
+	-webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, .175);
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, .175);
 }
-.mat-card.form-panel > mat-toolbar.grid-toolbar{
-	padding:0 10px;
+
+app-entity-form > mat-card-content.mat-card-content {
+	display: flex;
+	flex-direction: column;
 }
-.mat-card.form-panel mat-card-content{
-	padding:10px;
-	margin:0;
+
+app-entity-form > mat-toolbar.grid-toolbar {
+	padding: 0 10px;
+}
+
+app-entity-form mat-card-content {
+	padding: 10px;
+	margin: 0;
 	overflow: auto;
 	box-sizing: border-box;
 }
-.mat-card.form-panel mat-card-actions{
+
+app-entity-form mat-card-actions {
 	position: absolute;
-	left:0;
-	right:0;
-	bottom:0;
-	margin:0;
-	padding:10px;
-	border-top:1px solid lightgrey;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 10px;
+	border-top: 1px solid lightgrey;
 }
 

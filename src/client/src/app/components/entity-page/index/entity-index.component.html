@@ -13,25 +13,21 @@
 			<div class="grid-body box-shadow">
 				<ag-grid-angular
 					class="ag-theme-material"
+					rowSelection="single"
 					[gridOptions]="grid"
-					[rowData]="service.items">
+					[rowData]="service.items"
+					(selectionChanged)="gridSelectionChanged($event)"
+				>
 				</ag-grid-angular>
 				<ng-container #gridToolbar ></ng-container>
 			</div>
 		</div>
 		<mat-card class="form-panel">
 			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
-				<span class="grid-title">User form</span>
+				<span class="grid-title">{{uiConfig.labels.itemDetails}}</span>
 			</mat-toolbar>
-			<div class="form-body box-shadow">
-				<mat-card-content>Content
-				</mat-card-content>
-				<mat-toolbar class="grid-toolbar" role="footer">
-					<div class="right-side">
-						<button mat-flat-button color="primary">Button</button>
-					</div>
-				</mat-toolbar>
-			</div>
+			<ng-container class="form-body box-shadow" #gridForm>
+			</ng-container>
 		</mat-card>
 	</div>
 </div>
