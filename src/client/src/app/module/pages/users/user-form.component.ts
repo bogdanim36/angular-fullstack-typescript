@@ -15,23 +15,55 @@ export class UserFormComponent {
 	public source: User;
 	public errorMessages: Array<string> = [];
 	public errors: User;
-	isNewRecord = true;
+	public isNewItem = true;
+	public selectedRow: User;
 
 	constructor() {
-		this.source = {firstName: "Boddd"};
+		this.source = {};
 		this.item = new User(this.source);
 		this.errors = {};
+	}
+
+	formTitle(): string {
+		let title = this.uiConfig.labels.itemDetails + " (" + (this.isNewItem ? this.uiConfig.labels.addItem : this.uiConfig.labels.modify) + ")";
+		return title;
 	}
 
 	ngOnInit() {
 	}
 
+	newItem() {
+		this.source = {};
+		this.item = new User(this.source);
+		this.errors = {};
+		this.isNewItem = true;
+	}
+
+	modify() {
+		this.errors = {};
+		this.gridSelectionChanged();
+
+	}
+
 	gridSelectionChanged(event: any) {
 		console.log('selection changed', event.api.getSelectedRows(), this.item);
 		let rows = event.api.getSelectedRows();
-		if (rows.length) this.source = rows[0];
-		else this.source = {};
-		this.item = new User(this.source);
+		this.isNewItem = false;
+		this.selectedRow = new User(rows[0]);
+		console.log(this.selectedRow);
+		if (rows.length) {
+			this.source = rows[0];
+			this.item = new User(this.source);
+		} else {
+			this.newItem();
+		}
+
+	}
+
+	save() {
+	}
+
+	delete() {
 	}
 
 }

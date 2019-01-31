@@ -4,21 +4,23 @@ import {GridOptions} from 'ag-grid-community';
 export class EntityUiConfig {
 	columns: TableColumn[] = [];
 	components:any;
-	gridRowHeight:number;
-	gridRowHeaderHeight:number;
+	gridRowHeight:number=30;
+	gridRowHeaderHeight:number=36;
 	labels: {
 		save: string,
 		list: string,
 		addItem: string,
 		delete: string,
+		modify:string,
 		itemDetails: string,
 		actions:string,
 		specific:any
 	} = {
 		save: 'Save',
 		list: 'List of items',
-		addItem: 'Add Item',
+		addItem: 'New',
 		delete: 'Delete',
+		modify: 'Modify',
 		itemDetails: 'Item Details',
 		actions:"Actions",
 		specific:{}

@@ -28,11 +28,28 @@
 </mat-card-content>
 <mat-toolbar class="grid-toolbar" role="footer">
 	<div class="right-side">
-		<button mat-flat-button (click)='save(isNewItem, source, item)'>
+		<button mat-flat-button
+				  [disabled]="isNewItem"
+				  color="primary"
+				  (click)='newItem()'>
+			<mat-icon>add</mat-icon>
+			{{uiConfig.labels.addItem}}</button>
+		<button mat-flat-button
+				  [disabled]="!selectedRow"
+				  color="primary"
+				  (click)='modify()'>
+			<mat-icon>edit</mat-icon>
+			{{uiConfig.labels.modify}}</button>
+		<button mat-flat-button
+				  color="accent"
+				  (click)='save(isNewItem, source, item)'>
 			<mat-icon>check</mat-icon>
 			{{uiConfig.labels.save}}</button>
-		<button mat-flat-button icon='fa fa-close' [disabled]='isNewItem' (click)='delete(source)'>
-			<mat-icon>add</mat-icon>
+		<button mat-flat-button
+				  color="warn"
+				  [disabled]='isNewItem'
+				  (click)='delete(source)'>
+			<mat-icon>close</mat-icon>
 			{{uiConfig.labels.delete}}</button>
 	</div>
 </mat-toolbar>

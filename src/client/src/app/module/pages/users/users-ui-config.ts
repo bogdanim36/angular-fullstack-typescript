@@ -1,15 +1,13 @@
 import {EntityUiConfig} from '@app/core/entity-ui-config';
 import {GridActionColumnComponent} from "@app/components/entity-page/index/grid-action-column.component";
+import {SpkHelper} from "@app/core/spk-helper";
+import ObjectAssign = SpkHelper.ObjectAssign;
 
 export class UsersUiConfig extends EntityUiConfig {
 	constructor() {
 		super();
-		this.gridRowHeight = 30;
-		this.gridRowHeaderHeight = 36;
+		console.log("ui config",ObjectAssign({},this));
 		this.labels.list = 'List of Users';
-		this.labels.addItem = 'Add User';
-		this.labels.save = 'Save';
-		this.labels.delete = 'Delete';
 		this.labels.itemDetails = 'User Details';
 		this.labels.specific={
 			email:"Email",

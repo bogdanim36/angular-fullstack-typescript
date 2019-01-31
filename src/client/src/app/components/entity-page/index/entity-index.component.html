@@ -24,7 +24,7 @@
 		</div>
 		<mat-card class="form-panel">
 			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
-				<span class="grid-title">{{uiConfig.labels.itemDetails}}</span>
+				<span class="grid-title" [innerHTML]="formTitle()"></span>
 			</mat-toolbar>
 			<ng-container class="form-body box-shadow" #gridForm>
 			</ng-container>

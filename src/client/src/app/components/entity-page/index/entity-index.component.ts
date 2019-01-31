@@ -1,10 +1,11 @@
 import {PageComponent} from '@app/core/page.component';
-import {ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {ClientService} from '@app/core/client-service';
 import {AppSharedService} from '@app/core/app-shared.service';
 import {GridOptions} from 'ag-grid-community';
+import {EntityUiConfig} from "@app/core/entity-ui-config";
 
-export class EntityIndexComponent<M, C, S> extends PageComponent implements OnInit {
+export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageComponent implements OnInit {
 	isNewItem = false;
 	form: { item: M, errorMessages: Array<string> };
 	editingItem: Partial<M>;
@@ -17,7 +18,7 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 	ref: any;
 
 
-	constructor(protected appShared: AppSharedService, protected formClass: any, uiConfig) {
+	constructor(protected appShared: AppSharedService, uiConfig) {
 		super(appShared);
 		this.ref = this;
 		this.grid = <GridOptions>{
@@ -29,6 +30,10 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 		uiConfig.setGridOptions(this.grid);
 	}
 
+	formTitle():string {
+		return this.uiConfig.labels.itemDetails;
+	}
+
 	public gridActions(action, rowIndex, headerName) {
 		let dataRow = this.grid.api.getDisplayedRowAtIndex(rowIndex);
 		alert(`"Parent Component Method from ${dataRow.data.email}! ${action}`);
@@ -36,11 +41,10 @@ export class EntityIndexComponent<M, C, S> extends PageComponent implements OnIn
 
 	ngOnInit() {
 		this.service.getAll().then((data) => console.log('get data', data), console.error);
-		// this.gridToolbar.nativeElement.innerHTML = this.gridToolbar1;
 	}
 
 	gridSelectionChanged(event: any) {
-		console.log('sel c', event);
+		//this will be mapped to entity-form.gridSelectionChanged method
 	}
 
 	ngAfterViewInit() {
