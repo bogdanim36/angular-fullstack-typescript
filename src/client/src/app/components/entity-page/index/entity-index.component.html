@@ -1,5 +1,5 @@
 <!--<div *ngIf="isHandset">-->
-	<!--<app-entity-table-list [parentRef]="ref"></app-entity-table-list>-->
+<!--<app-entity-table-list [parentRef]="ref"></app-entity-table-list>-->
 <!--</div>-->
 <div *ngIf="!isHandset">
 	<div class="table-container">
@@ -19,10 +19,10 @@
 					(selectionChanged)="gridSelectionChanged($event)"
 				>
 				</ag-grid-angular>
-				<ng-container #gridToolbar ></ng-container>
+				<ng-container #gridToolbar></ng-container>
 			</div>
 		</div>
-		<mat-card class="form-panel">
+		<mat-card class="form-panel" *ngIf="showFormPanel">
 			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
 				<span class="grid-title" [innerHTML]="formTitle()"></span>
 			</mat-toolbar>

@@ -8,10 +8,10 @@ import {EntityUiConfig} from "@app/core/entity-ui-config";
 export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageComponent implements OnInit {
 	isNewItem = false;
 	form: { item: M, errorMessages: Array<string> };
-	editingItem: Partial<M>;
 	protected service: ClientService<M>;
 	protected uiConfig: C;
 	grid: GridOptions;
+	showFormPanel:boolean;
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
 	@ViewChild('gridForm', {read: ViewContainerRef}) gridForm: ViewContainerRef;
 	// protected dialogService: DialogService;
@@ -28,6 +28,7 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 			defaultColDef: {resizable: true}
 		};
 		uiConfig.setGridOptions(this.grid);
+		this.showFormPanel=true;
 	}
 
 	formTitle():string {
@@ -76,26 +77,19 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		// });
 	}
 
-	saveCallback(response) {
-		if (response.status) {
-			this.editingItem = null;
-			// this.dialogService.dialogComponentRef.instance.close();
-		} else {
-			if (response.message) this.form.errorMessages.push(response.message);
-			console.error('save error', response);
-		}
-	}
 
 	save(isNewItem, source, edited) {
 		if (isNewItem)
-			return this.service.create(edited).then((response) => this.saveCallback(response));
+			return this.service.create(edited);
 		else
-			return this.service.update(source, edited).then((response) => this.saveCallback(response));
+			return this.service.update(source, edited);
 	}
 
 	delete(item) {
-		this.service.delete(item);
-		this.editingItem = null;
+		return this.service.delete(item);
 		// this.dialogService.dialogComponentRef.instance.close();
+	}
+	toggleShowPanel(){
+		this.showFormPanel = !this.showFormPanel;
 	}
 }

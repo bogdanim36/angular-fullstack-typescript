@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {UsersUiConfig} from "@app/module/pages/users/users-ui-config";
-import {GridOptions} from 'ag-grid-community';
+import {GridOptions, RowNode} from 'ag-grid-community';
 import {User} from "@shared/user";
 
 @Component({
@@ -16,16 +16,18 @@ export class UserFormComponent {
 	public errorMessages: Array<string> = [];
 	public errors: User;
 	public isNewItem = true;
-	public selectedRow: User;
+	public rowNode: RowNode;
+	public isEditing: boolean;
+	public showFormPanel: boolean;
 
 	constructor() {
-		this.source = {};
-		this.item = new User(this.source);
+		this.item = {};
 		this.errors = {};
+		this.source = {};
 	}
 
 	formTitle(): string {
-		let title = this.uiConfig.labels.itemDetails + " (" + (this.isNewItem ? this.uiConfig.labels.addItem : this.uiConfig.labels.modify) + ")";
+		let title = this.uiConfig.labels.itemDetails + (this.isEditing ? " (" + (this.isNewItem ? this.uiConfig.labels.addItem : this.uiConfig.labels.modify) + ")" : "");
 		return title;
 	}
 
@@ -34,36 +36,91 @@ export class UserFormComponent {
 
 	newItem() {
 		this.source = {};
-		this.item = new User(this.source);
-		this.errors = {};
 		this.isNewItem = true;
+		this.editing();
 	}
+
 
 	modify() {
-		this.errors = {};
-		this.gridSelectionChanged();
-
+		this.source = this.rowNode.data;
+		this.isNewItem = false;
+		this.editing();
 	}
 
-	gridSelectionChanged(event: any) {
-		console.log('selection changed', event.api.getSelectedRows(), this.item);
-		let rows = event.api.getSelectedRows();
-		this.isNewItem = false;
-		this.selectedRow = new User(rows[0]);
-		console.log(this.selectedRow);
-		if (rows.length) {
-			this.source = rows[0];
-			this.item = new User(this.source);
-		} else {
-			this.newItem();
-		}
+	editing() {
+		this.isEditing = true;
+		this.grid.rowSelection = "";
+		this.grid.suppressRowClickSelection = true;
+		this.item = new User(this.source);
+	}
 
+	cancel() {
+		this.errors = {};
+		this.errorMessages = [];
+		this.isEditing = false;
+		this.isNewItem = false;
+		this.source = null;
+		this.grid.suppressRowClickSelection = false;
+		this.grid.rowSelection = "single";
+		this.gridSelectionChanged(this.grid);
+	}
+
+	gridSelectionChanged(event: GridOptions) {
+		console.log('selection changed', event.api.getSelectedRows(), this.item);
+		let nodes = event.api.getSelectedNodes();
+		if (nodes.length) this.rowNode = nodes[0];
+		else this.rowNode = null;
+		if (this.rowNode) this.item = this.rowNode.data;
+		else this.item = new User({});
 	}
 
 	save() {
+		this.saveGeneric(this.isNewItem, this.source, this.item).then(response => {
+			if (response.status) {
+				console.log(response);
+				let item = new User(response.data);
+				if (this.isNewItem) {
+					this.grid.api.updateRowData({add: [item], addIndex: 0});
+					this.grid.api.selectIndex(0, false, null);
+				} else {
+					this.rowNode.setData(item);
+				}
+				this.cancel();
+			} else {
+				if (response.message) this.errorMessages.push(response.message);
+				console.error('save error', response);
+			}
+		});
 	}
 
-	delete() {
+	saveGeneric(isNewRecord, source, edited): Promise<any> {
+		return new Promise((resolve, reject) => {
+			resolve(1);
+			reject("1");
+		});
 	}
+
+	delete(item: User) {
+		this.deleteGeneric(item).then(response => {
+			if (response.status) {
+				this.grid.api.updateRowData({remove: [item] });
+			} else {
+				if (response.message) this.errorMessages.push(response.message);
+				console.error('save error', response);
+			}
+		});
+	}
+
+	deleteGeneric(item: User): Promise<any> {
+		return new Promise((resolve, reject) => {
+			resolve(1);
+			reject("1");
+		});
+	}
+	close(){
+
+	}
+	toggleShowPanel(){}
+
 
 }

@@ -1,22 +1,28 @@
 <mat-card-content>
 	<mat-form-field appearance="standard">
 		<mat-label>{{uiConfig.labels.specific.firstName}}</mat-label>
-		<input matInput autocomplete="off" [(ngModel)]="item.firstName">
-		<mat-error *ngIf="errors.firstName">
+		<input matInput autocomplete="off"
+				 [disabled]="!isEditing"
+				 [(ngModel)]="item.firstName">
+		<mat-error *ngIf="errors?.firstName">
 			<p *ngFor="let msg of errors.firstName">{{msg}}</p>
 		</mat-error>
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>{{uiConfig.labels.specific.lastName}}</mat-label>
-		<input matInput autocomplete="off" [(ngModel)]="item.lastName">
-		<mat-error *ngIf="errors.lastName">
+		<input matInput autocomplete="off"
+				 [disabled]="!isEditing"
+				 [(ngModel)]="item.lastName">
+		<mat-error *ngIf="errors?.lastName">
 			<p *ngFor="let msg of errors.lastName">{{msg}}</p>
 		</mat-error>
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>{{uiConfig.labels.specific.email}}</mat-label>
-		<input matInput autocomplete="off" [(ngModel)]="item.email">
-		<mat-error *ngIf="errors.email">
+		<input matInput autocomplete="off"
+				 [disabled]="!isEditing"
+				 [(ngModel)]="item.email">
+		<mat-error *ngIf="errors?.email">
 			<p *ngFor="let msg of errors.email">{{msg}}</p>
 		</mat-error>
 	</mat-form-field>
@@ -29,27 +35,42 @@
 <mat-toolbar class="grid-toolbar" role="footer">
 	<div class="right-side">
 		<button mat-flat-button
-				  [disabled]="isNewItem"
+				  *ngIf="!isEditing "
+				  color="primary"
+				  (click)='toggleShowPanel()'>
+			<mat-icon>close</mat-icon>
+			{{uiConfig.labels.close}}</button>
+		<button mat-flat-button
+				  *ngIf="!isEditing "
 				  color="primary"
 				  (click)='newItem()'>
 			<mat-icon>add</mat-icon>
 			{{uiConfig.labels.addItem}}</button>
 		<button mat-flat-button
-				  [disabled]="!selectedRow"
+				  *ngIf="!isEditing"
+				  [disabled]="!rowNode"
 				  color="primary"
 				  (click)='modify()'>
 			<mat-icon>edit</mat-icon>
 			{{uiConfig.labels.modify}}</button>
 		<button mat-flat-button
+				  color="warn"
+				  *ngIf="!isEditing "
+				  [disabled]="!rowNode"
+				  (click)='delete(rowNode.data)'>
+			<mat-icon>close</mat-icon>
+			{{uiConfig.labels.delete}}</button>
+		<button mat-flat-button
 				  color="accent"
+				  *ngIf="isEditing"
 				  (click)='save(isNewItem, source, item)'>
 			<mat-icon>check</mat-icon>
 			{{uiConfig.labels.save}}</button>
 		<button mat-flat-button
 				  color="warn"
-				  [disabled]='isNewItem'
-				  (click)='delete(source)'>
-			<mat-icon>close</mat-icon>
-			{{uiConfig.labels.delete}}</button>
+				  *ngIf="isEditing"
+				  (click)='cancel()'>
+			<mat-icon>cancel</mat-icon>
+			{{uiConfig.labels.cancel}}</button>
 	</div>
 </mat-toolbar>

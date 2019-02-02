@@ -7,14 +7,13 @@ import {UsersUiConfig} from './users-ui-config';
 import {UsersClientService} from './users-client.service';
 import {UsersGridToolbarComponent} from "./users-grid-toolbar.component";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";
-import {EntityUiConfig} from "@app/core/entity-ui-config";
 
 @Component({
 	selector: 'app-users-list',
 	templateUrl: '../../../components/entity-page/index/entity-index.component.html',
 	styleUrls: ['../../../components/entity-page/index/entity-index.component.scss']
 })
-export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfig , UsersClientService> implements OnInit {
+export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfig, UsersClientService> implements OnInit {
 
 	constructor(appShared: AppSharedService,
 				public service: UsersClientService,
@@ -35,19 +34,22 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			let componentRef = this.gridToolbar.createComponent(componentFactory);
 			componentRef.instance.uiConfig = this.uiConfig;
 			componentRef.instance.grid = this.grid;
+			componentRef.instance.toggleShowPanel = this.toggleShowPanel.bind(this);
 		});
 	}
 
 	@ViewChild('gridForm', {read: ViewContainerRef}) set gridFormContent(content: ViewContainerRef) {
 		this.gridForm = content;
+		if (!content) return;
 		setTimeout(() => {
 			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UserFormComponent);
 			this.gridForm.clear();
 			let componentRef = this.gridForm.createComponent(componentFactory);
 			componentRef.instance.uiConfig = this.uiConfig;
 			componentRef.instance.grid = this.grid;
-			componentRef.instance.save = this.save.bind(componentRef.instance);
-			componentRef.instance.delete = this.delete.bind(componentRef.instance);
+			componentRef.instance.toggleShowPanel = this.toggleShowPanel.bind(this);
+			componentRef.instance.saveGeneric = this.save.bind(this);
+			componentRef.instance.deleteGeneric = this.delete.bind(this);
 			this.formTitle = componentRef.instance.formTitle.bind(componentRef.instance);
 			this.gridSelectionChanged = componentRef.instance.gridSelectionChanged.bind(componentRef.instance);
 		});

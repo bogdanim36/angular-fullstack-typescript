@@ -81,6 +81,7 @@ export class ClientService<M> {
 				if (response && response.status) {
 					Object.assign(originalItem, this.instanceCreate(response.data));
 				}
+				console.log("iupdated", this.items);
 				return response;
 			}, error => {
 				console.error(error);
@@ -110,6 +111,7 @@ export class ClientService<M> {
 			.then(response => {
 				if (response && response.status) {
 					this._items = this.items.filter((item, i) => item[this.primaryKey] !== id);
+					response.data = sourceItem;
 				}
 				return response;
 			}, error => {
