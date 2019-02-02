@@ -6,14 +6,15 @@ import ObjectAssign = SpkHelper.ObjectAssign;
 export class UsersUiConfig extends EntityUiConfig {
 	constructor() {
 		super();
-		console.log("ui config",ObjectAssign({},this));
+		console.log("ui config", ObjectAssign({}, this));
+		this.formPanelWidth = '400px';
 		this.labels.list = 'List of Users';
 		this.labels.itemDetails = 'User Details';
-		this.labels.specific={
-			email:"Email",
-			firstName:"First Name",
-			lastName:"Last Name",
-			fullName:"Full Name",
+		this.labels.specific = {
+			email: "Email",
+			firstName: "First Name",
+			lastName: "Last Name",
+			fullName: "Full Name",
 		};
 		this.addColumn({field: 'email', headerName: 'Email', sortable: true, width: 250, editable: true});
 		this.addColumn({field: 'fullName', headerName: 'Full Name', sortable: true, width: 300, editable: false});

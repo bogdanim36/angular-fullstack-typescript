@@ -4,6 +4,7 @@ import {ClientService} from '@app/core/client-service';
 import {AppSharedService} from '@app/core/app-shared.service';
 import {GridOptions} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
+import {DomSanitizer, SafeStyle} from "@angular/platform-browser";
 
 export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageComponent implements OnInit {
 	isNewItem = false;
@@ -11,14 +12,16 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	protected service: ClientService<M>;
 	protected uiConfig: C;
 	grid: GridOptions;
-	showFormPanel:boolean;
+	showFormPanel: boolean;
+	formPanelWidth: string;
+	private gridWidth: SafeStyle;
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
 	@ViewChild('gridForm', {read: ViewContainerRef}) gridForm: ViewContainerRef;
 	// protected dialogService: DialogService;
 	ref: any;
 
 
-	constructor(protected appShared: AppSharedService, uiConfig) {
+	constructor(protected appShared: AppSharedService, uiConfig, protected sanitizer: DomSanitizer) {
 		super(appShared);
 		this.ref = this;
 		this.grid = <GridOptions>{
@@ -28,10 +31,14 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 			defaultColDef: {resizable: true}
 		};
 		uiConfig.setGridOptions(this.grid);
-		this.showFormPanel=true;
+		this.formPanelWidth = uiConfig.formPanelWidth;
+		this.showFormPanel = true;
+		this.gridWidth = sanitizer.bypassSecurityTrustStyle("calc(100% - " + this.formPanelWidth + ")");
+		console.log(this.gridWidth);
+		console.log(this.formPanelWidth);
 	}
 
-	formTitle():string {
+	formTitle(): string {
 		return this.uiConfig.labels.itemDetails;
 	}
 
@@ -89,7 +96,10 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		return this.service.delete(item);
 		// this.dialogService.dialogComponentRef.instance.close();
 	}
-	toggleShowPanel(){
+
+	toggleShowPanel() {
 		this.showFormPanel = !this.showFormPanel;
+		this.formPanelWidth = this.showFormPanel? this.uiConfig.formPanelWidth:"0px";
+		this.gridWidth = this.sanitizer.bypassSecurityTrustStyle("calc(100% - " + this.formPanelWidth + ")");
 	}
 }

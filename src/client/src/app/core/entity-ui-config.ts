@@ -6,6 +6,7 @@ export class EntityUiConfig {
 	components: any;
 	gridRowHeight: number = 30;
 	gridRowHeaderHeight: number = 36;
+	private _formPanelWidth: string;
 	labels: {
 		save: string,
 		list: string,
@@ -30,6 +31,15 @@ export class EntityUiConfig {
 
 	addColumn(column: Partial<TableColumn>) {
 		this.columns.push(new TableColumn(column));
+	}
+
+	set formPanelWidth(value) {
+		if (value === "auto") throw  new Error("auto is not a valid value for formPanelWidth.Use 100%, or 400px format");
+		this._formPanelWidth = value;
+	}
+
+	get formPanelWidth() {
+		return this._formPanelWidth;
 	}
 
 	setGridOptions(grid: GridOptions) {

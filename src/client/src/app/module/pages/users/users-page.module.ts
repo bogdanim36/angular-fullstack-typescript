@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatToolbarModule} from "@angular/material";
+import {MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 import {AgGridModule} from 'ag-grid-angular';
 
 import {EntityPageModule} from '@app/components/entity-page/entity-page.module';
@@ -39,6 +39,7 @@ import {UserFormComponent} from "@app/module/pages/users/user-form.component";
 		MatCardModule,
 		MatFormFieldModule,
 		MatInputModule,
+		MatMenuModule,
 		AngularFontAwesomeModule,
 		BrowserAnimationsModule,
 		AgGridModule.withComponents([])

@@ -11,7 +11,9 @@ import {GridOptions} from "ag-grid-community";
 					 <mat-icon>add</mat-icon>
 					 Size columns
 				 </button>
-				 <button mat-flat-button color="primary" (click)="toggleShowPanel()">
+				 <button mat-flat-button color="primary"
+						 *ngIf="!formPanelIsVisible"
+						 (click)="toggleShowPanel()">
 					 <mat-icon>remove_red_eye</mat-icon>
 					 {{uiConfig?.labels.showDetails}}
 				 </button>
@@ -22,6 +24,7 @@ import {GridOptions} from "ag-grid-community";
 export class UsersGridToolbarComponent {
 	@Input() uiConfig: UsersUiConfig;
 	@Input() grid: GridOptions;
+	formPanelIsVisible: boolean;
 
 	constructor() {
 	}

@@ -34,38 +34,76 @@
 </mat-card-content>
 <mat-toolbar class="grid-toolbar" role="footer">
 	<div class="right-side">
-		<button mat-flat-button
+		<!--close button-->
+		<button mat-icon-button
 				  *ngIf="!isEditing "
 				  color="primary"
 				  (click)='toggleShowPanel()'>
 			<mat-icon>close</mat-icon>
-			{{uiConfig.labels.close}}</button>
-		<button mat-flat-button
+		</button>
+		<!--add button-->
+		<button mat-icon-button
 				  *ngIf="!isEditing "
 				  color="primary"
 				  (click)='newItem()'>
 			<mat-icon>add</mat-icon>
-			{{uiConfig.labels.addItem}}</button>
-		<button mat-flat-button
+		</button>
+		<!--modify button-->
+		<button mat-icon-button
 				  *ngIf="!isEditing"
 				  [disabled]="!rowNode"
 				  color="primary"
 				  (click)='modify()'>
 			<mat-icon>edit</mat-icon>
-			{{uiConfig.labels.modify}}</button>
-		<button mat-flat-button
+		</button>
+		<!--delete button-->
+		<button mat-icon-button
 				  color="warn"
-				  *ngIf="!isEditing "
+				  *ngIf="false "
 				  [disabled]="!rowNode"
 				  (click)='delete(rowNode.data)'>
 			<mat-icon>close</mat-icon>
 			{{uiConfig.labels.delete}}</button>
+		<div *ngIf="!isEditing" style="display: inline-block">
+			<mat-menu #deleteMenu="matMenu">
+				<div style="display: flex;flex-direction: column;margin:0 10px">
+					<button mat-flat-button
+							  style="margin-bottom: 5px;"
+							  color="primary">Cancel
+					</button>
+					<button mat-flat-button
+							  (click)='delete(rowNode.data)' color="warn">
+						<mat-icon>check</mat-icon>
+						Confirm
+					</button>
+				</div>
+			</mat-menu>
+			<button mat-icon-button
+					  [matMenuTriggerFor]="deleteMenu"
+					  color="warn"
+					  [disabled]="!rowNode">
+				<mat-icon>delete</mat-icon>
+			</button>
+		</div>
+		<!--<div *ngIf="!isEditing" style="display: inline-block">-->
+		<!--<ng2-dropdown [disabled]="!rowNode">-->
+		<!--<ng2-dropdown-button [disabled]="!rowNode">-->
+		<!--<button mat-flat-button-->
+		<!--color="warn"-->
+		<!--&gt;-->
+		<!--<mat-icon>close</mat-icon>-->
+		<!--{{uiConfig.labels.delete}}</button>-->
+		<!--</ng2-dropdown-button>-->
+		<!--</ng2-dropdown>-->
+		<!--</div>-->
+		<!--save button-->
 		<button mat-flat-button
 				  color="accent"
 				  *ngIf="isEditing"
 				  (click)='save(isNewItem, source, item)'>
 			<mat-icon>check</mat-icon>
 			{{uiConfig.labels.save}}</button>
+		<!--cancel button-->
 		<button mat-flat-button
 				  color="warn"
 				  *ngIf="isEditing"
