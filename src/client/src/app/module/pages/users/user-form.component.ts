@@ -12,7 +12,7 @@ import {EntityFormComponent} from "@app/components/entity-page/form/entity-form.
 })
 export class UserFormComponent extends EntityFormComponent<User, UsersUiConfig, UsersClientService>{
 
-	constructor(protected entityService: EntityService) {
+	constructor(public entityService: EntityService) {
 		super(User,entityService);
 	}
 
