@@ -31,13 +31,11 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		return title;
 	}
 
-
 	newItem() {
 		this.source = this.instanceCreate({});
 		this.isNewItem = true;
 		this.editing();
 	}
-
 
 	modify() {
 		this.source = this.selectedGridRowNode.data;
@@ -75,7 +73,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	save() {
 		this.serviceSave(this.isNewItem, this.source, this.item).then(response => {
 			if (response.status) {
-				let item = new User(response.data);
+				let item = this.instanceCreate(response.data);
 				if (this.isNewItem) {
 					this.grid.api.updateRowData({add: [item], addIndex: 0});
 					this.grid.api.selectIndex(0, false, null);
