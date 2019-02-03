@@ -53,7 +53,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	cancel() {
-		this.errors = this.instanceCreate({});;
+		this.errors = this.instanceCreate({});
 		this.errorMessages = [];
 		this.entityService.isEditing = false;
 		this.isNewItem = false;
