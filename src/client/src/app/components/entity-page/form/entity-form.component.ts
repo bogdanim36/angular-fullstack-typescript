@@ -5,7 +5,7 @@ import {GridOptions, RowNode} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {ClientService} from "@app/core/client-service";
 
-export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientService<M>, I> {
+export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientService<M>> {
 
 	@Input() uiConfig: C;
 	@Input() grid: GridOptions;
@@ -87,6 +87,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 				this.cancel();
 			} else {
 				if (response.message) this.errorMessages.push(response.message);
+				if (response.erros) this.errors = response.errors;
 				console.error('save error', response);
 			}
 		});
@@ -99,7 +100,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 			return this.service.update(source, edited);
 	}
 
-	delete(item: User) {
+	delete(item: M) {
 		this.service.delete(item).then(response => {
 			if (response.status) {
 				this.grid.api.updateRowData({remove: [item]});

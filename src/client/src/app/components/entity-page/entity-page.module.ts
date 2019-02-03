@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {EntityTableListComponent} from './table-list/entity-table-list.component';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AgGridModule} from 'ag-grid-angular';
@@ -9,11 +8,9 @@ import {CommonModule} from "@angular/common";
 
 @NgModule({
 	declarations: [
-		EntityTableListComponent,
 		GridActionColumnComponent
 	],
 	exports: [
-		EntityTableListComponent,
 	],
 	imports: [
 		BrowserModule,

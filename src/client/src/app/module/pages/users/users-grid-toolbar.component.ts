@@ -7,9 +7,9 @@ import {GridOptions} from "ag-grid-community";
 	template: `
 		 <mat-toolbar class="grid-toolbar" role="footer">
 			 <div class="right-side">
-				 <button mat-flat-button color="primary" (click)="grid.api.sizeColumnsToFit()">
-					 <mat-icon>add</mat-icon>
-					 Size columns
+				 <button mat-flat-button color="primary" 
+						 (click)="grid.api.sizeColumnsToFit()">
+					 Size columns to fit
 				 </button>
 			 </div>
 		 </mat-toolbar>`
