@@ -19,7 +19,6 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	constructor(protected modelClass: M & Function, protected entityService: EntityService) {
 		this.item = this.instanceCreate({});
 		this.errors = this.instanceCreate({});
-		this.source = this.instanceCreate({});
 	}
 
 	instanceCreate(source: Partial<M>, extra?: any): M {
@@ -27,7 +26,8 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	formTitle(): string {
-		let title = this.uiConfig.labels.itemDetails + (this.entityService.isEditing ? " (" + (this.isNewItem ? this.uiConfig.labels.addItem : this.uiConfig.labels.modify) + ")" : "");
+		let title = this.uiConfig.labels.itemDetails;
+		title += this.entityService.isEditing ? " (" + (this.isNewItem ? this.uiConfig.labels.addItem : this.uiConfig.labels.modify) + ")" : "";
 		return title;
 	}
 

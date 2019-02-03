@@ -32,6 +32,7 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) set gridToolbarContent(content: ViewContainerRef) {
 		this.gridToolbar = content;
+		if (!content) return;
 		console.log("create gridToolbar component");
 		setTimeout(() => {
 			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UsersGridToolbarComponent);

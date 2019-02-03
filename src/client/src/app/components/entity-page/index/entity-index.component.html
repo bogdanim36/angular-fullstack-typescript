@@ -1,38 +1,53 @@
-<!--<div *ngIf="isHandset">-->
-<!--<app-entity-table-list [parentRef]="ref"></app-entity-table-list>-->
-<!--</div>-->
-<div *ngIf="!isHandset">
-	<div class="table-container">
-		<div class="grid-panel" [style.width]="gridWidth">
-			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
-				<span class="grid-title">{{uiConfig.labels.list}}</span>
-				<div class="right-side info">
-					<span>{{service.items.length}} records</span>
-					<button mat-icon-button
-							  *ngIf="!entityService.formPanelIsVisible"
-							  [matTooltip]="uiConfig.labels.showFormPanel"
-							  (click)="toggleShowPanel()">
-						<mat-icon>remove_red_eye</mat-icon>
-						{{uiConfig?.labels.showDetails}}
-					</button>
+<div *ngIf="isHandset">
+	<mat-card role="heading">
+		<label class="list-title">{{uiConfig.labels.list}}</label>
+		<button mat-icon-button style="position: absolute;right:0;top:5px;">
+			<mat-icon>add</mat-icon>
+		</button>
+	</mat-card>
+	<mat-card *ngFor="let item of service.items" style="margin-top:5px">
+		<div style="width:100%">
+			<div *ngFor="let column of uiConfig.columns">
+				<div *ngIf="column.field">
+					<label>{{column.headerName}}: </label>{{item[column.field]}}
 				</div>
-			</mat-toolbar>
-			<div class="grid-body box-shadow">
-				<ag-grid-angular
-					class="ag-theme-material"
-					rowSelection="single"
-					[gridOptions]="grid"
-					[rowData]="service.items"
-					(selectionChanged)="gridSelectionChanged($event)"
-				>
-				</ag-grid-angular>
-				<ng-container #gridToolbar></ng-container>
 			</div>
 		</div>
-		<mat-card class="form-panel" *ngIf="entityService.formPanelIsVisible" [style.width]="formPanelWidth">
-			<ng-container #gridForm>
-			</ng-container>
-		</mat-card>
+		<button mat-icon-button style="position: absolute;right:0;top:5px;">
+			<mat-icon>edit</mat-icon>
+		</button>
+	</mat-card>
+</div>
+<div *ngIf="!isHandset" class="table-container">
+	<div class="grid-panel" [style.width]="gridWidth">
+		<mat-toolbar class="grid-toolbar box-shadow" role="heading">
+			<span class="grid-title">{{uiConfig.labels.list}}</span>
+			<div class="right-side info">
+				<span>{{service.items.length}} records</span>
+				<button mat-icon-button
+						  *ngIf="!entityService.formPanelIsVisible"
+						  [matTooltip]="uiConfig.labels.showFormPanel"
+						  (click)="toggleShowPanel()">
+					<mat-icon>remove_red_eye</mat-icon>
+					{{uiConfig?.labels.showDetails}}
+				</button>
+			</div>
+		</mat-toolbar>
+		<div class="grid-body box-shadow">
+			<ag-grid-angular
+				class="ag-theme-material"
+				rowSelection="single"
+				[gridOptions]="grid"
+				[rowData]="service.items"
+				(selectionChanged)="gridSelectionChanged($event)"
+			>
+			</ag-grid-angular>
+			<ng-container #gridToolbar></ng-container>
+		</div>
 	</div>
+	<mat-card class="form-panel" *ngIf="entityService.formPanelIsVisible" [style.width]="formPanelWidth">
+		<ng-container #gridForm>
+		</ng-container>
+	</mat-card>
 </div>
 

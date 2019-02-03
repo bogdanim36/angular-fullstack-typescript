@@ -24,6 +24,7 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	constructor(protected appShared: AppSharedService, uiConfig, protected sanitizer: DomSanitizer, protected entityService: EntityService) {
 		super(appShared);
 		this.ref = this;
+		this.entityService.formPanelIsVisible = true;
 		this.grid = <GridOptions>{
 			context: {
 				componentParent: this
@@ -32,7 +33,6 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		};
 		uiConfig.setGridOptions(this.grid);
 		this.formPanelWidth = uiConfig.formPanelWidth;
-		this.entityService.formPanelIsVisible = true;
 		this.gridWidth = sanitizer.bypassSecurityTrustStyle("calc(100% - " + this.formPanelWidth + ")");
 	}
 
@@ -45,13 +45,6 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	ngOnInit() {
 		this.service.getAll().then((data) => {
 		}, console.error);
-	}
-
-	gridSelectionChanged(event: any) {
-		//this will be mapped to entity-form.gridSelectionChanged method
-	}
-
-	ngAfterViewInit() {
 	}
 
 	showDialogToAdd() {
@@ -80,6 +73,9 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		// });
 	}
 
+	gridSelectionChanged(event: any) {
+		//this will be mapped to entity-form.gridSelectionChanged method
+	}
 
 	toggleShowPanel() {
 		this.entityService.formPanelIsVisible = !this.entityService.formPanelIsVisible;
