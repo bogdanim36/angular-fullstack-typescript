@@ -7,7 +7,14 @@
 			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
 				<span class="grid-title">{{uiConfig.labels.list}}</span>
 				<div class="right-side info">
-					{{service.items.length}} records
+					<span>{{service.items.length}} records</span>
+					<button mat-icon-button
+							  *ngIf="!entityService.formPanelIsVisible"
+							  [matTooltip]="uiConfig.labels.showFormPanel"
+							  (click)="toggleShowPanel()">
+						<mat-icon>remove_red_eye</mat-icon>
+						{{uiConfig?.labels.showDetails}}
+					</button>
 				</div>
 			</mat-toolbar>
 			<div class="grid-body box-shadow">
@@ -22,11 +29,8 @@
 				<ng-container #gridToolbar></ng-container>
 			</div>
 		</div>
-		<mat-card class="form-panel" *ngIf="showFormPanel" [style.width]="formPanelWidth" >
-			<mat-toolbar class="grid-toolbar box-shadow" role="heading">
-				<span class="grid-title" [innerHTML]="formTitle()"></span>
-			</mat-toolbar>
-			<ng-container class="form-body box-shadow" #gridForm>
+		<mat-card class="form-panel" *ngIf="entityService.formPanelIsVisible" [style.width]="formPanelWidth">
+			<ng-container #gridForm>
 			</ng-container>
 		</mat-card>
 	</div>

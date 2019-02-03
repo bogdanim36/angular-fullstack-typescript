@@ -1,114 +1,103 @@
-<mat-card-content>
-	<mat-form-field appearance="standard">
-		<mat-label>{{uiConfig.labels.specific.firstName}}</mat-label>
-		<input matInput autocomplete="off"
-				 [disabled]="!isEditing"
-				 [(ngModel)]="item.firstName">
-		<mat-error *ngIf="errors?.firstName">
-			<p *ngFor="let msg of errors.firstName">{{msg}}</p>
-		</mat-error>
-	</mat-form-field>
-	<mat-form-field>
-		<mat-label>{{uiConfig.labels.specific.lastName}}</mat-label>
-		<input matInput autocomplete="off"
-				 [disabled]="!isEditing"
-				 [(ngModel)]="item.lastName">
-		<mat-error *ngIf="errors?.lastName">
-			<p *ngFor="let msg of errors.lastName">{{msg}}</p>
-		</mat-error>
-	</mat-form-field>
-	<mat-form-field>
-		<mat-label>{{uiConfig.labels.specific.email}}</mat-label>
-		<input matInput autocomplete="off"
-				 [disabled]="!isEditing"
-				 [(ngModel)]="item.email">
-		<mat-error *ngIf="errors?.email">
-			<p *ngFor="let msg of errors.email">{{msg}}</p>
-		</mat-error>
-	</mat-form-field>
-	<div *ngIf="errorMessages.length" class="errors">
-		<ul class="ui-corner-all">
-			<li *ngFor="let message of errorMessages">{{message}}</li>
-		</ul>
-	</div>
-</mat-card-content>
-<mat-toolbar class="grid-toolbar" role="footer">
+<mat-toolbar class="grid-toolbar box-shadow" role="heading">
+	<span class="grid-title" [innerHTML]="formTitle()"></span>
 	<div class="right-side">
 		<!--close button-->
 		<button mat-icon-button
-				  *ngIf="!isEditing "
-				  color="primary"
+				  *ngIf="!entityService.isEditing"
+				  [matTooltip]="uiConfig.labels.closeFormPanel"
 				  (click)='toggleShowPanel()'>
 			<mat-icon>close</mat-icon>
 		</button>
-		<!--add button-->
-		<button mat-icon-button
-				  *ngIf="!isEditing "
-				  color="primary"
-				  (click)='newItem()'>
-			<mat-icon>add</mat-icon>
-		</button>
-		<!--modify button-->
-		<button mat-icon-button
-				  *ngIf="!isEditing"
-				  [disabled]="!rowNode"
-				  color="primary"
-				  (click)='modify()'>
-			<mat-icon>edit</mat-icon>
-		</button>
-		<!--delete button-->
-		<button mat-icon-button
-				  color="warn"
-				  *ngIf="false "
-				  [disabled]="!rowNode"
-				  (click)='delete(rowNode.data)'>
-			<mat-icon>close</mat-icon>
-			{{uiConfig.labels.delete}}</button>
-		<div *ngIf="!isEditing" style="display: inline-block">
-			<mat-menu #deleteMenu="matMenu">
-				<div style="display: flex;flex-direction: column;margin:0 10px">
-					<button mat-flat-button
-							  style="margin-bottom: 5px;"
-							  color="primary">Cancel
-					</button>
-					<button mat-flat-button
-							  (click)='delete(rowNode.data)' color="warn">
-						<mat-icon>check</mat-icon>
-						Confirm
-					</button>
-				</div>
-			</mat-menu>
-			<button mat-icon-button
-					  [matMenuTriggerFor]="deleteMenu"
-					  color="warn"
-					  [disabled]="!rowNode">
-				<mat-icon>delete</mat-icon>
-			</button>
-		</div>
-		<!--<div *ngIf="!isEditing" style="display: inline-block">-->
-		<!--<ng2-dropdown [disabled]="!rowNode">-->
-		<!--<ng2-dropdown-button [disabled]="!rowNode">-->
-		<!--<button mat-flat-button-->
-		<!--color="warn"-->
-		<!--&gt;-->
-		<!--<mat-icon>close</mat-icon>-->
-		<!--{{uiConfig.labels.delete}}</button>-->
-		<!--</ng2-dropdown-button>-->
-		<!--</ng2-dropdown>-->
-		<!--</div>-->
-		<!--save button-->
-		<button mat-flat-button
-				  color="accent"
-				  *ngIf="isEditing"
-				  (click)='save(isNewItem, source, item)'>
-			<mat-icon>check</mat-icon>
-			{{uiConfig.labels.save}}</button>
-		<!--cancel button-->
-		<button mat-flat-button
-				  color="warn"
-				  *ngIf="isEditing"
-				  (click)='cancel()'>
-			<mat-icon>cancel</mat-icon>
-			{{uiConfig.labels.cancel}}</button>
 	</div>
 </mat-toolbar>
+<div class="form-body box-shadow">
+	<mat-card-content>
+		<mat-form-field appearance="standard">
+			<mat-label>{{uiConfig.labels.specific.firstName}}</mat-label>
+			<input matInput autocomplete="off"
+					 [disabled]="!entityService.isEditing"
+					 [(ngModel)]="item.firstName">
+			<mat-error *ngIf="errors?.firstName">
+				<p *ngFor="let msg of errors.firstName">{{msg}}</p>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>{{uiConfig.labels.specific.lastName}}</mat-label>
+			<input matInput autocomplete="off"
+					 [disabled]="!entityService.isEditing"
+					 [(ngModel)]="item.lastName">
+			<mat-error *ngIf="errors?.lastName">
+				<p *ngFor="let msg of errors.lastName">{{msg}}</p>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>{{uiConfig.labels.specific.email}}</mat-label>
+			<input matInput autocomplete="off"
+					 [disabled]="!entityService.isEditing"
+					 [(ngModel)]="item.email">
+			<mat-error *ngIf="errors?.email">
+				<p *ngFor="let msg of errors.email">{{msg}}</p>
+			</mat-error>
+		</mat-form-field>
+		<div *ngIf="errorMessages.length" class="errors">
+			<ul class="ui-corner-all">
+				<li *ngFor="let message of errorMessages">{{message}}</li>
+			</ul>
+		</div>
+	</mat-card-content>
+	<mat-toolbar class="grid-toolbar" role="footer">
+		<div class="right-side">
+			<!--add button-->
+			<button mat-icon-button
+					  *ngIf="!entityService.isEditing "
+					  color="primary"
+					  (click)='newItem()'>
+				<mat-icon>add</mat-icon>
+			</button>
+			<!--modify button-->
+			<button mat-icon-button
+					  *ngIf="!entityService.isEditing"
+					  [disabled]="!selectedGridRowNode"
+					  color="primary"
+					  (click)='modify()'>
+				<mat-icon>edit</mat-icon>
+			</button>
+			<!--delete button-->
+			<div *ngIf="!entityService.isEditing" style="display: inline-block">
+				<mat-menu #deleteMenu="matMenu">
+					<div style="display: flex;flex-direction: column;margin:0 10px">
+						<button mat-flat-button
+								  style="margin-bottom: 5px;"
+								  color="primary">Cancel
+						</button>
+						<button mat-flat-button
+								  (click)='delete(selectedGridRowNode.data)' color="warn">
+							<mat-icon>check</mat-icon>
+							Confirm
+						</button>
+					</div>
+				</mat-menu>
+				<button mat-icon-button
+						  [matMenuTriggerFor]="deleteMenu"
+						  color="warn"
+						  [disabled]="!selectedGridRowNode">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</div>
+			<!--save button-->
+			<button mat-flat-button
+					  color="accent"
+					  *ngIf="entityService.isEditing"
+					  (click)='save(isNewItem, source, item)'>
+				<mat-icon>check</mat-icon>
+				{{uiConfig.labels.save}}</button>
+			<!--cancel button-->
+			<button mat-flat-button
+					  color="warn"
+					  *ngIf="entityService.isEditing"
+					  (click)='cancel()'>
+				<mat-icon>cancel</mat-icon>
+				{{uiConfig.labels.cancel}}</button>
+		</div>
+	</mat-toolbar>
+</div>

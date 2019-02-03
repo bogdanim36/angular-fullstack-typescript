@@ -5,6 +5,7 @@ import {AppSharedService} from '@app/core/app-shared.service';
 import {GridOptions} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {DomSanitizer, SafeStyle} from "@angular/platform-browser";
+import {EntityService} from "@app/components/entity-page/shared/entity.service";
 
 export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageComponent implements OnInit {
 	isNewItem = false;
@@ -12,7 +13,6 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	protected service: ClientService<M>;
 	protected uiConfig: C;
 	grid: GridOptions;
-	showFormPanel: boolean;
 	formPanelWidth: string;
 	private gridWidth: SafeStyle;
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
@@ -21,7 +21,7 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	ref: any;
 
 
-	constructor(protected appShared: AppSharedService, uiConfig, protected sanitizer: DomSanitizer) {
+	constructor(protected appShared: AppSharedService, uiConfig, protected sanitizer: DomSanitizer, protected entityService: EntityService) {
 		super(appShared);
 		this.ref = this;
 		this.grid = <GridOptions>{
@@ -32,15 +32,10 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		};
 		uiConfig.setGridOptions(this.grid);
 		this.formPanelWidth = uiConfig.formPanelWidth;
-		this.showFormPanel = true;
+		this.entityService.formPanelIsVisible = true;
 		this.gridWidth = sanitizer.bypassSecurityTrustStyle("calc(100% - " + this.formPanelWidth + ")");
-		console.log(this.gridWidth);
-		console.log(this.formPanelWidth);
 	}
 
-	formTitle(): string {
-		return this.uiConfig.labels.itemDetails;
-	}
 
 	public gridActions(action, rowIndex, headerName) {
 		let dataRow = this.grid.api.getDisplayedRowAtIndex(rowIndex);
@@ -48,7 +43,8 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	}
 
 	ngOnInit() {
-		this.service.getAll().then((data) => console.log('get data', data), console.error);
+		this.service.getAll().then((data) => {
+		}, console.error);
 	}
 
 	gridSelectionChanged(event: any) {
@@ -85,21 +81,10 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	}
 
 
-	save(isNewItem, source, edited) {
-		if (isNewItem)
-			return this.service.create(edited);
-		else
-			return this.service.update(source, edited);
-	}
-
-	delete(item) {
-		return this.service.delete(item);
-		// this.dialogService.dialogComponentRef.instance.close();
-	}
-
 	toggleShowPanel() {
-		this.showFormPanel = !this.showFormPanel;
-		this.formPanelWidth = this.showFormPanel? this.uiConfig.formPanelWidth:"0px";
+		this.entityService.formPanelIsVisible = !this.entityService.formPanelIsVisible;
+		this.formPanelWidth = this.entityService.formPanelIsVisible ? this.uiConfig.formPanelWidth : "0px";
 		this.gridWidth = this.sanitizer.bypassSecurityTrustStyle("calc(100% - " + this.formPanelWidth + ")");
 	}
+
 }

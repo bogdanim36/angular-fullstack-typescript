@@ -20,9 +20,9 @@ export class AppSharedService {
 		this.isHandset$.subscribe(value => {
 			this.isHandset = value;
 			if (this.isHandset ) {
-				console.log('Viewport is  less than 500px !');
+				// console.log('Viewport is  less than 500px !');
 			} else {
-				console.log('Viewport is big enough !');
+				// console.log('Viewport is big enough !');
 			}
 		});
 

@@ -8,6 +8,7 @@ import {UsersClientService} from './users-client.service';
 import {UsersGridToolbarComponent} from "./users-grid-toolbar.component";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";
 import {DomSanitizer} from "@angular/platform-browser";
+import {EntityService} from "@app/components/entity-page/shared/entity.service";
 
 @Component({
 	selector: 'app-users-list',
@@ -19,8 +20,10 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 	constructor(appShared: AppSharedService,
 				public service: UsersClientService,
 				public uiConfig: UsersUiConfig,
-				protected componentFactoryResolver: ComponentFactoryResolver, protected sanitizer: DomSanitizer) {
-		super(appShared, uiConfig, sanitizer);
+				protected componentFactoryResolver: ComponentFactoryResolver,
+				protected sanitizer: DomSanitizer,
+				protected entityService: EntityService) {
+		super(appShared, uiConfig, sanitizer, entityService);
 	}
 
 	ngOnInit() {
@@ -29,18 +32,13 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) set gridToolbarContent(content: ViewContainerRef) {
 		this.gridToolbar = content;
+		console.log("create gridToolbar component");
 		setTimeout(() => {
 			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UsersGridToolbarComponent);
-			let indexComponent = this;
 			this.gridToolbar.clear();
 			let componentRef = this.gridToolbar.createComponent(componentFactory);
 			componentRef.instance.uiConfig = this.uiConfig;
 			componentRef.instance.grid = this.grid;
-			Object.defineProperty(componentRef.instance, "formPanelIsVisible", {
-				get() {
-					return indexComponent.showFormPanel;
-				}
-			});
 			componentRef.instance.toggleShowPanel = this.toggleShowPanel.bind(this);
 		});
 	}
@@ -48,22 +46,18 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 	@ViewChild('gridForm', {read: ViewContainerRef}) set gridFormContent(content: ViewContainerRef) {
 		this.gridForm = content;
 		if (!content) return;
+		console.log("create gridForm component");
 		setTimeout(() => {
 			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UserFormComponent);
 			this.gridForm.clear();
 			let gridForm = this.gridForm.createComponent(componentFactory).instance;
 			gridForm.uiConfig = this.uiConfig;
 			gridForm.grid = this.grid;
+			gridForm.service = this.service;
 			gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
-			gridForm.saveGeneric = this.save.bind(this);
-			gridForm.deleteGeneric = this.delete.bind(this);
-			this.formTitle = gridForm.formTitle.bind(gridForm);
 			this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
 			gridForm.gridSelectionChanged(this.grid);
 		});
 	}
 
-	ngAfterViewInit() {
-		super.ngAfterViewInit();
-	}
 }

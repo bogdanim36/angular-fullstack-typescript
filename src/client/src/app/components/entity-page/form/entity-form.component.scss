@@ -1,9 +1,23 @@
-.errors {
-  padding: 8px;
-}
-.errors >ul{
+.errors > ul {
   padding: 8px 5px 8px 26px;
   color: red;
   border: 1px solid red;
   transition: border-color 0.2s;
+}
+
+.form-body {
+  border: 1px solid lightgrey;
+}
+
+mat-card-content.mat-card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 0;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+mat-toolbar.grid-toolbar {
+  padding: 0 10px;
 }

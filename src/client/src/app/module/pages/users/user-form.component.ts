@@ -2,6 +2,8 @@ import {Component, Input} from '@angular/core';
 import {UsersUiConfig} from "@app/module/pages/users/users-ui-config";
 import {GridOptions, RowNode} from 'ag-grid-community';
 import {User} from "@shared/user";
+import {UsersClientService} from "@app/module/pages/users/users-client.service";
+import {EntityService} from "@app/components/entity-page/shared/entity.service";
 
 @Component({
 	selector: 'app-entity-form',
@@ -11,23 +13,22 @@ import {User} from "@shared/user";
 export class UserFormComponent {
 	@Input() uiConfig: UsersUiConfig;
 	@Input() grid: GridOptions;
+	@Input() service: UsersClientService;
 	public item: User;
 	public source: User;
 	public errorMessages: Array<string> = [];
 	public errors: User;
 	public isNewItem = true;
-	public rowNode: RowNode;
-	public isEditing: boolean;
-	public showFormPanel: boolean;
+	public selectedGridRowNode: RowNode;
 
-	constructor() {
+	constructor(protected entityService: EntityService) {
 		this.item = {};
 		this.errors = {};
 		this.source = {};
 	}
 
 	formTitle(): string {
-		let title = this.uiConfig.labels.itemDetails + (this.isEditing ? " (" + (this.isNewItem ? this.uiConfig.labels.addItem : this.uiConfig.labels.modify) + ")" : "");
+		let title = this.uiConfig.labels.itemDetails + (this.entityService.isEditing ? " (" + (this.isNewItem ? this.uiConfig.labels.addItem : this.uiConfig.labels.modify) + ")" : "");
 		return title;
 	}
 
@@ -42,22 +43,22 @@ export class UserFormComponent {
 
 
 	modify() {
-		this.source = this.rowNode.data;
+		this.source = this.selectedGridRowNode.data;
 		this.isNewItem = false;
 		this.editing();
 	}
 
 	editing() {
-		this.isEditing = true;
 		this.grid.rowSelection = "";
 		this.grid.suppressRowClickSelection = true;
 		this.item = new User(this.source);
+		this.entityService.isEditing = true;
 	}
 
 	cancel() {
 		this.errors = {};
 		this.errorMessages = [];
-		this.isEditing = false;
+		this.entityService.isEditing = false;
 		this.isNewItem = false;
 		this.source = null;
 		this.grid.suppressRowClickSelection = false;
@@ -66,24 +67,24 @@ export class UserFormComponent {
 	}
 
 	gridSelectionChanged(event: GridOptions) {
-		console.log('selection changed', event.api.getSelectedRows(), this.item);
+		// console.log('selection changed', event.api.getSelectedRows(), this.item);
 		let nodes = event.api.getSelectedNodes();
-		if (nodes.length) this.rowNode = nodes[0];
-		else this.rowNode = null;
-		if (this.rowNode) this.item = this.rowNode.data;
+		if (nodes.length) this.selectedGridRowNode = nodes[0];
+		else this.selectedGridRowNode = null;
+		if (this.selectedGridRowNode) this.item = this.selectedGridRowNode.data;
 		else this.item = new User({});
 	}
 
 	save() {
-		this.saveGeneric(this.isNewItem, this.source, this.item).then(response => {
+		this.serviceSave(this.isNewItem, this.source, this.item).then(response => {
 			if (response.status) {
-				console.log(response);
 				let item = new User(response.data);
 				if (this.isNewItem) {
 					this.grid.api.updateRowData({add: [item], addIndex: 0});
 					this.grid.api.selectIndex(0, false, null);
 				} else {
-					this.rowNode.setData(item);
+					this.selectedGridRowNode.setData(item);
+					this.selectedGridRowNode.setSelected(true);
 				}
 				this.cancel();
 			} else {
@@ -93,17 +94,17 @@ export class UserFormComponent {
 		});
 	}
 
-	saveGeneric(isNewRecord, source, edited): Promise<any> {
-		return new Promise((resolve, reject) => {
-			resolve(1);
-			reject("1");
-		});
+	serviceSave(isNewItem, source, edited): Promise<any> {
+		if (isNewItem)
+			return this.service.create(edited);
+		else
+			return this.service.update(source, edited);
 	}
 
 	delete(item: User) {
-		this.deleteGeneric(item).then(response => {
+		this.service.delete(item).then(response => {
 			if (response.status) {
-				this.grid.api.updateRowData({remove: [item] });
+				this.grid.api.updateRowData({remove: [item]});
 			} else {
 				if (response.message) this.errorMessages.push(response.message);
 				console.error('save error', response);
@@ -111,16 +112,8 @@ export class UserFormComponent {
 		});
 	}
 
-	deleteGeneric(item: User): Promise<any> {
-		return new Promise((resolve, reject) => {
-			resolve(1);
-			reject("1");
-		});
+	toggleShowPanel() {
+		//this method si mapped to EntityIndexComponent.toggleShowPanel
 	}
-	close(){
-
-	}
-	toggleShowPanel(){}
-
 
 }

@@ -77,11 +77,10 @@ export class ClientService<M> {
 		const url = `${this.baseRoute}/` + (this.urls['update'] ? this.urls.update : `${id}`);
 		return this.http.post<ServerResponse>(url, {item: editedItem}).toPromise<ServerResponse>()
 			.then(response => {
-				console.log(url, editedItem);
+				// console.log(url, editedItem);
 				if (response && response.status) {
 					Object.assign(originalItem, this.instanceCreate(response.data));
 				}
-				console.log("iupdated", this.items);
 				return response;
 			}, error => {
 				console.error(error);
@@ -93,7 +92,7 @@ export class ClientService<M> {
 		const url = `${this.baseRoute}/` + (this.urls['create'] ? this.urls.create : ``);
 		return this.http.put<ServerResponse>(url, {item: sourceItem}).toPromise<ServerResponse>()
 			.then(response => {
-				console.log(url, sourceItem);
+				// console.log(url, sourceItem);
 				if (response && response.status) {
 					this._items.push(this.instanceCreate(response.data));
 				}

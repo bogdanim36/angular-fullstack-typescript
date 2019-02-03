@@ -7,7 +7,7 @@
   height: 100%;
 }
 
-.grid-body {
+.grid-body, :host ::ng-deep .form-body {
   position: absolute;
   top: 53px;
   left: 0;
@@ -17,6 +17,9 @@
 
 ag-grid-angular {
   width: 100%;
+}
+
+:host ::ng-deep app-entity-form mat-card-content.mat-card-content, ag-grid-angular {
   height: calc(100% - 57px);
 }
 
@@ -26,4 +29,25 @@ ag-grid-angular {
   height: 100%;
   display: flex;
   flex-direction: row;
+}
+
+mat-card.form-panel {
+  margin-left: 10px;
+  height: 100%;
+}
+
+.mat-card.form-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+  background-color: initial;
+  padding: 0;
+  position: relative;
+}
+
+.mat-card.form-panel app-entity-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
 }

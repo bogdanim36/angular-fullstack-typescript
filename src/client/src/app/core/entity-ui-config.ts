@@ -16,6 +16,8 @@ export class EntityUiConfig {
 		cancel: string,
 		itemDetails: string,
 		actions: string,
+		showFormPanel: string,
+		closeFormPanel: string
 		specific: any
 	} = {
 		save: 'Save',
@@ -26,6 +28,8 @@ export class EntityUiConfig {
 		modify: 'Modify',
 		itemDetails: 'Item Details',
 		actions: "Actions",
+		showFormPanel: "Show form panel",
+		closeFormPanel: "Close form panel",
 		specific: {}
 	};
 
