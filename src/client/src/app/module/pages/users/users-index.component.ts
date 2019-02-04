@@ -33,7 +33,6 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) set gridToolbarContent(content: ViewContainerRef) {
 		this.gridToolbar = content;
 		if (!content) return;
-		console.log("create gridToolbar component");
 		setTimeout(() => {
 			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UsersGridToolbarComponent);
 			this.gridToolbar.clear();
@@ -41,14 +40,13 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			componentRef.instance.uiConfig = this.uiConfig;
 			componentRef.instance.grid = this.grid;
 			componentRef.instance.toggleShowPanel = this.toggleShowPanel.bind(this);
-			this.componentLoaded('gridToolbar');
+			this.componentIsLoaded('gridToolbar');
 		});
 	}
 
 	@ViewChild('gridForm', {read: ViewContainerRef}) set gridFormContent(content: ViewContainerRef) {
 		this.gridForm = content;
 		if (!content) return;
-		console.log("create gridForm component");
 		setTimeout(() => {
 			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UserFormComponent);
 			this.gridForm.clear();
@@ -59,7 +57,7 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
 			this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
 			gridForm.gridSelectionChanged(this.grid);
-			this.componentLoaded('gridForm');
+			this.componentIsLoaded('gridForm');
 		});
 	}
 

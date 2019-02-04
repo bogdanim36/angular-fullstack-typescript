@@ -1,3 +1,8 @@
 .app .mat-drawer-content{
 	overflow: hidden;
 }
+
+.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after, .mat-input-element:disabled{
+	color:black;
+	font-style: italic;
+}

@@ -26,7 +26,7 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		super(appShared);
 		this.ref = this;
 		this.entityService.formPanelIsVisible = true;
-		this.componentsToLoad = ['gridToolbar', 'gridForm'];
+		this.componentsToLoad = ['gridToolbar', 'gridForm', 'data'];
 		this.grid = <GridOptions>{
 			context: {
 				componentParent: this
@@ -36,13 +36,16 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		uiConfig.setGridOptions(this.grid);
 		this.formPanelWidth = uiConfig.formPanelWidth;
 		this.gridWidth = sanitizer.bypassSecurityTrustStyle("calc(100% - " + this.formPanelWidth + ")");
+
 	}
 
-	componentLoaded(componentName) {
-		if (this.componentsToLoad.length === 0) return;
+	componentIsLoaded(componentName) {
+		if (this.componentsToLoad.length === 0) return true;
 		let index = this.componentsToLoad.indexOf(componentName);
 		if (index === -1) throw new Error(componentName + ' is not a valid componentName');
-		this.componentsToLoad.splice(index,1);
+		this.componentsToLoad.splice(index, 1);
+		console.log('component loaded', componentName);
+		return false;
 	}
 
 	public gridActions(action, rowIndex, headerName) {
@@ -52,8 +55,18 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 
 	ngOnInit() {
 		this.service.getAll().then((data) => {
+			setTimeout(() => {
+				this.componentIsLoaded('data');
+				let nodes = this.grid.api.getRenderedNodes();
+				if (nodes.length) {
+					nodes[0].setSelected(true);
+					this.grid.api.setFocusedCell(0, '1');
+				}
+			});
 		}, console.error);
+
 	}
+
 
 	showDialogToAdd() {
 		this.showDialog(true, {});
