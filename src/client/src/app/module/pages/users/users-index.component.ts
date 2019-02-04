@@ -41,6 +41,7 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			componentRef.instance.uiConfig = this.uiConfig;
 			componentRef.instance.grid = this.grid;
 			componentRef.instance.toggleShowPanel = this.toggleShowPanel.bind(this);
+			this.componentLoaded('gridToolbar');
 		});
 	}
 
@@ -58,6 +59,7 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
 			this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
 			gridForm.gridSelectionChanged(this.grid);
+			this.componentLoaded('gridForm');
 		});
 	}
 

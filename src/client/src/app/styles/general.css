@@ -40,5 +40,8 @@ i.is-button {
 label{
 	font-weight: bold;
 }
+[hidden] {
+	display: none !important;
+}
 
 

@@ -19,7 +19,9 @@
 	</mat-card>
 </div>
 <div *ngIf="!isHandset" class="table-container">
-	<div class="grid-panel" [style.width]="gridWidth">
+	<mat-spinner [style.visibility]="componentsToLoad.length===0?'hidden':'visible'" diameter="20">
+	</mat-spinner>
+	<div class="grid-panel" [style.width]="gridWidth" [style.visibility]="componentsToLoad.length>0?'hidden':'visible'">
 		<mat-toolbar class="grid-toolbar box-shadow" role="heading">
 			<span class="grid-title">{{uiConfig.labels.list}}</span>
 			<div class="right-side info">
@@ -45,7 +47,9 @@
 			<ng-container #gridToolbar></ng-container>
 		</div>
 	</div>
-	<mat-card class="form-panel" *ngIf="entityService.formPanelIsVisible" [style.width]="formPanelWidth">
+	<mat-card class="form-panel"
+				 [style.visibility]="componentsToLoad.length>0?'hidden':'visible'"
+				 *ngIf="entityService.formPanelIsVisible" [style.width]="formPanelWidth">
 		<ng-container #gridForm>
 		</ng-container>
 	</mat-card>

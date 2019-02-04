@@ -15,6 +15,7 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	grid: GridOptions;
 	formPanelWidth: string;
 	private gridWidth: SafeStyle;
+	componentsToLoad: Array<string>;
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
 	@ViewChild('gridForm', {read: ViewContainerRef}) gridForm: ViewContainerRef;
 	// protected dialogService: DialogService;
@@ -25,6 +26,7 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		super(appShared);
 		this.ref = this;
 		this.entityService.formPanelIsVisible = true;
+		this.componentsToLoad = ['gridToolbar', 'gridForm'];
 		this.grid = <GridOptions>{
 			context: {
 				componentParent: this
@@ -36,6 +38,12 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		this.gridWidth = sanitizer.bypassSecurityTrustStyle("calc(100% - " + this.formPanelWidth + ")");
 	}
 
+	componentLoaded(componentName) {
+		if (this.componentsToLoad.length === 0) return;
+		let index = this.componentsToLoad.indexOf(componentName);
+		if (index === -1) throw new Error(componentName + ' is not a valid componentName');
+		this.componentsToLoad.splice(index,1);
+	}
 
 	public gridActions(action, rowIndex, headerName) {
 		let dataRow = this.grid.api.getDisplayedRowAtIndex(rowIndex);
