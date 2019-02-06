@@ -1,22 +1,6 @@
 <div *ngIf="isHandset">
-	<mat-card role="heading">
-		<label class="list-title">{{uiConfig.labels.list}}</label>
-		<button mat-icon-button style="position: absolute;right:0;top:5px;">
-			<mat-icon>add</mat-icon>
-		</button>
-	</mat-card>
-	<mat-card *ngFor="let item of service.items" style="margin-top:5px">
-		<div style="width:100%">
-			<div *ngFor="let column of uiConfig.columns">
-				<div *ngIf="column.field">
-					<label>{{column.headerName}}: </label>{{item[column.field]}}
-				</div>
-			</div>
-		</div>
-		<button mat-icon-button style="position: absolute;right:0;top:5px;">
-			<mat-icon>edit</mat-icon>
-		</button>
-	</mat-card>
+	<ng-container #handsetForm class="handset-scroller">
+	</ng-container>
 </div>
 <div *ngIf="!isHandset" class="table-container">
 	<mat-spinner [style.visibility]="componentsToLoad.length===0?'hidden':'visible'" diameter="20">

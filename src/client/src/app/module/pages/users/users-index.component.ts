@@ -13,7 +13,7 @@ import {EntityService} from "@app/components/entity-page/shared/entity.service";
 @Component({
 	selector: 'app-users-list',
 	templateUrl: '../../../components/entity-page/index/entity-index.component.html',
-	styleUrls: ['../../../components/entity-page/index/entity-index.component.scss']
+	styleUrls: ['../../../components/entity-page/index/entity-index.component.scss', './users-index.component.scss']
 })
 export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfig, UsersClientService> implements OnInit {
 
@@ -58,6 +58,18 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
 			gridForm.gridSelectionChanged(this.grid);
 			this.componentIsLoaded('gridForm');
+		});
+	}
+	@ViewChild('handsetForm', {read: ViewContainerRef}) set handsetFormContent(content: ViewContainerRef) {
+		this.handsetForm = content;
+		if (!content) return;
+		setTimeout(() => {
+			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UserFormComponent);
+			this.handsetForm .clear();
+			let handsetForm = this.handsetForm.createComponent(componentFactory).instance;
+			handsetForm.uiConfig = this.uiConfig;
+			handsetForm.service = this.service;
+			// this.componentIsLoaded('handsetForm');
 		});
 	}
 

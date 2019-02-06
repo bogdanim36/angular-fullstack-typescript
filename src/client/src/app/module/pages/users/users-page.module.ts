@@ -13,6 +13,7 @@ import {UsersUiConfig} from '@app/module/pages/users/users-ui-config';
 import {CommonModule} from "@angular/common";
 import {UsersGridToolbarComponent} from "@app/module/pages/users/users-grid-toolbar.component";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";
+import {ScrollingModule} from "@angular/cdk/scrolling";
 
 @NgModule({
 	entryComponents: [
@@ -30,6 +31,8 @@ import {UserFormComponent} from "@app/module/pages/users/user-form.component";
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
+		AngularFontAwesomeModule,
 		CommonModule,
 		EntityPageModule,
 		FormsModule,
@@ -42,8 +45,7 @@ import {UserFormComponent} from "@app/module/pages/users/user-form.component";
 		MatMenuModule,
 		MatTooltipModule,
 		MatProgressSpinnerModule,
-		AngularFontAwesomeModule,
-		BrowserAnimationsModule,
+		ScrollingModule,
 		AgGridModule.withComponents([])
 	]
 })

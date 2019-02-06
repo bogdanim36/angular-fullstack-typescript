@@ -18,6 +18,7 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	componentsToLoad: Array<string>;
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
 	@ViewChild('gridForm', {read: ViewContainerRef}) gridForm: ViewContainerRef;
+	@ViewChild('handsetForm', {read: ViewContainerRef}) handsetForm: ViewContainerRef;
 	// protected dialogService: DialogService;
 	ref: any;
 
@@ -57,10 +58,12 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		this.service.getAll().then((data) => {
 			setTimeout(() => {
 				this.componentIsLoaded('data');
-				let nodes = this.grid.api.getRenderedNodes();
-				if (nodes.length) {
-					nodes[0].setSelected(true);
-					this.grid.api.setFocusedCell(0, '1');
+				if (!this.isHandset) {
+					let nodes = this.grid.api.getRenderedNodes();
+					if (nodes.length) {
+						nodes[0].setSelected(true);
+						this.grid.api.setFocusedCell(0, '1');
+					}
 				}
 			});
 		}, console.error);
