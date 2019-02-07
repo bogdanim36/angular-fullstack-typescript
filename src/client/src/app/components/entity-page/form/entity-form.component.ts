@@ -16,12 +16,23 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	public errors: M;
 	public isNewItem = true;
 	public selectedGridRowNode: RowNode;
+	showNavigation: boolean;
 
 	constructor(protected modelClass: M & Function,
 				protected entityService: EntityService,
 				protected sharedService: AppSharedService) {
 		this.item = this.instanceCreate({});
 		this.errors = this.instanceCreate({});
+		Object.defineProperty(this, 'hasItem', {
+			get() {
+				return this.isNewItem || Object.keys(this.item).length > 0;
+			}
+		});
+		Object.defineProperty(this, 'showNavigation', {
+			get() {
+				return sharedService.isHandset && !entityService.isEditing;
+			}
+		});
 	}
 
 	instanceCreate(source: Partial<M>, extra?: any): M {
@@ -42,6 +53,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 
 	modify() {
 		if (this.sharedService.isHandset) {
+			this.source = this.item;
 		} else {
 			this.source = this.selectedGridRowNode.data;
 		}
@@ -73,9 +85,18 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		}
 	}
 
-	gridSelectionChanged(event: GridOptions) {
+	setCurrentItem(grid?: GridOptions) {
+		if (this.sharedService.isHandset) {
+			this.item = this.service.data.currentItem;
+			this.service.data.currentItemChanged.subscribe(item => {
+				this.item = item;
+			});
+		} else this.gridSelectionChanged(grid);
+	}
+
+	gridSelectionChanged(grid: GridOptions) {
 		// console.log('selection changed', event.api.getSelectedRows(), this.item);
-		let nodes = event.api.getSelectedNodes();
+		let nodes = grid.api.getSelectedNodes();
 		if (nodes.length) this.selectedGridRowNode = nodes[0];
 		else this.selectedGridRowNode = null;
 		if (this.selectedGridRowNode) this.item = this.selectedGridRowNode.data;
@@ -95,8 +116,8 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 						this.selectedGridRowNode.setData(item);
 						this.selectedGridRowNode.setSelected(true);
 					}
-					this.cancel();
 				}
+				this.cancel();
 			} else {
 				if (response.message) this.errorMessages.push(response.message);
 				if (response.erros) this.errors = response.errors;

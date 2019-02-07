@@ -69,6 +69,7 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			let handsetForm = this.handsetForm.createComponent(componentFactory).instance;
 			handsetForm.uiConfig = this.uiConfig;
 			handsetForm.service = this.service;
+			handsetForm.setCurrentItem();
 			// this.componentIsLoaded('handsetForm');
 		});
 	}

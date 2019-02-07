@@ -16,10 +16,10 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	formPanelWidth: string;
 	private gridWidth: SafeStyle;
 	componentsToLoad: Array<string>;
+	hasItem: boolean;
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
 	@ViewChild('gridForm', {read: ViewContainerRef}) gridForm: ViewContainerRef;
 	@ViewChild('handsetForm', {read: ViewContainerRef}) handsetForm: ViewContainerRef;
-	// protected dialogService: DialogService;
 	ref: any;
 
 
@@ -56,17 +56,18 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 
 	ngOnInit() {
 		this.service.getAll().then((data) => {
-			setTimeout(() => {
-				this.componentIsLoaded('data');
-				if (this.appShared.isHandset) {
-				} else {
+			if (this.appShared.isHandset) {
+				this.service.data.first();
+			} else {
+				setTimeout(() => {
+					this.componentIsLoaded('data');
 					let nodes = this.grid.api.getRenderedNodes();
 					if (nodes.length) {
 						nodes[0].setSelected(true);
 						this.grid.api.setFocusedCell(0, '1');
 					}
-				}
-			});
+				});
+			}
 		}, console.error);
 
 	}

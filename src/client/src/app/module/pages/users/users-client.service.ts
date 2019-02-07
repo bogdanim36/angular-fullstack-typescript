@@ -12,7 +12,7 @@ export class UsersClientService extends ClientService<User> {
 
 	getAll(params?, reload: boolean = false): Promise<any> {
 		return super.getAll(params, reload).then((response) => {
-			this._items = response;
+			this.data.items = response;
 			return response;
 		});
 	}

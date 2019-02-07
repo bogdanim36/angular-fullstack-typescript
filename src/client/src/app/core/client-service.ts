@@ -1,13 +1,16 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServerResponse} from './server.response';
 import {environment} from '@app/../environments/environment';
+import {Datasource} from "@app/core/datasource";
 
 export class ClientService<M> {
 	_items: M[] = [];
+	data:Datasource;
 	urls: any = {};
 	primaryKey: string = 'id';
 
 	constructor(protected http: HttpClient, protected modelClass: M & Function, protected baseRoute?: string) {
+		this.data = new Datasource();
 	}
 
 	instanceCreate(source: Partial<M>, extra?: any): M {
@@ -65,11 +68,11 @@ export class ClientService<M> {
 	}
 
 	get items(): M[] {
-		return this._items;
+		return this.data.items || [];
 	}
 
 	clearItems() {
-		this._items = [];
+		return this.data.clearItems();
 	}
 
 	update(originalItem: M, editedItem: Partial<M>) {
@@ -94,7 +97,7 @@ export class ClientService<M> {
 			.then(response => {
 				// console.log(url, sourceItem);
 				if (response && response.status) {
-					this._items.push(this.instanceCreate(response.data));
+					this.data.add(this.instanceCreate(response.data),0);
 				}
 				return response;
 			}, error => {
@@ -109,7 +112,7 @@ export class ClientService<M> {
 		return this.http.delete<ServerResponse>(url).toPromise<ServerResponse>()
 			.then(response => {
 				if (response && response.status) {
-					this._items = this.items.filter((item, i) => item[this.primaryKey] !== id);
+					this.data.deleteByColumn(this.primaryKey,id);
 					response.data = sourceItem;
 				}
 				return response;

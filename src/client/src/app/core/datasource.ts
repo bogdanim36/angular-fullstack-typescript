@@ -1,6 +1,10 @@
-export class Datasource {
+import {observable, Observable} from "rxjs";
+import {EventEmitter} from "@angular/core";
+
+export class Datasource  {
 	items: Array<any>;
 	currentItem: any;
+	currentItemChanged= new EventEmitter();
 	currentIndex: number;
 	isLast: boolean;
 	isFirst: boolean;
@@ -25,10 +29,13 @@ export class Datasource {
 		index = Math.max(0, index);
 		index = Math.min(this.items.length - 1, index);
 		let currentIndexChanged = this.currentIndex !== index;
-		this.currentItem = this.items[index];
+		if (index === -1) this.currentItem = {};
+		else this.currentItem = this.items[index];
 		this.currentIndex = index;
 		this.isFirst = this.currentIndex === 0;
-		this.isLast = this.currentIndex === this.items.length;
+		this.isLast = this.currentIndex === this.items.length-1;
+		if (currentIndexChanged !== index) this.currentItemChanged.emit(this.currentItem);
+		console.log("datasource.setCurrent", index, this.currentItem);
 	}
 
 	first() {
@@ -40,8 +47,8 @@ export class Datasource {
 		let index = this.currentIndex;
 		if (this.items.length === 0) {
 			index = -1;
-		} else if (this.currentIndex < this.items.length - 2) {
-			index = this.currentIndex++;
+		} else if (this.currentIndex < this.items.length - 1) {
+			index = this.currentIndex + 1;
 		}
 		this.setCurrent(index);
 	}
@@ -56,7 +63,7 @@ export class Datasource {
 		this.setCurrent(index);
 	}
 
-	add(item, position, setCurrent) {
+	add(item: Object, position: number, setCurrent?: boolean) {
 		if (position) {
 			this.items.splice(position, 0, item);
 		} else {

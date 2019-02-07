@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressSpinnerModule, MatToolbarModule, MatTooltipModule} from "@angular/material";
+import {MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressSpinnerModule, MatToolbarModule, MatTooltipModule} from "@angular/material";
 import {AgGridModule} from 'ag-grid-angular';
 
 import {EntityPageModule} from '@app/components/entity-page/entity-page.module';
@@ -45,6 +45,7 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 		MatMenuModule,
 		MatTooltipModule,
 		MatProgressSpinnerModule,
+		MatDividerModule,
 		ScrollingModule,
 		AgGridModule.withComponents([])
 	]
