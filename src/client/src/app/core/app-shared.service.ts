@@ -8,16 +8,16 @@ import {map} from 'rxjs/operators';
 })
 export class AppSharedService {
 	isHandset: boolean;
-	isHandset$: Observable<boolean>;
+	observableIsHandset: Observable<boolean>;
 
 	constructor(private breakpointObserver: BreakpointObserver) {
-		this.isHandset$ = this.breakpointObserver
+		this.observableIsHandset = this.breakpointObserver
 			.observe(['(max-width: 800px)'])
 		.pipe(
 			map((result:BreakpointState) => result.matches)
 		);
 
-		this.isHandset$.subscribe(value => {
+		this.observableIsHandset.subscribe(value => {
 			this.isHandset = value;
 			if (this.isHandset ) {
 				// console.log('Viewport is  less than 500px !');

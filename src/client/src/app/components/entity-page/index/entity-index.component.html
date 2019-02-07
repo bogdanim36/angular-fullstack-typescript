@@ -1,8 +1,8 @@
-<div *ngIf="isHandset">
-	<ng-container #handsetForm class="handset-scroller">
+<div *ngIf="appShared.isHandset">
+	<ng-container #handsetForm class="handset-scroller" >
 	</ng-container>
 </div>
-<div *ngIf="!isHandset" class="table-container">
+<div *ngIf="!appShared.isHandset" class="table-container">
 	<mat-spinner [style.visibility]="componentsToLoad.length===0?'hidden':'visible'" diameter="20">
 	</mat-spinner>
 	<div class="grid-panel" [style.width]="gridWidth" [style.visibility]="componentsToLoad.length>0?'hidden':'visible'">

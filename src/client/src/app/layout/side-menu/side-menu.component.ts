@@ -12,13 +12,11 @@ import {Observable} from 'rxjs';
 })
 export class SideMenuComponent implements OnDestroy, OnInit {
 	@ViewChild('drawer') drawer: MatSidenav;
-	isHandset = false;
 	isHandset$: Observable<boolean>;
 
 	constructor(private appShared: AppSharedService,
 				router: Router, ) {
-		appShared.isHandset$.subscribe(value => this.isHandset = value);
-		this.isHandset$ = appShared.isHandset$;
+		this.isHandset$ = appShared.observableIsHandset;
 		router.events.pipe(
 			withLatestFrom(this.isHandset$),
 			filter(([a, b]) => b && a instanceof NavigationEnd)

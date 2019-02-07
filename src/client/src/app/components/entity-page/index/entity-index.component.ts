@@ -58,7 +58,8 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		this.service.getAll().then((data) => {
 			setTimeout(() => {
 				this.componentIsLoaded('data');
-				if (!this.isHandset) {
+				if (this.appShared.isHandset) {
+				} else {
 					let nodes = this.grid.api.getRenderedNodes();
 					if (nodes.length) {
 						nodes[0].setSelected(true);

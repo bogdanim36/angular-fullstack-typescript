@@ -3,7 +3,7 @@
 	<div class="right-side">
 		<!--close button-->
 		<button mat-icon-button
-				  *ngIf="!entityService.isEditing"
+				  *ngIf="!entityService.isEditing && !sharedService.isHandset"
 				  [matTooltip]="uiConfig.labels.closeFormPanel"
 				  (click)='toggleShowPanel()'>
 			<mat-icon>close</mat-icon>

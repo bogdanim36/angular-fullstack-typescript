@@ -3,6 +3,7 @@ import {EntityService} from "@app/components/entity-page/shared/entity.service";
 import {GridOptions, RowNode} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {ClientService} from "@app/core/client-service";
+import {AppSharedService} from "@app/core/app-shared.service";
 
 export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientService<M>> {
 
@@ -16,7 +17,9 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	public isNewItem = true;
 	public selectedGridRowNode: RowNode;
 
-	constructor(protected modelClass: M & Function, protected entityService: EntityService) {
+	constructor(protected modelClass: M & Function,
+				protected entityService: EntityService,
+				protected sharedService: AppSharedService) {
 		this.item = this.instanceCreate({});
 		this.errors = this.instanceCreate({});
 	}
@@ -38,14 +41,20 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	modify() {
-		this.source = this.selectedGridRowNode.data;
+		if (this.sharedService.isHandset) {
+		} else {
+			this.source = this.selectedGridRowNode.data;
+		}
 		this.isNewItem = false;
 		this.editing();
 	}
 
 	editing() {
-		this.grid.rowSelection = "";
-		this.grid.suppressRowClickSelection = true;
+		if (this.sharedService.isHandset) {
+		} else {
+			this.grid.rowSelection = "";
+			this.grid.suppressRowClickSelection = true;
+		}
 		this.item = this.instanceCreate(this.source);
 		this.entityService.isEditing = true;
 	}
@@ -56,9 +65,12 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		this.entityService.isEditing = false;
 		this.isNewItem = false;
 		this.source = null;
-		this.grid.suppressRowClickSelection = false;
-		this.grid.rowSelection = "single";
-		this.gridSelectionChanged(this.grid);
+		if (this.sharedService.isHandset) {
+		} else {
+			this.grid.suppressRowClickSelection = false;
+			this.grid.rowSelection = "single";
+			this.gridSelectionChanged(this.grid);
+		}
 	}
 
 	gridSelectionChanged(event: GridOptions) {
@@ -74,14 +86,17 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		this.serviceSave(this.isNewItem, this.source, this.item).then(response => {
 			if (response.status) {
 				let item = this.instanceCreate(response.data);
-				if (this.isNewItem) {
-					this.grid.api.updateRowData({add: [item], addIndex: 0});
-					this.grid.api.selectIndex(0, false, null);
+				if (this.sharedService.isHandset) {
 				} else {
-					this.selectedGridRowNode.setData(item);
-					this.selectedGridRowNode.setSelected(true);
+					if (this.isNewItem) {
+						this.grid.api.updateRowData({add: [item], addIndex: 0});
+						this.grid.api.selectIndex(0, false, null);
+					} else {
+						this.selectedGridRowNode.setData(item);
+						this.selectedGridRowNode.setSelected(true);
+					}
+					this.cancel();
 				}
-				this.cancel();
 			} else {
 				if (response.message) this.errorMessages.push(response.message);
 				if (response.erros) this.errors = response.errors;
