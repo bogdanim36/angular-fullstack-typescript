@@ -56,7 +56,7 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			gridForm.service = this.service;
 			gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
 			this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
-			gridForm.gridSelectionChanged(this.grid);
+			gridForm.setCurrentItem(this.grid);
 			this.componentIsLoaded('gridForm');
 		});
 	}

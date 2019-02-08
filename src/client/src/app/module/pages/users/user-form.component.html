@@ -11,6 +11,9 @@
 	</div>
 </mat-toolbar>
 <div class="form-body box-shadow">
+	<mat-spinner [style.visibility]="working?'visible':'hidden'" diameter="20">
+	</mat-spinner>
+
 	<mat-card-content>
 		<mat-form-field appearance="standard">
 			<mat-label>{{uiConfig.labels.specific.firstName}}</mat-label>
@@ -42,6 +45,11 @@
 		<div *ngIf="errorMessages.length" class="errors">
 			<ul class="ui-corner-all">
 				<li *ngFor="let message of errorMessages">{{message}}</li>
+			</ul>
+		</div>
+		<div *ngIf="successMessages.length" class="success">
+			<ul class="ui-corner-all">
+				<li *ngFor="let message of successMessages">{{message}}</li>
 			</ul>
 		</div>
 	</mat-card-content>

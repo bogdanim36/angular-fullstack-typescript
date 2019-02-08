@@ -13,10 +13,12 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	public item: M;
 	public source: M;
 	public errorMessages: Array<string> = [];
+	public successMessages: Array<string> = [];
 	public errors: M;
 	public isNewItem = true;
 	public selectedGridRowNode: RowNode;
 	showNavigation: boolean;
+	working = false;
 
 	constructor(protected modelClass: M & Function,
 				protected entityService: EntityService,
@@ -69,6 +71,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		}
 		this.item = this.instanceCreate(this.source);
 		this.entityService.isEditing = true;
+		this.successMessages=[];
 	}
 
 	cancel() {
@@ -78,6 +81,8 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		this.isNewItem = false;
 		this.source = null;
 		if (this.sharedService.isHandset) {
+			if (this.service.data.currentItem) this.item = this.service.data.currentItem;
+			else this.item = this.instanceCreate({});
 		} else {
 			this.grid.suppressRowClickSelection = false;
 			this.grid.rowSelection = "single";
@@ -87,7 +92,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 
 	setCurrentItem(grid?: GridOptions) {
 		if (this.sharedService.isHandset) {
-			this.item = this.service.data.currentItem;
+			if (this.service.data.currentItem) this.item = this.service.data.currentItem;
 			this.service.data.currentItemChanged.subscribe(item => {
 				this.item = item;
 			});
@@ -102,10 +107,16 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		if (this.selectedGridRowNode) this.item = this.selectedGridRowNode.data;
 		else this.item = this.instanceCreate({});
 	}
-
+showSuccessMsg(msg){
+		this.successMessages.push(msg);
+		setTimeout(()=>{this.successMessages=[];},2000);
+}
 	save() {
+		this.working = true;
 		this.serviceSave(this.isNewItem, this.source, this.item).then(response => {
+			this.working = false;
 			if (response.status) {
+				this.showSuccessMsg("Item is saved!");
 				let item = this.instanceCreate(response.data);
 				if (this.sharedService.isHandset) {
 				} else {
@@ -117,6 +128,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 						this.selectedGridRowNode.setSelected(true);
 					}
 				}
+
 				this.cancel();
 			} else {
 				if (response.message) this.errorMessages.push(response.message);

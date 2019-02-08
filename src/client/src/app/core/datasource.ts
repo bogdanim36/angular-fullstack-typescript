@@ -35,7 +35,7 @@ export class Datasource  {
 		this.isFirst = this.currentIndex === 0;
 		this.isLast = this.currentIndex === this.items.length-1;
 		if (currentIndexChanged !== index) this.currentItemChanged.emit(this.currentItem);
-		console.log("datasource.setCurrent", index, this.currentItem);
+		// console.log("datasource.setCurrent", index, this.currentItem);
 	}
 
 	first() {
