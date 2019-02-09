@@ -91,15 +91,12 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	}
 
 	globalSearchColumnChanged() {
-		// console.log(this.globalSearchSelectedColumns, arguments);
-		this.uiConfig.columns.forEach(column=>{
-			if (this.globalSearchSelectedColumns.indexOf(column.field)>-1) column.getQuickFilterText = (params)=> params.value.name;
-			else column.getQuickFilterText = ()=> '';
+		this.grid.columnApi.getAllColumns().forEach(column=>{
+			let def = column.getColDef();
+			if (this.globalSearchSelectedColumns.indexOf(def.field)>-1) def.getQuickFilterText = undefined;
+			else def.getQuickFilterText = ()=> '';
 		});
-		this.grid.api.setColumnDefs(this.uiConfig.columns);
 		this.grid.api.onFilterChanged();
-		this.grid.api.resetQuickFilter();
-		this.grid.api.setQuickFilter(this.globalSearch);
 	}
 
 	showDialogToAdd() {
