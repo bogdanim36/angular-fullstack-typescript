@@ -71,7 +71,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		}
 		this.item = this.instanceCreate(this.source);
 		this.entityService.isEditing = true;
-		this.successMessages=[];
+		this.successMessages = [];
 	}
 
 	cancel() {
@@ -107,10 +107,14 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		if (this.selectedGridRowNode) this.item = this.selectedGridRowNode.data;
 		else this.item = this.instanceCreate({});
 	}
-showSuccessMsg(msg){
+
+	showSuccessMsg(msg) {
 		this.successMessages.push(msg);
-		setTimeout(()=>{this.successMessages=[];},2000);
-}
+		setTimeout(() => {
+			this.successMessages = [];
+		}, 2000);
+	}
+
 	save() {
 		this.working = true;
 		this.serviceSave(this.isNewItem, this.source, this.item).then(response => {

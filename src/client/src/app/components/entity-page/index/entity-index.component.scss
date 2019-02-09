@@ -65,3 +65,41 @@ mat-spinner {
   background-color: lightgrey;
 }
 
+.global-search {
+  margin-right: 10px !important;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+:host ::ng-deep .global-search .mat-form-field-flex {
+  line-height: 0;
+  padding: 5px;
+}
+
+:host ::ng-deep .global-search .mat-form-field-infix {
+  border-top: none;
+  padding: 0;
+  margin:auto;
+}
+
+:host ::ng-deep .global-search .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+:host ::ng-deep .global-search input{
+  height:26px;
+  padding:0 5px;
+  box-sizing: border-box;
+}
+:host ::ng-deep .global-search .mat-form-field-underline {
+  bottom:0;
+}
+:host ::ng-deep .global-search  mat-select{
+  visibility: hidden;
+  position: absolute;
+  right:-5px;
+  top:45px;
+}
+:host ::ng-deep .global-search mat-icon{
+  cursor: pointer;
+}

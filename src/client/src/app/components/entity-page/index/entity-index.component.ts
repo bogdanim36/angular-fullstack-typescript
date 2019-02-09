@@ -6,6 +6,7 @@ import {GridOptions} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {DomSanitizer, SafeStyle} from "@angular/platform-browser";
 import {EntityService} from "@app/components/entity-page/shared/entity.service";
+import {TableColumn} from "@app/core/table-column";
 
 export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageComponent implements OnInit {
 	isNewItem = false;
@@ -17,6 +18,9 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	private gridWidth: SafeStyle;
 	componentsToLoad: Array<string>;
 	hasItem: boolean;
+	globalSearch: string;
+	globalSearchSelectedColumns: Array<string>;
+	globalSearchColumns: Array<TableColumn>;
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
 	@ViewChild('gridForm', {read: ViewContainerRef}) gridForm: ViewContainerRef;
 	@ViewChild('handsetForm', {read: ViewContainerRef}) handsetForm: ViewContainerRef;
@@ -35,9 +39,18 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 			defaultColDef: {resizable: true}
 		};
 		uiConfig.setGridOptions(this.grid);
+
 		this.formPanelWidth = uiConfig.formPanelWidth;
 		this.gridWidth = sanitizer.bypassSecurityTrustStyle("calc(100% - " + this.formPanelWidth + ")");
-
+		this.globalSearch = "";
+		this.globalSearchSelectedColumns = [];
+		this.globalSearchColumns = [];
+		uiConfig.columns.forEach(column => {
+			if (column.field) {
+				this.globalSearchColumns.push(column);
+				this.globalSearchSelectedColumns.push(column.field);
+			}
+		});
 	}
 
 	componentIsLoaded(componentName) {
@@ -72,6 +85,22 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 
 	}
 
+	globalSearchValueChanged(newValue) {
+		this.globalSearch = newValue;
+		this.grid.api.setQuickFilter(newValue);
+	}
+
+	globalSearchColumnChanged() {
+		// console.log(this.globalSearchSelectedColumns, arguments);
+		this.uiConfig.columns.forEach(column=>{
+			if (this.globalSearchSelectedColumns.indexOf(column.field)>-1) column.getQuickFilterText = (params)=> params.value.name;
+			else column.getQuickFilterText = ()=> '';
+		});
+		this.grid.api.setColumnDefs(this.uiConfig.columns);
+		this.grid.api.onFilterChanged();
+		this.grid.api.resetQuickFilter();
+		this.grid.api.setQuickFilter(this.globalSearch);
+	}
 
 	showDialogToAdd() {
 		this.showDialog(true, {});

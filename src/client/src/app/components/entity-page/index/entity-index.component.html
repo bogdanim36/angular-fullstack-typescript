@@ -1,5 +1,5 @@
 <div *ngIf="appShared.isHandset">
-	<ng-container #handsetForm class="handset-scroller" >
+	<ng-container #handsetForm class="handset-scroller">
 	</ng-container>
 </div>
 <div *ngIf="!appShared.isHandset" class="table-container">
@@ -9,6 +9,21 @@
 		<mat-toolbar class="grid-toolbar box-shadow" role="heading">
 			<span class="grid-title">{{uiConfig.labels.list}}</span>
 			<div class="right-side info">
+				<mat-form-field class="global-search" appearance="fill">
+					<input matInput autocomplete="off"
+							 [disabled]="entityService.isEditing"
+							 (ngModelChange)="globalSearchValueChanged($event)"
+							 [(ngModel)]="globalSearch">
+					<mat-icon matPrefix>search</mat-icon>
+					<mat-icon matSuffix *ngIf="globalSearch"
+								 style="position: absolute;right:27px"
+								 (click)="globalSearchValueChanged('')">close</mat-icon>
+					<mat-icon matSuffix (click)="globalSearchSelect.toggle()">menu</mat-icon>
+					<mat-select [(ngModel)]="globalSearchSelectedColumns" multiple #globalSearchSelect (selectionChange)="globalSearchColumnChanged()">
+						<mat-option *ngFor="let column of globalSearchColumns" [value]="column.field">{{column.headerName}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+
 				<span>{{service.items.length}} records</span>
 				<button mat-icon-button
 						  *ngIf="!entityService.formPanelIsVisible"
@@ -24,6 +39,7 @@
 				class="ag-theme-material"
 				rowSelection="single"
 				[gridOptions]="grid"
+				[columnDefs]="uiConfig.columns"
 				[rowData]="service.items"
 				(selectionChanged)="gridSelectionChanged($event)"
 			>

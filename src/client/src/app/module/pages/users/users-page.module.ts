@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressSpinnerModule, MatToolbarModule, MatTooltipModule} from "@angular/material";
+import {MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatToolbarModule, MatTooltipModule} from "@angular/material";
 import {AgGridModule} from 'ag-grid-angular';
 
 import {EntityPageModule} from '@app/components/entity-page/entity-page.module';
@@ -14,6 +14,7 @@ import {CommonModule} from "@angular/common";
 import {UsersGridToolbarComponent} from "@app/module/pages/users/users-grid-toolbar.component";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";
 import {ScrollingModule} from "@angular/cdk/scrolling";
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 
 @NgModule({
 	entryComponents: [
@@ -46,7 +47,9 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 		MatTooltipModule,
 		MatProgressSpinnerModule,
 		MatDividerModule,
+		MatSelectModule,
 		ScrollingModule,
+		NgxMatSelectSearchModule,
 		AgGridModule.withComponents([])
 	]
 })
