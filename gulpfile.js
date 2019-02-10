@@ -47,7 +47,7 @@ gulp.task("gen:entity", (callback) => {
 	let moduleNames = Object.keys(config.paths.modules);
 	if (!config.entity) throw "No entity argument provided";
 	if (!config.entities) throw "No entities argument provided";
-	let nameCases = {};
+	let nameCases = {pascalCase:''};
 	moduleNames.forEach(moduleName => {
 		let module = config.paths.modules[moduleName];
 		nameCases[module.filesNameCase] = '';
@@ -70,11 +70,11 @@ gulp.task("gen:entity", (callback) => {
 				file.basename = config[module.filesName][module.filesNameCase] + (module.filesNameCase === 'paramCase' && baseName ? "-" : "") + baseName;
 			}))
 			.pipe(gulp.dest(config.paths.destRoot + module.dest + (module.entitiesSubdir ? config.entities.paramCase : "")));
-		if (moduleName === 'server') addControllerToServerIndex(config);
-		if (moduleName === 'client') {
-			addClientRooting(config);
-			addClientModule(config);
-		}
+		// if (moduleName === 'server') addControllerToServerIndex(config);
+		// if (moduleName === 'client') {
+		// 	addClientRooting(config);
+		// 	addClientModule(config);
+		// }
 	});
 
 	callback();

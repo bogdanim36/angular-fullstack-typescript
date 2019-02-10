@@ -3,12 +3,11 @@ import {DomSanitizer} from "@angular/platform-browser";
 
 import {AppSharedService} from '@app/core/app-shared.service';
 import {EntityIndexComponent} from '@app/components/entity-page/index/entity-index.component';
+import {EntityService} from "@app/components/entity-page/shared/entity.service";
 import {User} from '@shared/user';
 import {UsersUiConfig} from './users-ui-config';
 import {UsersClientService} from './users-client.service';
-import {UsersGridToolbarComponent} from "./users-grid-toolbar.component";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";
-import {EntityService} from "@app/components/entity-page/shared/entity.service";
 
 @Component({
 	selector: 'app-users-list',

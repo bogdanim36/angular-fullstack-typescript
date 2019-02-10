@@ -13,17 +13,14 @@ import {EntityPageModule} from '@app/components/entity-page/entity-page.module';
 import {UsersIndexComponent} from '@app/module/pages/users/users-index.component';
 import {UsersClientService} from '@app/module/pages/users/users-client.service';
 import {UsersUiConfig} from '@app/module/pages/users/users-ui-config';
-import {UsersGridToolbarComponent} from "@app/module/pages/users/users-grid-toolbar.component";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";
 
 @NgModule({
 	entryComponents: [
-		UsersGridToolbarComponent,
 		UserFormComponent
 	],
 	declarations: [
 		UsersIndexComponent,
-		UsersGridToolbarComponent,
 		UserFormComponent
 	],
 	providers: [
