@@ -1,4 +1,5 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {DomSanitizer} from "@angular/platform-browser";
 
 import {AppSharedService} from '@app/core/app-shared.service';
 import {EntityIndexComponent} from '@app/components/entity-page/index/entity-index.component';
@@ -7,7 +8,6 @@ import {UsersUiConfig} from './users-ui-config';
 import {UsersClientService} from './users-client.service';
 import {UsersGridToolbarComponent} from "./users-grid-toolbar.component";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";
-import {DomSanitizer} from "@angular/platform-browser";
 import {EntityService} from "@app/components/entity-page/shared/entity.service";
 
 @Component({
@@ -59,18 +59,17 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			this.componentIsLoaded('gridForm');
 		});
 	}
+
 	@ViewChild('handsetForm', {read: ViewContainerRef}) set handsetFormContent(content: ViewContainerRef) {
 		this.handsetForm = content;
 		if (!content) return;
 		setTimeout(() => {
 			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UserFormComponent);
-			this.handsetForm .clear();
+			this.handsetForm.clear();
 			let handsetForm = this.handsetForm.createComponent(componentFactory).instance;
 			handsetForm.uiConfig = this.uiConfig;
 			handsetForm.service = this.service;
 			handsetForm.setCurrentItem();
-			// this.componentIsLoaded('handsetForm');
 		});
 	}
-
 }
