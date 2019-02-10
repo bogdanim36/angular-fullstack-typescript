@@ -12,6 +12,7 @@ export class MainToolbarComponent implements OnInit {
 	constructor() {
 		this.appTitle = appInfo.name;
 		document.title = this.appTitle;
+		document.querySelector('head title').innerHTML = this.appTitle;
 	}
 
 	ngOnInit() {
