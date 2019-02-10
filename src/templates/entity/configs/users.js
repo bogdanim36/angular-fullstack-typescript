@@ -19,10 +19,19 @@ module.exports = function () {
 		config.model.expression("fullName", true, "string", "((this.firstName ? this.firstName.trim() : '') + (this.lastName ? ' ' + this.lastName.trim() : '')).trim();")
 	};
 	config.uiConfig.build = function () {
-		config.uiConfig.column('email', 'Email', '250px', true, true);
-		config.uiConfig.column('firstName', 'First Name', '250px', true, true);
-		config.uiConfig.column('lastName', 'Last Name', '250px', true, true);
-		config.uiConfig.column('fullName', 'Full Name', '250px', true, false);
+		config.uiConfig.formPanelWidth = '400px';
+		config.uiConfig.labels.list = 'List of Users';
+		config.uiConfig.labels.itemDetails = 'User Details';
+		config.uiConfig.labels.specific = {
+			email: "Email",
+			firstName: "First Name",
+			lastName: "Last Name",
+			fullName: "Full Name"
+		};
+		config.uiConfig.column('email', 'Email', 250, true);
+		config.uiConfig.column('fullName', 'Full Name', 300, true);
+		config.uiConfig.column('firstName', 'First Name', 150, true);
+		config.uiConfig.column('lastName', 'Last Name', 150, true);
 	};
 	config.form.build = function () {
 		config.form.inputText('content', 'firstName', 'First Name');

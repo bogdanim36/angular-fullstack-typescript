@@ -1,5 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+
 import {ClientService} from '@app/core/client-service';
 import {<%= entity.pascalCase %>} from '@shared/<%= entity.paramCase %>';
 
@@ -12,7 +13,7 @@ export class <%= entities.pascalCase %>ClientService extends ClientService<<%= e
 
 	getAll(params?, reload: boolean = false): Promise<any> {
 		return super.getAll(params, reload).then((response) => {
-			this._items = response;
+			this.data.items = response;
 			return response;
 		});
 	}
