@@ -4,6 +4,7 @@ import {GridOptions} from 'ag-grid-community';
 export class EntityUiConfig {
 	columns: TableColumn[] = [];
 	components: any;
+	gridRowActionsMenu: {title:string, actionName:String}[];
 	gridRowHeight: number = 30;
 	gridRowHeaderHeight: number = 36;
 	private _formPanelWidth: string;

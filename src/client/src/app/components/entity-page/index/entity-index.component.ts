@@ -26,15 +26,15 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	@ViewChild('handsetForm', {read: ViewContainerRef}) handsetForm: ViewContainerRef;
 	ref: any;
 
-
 	constructor(protected appShared: AppSharedService, uiConfig, protected sanitizer: DomSanitizer, protected entityService: EntityService) {
 		super(appShared);
 		this.ref = this;
 		this.entityService.formPanelIsVisible = true;
-		this.componentsToLoad = ['gridToolbar', 'gridForm', 'data'];
+		this.componentsToLoad = 1===1 ? ['gridForm', 'data'] : ['gridToolbar', 'gridForm', 'data'];
 		this.grid = <GridOptions>{
 			context: {
-				componentParent: this
+				componentParent: this,
+				gridRowActionsMenu: uiConfig.gridRowActionsMenu,
 			},
 			defaultColDef: {resizable: true}
 		};
@@ -91,10 +91,10 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	}
 
 	globalSearchColumnChanged() {
-		this.grid.columnApi.getAllColumns().forEach(column=>{
+		this.grid.columnApi.getAllColumns().forEach(column => {
 			let def = column.getColDef();
-			if (this.globalSearchSelectedColumns.indexOf(def.field)>-1) def.getQuickFilterText = undefined;
-			else def.getQuickFilterText = ()=> '';
+			if (this.globalSearchSelectedColumns.indexOf(def.field) > -1) def.getQuickFilterText = undefined;
+			else def.getQuickFilterText = () => '';
 		});
 		this.grid.api.onFilterChanged();
 	}

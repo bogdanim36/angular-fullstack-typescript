@@ -22,7 +22,5 @@ export class UsersGridToolbarComponent {
 	constructor() {
 	}
 
-	toggleShowPanel() {
-	}
 }
 

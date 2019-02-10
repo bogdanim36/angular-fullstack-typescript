@@ -39,7 +39,6 @@ export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfi
 			let componentRef = this.gridToolbar.createComponent(componentFactory);
 			componentRef.instance.uiConfig = this.uiConfig;
 			componentRef.instance.grid = this.grid;
-			componentRef.instance.toggleShowPanel = this.toggleShowPanel.bind(this);
 			this.componentIsLoaded('gridToolbar');
 		});
 	}
