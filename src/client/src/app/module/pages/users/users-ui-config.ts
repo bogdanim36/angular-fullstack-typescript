@@ -12,5 +12,6 @@ export class UsersUiConfig extends EntityUiConfig {
 		this.addColumn({field: 'fullName', headerName: 'Full Name', sortable: true, width: 300});
 		this.addColumn({field: 'firstName', headerName: 'First Name', sortable: true, width: 150});
 		this.addColumn({field: 'lastName', headerName: 'Last Name', sortable: true, width: 150});
+
 	}
 }
