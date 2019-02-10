@@ -15,33 +15,7 @@
 	</mat-spinner>
 
 	<mat-card-content>
-		<mat-form-field appearance="standard">
-			<mat-label>{{uiConfig.labels.specific.firstName}}</mat-label>
-			<input matInput autocomplete="off"
-					 [disabled]="!entityService.isEditing"
-					 [(ngModel)]="item.firstName">
-			<mat-error *ngIf="errors?.firstName">
-				<p *ngFor="let msg of errors.firstName">{{msg}}</p>
-			</mat-error>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>{{uiConfig.labels.specific.lastName}}</mat-label>
-			<input matInput autocomplete="off"
-					 [disabled]="!entityService.isEditing"
-					 [(ngModel)]="item.lastName">
-			<mat-error *ngIf="errors?.lastName">
-				<p *ngFor="let msg of errors.lastName">{{msg}}</p>
-			</mat-error>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>{{uiConfig.labels.specific.email}}</mat-label>
-			<input matInput autocomplete="off"
-					 [disabled]="!entityService.isEditing"
-					 [(ngModel)]="item.email">
-			<mat-error *ngIf="errors?.email">
-				<p *ngFor="let msg of errors.email">{{msg}}</p>
-			</mat-error>
-		</mat-form-field>
+		<%= formFields %>
 		<div *ngIf="errorMessages.length" class="errors">
 			<ul class="ui-corner-all">
 				<li *ngFor="let message of errorMessages">{{message}}</li>
@@ -121,14 +95,16 @@
 					  *ngIf="entityService.isEditing"
 					  (click)='save(isNewItem, source, item)'>
 				<mat-icon>check</mat-icon>
-				{{uiConfig.labels.save}}</button>
+				{{uiConfig.labels.save}}
+			</button>
 			<!--cancel button-->
 			<button mat-flat-button
 					  color="warn"
 					  *ngIf="entityService.isEditing"
 					  (click)='cancel()'>
 				<mat-icon>cancel</mat-icon>
-				{{uiConfig.labels.cancel}}</button>
+				{{uiConfig.labels.cancel}}
+			</button>
 		</div>
 	</mat-toolbar>
 </div>
