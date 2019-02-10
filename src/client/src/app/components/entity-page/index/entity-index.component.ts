@@ -53,6 +53,10 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		});
 	}
 
+	/**
+	 * control when to show up ag-grid (when all parts are loaded)
+	 * @param componentName
+	 */
 	componentIsLoaded(componentName) {
 		if (this.componentsToLoad.length === 0) return true;
 		let index = this.componentsToLoad.indexOf(componentName);
