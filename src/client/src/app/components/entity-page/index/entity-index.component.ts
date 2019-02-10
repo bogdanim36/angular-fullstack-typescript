@@ -99,31 +99,6 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		this.grid.api.onFilterChanged();
 	}
 
-	showDialogToAdd() {
-		this.showDialog(true, {});
-	}
-
-	showDialogToEdit(event, item) {
-		this.showDialog(false, item);
-	}
-
-	showDialog(isNewItem: boolean, source) {
-		this.isNewItem = isNewItem;
-		const editingItem = this.service.instanceCreate(source);
-		// this.dialogService.open(this.formClass, {
-		//     data: {
-		//         uiConfig: this.uiConfig,
-		//         item: editingItem as M,
-		//         source: source,
-		//         launcher: this,
-		//         isNewItem: isNewItem,
-		//         save: this.save.bind(this),
-		//         delete: this.delete.bind(this)
-		//     },
-		//     height: this.isHandset ? '100%' : 'auto',
-		//     width: this.isHandset ? '100%' : '300px'
-		// });
-	}
 
 	gridSelectionChanged(event: any) {
 		//this will be mapped to entity-form.gridSelectionChanged method

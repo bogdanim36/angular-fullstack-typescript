@@ -49,7 +49,7 @@ export class EntityUiConfig {
 	setGridOptions(grid: GridOptions) {
 		grid.rowHeight = this.gridRowHeight;
 		grid.headerHeight = this.gridRowHeaderHeight;
-		// grid.columnDefs = this.columns;
+		grid.columnDefs = this.columns;
 		grid.components = this.components;
 	}
 }
