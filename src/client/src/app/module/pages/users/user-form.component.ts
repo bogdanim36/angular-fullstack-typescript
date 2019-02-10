@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
-import {UsersUiConfig} from "@app/module/pages/users/users-ui-config";
-import {User} from "@shared/user";
-import {UsersClientService} from "@app/module/pages/users/users-client.service";
-import {EntityService} from "@app/components/entity-page/shared/entity.service";
+
+import {EntityService} from "@app/components/entity-page/entity.service";
 import {EntityFormComponent} from "@app/components/entity-page/form/entity-form.component";
 import {AppSharedService} from "@app/core/app-shared.service";
+
+import {User} from "@shared/user";
+import {UsersUiConfig} from "@app/module/pages/users/users-ui-config";
+import {UsersClientService} from "@app/module/pages/users/users-client.service";
 
 @Component({
 	selector: 'app-entity-form',
@@ -16,5 +18,4 @@ export class UserFormComponent extends EntityFormComponent<User, UsersUiConfig, 
 	constructor(public entityService: EntityService, public sharedService: AppSharedService) {
 		super(User, entityService, sharedService);
 	}
-
 }

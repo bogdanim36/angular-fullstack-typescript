@@ -1,5 +1,5 @@
 import {Input} from '@angular/core';
-import {EntityService} from "@app/components/entity-page/shared/entity.service";
+import {EntityService} from "@app/components/entity-page/entity.service";
 import {GridOptions, RowNode} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {ClientService} from "@app/core/client-service";

@@ -5,7 +5,7 @@ import {AppSharedService} from '@app/core/app-shared.service';
 import {GridOptions} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {DomSanitizer, SafeStyle} from "@angular/platform-browser";
-import {EntityService} from "@app/components/entity-page/shared/entity.service";
+import {EntityService} from "@app/components/entity-page/entity.service";
 import {TableColumn} from "@app/core/table-column";
 
 export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageComponent implements OnInit {

@@ -3,7 +3,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 
 import {AppSharedService} from '@app/core/app-shared.service';
 import {EntityIndexComponent} from '@app/components/entity-page/index/entity-index.component';
-import {EntityService} from "@app/components/entity-page/shared/entity.service";
+import {EntityService} from "@app/components/entity-page/entity.service";
 
 import {User} from '@shared/user';
 import {UsersUiConfig} from '@app/module/pages/users/users-ui-config';
