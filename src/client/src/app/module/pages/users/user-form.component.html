@@ -16,7 +16,7 @@
 
 	<mat-card-content>
 		<mat-form-field appearance="standard">
-			<mat-label>{{uiConfig.labels.specific.firstName}}</mat-label>
+			<mat-label >{{uiConfig.labels.specific.firstName}}</mat-label>
 			<input matInput autocomplete="off"
 					 [disabled]="!entityService.isEditing"
 					 [(ngModel)]="item.firstName">
