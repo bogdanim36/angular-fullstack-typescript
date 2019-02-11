@@ -1,19 +1,19 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import {DomSanitizer} from "@angular/platform-browser";
 
-import {AppSharedService} from '@app/core/app-shared.service';
-import {EntityIndexComponent} from '@app/components/entity-page/index/entity-index.component';
+import {AppSharedService} from "@app/core/app-shared.service";
+import {EntityIndexComponent} from "@app/components/entity-page/index/entity-index.component";
 import {EntityService} from "@app/components/entity-page/entity.service";
 
-import {User} from '@shared/user';
-import {UsersUiConfig} from '@app/module/pages/users/users-ui-config';
-import {UsersClientService} from '@app/module/pages/users/users-client.service';
-import {UserFormComponent} from '@app/module/pages/users/user-form.component';
+import {User} from "@shared/user";
+import {UsersUiConfig} from "@app/module/pages/users/users-ui-config";
+import {UsersClientService} from "@app/module/pages/users/users-client.service";
+import {UserFormComponent} from "@app/module/pages/users/user-form.component";
 
 @Component({
-	selector: 'app-users-list',
-	templateUrl: '../../../components/entity-page/index/entity-index.component.html',
-	styleUrls: ['../../../components/entity-page/index/entity-index.component.scss', './users-index.component.scss']
+	selector: "app-users-list",
+	templateUrl: "../../../components/entity-page/index/entity-index.component.html",
+	styleUrls: ["../../../components/entity-page/index/entity-index.component.scss", "./users-index.component.scss"]
 })
 export class UsersIndexComponent extends EntityIndexComponent<User, UsersUiConfig, UsersClientService> implements OnInit {
 

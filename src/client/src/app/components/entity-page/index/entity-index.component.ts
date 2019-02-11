@@ -17,18 +17,17 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	formPanelWidth: string;
 	private gridWidth: SafeStyle;
 	componentsToLoad: Array<string>;
-	hasItem: boolean;
 	globalSearch: string;
 	globalSearchSelectedColumns: Array<string>;
 	globalSearchColumns: Array<TableColumn>;
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
 	@ViewChild('gridForm', {read: ViewContainerRef}) gridForm: ViewContainerRef;
 	@ViewChild('handsetForm', {read: ViewContainerRef}) handsetForm: ViewContainerRef;
-	ref: any;
+	// ref: any;
 
 	constructor(protected appShared: AppSharedService, uiConfig, protected sanitizer: DomSanitizer, protected entityService: EntityService) {
 		super(appShared);
-		this.ref = this;
+		// this.ref = this;
 		this.entityService.formPanelIsVisible = true;
 		this.componentsToLoad = 1===1 ? ['gridForm', 'data'] : ['gridToolbar', 'gridForm', 'data'];
 		this.grid = <GridOptions>{

@@ -16,6 +16,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	public successMessages: Array<string> = [];
 	public errors: M;
 	public isNewItem = true;
+	hasItem: boolean;
 	public selectedGridRowNode: RowNode;
 	showNavigation: boolean;
 	working = false;
@@ -42,7 +43,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	formTitle(): string {
-		let title = this.uiConfig.labels.itemDetails;
+		let title = this.uiConfig.labels.itemDetails.toString();
 		title += this.entityService.isEditing ? " (" + (this.isNewItem ? this.uiConfig.labels.addItem : this.uiConfig.labels.modify) + ")" : "";
 		return title;
 	}
@@ -120,7 +121,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		this.serviceSave(this.isNewItem, this.source, this.item).then(response => {
 			this.working = false;
 			if (response.status) {
-				this.showSuccessMsg("Item is saved!");
+				this.showSuccessMsg(this.uiConfig.labels.itemIsSaved);
 				let item = this.instanceCreate(response.data);
 				if (this.sharedService.isHandset) {
 				} else {

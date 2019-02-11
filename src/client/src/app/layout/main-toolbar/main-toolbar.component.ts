@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {appInfo} from "@shared/app-info";
+import {environment} from "../../../environments/environment";
+import {MatSelectChange} from "@angular/material";
 
 @Component({
 	selector: 'app-main-toolbar',
@@ -7,10 +9,14 @@ import {appInfo} from "@shared/app-info";
 	styleUrls: ['./main-toolbar.component.scss']
 })
 export class MainToolbarComponent implements OnInit {
-	appTitle:string;
+	appTitle: string;
+	language: string;
+	languages: any[];
 
 	constructor() {
 		this.appTitle = appInfo.name;
+		this.language = environment.language;
+		this.languages = environment.languages;
 		document.title = this.appTitle;
 		document.querySelector('head title').innerHTML = this.appTitle;
 	}
@@ -18,4 +24,8 @@ export class MainToolbarComponent implements OnInit {
 	ngOnInit() {
 	}
 
+	languageChanged(changed:MatSelectChange) {
+		environment.language = changed.value;
+		console.log('langauge changed', changed.value);
+	}
 }

@@ -1,12 +1,14 @@
-﻿export const noRoleMenu: MenuItem[] = [
+﻿import {Translation} from "../client/src/app/core/translation";
+
+export const noRoleMenu: MenuItem[] = [
 	{
-		label: 'Administration', expanded: true, items:
+		label: new Translation( 'Administration', 'Administrare'), expanded: true, items:
 			[
-				  {label: 'Users', routerLink: 'users', icon: 'fa fa-caret-right'}
-				, {label: 'Projects', routerLink: 'projects', icon: 'fa fa-caret-right'}
-				, {label: 'Task Types', routerLink: 'task-types', icon: 'fa fa-caret-right'}
-				, {label: 'Task Status', routerLink: 'task-status', icon: 'fa fa-caret-right'}
-				, {label: 'Tasks', routerLink: 'tasks', icon: 'fa fa-caret-right'}
+				{label: new Translation('Users', "Utilizatori"), routerLink: 'users', icon: 'fa fa-caret-right'}
+				, {label: new Translation('Projects', "Proiecte"), routerLink: 'projects', icon: 'fa fa-caret-right'}
+				, {label: new Translation('Task Types', 'Tipuri Task-uri'), routerLink: 'task-types', icon: 'fa fa-caret-right'}
+				, {label: new Translation('Task Status', 'Stari Task-uri'), routerLink: 'task-status', icon: 'fa fa-caret-right'}
+				, {label: new Translation('Tasks', 'Task-uri'), routerLink: 'tasks', icon: 'fa fa-caret-right'}
 			]
 	}];
 
@@ -18,10 +20,10 @@ export const ConfigMenu = {
 };
 
 export class MenuItem {
-	label: string;
+	label: Translation;
 	expanded?: boolean;
 	routerLink?: string;
 	icon?: string;
-	type?:any;
+	type?: any;
 	items?: Array<MenuItem>;
 }

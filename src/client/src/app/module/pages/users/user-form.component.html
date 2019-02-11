@@ -15,31 +15,25 @@
 	</mat-spinner>
 
 	<mat-card-content>
-		<mat-form-field appearance="standard">
-			<mat-label >{{uiConfig.labels.specific.firstName}}</mat-label>
-			<input matInput autocomplete="off"
-					 [disabled]="!entityService.isEditing"
-					 [(ngModel)]="item.firstName">
-			<mat-error *ngIf="errors?.firstName">
-				<p *ngFor="let msg of errors.firstName">{{msg}}</p>
+		<mat-form-field>
+			<mat-label>{{uiConfig.labels.specific['firstName']}}</mat-label>
+			<input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['firstName']"/>
+			<mat-error *ngIf="errors['firstName']">
+				<p *ngFor="let msg of errors['firstName']">{{msg}}</p>
 			</mat-error>
 		</mat-form-field>
 		<mat-form-field>
-			<mat-label>{{uiConfig.labels.specific.lastName}}</mat-label>
-			<input matInput autocomplete="off"
-					 [disabled]="!entityService.isEditing"
-					 [(ngModel)]="item.lastName">
-			<mat-error *ngIf="errors?.lastName">
-				<p *ngFor="let msg of errors.lastName">{{msg}}</p>
+			<mat-label>{{uiConfig.labels.specific['lastName']}}</mat-label>
+			<input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['lastName']"/>
+			<mat-error *ngIf="errors['lastName']">
+				<p *ngFor="let msg of errors['lastName']">{{msg}}</p>
 			</mat-error>
 		</mat-form-field>
 		<mat-form-field>
-			<mat-label>{{uiConfig.labels.specific.email}}</mat-label>
-			<input matInput autocomplete="off"
-					 [disabled]="!entityService.isEditing"
-					 [(ngModel)]="item.email">
-			<mat-error *ngIf="errors?.email">
-				<p *ngFor="let msg of errors.email">{{msg}}</p>
+			<mat-label>{{uiConfig.labels.specific['email']}}</mat-label>
+			<input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['email']"/>
+			<mat-error *ngIf="errors['email']">
+				<p *ngFor="let msg of errors['email']">{{msg}}</p>
 			</mat-error>
 		</mat-form-field>
 		<div *ngIf="errorMessages.length" class="errors">
@@ -59,6 +53,7 @@
 			<button mat-icon-button
 					  *ngIf="!entityService.isEditing "
 					  color="primary"
+					  [matTooltip]="uiConfig.labels.addItem"
 					  (click)='newItem()'>
 				<mat-icon>add</mat-icon>
 			</button>
@@ -66,6 +61,7 @@
 			<button mat-icon-button
 					  *ngIf="!entityService.isEditing"
 					  [disabled]="!hasItem"
+					  [matTooltip]="uiConfig.labels.modify"
 					  color="primary"
 					  (click)='modify()'>
 				<mat-icon>edit</mat-icon>
@@ -76,17 +72,20 @@
 					<div style="display: flex;flex-direction: column;margin:0 10px">
 						<button mat-flat-button
 								  style="margin-bottom: 5px;"
-								  color="primary">Cancel
+								  color="primary">
+							<mat-icon>cancel</mat-icon>
+							{{uiConfig.labels.cancel}}
 						</button>
 						<button mat-flat-button
 								  (click)='delete(selectedGridRowNode.data)' color="warn">
 							<mat-icon>check</mat-icon>
-							Confirm
+							{{uiConfig.labels.confirm}}
 						</button>
 					</div>
 				</mat-menu>
 				<button mat-icon-button
 						  [matMenuTriggerFor]="deleteMenu"
+						  [matTooltip]="uiConfig.labels.delete"
 						  color="warn"
 						  [disabled]="!hasItem">
 					<mat-icon>delete</mat-icon>
@@ -121,14 +120,16 @@
 					  *ngIf="entityService.isEditing"
 					  (click)='save(isNewItem, source, item)'>
 				<mat-icon>check</mat-icon>
-				{{uiConfig.labels.save}}</button>
+				{{uiConfig.labels.save}}
+			</button>
 			<!--cancel button-->
 			<button mat-flat-button
 					  color="warn"
 					  *ngIf="entityService.isEditing"
 					  (click)='cancel()'>
 				<mat-icon>cancel</mat-icon>
-				{{uiConfig.labels.cancel}}</button>
+				{{uiConfig.labels.cancel}}
+			</button>
 		</div>
 	</mat-toolbar>
 </div>

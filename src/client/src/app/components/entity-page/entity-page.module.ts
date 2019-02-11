@@ -5,6 +5,7 @@ import {AgGridModule} from 'ag-grid-angular';
 import {MatButtonModule, MatCardModule, MatIconModule, MatToolbarModule} from "@angular/material";
 import {GridActionColumnComponent} from "@app/components/entity-page/index/grid-action-column.component";
 import {CommonModule} from "@angular/common";
+import {AppSharedService} from "@app/core/app-shared.service";
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,7 @@ import {CommonModule} from "@angular/common";
 		MatCardModule,
 		AgGridModule.withComponents([GridActionColumnComponent])
 	],
-	providers: []
+	providers: [AppSharedService]
 })
 
 export class EntityPageModule {
