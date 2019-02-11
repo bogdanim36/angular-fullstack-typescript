@@ -34,9 +34,9 @@ module.exports = function () {
 		config.uiConfig.column('lastName', 'Last Name', 150, true);
 	};
 	config.form.build = function () {
-		config.form.inputText('content', 'firstName', 'First Name');
-		config.form.inputText('content', 'lastName', 'Last Name');
-		config.form.inputText('content', 'email', 'Email');
+		config.form.inputText('content', 'firstName');
+		config.form.inputText('content', 'lastName');
+		config.form.inputText('content', 'email');
 	};
 	return config;
 };
