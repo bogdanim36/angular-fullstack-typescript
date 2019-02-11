@@ -88,10 +88,13 @@ module.exports = function entityConfig() {
 				footer: ""
 			},
 			inputText: function (where, field, title, model) {
-				this.html[where] += '\n\t<div class="ui-g-12">';
-				this.html[where] += '\n\t\t<label for="' + field + '">' + title + '</label>;'
-				this.html[where] += '\n\t\t<input pInputText id="' + field + '"  class="ui-inputtext" autocomplete="off" [(ngModel)]="config.data.item[\'' + field + '\']"/>';
-				this.html[where] += '\n\t</div>';
+				this.html[where] += '\n\t<mat-form-field >';
+				this.html[where] += '\n\t\t<mat-label >{{' + title + '}}</mat-label>;'
+				this.html[where] += '\n\t\t<input matInput autocomplete="off" [(ngModel)]="item[\'' + field + '\']"/>';
+				this.html[where] += '\n\t\t<mat-error *ngIf="errors[\'' + field + '\']"/>';
+				this.html[where] += '\n\t\t\t<p *ngFor="let msg of errors[\'' + field + '\']">{{msg}}</p>';
+				this.html[where] += '\n\t\t</mat-error>';
+				this.html[where] += '\n\t</mat-form-field>';
 			},
 			toggleButton: function (where, field, title, model) {
 				this.html[where] += '\n\t<div class="ui-g-12">';

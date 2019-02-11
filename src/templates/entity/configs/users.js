@@ -37,17 +37,6 @@ module.exports = function () {
 		config.form.inputText('content', 'firstName', 'First Name');
 		config.form.inputText('content', 'lastName', 'Last Name');
 		config.form.inputText('content', 'email', 'Email');
-		config.form.button('footer', {
-			'[label]': 'config.data.uiConfig.labels.save',
-			'icon': 'fa fa-check',
-			'(click)': 'config.data.save(config.data.isNewItem, config.data.source, config.data.item)'
-		});
-		config.form.button('footer', {
-			'[label]': 'config.data.uiConfig.labels.delete',
-			'icon': 'fa fa-close',
-			'[disabled]': 'config.data.isNewItem',
-			'(click)': 'config.data.delete(config.data.source)'
-		});
 	};
 	return config;
 };

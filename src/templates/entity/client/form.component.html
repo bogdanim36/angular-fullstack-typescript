@@ -15,7 +15,7 @@
 	</mat-spinner>
 
 	<mat-card-content>
-		<%= formFields %>
+		<%= form.html.content %>
 		<div *ngIf="errorMessages.length" class="errors">
 			<ul class="ui-corner-all">
 				<li *ngFor="let message of errorMessages">{{message}}</li>
