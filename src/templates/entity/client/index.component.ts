@@ -1,19 +1,19 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import {DomSanitizer} from "@angular/platform-browser";
 
-import {AppSharedService} from '@app/core/app-shared.service';
-import {EntityIndexComponent} from '@app/components/entity-page/index/entity-index.component';
+import {AppSharedService} from "@app/core/app-shared.service";
+import {EntityIndexComponent} from "@app/components/entity-page/index/entity-index.component";
 import {EntityService} from "@app/components/entity-page/entity.service";
 
-import {<%= entity.pascalCase %>} from '@shared/<%= entity.paramCase %>';
-import {<%= entities.pascalCase %>UiConfig} from '@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-ui-config';
-import {<%= entities.pascalCase %>ClientService} from '@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-client.service';
-import {<%= entity.pascalCase %>FormComponent} from '@app/module/pages/<%= entities.paramCase %>/<%= entity.paramCase %>-form.component';
+import {<%= entity.pascalCase %>} from "@shared/<%= entity.paramCase %>";
+import {<%= entities.pascalCase %>UiConfig} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-ui-config";
+import {<%= entities.pascalCase %>ClientService} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-client.service";
+import {<%= entity.pascalCase %>FormComponent} from "@app/module/pages/<%= entities.paramCase %>/<%= entity.paramCase %>-form.component";
 
 @Component({
-	selector: 'app-<%= entities.paramCase %>-list',
-	templateUrl: '../../../components/entity-page/index/entity-index.component.html',
-	styleUrls: ['../../../components/entity-page/index/entity-index.component.scss', './<%= entities.paramCase %>-index.component.scss']
+	selector: "app-<%= entities.paramCase %>-list",
+	templateUrl: "../../../components/entity-page/index/entity-index.component.html",
+	styleUrls: ["../../../components/entity-page/index/entity-index.component.scss", "./<%= entities.paramCase %>-index.component.scss"]
 })
 export class <%= entities.pascalCase %>IndexComponent extends EntityIndexComponent<<%= entity.pascalCase %>, <%= entities.pascalCase %>UiConfig, <%= entities.pascalCase %>ClientService> implements OnInit {
 

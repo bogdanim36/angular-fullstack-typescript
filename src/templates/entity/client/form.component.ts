@@ -4,9 +4,9 @@ import {EntityService} from "@app/components/entity-page/entity.service";
 import {EntityFormComponent} from "@app/components/entity-page/form/entity-form.component";
 import {AppSharedService} from "@app/core/app-shared.service";
 
-import {<%= entity.pascalCase %>} from '@shared/<%= entity.paramCase %>';
-import {<%= entities.pascalCase %>UiConfig} from '@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-ui-config';
-import {<%= entities.pascalCase %>ClientService} from '@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-client.service';
+import {<%= entity.pascalCase %>} from "@shared/<%= entity.paramCase %>";
+import {<%= entities.pascalCase %>UiConfig} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-ui-config";
+import {<%= entities.pascalCase %>ClientService} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-client.service";
 
 @Component({
 	selector: 'app-entity-form',

@@ -1,10 +1,10 @@
 module.exports = function entityConfig() {
 	let config = {
 		build: function () {
-			// this.model.build();
-			// this.form.build();
+			this.model.build();
+			this.form.build();
 			this.uiConfig.build();
-			// this.script.build();
+			this.script.build();
 			let text = "To do next:";
 			text += "\n Add option menu '" + this.entities.name + "' in shared/config-menu.ts";
 			// console.log(text);
@@ -89,9 +89,9 @@ module.exports = function entityConfig() {
 			},
 			inputText: function (where, field, title, model) {
 				this.html[where] += '\n\t<mat-form-field >';
-				this.html[where] += '\n\t\t<mat-label >{{' + title + '}}</mat-label>;'
-				this.html[where] += '\n\t\t<input matInput autocomplete="off" [(ngModel)]="item[\'' + field + '\']"/>';
-				this.html[where] += '\n\t\t<mat-error *ngIf="errors[\'' + field + '\']"/>';
+				this.html[where] += '\n\t\t<mat-label >{{' + (title? title: "uiConfig.labels.specific['"+field+"']")  + '}}</mat-label>'
+				this.html[where] += '\n\t\t<input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item[\'' + field + '\']"/>';
+				this.html[where] += '\n\t\t<mat-error *ngIf="errors[\'' + field + '\']">';
 				this.html[where] += '\n\t\t\t<p *ngFor="let msg of errors[\'' + field + '\']">{{msg}}</p>';
 				this.html[where] += '\n\t\t</mat-error>';
 				this.html[where] += '\n\t</mat-form-field>';
