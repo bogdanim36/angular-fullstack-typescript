@@ -37,11 +37,15 @@ i.is-button {
 	-webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, .175);
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, .175);
 }
-label{
+
+label {
 	font-weight: bold;
 }
+
 [hidden] {
 	display: none !important;
 }
 
-
+.fill-remaining-space {
+	flex: 1 1 auto;
+}

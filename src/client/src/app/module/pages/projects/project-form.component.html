@@ -1,6 +1,6 @@
 <mat-toolbar class="grid-toolbar box-shadow" role="heading">
 	<span class="grid-title" [innerHTML]="formTitle()"></span>
-	<div class="right-side">
+	<span class="right-side">
 		<!--close button-->
 		<button mat-icon-button
 				  *ngIf="!entityService.isEditing && !sharedService.isHandset"
@@ -8,7 +8,7 @@
 				  (click)='toggleShowPanel()'>
 			<mat-icon>close</mat-icon>
 		</button>
-	</div>
+	</span>
 </mat-toolbar>
 <div class="form-body box-shadow">
 	<mat-spinner [style.visibility]="working?'visible':'hidden'" diameter="20">
