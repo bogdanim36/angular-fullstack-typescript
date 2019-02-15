@@ -22,6 +22,7 @@ export class EntityUiConfig {
 		closeFormPanel: Translation
 		itemIsSaved: Translation,
 		confirm: Translation,
+		records:Translation,
 		specific: any
 	} = {
 		save: new Translation('Save', "Salveaza"),
@@ -36,6 +37,7 @@ export class EntityUiConfig {
 		showFormPanel: new Translation( "Show form panel", 'Afiseaza panoul  formular'),
 		closeFormPanel: new Translation("Close form panel", "Inchide panoul formular"),
 		itemIsSaved: new Translation("Item is saved!", "Elementul este salvat!"),
+		records: new Translation("records", "inregistrari"),
 		specific: {}
 	};
 

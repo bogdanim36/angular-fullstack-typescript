@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {AppSharedService} from "@app/core/app-shared.service";
+import {environment} from "../environments/environment";
 
 @Component({
 	selector: 'app-root',
@@ -6,4 +8,9 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+	constructor(private appSharedService:AppSharedService){
+		let language = appSharedService.getStorage('language');
+		if (language) environment.language = language;
+		console.log('get language', language);
+	}
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {appInfo} from "@shared/app-info";
 import {environment} from "../../../environments/environment";
 import {MatSelectChange} from "@angular/material";
+import {AppSharedService} from "@app/core/app-shared.service";
 
 @Component({
 	selector: 'app-main-toolbar',
@@ -13,7 +14,7 @@ export class MainToolbarComponent implements OnInit {
 	language: string;
 	languages: any[];
 
-	constructor() {
+	constructor(private appSharedService: AppSharedService) {
 		this.appTitle = appInfo.name;
 		this.language = environment.language;
 		this.languages = environment.languages;
@@ -26,6 +27,7 @@ export class MainToolbarComponent implements OnInit {
 
 	languageChanged(changed:MatSelectChange) {
 		environment.language = changed.value;
-		console.log('langauge changed', changed.value);
+		this.appSharedService.addToStorage('language', environment.language);
+		window.location.reload();
 	}
 }
