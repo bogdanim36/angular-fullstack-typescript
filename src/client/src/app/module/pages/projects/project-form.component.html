@@ -1,0 +1,124 @@
+<mat-toolbar class="grid-toolbar box-shadow" role="heading">
+	<span class="grid-title" [innerHTML]="formTitle()"></span>
+	<div class="right-side">
+		<!--close button-->
+		<button mat-icon-button
+				  *ngIf="!entityService.isEditing && !sharedService.isHandset"
+				  [matTooltip]="uiConfig.labels.closeFormPanel"
+				  (click)='toggleShowPanel()'>
+			<mat-icon>close</mat-icon>
+		</button>
+	</div>
+</mat-toolbar>
+<div class="form-body box-shadow">
+	<mat-spinner [style.visibility]="working?'visible':'hidden'" diameter="20">
+	</mat-spinner>
+
+	<mat-card-content>
+		
+	<mat-form-field >
+		<mat-label >{{uiConfig.labels.specific['name']}}</mat-label>
+		<input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['name']"/>
+		<mat-error *ngIf="errors['name']">
+			<p *ngFor="let msg of errors['name']">{{msg}}</p>
+		</mat-error>
+	</mat-form-field>
+	<mat-form-field >
+		<mat-label >{{uiConfig.labels.specific['description']}}</mat-label>
+		<textarea matInput cdkTextareaAutosize autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['description']"></textarea>
+		<mat-error *ngIf="errors['description']">
+			<p *ngFor="let msg of errors['description']">{{msg}}</p>
+		</mat-error>
+	</mat-form-field>
+		<div *ngIf="errorMessages.length" class="errors">
+			<ul class="ui-corner-all">
+				<li *ngFor="let message of errorMessages">{{message}}</li>
+			</ul>
+		</div>
+		<div *ngIf="successMessages.length" class="success">
+			<ul class="ui-corner-all">
+				<li *ngFor="let message of successMessages">{{message}}</li>
+			</ul>
+		</div>
+	</mat-card-content>
+	<mat-toolbar class="grid-toolbar" role="footer">
+		<div class="right-side">
+			<!--add button-->
+			<button mat-icon-button
+					  *ngIf="!entityService.isEditing "
+					  color="primary"
+					  (click)='newItem()'>
+				<mat-icon>add</mat-icon>
+			</button>
+			<!--modify button-->
+			<button mat-icon-button
+					  *ngIf="!entityService.isEditing"
+					  [disabled]="!hasItem"
+					  color="primary"
+					  (click)='modify()'>
+				<mat-icon>edit</mat-icon>
+			</button>
+			<!--delete button-->
+			<div *ngIf="!entityService.isEditing" style="display: inline-block">
+				<mat-menu #deleteMenu="matMenu">
+					<div style="display: flex;flex-direction: column;margin:0 10px">
+						<button mat-flat-button
+								  style="margin-bottom: 5px;"
+								  color="primary">Cancel
+						</button>
+						<button mat-flat-button
+								  (click)='delete(selectedGridRowNode.data)' color="warn">
+							<mat-icon>check</mat-icon>
+							Confirm
+						</button>
+					</div>
+				</mat-menu>
+				<button mat-icon-button
+						  [matMenuTriggerFor]="deleteMenu"
+						  color="warn"
+						  [disabled]="!hasItem">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</div>
+			<!--navigation buttons-->
+			<div *ngIf="showNavigation" class="navigation-btns">
+				<button mat-icon-button
+						  [disabled]="service.data.isFirst"
+						  (click)='service.data.first()'>
+					<mat-icon>skip_previous</mat-icon>
+				</button>
+				<button mat-icon-button
+						  [disabled]="service.data.isFirst"
+						  (click)='service.data.previous()'>
+					<mat-icon>navigate_before</mat-icon>
+				</button>
+				<button mat-icon-button
+						  [disabled]="service.data.isLast"
+						  (click)='service.data.next()'>
+					<mat-icon>navigate_next</mat-icon>
+				</button>
+				<button mat-icon-button
+						  [disabled]="service.data.isLast"
+						  (click)='service.data.last()'>
+					<mat-icon>skip_next</mat-icon>
+				</button>
+			</div>
+			<!--save button-->
+			<button mat-flat-button
+					  color="accent"
+					  *ngIf="entityService.isEditing"
+					  (click)='save(isNewItem, source, item)'>
+				<mat-icon>check</mat-icon>
+				{{uiConfig.labels.save}}
+			</button>
+			<!--cancel button-->
+			<button mat-flat-button
+					  color="warn"
+					  *ngIf="entityService.isEditing"
+					  (click)='cancel()'>
+				<mat-icon>cancel</mat-icon>
+				{{uiConfig.labels.cancel}}
+			</button>
+		</div>
+	</mat-toolbar>
+</div>

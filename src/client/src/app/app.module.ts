@@ -8,6 +8,7 @@ import {AppLayoutModule} from '@app/layout/app-layout.module';
 import {AppSharedService} from '@app/core/app-shared.service';
 import {UsersPageModule} from '@app/module/pages/users/users-page.module';
 import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.component';
+import {ProjectsPageModule} from '@app/module/pages/projects/projects-page.module';
 
 @NgModule({
 	declarations: [
@@ -15,11 +16,13 @@ import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.co
 		ModalConfirmComponent,
 	],
 
-	imports: [BrowserModule,
+	
+imports : [BrowserModule,
 		HttpClientModule,
 		AppRoutingModule,
 		AppLayoutModule,
-		UsersPageModule
+		UsersPageModule,
+		ProjectsPageModule
 	],
 	bootstrap: [AppComponent],
 	providers: [AppSharedService]
