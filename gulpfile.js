@@ -70,11 +70,11 @@ gulp.task("gen:entity", (callback) => {
 				file.basename = config[module.filesName][module.filesNameCase] + (module.filesNameCase === 'paramCase' && baseName ? "-" : "") + baseName;
 			}))
 			.pipe(gulp.dest(config.paths.destRoot + module.dest + (module.entitiesSubdir ? config.entities.paramCase : "")));
-		// if (moduleName === 'server') addControllerToServerIndex(config);
-		// if (moduleName === 'client') {
-		// 	addClientRooting(config);
-		// 	addClientModule(config);
-		// }
+		if (moduleName === 'server') addControllerToServerIndex(config);
+		if (moduleName === 'client') {
+			addClientRooting(config);
+			addClientModule(config);
+		}
 	});
 
 	callback();
@@ -105,7 +105,7 @@ let addClientRooting = function (config) {
 	// ads import statement
 	let positionToInsert = content.lastIndexOf('import ');
 	positionToInsert = content.indexOf(';', positionToInsert) + 1;
-	let pathToImport = "@app/module/pages/" + config.entities.paramCase + "/index/" + config.entities.paramCase + "-index.component";
+	let pathToImport = "@app/module/pages/" + config.entities.paramCase + "/" + config.entities.paramCase + "-index.component";
 	let stringToInsert = "\nimport {" + EntitiesToImport + "} from '" + pathToImport + "';";
 	content = content.substring(0, positionToInsert) + stringToInsert + content.substring(positionToInsert + 1);
 

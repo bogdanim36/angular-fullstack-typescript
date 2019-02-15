@@ -1,4 +1,5 @@
-let base = require('../entity.base');
+let entity = require('../entity.base');
+let base = entity.base;
 module.exports = function () {
 	let config = new base();
 	config.entity = {name: "Project"};
@@ -18,29 +19,23 @@ module.exports = function () {
 		config.model.regular("description", true, "string");
 		config.model.regular("closed", true, "boolean");
 		config.model.regular("parentId", true, "number");
-		// this.expression("fullName", true, "string", "((this.firstName ? this.firstName.trim() : '') + (this.lastName ? ' ' + this.lastName.trim() : '')).trim();")
 	};
 	config.uiConfig.build = function () {
-		config.uiConfig.column('name', 'Name', '250px', true, true);
-		config.uiConfig.column('closed', 'Closed', '100px', true, true);
-		config.uiConfig.column('description', 'Description', '100%', true, true);
+		config.uiConfig.formPanelWidth = '600px';
+		config.uiConfig.label("list", "List of Projects", "Lista de Proiecte");
+		config.uiConfig.label("itemDetails", "Project Details", "Detalii Proiect");
+		config.uiConfig.specific("name", "Name", "Denumire");
+		config.uiConfig.specific("closed", "Closed", "Inchis");
+		config.uiConfig.specific("description", "Description", "Descriere");
+
+		config.uiConfig.column('name', 250, true);
+		config.uiConfig.column('closed', 100, true);
+		config.uiConfig.column('description', 300, false);
 	};
 	config.form.build = function () {
-		config.form.inputText('content', 'name', 'Name');
-		config.form.inputTextarea('content', 'description', 'Description');
-		config.form.toggleButton('content', 'closed', 'Closed');
-		config.form.button('footer', {
-			'[label]': 'config.data.uiConfig.labels.save',
-			'icon': 'fa fa-check',
-			'(click)': 'config.data.save(config.data.isNewItem, config.data.source, config.data.item)'
-		})
-		;
-		config.form.button('footer', {
-			'[label]': 'config.data.uiConfig.labels.delete',
-			'icon': 'fa fa-close',
-			'[disabled]': 'config.data.isNewItem',
-			'(click)': 'config.data.delete(config.data.source)'
-		});
+		config.form.inputText('content', 'name');
+		config.form.inputTextarea('content', 'description');
+		// config.form.toggleButton('content', 'closed', 'Closed');
 	};
 	return config;
 };

@@ -20,18 +20,18 @@ module.exports = function () {
 	};
 	config.uiConfig.build = function () {
 		config.uiConfig.formPanelWidth = '400px';
-		config.uiConfig.labels.list = 'List of Users';
-		config.uiConfig.labels.itemDetails = 'User Details';
-		config.uiConfig.labels.specific = {
-			email: "Email",
-			firstName: "First Name",
-			lastName: "Last Name",
-			fullName: "Full Name"
-		};
-		config.uiConfig.column('email', 'Email', 250, true);
-		config.uiConfig.column('fullName', 'Full Name', 300, true);
-		config.uiConfig.column('firstName', 'First Name', 150, true);
-		config.uiConfig.column('lastName', 'Last Name', 150, true);
+		config.uiConfig.labels("list", 'List of Users', "Lsiat de Utilizatori");
+		config.uiConfig.labels("itemDetails", 'User Details', 'Detalii Utilizator');
+
+		config.uiConfig.labels.specific('email', "Email", 'Email');
+		config.uiConfig.labels.specific('firstName: "First Name","Nume complet");
+		config.uiConfig.labels.specific('lastName: "Last Name", "Nume");
+		config.uiConfig.labels.specific('fullName: "Full Name". "Prenume");
+
+		config.uiConfig.column('email', 250, true);
+		config.uiConfig.column('fullName', 300, true);
+		config.uiConfig.column('firstName', 150, true);
+		config.uiConfig.column('lastName', 150, true);
 	};
 	config.form.build = function () {
 		config.form.inputText('content', 'firstName');

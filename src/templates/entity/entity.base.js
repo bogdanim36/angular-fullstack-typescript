@@ -1,4 +1,4 @@
-module.exports = function entityConfig() {
+module.exports.base = function entityConfig() {
 	let config = {
 		build: function () {
 			this.model.build();
@@ -19,10 +19,10 @@ module.exports = function entityConfig() {
 			},
 			modules: {
 				client: {src: ["src/templates/entity/client/**", "!src/templates/entity/client/form.*.*"], dest: "/client/src/app/module/pages/", entitiesSubdir: true, filesNameCase: 'paramCase', filesName: "entities"},
-				clientForm: {src: ["src/templates/entity/client/form.*.*" ], dest: "/client/src/app/module/pages/", entitiesSubdir: true, filesNameCase: 'paramCase', filesName: "entity"},
-				// shared: {src: "src/templates/entity/shared/**", dest: "/shared/", identity: "\\shared", filesNameCase: 'paramCase', filesName: "entity", addBaseName: false},
-				// server: {src: "src/templates/entity/server/**", dest: "/server/src/app/module/", entitiesSubdir: true, filesNameCase: 'pascalCase', filesName: "entities"},
-				// scripts: {src: "src/templates/entity/scripts/**", dest: "/scripts/", filesNameCase: 'paramCase', filesName: "entities", addBaseName: false}
+				clientForm: {src: ["src/templates/entity/client/form.*.*"], dest: "/client/src/app/module/pages/", entitiesSubdir: true, filesNameCase: 'paramCase', filesName: "entity"},
+				shared: {src: "src/templates/entity/shared/**", dest: "/shared/", identity: "\\shared", filesNameCase: 'paramCase', filesName: "entity", addBaseName: false},
+				server: {src: "src/templates/entity/server/**", dest: "/server/src/app/module/", entitiesSubdir: true, filesNameCase: 'pascalCase', filesName: "entities"},
+				scripts: {src: "src/templates/entity/scripts/**", dest: "/scripts/", filesNameCase: 'paramCase', filesName: "entities", addBaseName: false}
 			}
 		},
 		entity: {name: "", paramCase: '', pascalCase: ''},
@@ -69,10 +69,17 @@ module.exports = function entityConfig() {
 			}
 		},
 		uiConfig: {
-			labels: {},
+			labels: "",
+			specifics: "",
 			columns: "",
-			column: function (name, header, width, sortable) {
-				this.columns += "\t\tthis.addColumn({field: '" + name + "', headerName: '" + header + "', sortable: " + sortable + ", width: " + width + "});\n";
+			label: function(name, en,ro){
+				this.labels += "\t\tthis.labels."+ name + " = new Translation('"+en+"','"+ro+"');\n";
+			},
+			specific: function(name, en,ro){
+				this.specifics += "\t\tthis.labels.specific."+ name + " = new Translation('"+en+"','"+ro+"');\n";
+			},
+			column: function (name, width, sortable) {
+				this.columns += "\t\tthis.addColumn({field: '" + name + "', headerName: this.labels.specific." + name + ", sortable: " + sortable + ", width: " + width + "});\n";
 			},
 			addGridActionColumn(headerName, width, pinned) {
 				this.columns += "\t\tthis.addColumn({field: '" + name + "', headerName: '" + header + "', sortable: " + sortable + ", width: " + width + (pinned ? ", pinned:'" + pinned + "'" : "") + ", cellRendererFramework: GridActionColumnComponent});\n";
@@ -89,39 +96,28 @@ module.exports = function entityConfig() {
 			},
 			inputText: function (where, field, title, model) {
 				this.html[where] += '\n\t<mat-form-field >';
-				this.html[where] += '\n\t\t<mat-label >{{' + (title? title: "uiConfig.labels.specific['"+field+"']")  + '}}</mat-label>'
+				this.html[where] += '\n\t\t<mat-label >{{' + (title ? title : "uiConfig.labels.specific['" + field + "']") + '}}</mat-label>'
 				this.html[where] += '\n\t\t<input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item[\'' + field + '\']"/>';
 				this.html[where] += '\n\t\t<mat-error *ngIf="errors[\'' + field + '\']">';
 				this.html[where] += '\n\t\t\t<p *ngFor="let msg of errors[\'' + field + '\']">{{msg}}</p>';
 				this.html[where] += '\n\t\t</mat-error>';
 				this.html[where] += '\n\t</mat-form-field>';
 			},
-			toggleButton: function (where, field, title, model) {
-				this.html[where] += '\n\t<div class="ui-g-12">';
-				this.html[where] += '\n\t\t<label for="' + field + '">' + title + '</label>;'
-				this.html[where] += '\n\t\t<p-toggleButton  id="' + field + '"  class="ui-togglebutton"  [(ngModel)]="config.data.item[\'' + field + '\']"></p-toggleButton>';
-				this.html[where] += '\n\t</div>';
-			},
 			inputTextarea: function (where, field, title, model) {
-				this.html[where] += '\n\t<div class="ui-g-12">';
-				this.html[where] += '\n\t\t<label for="' + field + '">' + title + '</label>;';
-				this.html[where] += '\n\t\t<textarea pInputTextarea id="' + field + '" class="ui-inputtextarea"  [(ngModel)]="config.data.item[\'' + field + '\']"></textarea>';
-				this.html[where] += '\n\t</div>';
+				this.html[where] += '\n\t<mat-form-field >';
+				this.html[where] += '\n\t\t<mat-label >{{' + (title ? title : "uiConfig.labels.specific['" + field + "']") + '}}</mat-label>'
+				this.html[where] += '\n\t\t<textarea matInput cdkTextareaAutosize autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item[\'' + field + '\']"></textarea>';
+				this.html[where] += '\n\t\t<mat-error *ngIf="errors[\'' + field + '\']">';
+				this.html[where] += '\n\t\t\t<p *ngFor="let msg of errors[\'' + field + '\']">{{msg}}</p>';
+				this.html[where] += '\n\t\t</mat-error>';
+				this.html[where] += '\n\t</mat-form-field>';
 			},
 			custom: function (where, html) {
 				this.html[where] += html;
-			},
-			button: function (where, attrs, innerHTML) {
-				let attrsList = ["type='button'", 'pButton'];
-				Object.keys(attrs).forEach(attr => {
-					attrsList.push(attr + (attrs[attr] !== undefined ? "='" + attrs[attr] + "'" : ''));
-				})
-				this.html[where] += '\n\t\t<button ' + attrsList.join(' ') + '>' + (innerHTML ? innerHTML : '') + '</button>';
 			},
 			build: function () {
 			}
 		}
 	};
 	return config;
-}
-;
+};
