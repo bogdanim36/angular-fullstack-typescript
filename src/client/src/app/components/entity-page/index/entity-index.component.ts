@@ -34,11 +34,9 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		this.grid = <GridOptions>{
 			context: {
 				componentParent: this,
-				gridRowActionsMenu: uiConfig.gridRowActionsMenu,
 			},
 			defaultColDef: {resizable: true}
 		};
-		if (uiConfig.gridContext) Object.assign(this.grid.context, uiConfig.gridContext);
 		uiConfig.setGridOptions(this.grid);
 
 		this.formPanelWidth = uiConfig.formPanelWidth;

@@ -72,14 +72,18 @@ module.exports.base = function entityConfig() {
 			labels: "",
 			specifics: "",
 			columns: "",
-			label: function(name, en,ro){
-				this.labels += "\t\tthis.labels."+ name + " = new Translation('"+en+"','"+ro+"');\n";
+			label: function (name, en, ro) {
+				this.labels += "\t\tthis.labels." + name + " = new Translation('" + en + "','" + ro + "');\n";
 			},
-			specific: function(name, en,ro){
-				this.specifics += "\t\tthis.labels.specific."+ name + " = new Translation('"+en+"','"+ro+"');\n";
+			specific: function (name, en, ro) {
+				this.specifics += "\t\tthis.labels.specific." + name + " = new Translation('" + en + "','" + ro + "');\n";
 			},
-			column: function (name, width, sortable) {
-				this.columns += "\t\tthis.addColumn({field: '" + name + "', headerName: this.labels.specific." + name + ", sortable: " + sortable + ", width: " + width + "});\n";
+			column: function (name, width, sortable, cellRendererFramework) {
+				this.columns += "\t\tthis.addColumn({field: '" + name + "', headerName: this.labels.specific." + name + ", sortable: " + sortable + ", width: " + width;
+				if (cellRendererFramework) {
+					this.columns += ", cellRendererFramework: " + cellRendererFramework
+				}
+				this.columns += "});\n";
 			},
 			addGridActionColumn(headerName, width, pinned) {
 				this.columns += "\t\tthis.addColumn({field: '" + name + "', headerName: '" + header + "', sortable: " + sortable + ", width: " + width + (pinned ? ", pinned:'" + pinned + "'" : "") + ", cellRendererFramework: GridActionColumnComponent});\n";

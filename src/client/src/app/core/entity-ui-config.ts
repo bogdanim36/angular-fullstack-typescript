@@ -6,7 +6,7 @@ export class EntityUiConfig {
 	columns: TableColumn[] = [];
 	components: any;
 	gridRowActionsMenu: { title: string, actionName: String }[];
-	gridContext:any;
+	gridContext: any;
 	gridRowHeight: number = 30;
 	gridRowHeaderHeight: number = 36;
 	private _formPanelWidth: string;
@@ -23,7 +23,7 @@ export class EntityUiConfig {
 		closeFormPanel: Translation
 		itemIsSaved: Translation,
 		confirm: Translation,
-		records:Translation,
+		records: Translation,
 		specific: any
 	} = {
 		save: new Translation('Save', "Salveaza"),
@@ -31,11 +31,11 @@ export class EntityUiConfig {
 		list: new Translation('List of items', 'Lista elemente'),
 		cancel: new Translation('Cancel', "Renunta"),
 		addItem: new Translation('Add new Item', "Adauga element nou"),
-		delete:new Translation( 'Delete item!!!', 'Sterge element!!!'),
+		delete: new Translation('Delete item!!!', 'Sterge element!!!'),
 		modify: new Translation('Modify', 'Modifica'),
-		itemDetails: new Translation( 'Item Details', "Informatii Element"),
-		actions: new Translation( "Actions", "Actiuni"),
-		showFormPanel: new Translation( "Show form panel", 'Afiseaza panoul  formular'),
+		itemDetails: new Translation('Item Details', "Informatii Element"),
+		actions: new Translation("Actions", "Actiuni"),
+		showFormPanel: new Translation("Show form panel", 'Afiseaza panoul  formular'),
 		closeFormPanel: new Translation("Close form panel", "Inchide panoul formular"),
 		itemIsSaved: new Translation("Item is saved!", "Elementul este salvat!"),
 		records: new Translation("records", "inregistrari"),
@@ -60,5 +60,8 @@ export class EntityUiConfig {
 		grid.headerHeight = this.gridRowHeaderHeight;
 		grid.columnDefs = this.columns;
 		grid.components = this.components;
+		if (this.gridContext) Object.assign(grid.context, this.gridContext);
+		if (this.gridRowActionsMenu) grid.context.gridRowActionsMenu = this.gridRowActionsMenu;
+
 	}
 }
