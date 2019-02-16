@@ -14,14 +14,17 @@ import {ProjectsIndexComponent} from "@app/module/pages/projects/projects-index.
 import {ProjectsClientService} from "@app/module/pages/projects/projects-client.service";
 import {ProjectsUiConfig} from "@app/module/pages/projects/projects-ui-config";
 import {ProjectFormComponent} from "@app/module/pages/projects/project-form.component";
+import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 
 @NgModule({
 	entryComponents: [
 		ProjectFormComponent,
+		GridBooleanCellRenderComponent
 	],
 	declarations: [
 		ProjectsIndexComponent,
 		ProjectFormComponent,
+		GridBooleanCellRenderComponent
 	],
 	providers: [
 		ProjectsClientService,

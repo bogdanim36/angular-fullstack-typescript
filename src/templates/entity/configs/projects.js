@@ -29,7 +29,7 @@ module.exports = function () {
 		config.uiConfig.specific("description", "Description", "Descriere");
 
 		config.uiConfig.column('name', 250, true);
-		config.uiConfig.column('closed', 100, true);
+		config.uiConfig.column('closed', 100, true, 'GridBooleanCellRenderComponent');
 		config.uiConfig.column('description', 300, false);
 	};
 	config.form.build = function () {

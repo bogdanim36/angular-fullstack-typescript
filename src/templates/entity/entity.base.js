@@ -1,3 +1,4 @@
+let changeCase = require('change-case');
 module.exports.base = function entityConfig() {
 	let config = {
 		build: function () {
@@ -72,6 +73,7 @@ module.exports.base = function entityConfig() {
 			labels: "",
 			specifics: "",
 			columns: "",
+			imports:"",
 			label: function (name, en, ro) {
 				this.labels += "\t\tthis.labels." + name + " = new Translation('" + en + "','" + ro + "');\n";
 			},
@@ -81,6 +83,7 @@ module.exports.base = function entityConfig() {
 			column: function (name, width, sortable, cellRendererFramework) {
 				this.columns += "\t\tthis.addColumn({field: '" + name + "', headerName: this.labels.specific." + name + ", sortable: " + sortable + ", width: " + width;
 				if (cellRendererFramework) {
+					this.imports +='import {' +cellRendererFramework + '} from "@app/components/entity-page/index/' + changeCase.paramCase(cellRendererFramework) +'.component";\n'
 					this.columns += ", cellRendererFramework: " + cellRendererFramework
 				}
 				this.columns += "});\n";
