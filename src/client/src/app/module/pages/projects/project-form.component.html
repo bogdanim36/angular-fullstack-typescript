@@ -1,6 +1,6 @@
 <mat-toolbar class="grid-toolbar box-shadow" role="heading">
 	<span class="grid-title" [innerHTML]="formTitle()"></span>
-	<span class="right-side">
+	<div class="right-side">
 		<!--close button-->
 		<button mat-icon-button
 				  *ngIf="!entityService.isEditing && !sharedService.isHandset"
@@ -8,7 +8,7 @@
 				  (click)='toggleShowPanel()'>
 			<mat-icon>close</mat-icon>
 		</button>
-	</span>
+	</div>
 </mat-toolbar>
 <div class="form-body box-shadow">
 	<mat-spinner [style.visibility]="working?'visible':'hidden'" diameter="20">
@@ -25,11 +25,18 @@
 	</mat-form-field>
 	<mat-form-field >
 		<mat-label >{{uiConfig.labels.specific['description']}}</mat-label>
-		<textarea matInput cdkTextareaAutosize autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['description']"></textarea>
+		<textarea matInput style="height:60px" autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['description']"></textarea>
 		<mat-error *ngIf="errors['description']">
 			<p *ngFor="let msg of errors['description']">{{msg}}</p>
 		</mat-error>
 	</mat-form-field>
+	<div class="mat-slide-toggle mat-form-field" >
+		<mat-label >{{uiConfig.labels.specific['closed']}}</mat-label>
+		<mat-slide-toggle [disabled]="!entityService.isEditing" [(ngModel)]="item['closed']"></mat-slide-toggle>
+		<mat-error *ngIf="errors['closed']">
+			<p *ngFor="let msg of errors['closed']">{{msg}}</p>
+		</mat-error>
+	</div>
 		<div *ngIf="errorMessages.length" class="errors">
 			<ul class="ui-corner-all">
 				<li *ngFor="let message of errorMessages">{{message}}</li>

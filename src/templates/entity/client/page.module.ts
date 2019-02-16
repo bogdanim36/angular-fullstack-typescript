@@ -5,8 +5,11 @@ import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CommonModule} from "@angular/common";
 import {ScrollingModule} from "@angular/cdk/scrolling";
-import {MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
-	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatToolbarModule, MatTooltipModule} from "@angular/material";
+import {
+	MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
+	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule, MatTooltipModule,
+	MatSlideToggleModule
+} from "@angular/material";
 import {AgGridModule} from "ag-grid-angular";
 
 import {EntityPageModule} from "@app/components/entity-page/entity-page.module";
@@ -14,14 +17,16 @@ import {<%= entities.pascalCase %>IndexComponent} from "@app/module/pages/<%= en
 import {<%= entities.pascalCase %>ClientService} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-client.service";
 import {<%= entities.pascalCase %>UiConfig} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-ui-config";
 import {<%= entity.pascalCase %>FormComponent} from "@app/module/pages/<%= entities.paramCase %>/<%= entity.paramCase %>-form.component";
+<%= uiConfig.module.imports %>
 
 @NgModule({
 	entryComponents: [
 		<%= entity.pascalCase %>FormComponent,
 	],
 	declarations: [
-		<%= entities.pascalCase %>IndexComponent,
-		<%= entity.pascalCase %>FormComponent,
+		<%= entities.pascalCase %>IndexComponent
+		,<%= entity.pascalCase %>FormComponent
+		<%= uiConfig.module.declarations %>
 	],
 	providers: [
 		<%= entities.pascalCase %>ClientService,
@@ -45,6 +50,7 @@ import {<%= entity.pascalCase %>FormComponent} from "@app/module/pages/<%= entit
 		MatProgressSpinnerModule,
 		MatDividerModule,
 		MatSelectModule,
+		MatSlideToggleModule,
 		ScrollingModule,
 		AgGridModule.withComponents([])
 	]

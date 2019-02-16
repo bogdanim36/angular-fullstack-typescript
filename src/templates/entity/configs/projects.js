@@ -21,7 +21,12 @@ module.exports = function () {
 		config.model.regular("parentId", true, "number");
 	};
 	config.uiConfig.build = function () {
-		config.uiConfig.formPanelWidth = '600px';
+		config.uiConfig.formPanelWidth = '400px';
+		config.uiConfig.gridContext = {
+			cellRenders: {
+				closed: {iconChecked: 'check_box', iconUnchecked: 'check_box_outline_blank'}
+			}
+		};
 		config.uiConfig.label("list", "List of Projects", "Lista de Proiecte");
 		config.uiConfig.label("itemDetails", "Project Details", "Detalii Proiect");
 		config.uiConfig.specific("name", "Name", "Denumire");
@@ -34,8 +39,8 @@ module.exports = function () {
 	};
 	config.form.build = function () {
 		config.form.inputText('content', 'name');
-		config.form.inputTextarea('content', 'description');
-		// config.form.toggleButton('content', 'closed', 'Closed');
+		config.form.inputTextarea('content', 'description', false, false, '60px');
+		config.form.inputSlideToggle('content', 'closed');
 	};
 	return config;
 };

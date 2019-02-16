@@ -6,18 +6,15 @@ export class ProjectsUiConfig extends EntityUiConfig {
 
 	constructor() {
 		super();
-		this.formPanelWidth = '600px';
-		this.gridContext = {
-			cellRenders: {
-				closed: {iconChecked: 'check_box', iconUnchecked: 'check_box_outline_blank'}
-			}
-		};
-		this.labels.list = new Translation('List of Projects', 'Lista de Proiecte');
-		this.labels.itemDetails = new Translation('Project Details', 'Detalii Proiect');
+		this.formPanelWidth = '400px';
+this.gridContext = {"cellRenders":{"closed":{"iconChecked":"check_box","iconUnchecked":"check_box_outline_blank"}}}
 
-		this.labels.specific.name = new Translation('Name', 'Denumire');
-		this.labels.specific.closed = new Translation('Closed', 'Inchis');
-		this.labels.specific.description = new Translation('Description', 'Descriere');
+		this.labels.list = new Translation('List of Projects','Lista de Proiecte');
+		this.labels.itemDetails = new Translation('Project Details','Detalii Proiect');
+
+		this.labels.specific.name = new Translation('Name','Denumire');
+		this.labels.specific.closed = new Translation('Closed','Inchis');
+		this.labels.specific.description = new Translation('Description','Descriere');
 
 		this.addColumn({field: 'name', headerName: this.labels.specific.name, sortable: true, width: 250});
 		this.addColumn({field: 'closed', headerName: this.labels.specific.closed, sortable: true, width: 100, cellRendererFramework: GridBooleanCellRenderComponent});

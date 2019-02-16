@@ -73,7 +73,11 @@ module.exports.base = function entityConfig() {
 			labels: "",
 			specifics: "",
 			columns: "",
-			imports:"",
+			module: {
+				imports: "",
+				declarations: ""
+			},
+			imports: "",
 			label: function (name, en, ro) {
 				this.labels += "\t\tthis.labels." + name + " = new Translation('" + en + "','" + ro + "');\n";
 			},
@@ -83,7 +87,10 @@ module.exports.base = function entityConfig() {
 			column: function (name, width, sortable, cellRendererFramework) {
 				this.columns += "\t\tthis.addColumn({field: '" + name + "', headerName: this.labels.specific." + name + ", sortable: " + sortable + ", width: " + width;
 				if (cellRendererFramework) {
-					this.imports +='import {' +cellRendererFramework + '} from "@app/components/entity-page/index/' + changeCase.paramCase(cellRendererFramework) +'.component";\n'
+					let importComponent = 'import {' + cellRendererFramework + '} from "@app/components/entity-page/index/' + changeCase.paramCase(cellRendererFramework.replace('Component', '')) + '.component";\n';
+					this.imports += importComponent;
+					this.module.declarations += ',' + cellRendererFramework;
+					this.module.imports += importComponent;
 					this.columns += ", cellRendererFramework: " + cellRendererFramework
 				}
 				this.columns += "});\n";
@@ -110,14 +117,24 @@ module.exports.base = function entityConfig() {
 				this.html[where] += '\n\t\t</mat-error>';
 				this.html[where] += '\n\t</mat-form-field>';
 			},
-			inputTextarea: function (where, field, title, model) {
+			inputTextarea: function (where, field, title, model, height) {
 				this.html[where] += '\n\t<mat-form-field >';
 				this.html[where] += '\n\t\t<mat-label >{{' + (title ? title : "uiConfig.labels.specific['" + field + "']") + '}}</mat-label>'
-				this.html[where] += '\n\t\t<textarea matInput cdkTextareaAutosize autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item[\'' + field + '\']"></textarea>';
+				let style = 'height:' + (height ? height : '60px');
+				this.html[where] += '\n\t\t<textarea matInput style="' + style + '" autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item[\'' + field + '\']"></textarea>';
 				this.html[where] += '\n\t\t<mat-error *ngIf="errors[\'' + field + '\']">';
 				this.html[where] += '\n\t\t\t<p *ngFor="let msg of errors[\'' + field + '\']">{{msg}}</p>';
 				this.html[where] += '\n\t\t</mat-error>';
 				this.html[where] += '\n\t</mat-form-field>';
+			},
+			inputSlideToggle: function (where, field, title, model) {
+				this.html[where] += '\n\t<div class="mat-slide-toggle mat-form-field" >';
+				this.html[where] += '\n\t\t<mat-label >{{' + (title ? title : "uiConfig.labels.specific['" + field + "']") + '}}</mat-label>';
+				this.html[where] += '\n\t\t<mat-slide-toggle [disabled]="!entityService.isEditing" [(ngModel)]="item[\'' + field + '\']"></mat-slide-toggle>';
+				this.html[where] += '\n\t\t<mat-error *ngIf="errors[\'' + field + '\']">';
+				this.html[where] += '\n\t\t\t<p *ngFor="let msg of errors[\'' + field + '\']">{{msg}}</p>';
+				this.html[where] += '\n\t\t</mat-error>';
+				this.html[where] += '\n\t</div>';
 			},
 			custom: function (where, html) {
 				this.html[where] += html;

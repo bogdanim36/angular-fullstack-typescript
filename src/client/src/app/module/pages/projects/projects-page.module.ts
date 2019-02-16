@@ -5,8 +5,11 @@ import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CommonModule} from "@angular/common";
 import {ScrollingModule} from "@angular/cdk/scrolling";
-import {MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
-	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatToolbarModule, MatTooltipModule} from "@angular/material";
+import {
+	MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
+	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule, MatTooltipModule,
+	MatSlideToggleModule
+} from "@angular/material";
 import {AgGridModule} from "ag-grid-angular";
 
 import {EntityPageModule} from "@app/components/entity-page/entity-page.module";
@@ -16,15 +19,15 @@ import {ProjectsUiConfig} from "@app/module/pages/projects/projects-ui-config";
 import {ProjectFormComponent} from "@app/module/pages/projects/project-form.component";
 import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 
+
 @NgModule({
 	entryComponents: [
 		ProjectFormComponent,
-		GridBooleanCellRenderComponent
 	],
 	declarations: [
-		ProjectsIndexComponent,
-		ProjectFormComponent,
-		GridBooleanCellRenderComponent
+		ProjectsIndexComponent
+		,ProjectFormComponent
+		,GridBooleanCellRenderComponent
 	],
 	providers: [
 		ProjectsClientService,
@@ -48,6 +51,7 @@ import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/
 		MatProgressSpinnerModule,
 		MatDividerModule,
 		MatSelectModule,
+		MatSlideToggleModule,
 		ScrollingModule,
 		AgGridModule.withComponents([])
 	]
