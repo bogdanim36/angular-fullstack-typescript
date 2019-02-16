@@ -23,13 +23,14 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 	@ViewChild('gridToolbar', {read: ViewContainerRef}) gridToolbar: ViewContainerRef;
 	@ViewChild('gridForm', {read: ViewContainerRef}) gridForm: ViewContainerRef;
 	@ViewChild('handsetForm', {read: ViewContainerRef}) handsetForm: ViewContainerRef;
+
 	// ref: any;
 
 	constructor(protected appShared: AppSharedService, uiConfig, protected sanitizer: DomSanitizer, protected entityService: EntityService) {
 		super(appShared);
 		// this.ref = this;
 		this.entityService.formPanelIsVisible = true;
-		this.componentsToLoad = 1===1 ? ['gridForm', 'data'] : ['gridToolbar', 'gridForm', 'data'];
+		this.componentsToLoad = 1 === 1 ? ['gridForm', 'data'] : ['gridToolbar', 'gridForm', 'data'];
 		this.grid = <GridOptions>{
 			context: {
 				componentParent: this,
@@ -37,6 +38,7 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 			},
 			defaultColDef: {resizable: true}
 		};
+		if (uiConfig.gridContext) Object.assign(this.grid.context, uiConfig.gridContext);
 		uiConfig.setGridOptions(this.grid);
 
 		this.formPanelWidth = uiConfig.formPanelWidth;
