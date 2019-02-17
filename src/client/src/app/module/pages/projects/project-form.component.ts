@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {GridOptions} from 'ag-grid-community';
 
 import {EntityService} from "@app/components/entity-page/entity.service";
 import {EntityFormComponent} from "@app/components/entity-page/form/entity-form.component";
@@ -19,21 +20,40 @@ export class ProjectFormComponent extends EntityFormComponent<Project, ProjectsU
 
 	constructor(public entityService: EntityService, public sharedService: AppSharedService) {
 		super(Project, entityService, sharedService);
-		this.parentAutocompleteOptions = [];
-		this.parentAutocompleteOptions.push(new Project({name: 'Project1', id: 1}));
-		this.parentAutocompleteOptions.push(new Project({name: 'Project2', id: 2}));
+	}
+
+	componentLoaded() {
+		super.componentLoaded();
+		this.parentAutocompleteOptions = this.service.data.items;
 		this.parentAutocompleteOptionsFiltered = this.parentAutocompleteFilter('');
 	}
 
-	parentAutocompleteDisplay(){
-		return (id => id ? this.parentAutocompleteOptionsFiltered.find(item=>item.id === id).name : '');
+	parentAutocompleteDisplay() {
+		return (id => {
+			if (id) {
+				let found = this.parentAutocompleteOptionsFiltered.find(item => item.id === id);
+				return found ? found.name : '';
+			} else return '';
+		});
 	}
-	parentAutocompleteFilter(searchBy:any){
-		let searchStr = searchBy && typeof searchBy === 'object'? searchBy.name: searchBy;
-		console.log('search', searchBy, searchStr);
-		return this.parentAutocompleteOptions.filter(item=>item.name.toLowerCase().includes(searchStr))
+
+	parentAutocompleteFilter(searchBy: any) {
+		console.log('search', searchBy, this.item.parentId);
+		if (searchBy === '' || searchBy === null || searchBy === undefined) return this.parentAutocompleteOptions;
+		if (typeof searchBy === "number") return this.parentAutocompleteOptions.filter(item => item.id === searchBy);
+		searchBy = searchBy.toLowerCase().trim();
+		return this.parentAutocompleteOptions.filter(item => item.name.toLowerCase().includes(searchBy));
 	}
-	parentAutocompleteSearch(newValue){
+
+	parentAutocompleteSearch(newValue) {
+		if (newValue === '') newValue = null;
 		this.parentAutocompleteOptionsFiltered = this.parentAutocompleteFilter(newValue);
+		console.log('filtered options', this.parentAutocompleteOptionsFiltered);
+	}
+
+	gridSelectionChanged(grid: GridOptions) {
+		super.gridSelectionChanged(grid);
+		if (this.componentIsLoaded)
+			setTimeout(() => this.parentAutocompleteSearch(''));
 	}
 }

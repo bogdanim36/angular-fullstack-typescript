@@ -25,7 +25,8 @@ export class ProjectsIndexComponent extends EntityIndexComponent<Project, Projec
 				protected entityService: EntityService) {
 		super(appShared, uiConfig, sanitizer, entityService);
 	}
-		ngOnInit() {
+
+	ngOnInit() {
 		super.ngOnInit();
 	}
 
@@ -55,6 +56,7 @@ export class ProjectsIndexComponent extends EntityIndexComponent<Project, Projec
 			gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
 			this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
 			gridForm.setCurrentItem(this.grid);
+			gridForm.componentLoaded();
 			this.componentIsLoaded('gridForm');
 		});
 	}

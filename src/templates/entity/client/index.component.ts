@@ -25,7 +25,7 @@ export class <%= entities.pascalCase %>IndexComponent extends EntityIndexCompone
 				protected entityService: EntityService) {
 		super(appShared, uiConfig, sanitizer, entityService);
 	}
-		ngOnInit() {
+	ngOnInit() {
 		super.ngOnInit();
 	}
 
@@ -55,6 +55,7 @@ export class <%= entities.pascalCase %>IndexComponent extends EntityIndexCompone
 			gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
 			this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
 			gridForm.setCurrentItem(this.grid);
+			gridForm.componentLoaded();
 			this.componentIsLoaded('gridForm');
 		});
 	}

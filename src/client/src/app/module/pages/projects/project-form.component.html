@@ -21,7 +21,8 @@
 			<input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
 					 (ngModelChange)="parentAutocompleteSearch($event)"
 					 [(ngModel)]="item['parentId']" [matAutocomplete]="parentAutocomplete"/>
-			<button mat-button *ngIf="item['parentId'] && entityService.isEditing" matSuffix mat-icon-button aria-label="Clear" (click)="item['parentId']=''">
+			<button mat-button *ngIf="item['parentId'] && entityService.isEditing" matSuffix mat-icon-button aria-label="Clear"
+					  (click)="item['parentId']=null;parentAutocompleteSearch(null)">
 				<mat-icon>close</mat-icon>
 			</button>
 			<mat-autocomplete #parentAutocomplete="matAutocomplete" [displayWith]="parentAutocompleteDisplay()">

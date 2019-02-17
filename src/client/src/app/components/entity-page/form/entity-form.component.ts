@@ -20,6 +20,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	public selectedGridRowNode: RowNode;
 	showNavigation: boolean;
 	working = false;
+	componentIsLoaded = false;
 
 	constructor(protected modelClass: M & Function,
 				protected entityService: EntityService,
@@ -36,6 +37,12 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 				return sharedService.isHandset && !entityService.isEditing;
 			}
 		});
+	}
+
+	//callback fired after entity-form.component is injected in entity-index.component
+	//this can be customized in particular instance
+	componentLoaded() {
+		this.componentIsLoaded = true;
 	}
 
 	instanceCreate(source: Partial<M>, extra?: any): M {
