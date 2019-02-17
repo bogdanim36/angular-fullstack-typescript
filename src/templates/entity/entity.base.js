@@ -117,11 +117,11 @@ module.exports.base = function entityConfig() {
 				this.html[where] += '\n\t\t</mat-error>';
 				this.html[where] += '\n\t</mat-form-field>';
 			},
-			inputTextarea: function (where, field, title, model, height) {
+			inputTextarea: function (where, field, title, model, maxRows) {
 				this.html[where] += '\n\t<mat-form-field >';
 				this.html[where] += '\n\t\t<mat-label >{{' + (title ? title : "uiConfig.labels.specific['" + field + "']") + '}}</mat-label>'
-				let style = 'height:' + (height ? height : '60px');
-				this.html[where] += '\n\t\t<textarea matInput style="' + style + '" autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item[\'' + field + '\']"></textarea>';
+				let maxRows = maxRows? maxRows: 3;
+				this.html[where] += '\n\t\t<textarea matInput matAutosizeMaxRows="'+maxRows+'" autocomplete="off" matTextareaAutosize="true" [disabled]="!entityService.isEditing" [(ngModel)]="item[\'' + field + '\']"></textarea>';
 				this.html[where] += '\n\t\t<mat-error *ngIf="errors[\'' + field + '\']">';
 				this.html[where] += '\n\t\t\t<p *ngFor="let msg of errors[\'' + field + '\']">{{msg}}</p>';
 				this.html[where] += '\n\t\t</mat-error>';

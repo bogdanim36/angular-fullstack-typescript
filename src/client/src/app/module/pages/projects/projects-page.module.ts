@@ -7,7 +7,8 @@ import {CommonModule} from "@angular/common";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {
 	MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
-	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule, MatTooltipModule
+	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule, MatTooltipModule,
+	MatAutocompleteModule
 } from "@angular/material";
 import {AgGridModule} from "ag-grid-angular";
 
@@ -51,6 +52,7 @@ import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/
 		MatDividerModule,
 		MatSelectModule,
 		MatSlideToggleModule,
+		MatAutocompleteModule,
 		ScrollingModule,
 		AgGridModule.withComponents([])
 	]

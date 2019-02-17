@@ -15,28 +15,46 @@
 	</mat-spinner>
 
 	<mat-card-content>
-		
-	<mat-form-field >
-		<mat-label >{{uiConfig.labels.specific['name']}}</mat-label>
-		<input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['name']"/>
-		<mat-error *ngIf="errors['name']">
-			<p *ngFor="let msg of errors['name']">{{msg}}</p>
-		</mat-error>
-	</mat-form-field>
-	<mat-form-field >
-		<mat-label >{{uiConfig.labels.specific['description']}}</mat-label>
-		<textarea matInput style="height:60px" autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['description']"></textarea>
-		<mat-error *ngIf="errors['description']">
-			<p *ngFor="let msg of errors['description']">{{msg}}</p>
-		</mat-error>
-	</mat-form-field>
-	<div class="mat-slide-toggle mat-form-field" >
-		<mat-label >{{uiConfig.labels.specific['closed']}}</mat-label>
-		<mat-slide-toggle [disabled]="!entityService.isEditing" [(ngModel)]="item['closed']"></mat-slide-toggle>
-		<mat-error *ngIf="errors['closed']">
-			<p *ngFor="let msg of errors['closed']">{{msg}}</p>
-		</mat-error>
-	</div>
+
+		<mat-form-field>
+			<mat-label>{{uiConfig.labels.specific['parentId']}}</mat-label>
+			<input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
+					 (ngModelChange)="parentAutocompleteSearch($event)"
+					 [(ngModel)]="item['parentId']" [matAutocomplete]="parentAutocomplete"/>
+			<button mat-button *ngIf="item['parentId'] && entityService.isEditing" matSuffix mat-icon-button aria-label="Clear" (click)="item['parentId']=''">
+				<mat-icon>close</mat-icon>
+			</button>
+			<mat-autocomplete #parentAutocomplete="matAutocomplete" [displayWith]="parentAutocompleteDisplay()">
+				<mat-option *ngFor="let project of parentAutocompleteOptionsFiltered" [value]="project.id">{{project.name}}</mat-option>
+			</mat-autocomplete>
+			<mat-error *ngIf="errors['name']">
+				<p *ngFor="let msg of errors['name']">{{msg}}</p>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>{{uiConfig.labels.specific['name']}}</mat-label>
+			<input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['name']"/>
+			<mat-error *ngIf="errors['name']">
+				<p *ngFor="let msg of errors['name']">{{msg}}</p>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>{{uiConfig.labels.specific['description']}}</mat-label>
+			<textarea matInput
+						 matTextareaAutosize="true"
+						 matAutosizeMaxRows="3"
+						 autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['description']"></textarea>
+			<mat-error *ngIf="errors['description']">
+				<p *ngFor="let msg of errors['description']">{{msg}}</p>
+			</mat-error>
+		</mat-form-field>
+		<div class="mat-slide-toggle mat-form-field">
+			<mat-label>{{uiConfig.labels.specific['closed']}}</mat-label>
+			<mat-slide-toggle [disabled]="!entityService.isEditing" [(ngModel)]="item['closed']"></mat-slide-toggle>
+			<mat-error *ngIf="errors['closed']">
+				<p *ngFor="let msg of errors['closed']">{{msg}}</p>
+			</mat-error>
+		</div>
 		<div *ngIf="errorMessages.length" class="errors">
 			<ul class="ui-corner-all">
 				<li *ngFor="let message of errorMessages">{{message}}</li>

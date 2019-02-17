@@ -39,7 +39,7 @@ module.exports = function () {
 	};
 	config.form.build = function () {
 		config.form.inputText('content', 'name');
-		config.form.inputTextarea('content', 'description', false, false, '60px');
+		config.form.inputTextarea('content', 'description', false, false, 4);
 		config.form.inputSlideToggle('content', 'closed');
 	};
 	return config;
