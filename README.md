@@ -17,8 +17,8 @@ Objectives:
 <br>  06. Change angular dev server port in src/client/angular.json, serve.port to the desired one.
 <br>  07. Run npm server:build-dev. This will create dist/server.js
 <br>  08. Run npm server:start-dev. This will start nodeJs api server.
-<br>  09. Run npm client:start. This will run ng serve with proxy config (src/client/proxy.conf.json).
-<br>  10. View app on http://localhost:4201
+<br>  09. Run npm client:start-dev. This will run ng serve with proxy config (src/client/proxy.conf.json).
+<br>  10. View app on http://localhost:4201 (default port).
 <br>  11. For production build run gulp build-prod task. This will run build for client and server side and copy source files in dist folder
 <br>  12. For create simple page, you must create a template in src/templates/entity/. There are some samples to follows.
 <br>  13. Run task with gulp gen:entity --config ./src/templates/entity/templateName.js for create entities (users, projects,etc)

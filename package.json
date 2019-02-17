@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "install": "npm i typescript@3.1.6",
-    "install-all": "mkdir logs && npm i && cd src\\server && npm i && cd.. && cd client && npm i ",
+    "install-all": "npm install -g ntl && mkdir logs && npm i && cd src\\server && npm i && cd.. && cd client && npm i typescript@3.1.6",
+    "script-menu": "ntl",
     "client:start-dev": "cd src/client && ng serve --proxy-config proxy.conf.json",
     "server:build-dev": "webpack --config webpack.config.js --env.developement",
     "server:start-dev": "SET port=8001 && SET dev = true && nodemon --inspect ./src/server/dist/dev/server.js",
@@ -21,6 +22,7 @@
     "descriptions": {
       "install": "Install npm packages for root folder with 3.1.6 Typescript version needed for Angular7",
       "install-all": "Install npm packages for all sites: project root, client and server sites",
+      "script-menu": "Show a menu with npm scripts",
       "client:start-dev": "script to open client development server. You need to open browser your self",
       "server:build-dev": "build source for develpment api server",
       "server:start-dev": "open api server (builded with server:build-dev)",
