@@ -19,14 +19,14 @@
 		<mat-form-field>
 			<mat-label>{{uiConfig.labels.specific['parentId']}}</mat-label>
 			<input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
-					 (ngModelChange)="parentAutocompleteSearch($event)"
-					 [(ngModel)]="item['parentId']" [matAutocomplete]="parentAutocomplete"/>
+					 (ngModelChange)="parentAutocomplete.search($event)"
+					 [(ngModel)]="item['parentId']" [matAutocomplete]="parentAutocompleteRef"/>
 			<button mat-button *ngIf="item['parentId'] && entityService.isEditing" matSuffix mat-icon-button aria-label="Clear"
-					  (click)="item['parentId']=null;parentAutocompleteSearch(null)">
+					  (click)="item['parentId']=null;parentAutocomplete.search(null, this.item.id)">
 				<mat-icon>close</mat-icon>
 			</button>
-			<mat-autocomplete #parentAutocomplete="matAutocomplete" [displayWith]="parentAutocompleteDisplay()">
-				<mat-option *ngFor="let project of parentAutocompleteOptionsFiltered" [value]="project.id">{{project.name}}</mat-option>
+			<mat-autocomplete #parentAutocompleteRef="matAutocomplete" [displayWith]="parentAutocomplete.display()">
+				<mat-option *ngFor="let project of parentAutocomplete.filteredItems" [value]="project.id">{{project.name}}</mat-option>
 			</mat-autocomplete>
 			<mat-error *ngIf="errors['name']">
 				<p *ngFor="let msg of errors['name']">{{msg}}</p>
