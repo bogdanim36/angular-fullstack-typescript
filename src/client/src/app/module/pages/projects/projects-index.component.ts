@@ -71,6 +71,7 @@ export class ProjectsIndexComponent extends EntityIndexComponent<Project, Projec
 			handsetForm.uiConfig = this.uiConfig;
 			handsetForm.service = this.service;
 			handsetForm.setCurrentItem();
+			handsetForm.componentLoaded();
 		});
 	}
 }
