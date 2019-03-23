@@ -131,6 +131,11 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 				this.showSuccessMsg(this.uiConfig.labels.itemIsSaved);
 				let item = this.instanceCreate(response.data);
 				if (this.sharedService.isHandset) {
+					if (this.isNewItem) {
+						let columnName = this.service.primaryKey;
+						let index = this.service.data.findIndexByColumn(columnName, item[columnName]);
+						this.service.data.setCurrent(index);
+					}
 				} else {
 					if (this.isNewItem) {
 						this.grid.api.updateRowData({add: [item], addIndex: 0});
@@ -160,7 +165,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	delete(item: M) {
 		this.service.delete(item).then(response => {
 			if (response.status) {
-				this.grid.api.updateRowData({remove: [item]});
+				if (this.grid) this.grid.api.updateRowData({remove: [item]});
 			} else {
 				if (response.message) this.errorMessages.push(response.message);
 				console.error('save error', response);

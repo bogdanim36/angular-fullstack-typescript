@@ -1,4 +1,4 @@
-import {observable, Observable} from "rxjs";
+
 import {EventEmitter} from "@angular/core";
 
 export class Datasource  {
@@ -79,7 +79,7 @@ export class Datasource  {
 	}
 
 	deleteByIndex(index) {
-		if (index > this.items.length) {
+		if (index < this.items.length) {
 			this.items.splice(index, 1);
 			this.setCurrent(index);
 		} else console.error("datasource.deleteByIndex:", "index", index, "not found in datasource:", this.items.length);
