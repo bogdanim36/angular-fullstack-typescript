@@ -1,6 +1,6 @@
 # Fullstack Typescript project
 Please visit other project of mine about same thing: <a href='https://github.com/bogdanim36/project-manager'>Project manager</a>, or <a href='https://ionescu.io/blog'>my blog</a>.
-<br>I create this project as a start-kit for projects using: Typescript with Angular7 and Express NodeJS, Webpack, PrimeNg.
+<br>I create this project as a start-kit for projects using: Typescript with Angular7 and Express NodeJS, Webpack, Angular Material and Ag-Grid.
 Objectives:
  - using typescript not only on client side, but server side too, and having a shared folder for models and other useful code on both sides.
  - use automatic nodejs server update with nodemon and webpack and use angular live dev server with proxy having separated node modules packages for client and server side. Also creating gulp task for production build.
