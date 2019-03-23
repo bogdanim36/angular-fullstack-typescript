@@ -43,6 +43,6 @@ export class AutocompleteConfig<M> {
 	search(newValue, currentItemId?) {
 		if (newValue === '') newValue = null;
 		this.filteredItems = this.filter(newValue, currentItemId);
-		console.log('filtered options', this.filteredItems);
+		// console.log('filtered options', this.filteredItems);
 	}
 }

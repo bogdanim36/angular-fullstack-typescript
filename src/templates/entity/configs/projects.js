@@ -29,6 +29,7 @@ module.exports = function () {
 		};
 		config.uiConfig.label("list", "List of Projects", "Lista de Proiecte");
 		config.uiConfig.label("itemDetails", "Project Details", "Detalii Proiect");
+		config.uiConfig.specific("parentId", "Parent project", "Proiect parinte");
 		config.uiConfig.specific("name", "Name", "Denumire");
 		config.uiConfig.specific("closed", "Closed", "Inchis");
 		config.uiConfig.specific("description", "Description", "Descriere");

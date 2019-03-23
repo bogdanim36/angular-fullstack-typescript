@@ -7,11 +7,12 @@ export class ProjectsUiConfig extends EntityUiConfig {
 	constructor() {
 		super();
 		this.formPanelWidth = '400px';
-this.gridContext = {"cellRenders":{"closed":{"iconChecked":"check_box","iconUnchecked":"check_box_outline_blank"}}}
+		this.gridContext = {"cellRenders":{"closed":{"iconChecked":"check_box","iconUnchecked":"check_box_outline_blank"}}};
 
 		this.labels.list = new Translation('List of Projects','Lista de Proiecte');
 		this.labels.itemDetails = new Translation('Project Details','Detalii Proiect');
 
+		this.labels.specific.parentId = new Translation('Parent project','Proiect parinte');
 		this.labels.specific.name = new Translation('Name','Denumire');
 		this.labels.specific.closed = new Translation('Closed','Inchis');
 		this.labels.specific.description = new Translation('Description','Descriere');
