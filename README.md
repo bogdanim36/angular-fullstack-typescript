@@ -1,6 +1,7 @@
 # Fullstack Typescript project
 
 Please visit another project of mine about the same thing: <a href='https://github.com/bogdanim36/project-manager'>Project manager</a>, or <a href='https://ionescu.io/blog'>my blog</a>.
+ <a href='https://www.youtube.com/watch?v=AnaruaLvE0Y'>See on Youtube</a>
 
 I created this project as a start-kit for projects using: Typescript with Angular7 and Express NodeJS, Webpack, Angular Material and Ag-Grid.
 
