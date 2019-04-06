@@ -2,7 +2,6 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServerResponse} from './server.response';
 import {environment} from '@app/../environments/environment';
 import {Datasource} from "@app/core/datasource";
-import {Observable} from "rxjs";
 
 export class ClientServiceBaseClass<M> {
 	_items: M[] = [];
