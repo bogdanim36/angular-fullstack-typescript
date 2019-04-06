@@ -1,4 +1,4 @@
-import {ClientService} from "@app/core/client-service";
+import {ClientServiceBaseClass} from "@app/core/client-service-base-class";
 
 export class AutocompleteConfig<M> {
 	allItems:M[] = [];
@@ -7,7 +7,7 @@ export class AutocompleteConfig<M> {
 	idField: string;
 	itemsLoaded = false;
 
-	constructor(idField: string, displayField: string, private service?: ClientService<M>, items?: []) {
+	constructor(idField: string, displayField: string, private service?: ClientServiceBaseClass<M>, items?: []) {
 		this.idField = idField;
 		this.displayField = displayField;
 		if (service) service.getAll().then(response => {
@@ -43,6 +43,5 @@ export class AutocompleteConfig<M> {
 	search(newValue, currentItemId?) {
 		if (newValue === '') newValue = null;
 		this.filteredItems = this.filter(newValue, currentItemId);
-		// console.log('filtered options', this.filteredItems);
 	}
 }

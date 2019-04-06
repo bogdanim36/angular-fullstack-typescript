@@ -1,6 +1,6 @@
 import {PageComponent} from '@app/core/page.component';
 import {OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {ClientService} from '@app/core/client-service';
+import {ClientServiceBaseClass} from '@app/core/client-service-base-class';
 import {AppSharedService} from '@app/core/app-shared.service';
 import {GridOptions} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
@@ -11,7 +11,7 @@ import {TableColumn} from "@app/core/table-column";
 export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageComponent implements OnInit {
 	isNewItem = false;
 	form: { item: M, errorMessages: Array<string> };
-	protected service: ClientService<M>;
+	protected service: ClientServiceBaseClass<M>;
 	protected uiConfig: C;
 	grid: GridOptions;
 	formPanelWidth: string;

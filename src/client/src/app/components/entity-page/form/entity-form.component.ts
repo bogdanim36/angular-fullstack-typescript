@@ -2,10 +2,10 @@ import {Input} from '@angular/core';
 import {EntityService} from "@app/components/entity-page/entity.service";
 import {GridOptions, RowNode} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
-import {ClientService} from "@app/core/client-service";
+import {ClientServiceBaseClass} from "@app/core/client-service-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
-export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientService<M>> {
+export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientServiceBaseClass<M>> {
 
 	@Input() uiConfig: C;
 	@Input() grid: GridOptions;
@@ -25,8 +25,8 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	constructor(protected modelClass: M & Function,
 				protected entityService: EntityService,
 				protected sharedService: AppSharedService) {
-		this.item = this.instanceCreate({});
-		this.errors = this.instanceCreate({});
+		this.item = this.createInstance({});
+		this.errors = this.createInstance({});
 		Object.defineProperty(this, 'hasItem', {
 			get() {
 				return this.isNewItem || Object.keys(this.item).length > 0;
@@ -45,7 +45,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		this.componentIsLoaded = true;
 	}
 
-	instanceCreate(source: Partial<M>, extra?: any): M {
+	createInstance(source: Partial<M>, extra?: any): M {
 		return new this.modelClass.prototype.constructor(source, extra);
 	}
 
@@ -56,7 +56,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	newItem() {
-		this.source = this.instanceCreate({});
+		this.source = this.createInstance({});
 		this.isNewItem = true;
 		this.editing();
 	}
@@ -77,20 +77,20 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 			this.grid.rowSelection = "";
 			this.grid.suppressRowClickSelection = true;
 		}
-		this.item = this.instanceCreate(this.source);
+		this.item = this.createInstance(this.source);
 		this.entityService.isEditing = true;
 		this.successMessages = [];
 	}
 
 	cancel() {
-		this.errors = this.instanceCreate({});
+		this.errors = this.createInstance({});
 		this.errorMessages = [];
 		this.entityService.isEditing = false;
 		this.isNewItem = false;
 		this.source = null;
 		if (this.sharedService.isHandset) {
 			if (this.service.data.currentItem) this.item = this.service.data.currentItem;
-			else this.item = this.instanceCreate({});
+			else this.item = this.createInstance({});
 		} else {
 			this.grid.suppressRowClickSelection = false;
 			this.grid.rowSelection = "single";
@@ -113,7 +113,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		if (nodes.length) this.selectedGridRowNode = nodes[0];
 		else this.selectedGridRowNode = null;
 		if (this.selectedGridRowNode) this.item = this.selectedGridRowNode.data;
-		else this.item = this.instanceCreate({});
+		else this.item = this.createInstance({});
 	}
 
 	showSuccessMsg(msg) {
@@ -129,7 +129,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 			this.working = false;
 			if (response.status) {
 				this.showSuccessMsg(this.uiConfig.labels.itemIsSaved);
-				let item = this.instanceCreate(response.data);
+				let item = this.createInstance(response.data);
 				if (this.sharedService.isHandset) {
 					if (this.isNewItem) {
 						let columnName = this.service.primaryKey;
@@ -174,7 +174,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	toggleShowPanel() {
-		//this method si mapped to EntityIndexComponent.toggleShowPanel
+		//this method is mapped to EntityIndexComponent.toggleShowPanel
 	}
 
 }

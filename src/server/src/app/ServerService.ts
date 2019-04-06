@@ -8,14 +8,14 @@ export class ServerService<M, R extends ServerRepository> {
     constructor(protected modelClass: M & Function, protected store: ServerStore) {
     }
 
-    instanceCreate(source: Partial<M>, extra?: any): M {
+    createInstance(source: Partial<M>, extra?: any): M {
         return new this.modelClass.prototype.constructor(source, extra);
     }
 
     injectModelInCollection(input) {
         let output = [];
         input.forEach(item => {
-            let modelInstance = this.instanceCreate(item);
+            let modelInstance = this.createInstance(item);
             output.push(modelInstance);
         });
         return output;
@@ -28,13 +28,13 @@ export class ServerService<M, R extends ServerRepository> {
     getOne(id): Promise<any> {
         return this.repository.getOne(id).then((data: any) => {
             console.log('get one response', data);
-            if (data && data.length === 1) return this.instanceCreate(data[0]);
+            if (data && data.length === 1) return this.createInstance(data[0]);
             else throw new Error('No item retrieved for id ' + id + ' for model ' + this.modelClass.name);
         });
     }
 
     new(source): M {
-        return this.instanceCreate(source);
+        return this.createInstance(source);
     }
 
     create(item): Promise<M> {

@@ -46,7 +46,7 @@ export class ServerController {
                 data: null,
                 serverResponse: res
             };
-            // let item = this.instanceCreate(response, 'data');
+            // let item = this.createInstance(response, 'data');
         }
     }
 
