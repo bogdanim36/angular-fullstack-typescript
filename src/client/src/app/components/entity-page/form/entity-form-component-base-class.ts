@@ -1,15 +1,17 @@
-import {Input} from '@angular/core';
+import {EventEmitter, Input, Output} from '@angular/core';
 import {EntityService} from "@app/components/entity-page/entity.service";
 import {GridOptions, RowNode} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {ClientServiceBaseClass} from "@app/core/client-service-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
-export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientServiceBaseClass<M>> {
+export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends ClientServiceBaseClass<M>> {
 
 	@Input() uiConfig: C;
 	@Input() grid: GridOptions;
 	@Input() service: S;
+	@Output() editEvent: EventEmitter<any> = new EventEmitter();
+	@Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 	public item: M;
 	public source: M;
 	public errorMessages: Array<string> = [];
@@ -24,7 +26,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 
 	constructor(protected modelClass: M & Function,
 				protected entityService: EntityService,
-				protected sharedService: AppSharedService) {
+				protected appSharedService: AppSharedService) {
 		this.item = this.createInstance({});
 		this.errors = this.createInstance({});
 		Object.defineProperty(this, 'hasItem', {
@@ -34,13 +36,13 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		});
 		Object.defineProperty(this, 'showNavigation', {
 			get() {
-				return sharedService.isHandset && !entityService.isEditing;
+				return appSharedService.isHandset && !entityService.isEditing;
 			}
 		});
 	}
 
 	//callback fired after entity-form.component is injected in entity-index.component
-	//this can be customized in particular instance
+	//this can be customized in particular instance of entity-form
 	componentLoaded() {
 		this.componentIsLoaded = true;
 	}
@@ -62,7 +64,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	modify() {
-		if (this.sharedService.isHandset) {
+		if (this.appSharedService.isHandset) {
 			this.source = this.item;
 		} else {
 			this.source = this.selectedGridRowNode.data;
@@ -72,7 +74,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	editing() {
-		if (this.sharedService.isHandset) {
+		if (this.appSharedService.isHandset) {
 		} else {
 			this.grid.rowSelection = "";
 			this.grid.suppressRowClickSelection = true;
@@ -88,7 +90,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 		this.entityService.isEditing = false;
 		this.isNewItem = false;
 		this.source = null;
-		if (this.sharedService.isHandset) {
+		if (this.appSharedService.isHandset) {
 			if (this.service.data.currentItem) this.item = this.service.data.currentItem;
 			else this.item = this.createInstance({});
 		} else {
@@ -99,7 +101,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	setCurrentItem(grid?: GridOptions) {
-		if (this.sharedService.isHandset) {
+		if (this.appSharedService.isHandset) {
 			if (this.service.data.currentItem) this.item = this.service.data.currentItem;
 			this.service.data.currentItemChanged.subscribe(item => {
 				this.item = item;
@@ -130,22 +132,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 			if (response.status) {
 				this.showSuccessMsg(this.uiConfig.labels.itemIsSaved);
 				let item = this.createInstance(response.data);
-				if (this.sharedService.isHandset) {
-					if (this.isNewItem) {
-						let columnName = this.service.primaryKey;
-						let index = this.service.data.findIndexByColumn(columnName, item[columnName]);
-						this.service.data.setCurrent(index);
-					}
-				} else {
-					if (this.isNewItem) {
-						this.grid.api.updateRowData({add: [item], addIndex: 0});
-						this.grid.api.selectIndex(0, false, null);
-					} else {
-						this.selectedGridRowNode.setData(item);
-						this.selectedGridRowNode.setSelected(true);
-					}
-				}
-
+				this.editEvent.emit({item:item, isNewItem: this.isNewItem});
 				this.cancel();
 			} else {
 				if (response.message) this.errorMessages.push(response.message);
@@ -165,7 +152,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	delete(item: M) {
 		this.service.delete(item).then(response => {
 			if (response.status) {
-				if (this.grid) this.grid.api.updateRowData({remove: [item]});
+				this.deleteEvent.emit({response:response, item:item});
 			} else {
 				if (response.message) this.errorMessages.push(response.message);
 				console.error('save error', response);
@@ -174,7 +161,7 @@ export class EntityFormComponent<M, C extends EntityUiConfig, S extends ClientSe
 	}
 
 	toggleShowPanel() {
-		//this method is mapped to EntityIndexComponent.toggleShowPanel
+		//this method is mapped to EntityIndexComponentBaseClass.toggleShowPanel
 	}
 
 }

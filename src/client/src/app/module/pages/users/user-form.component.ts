@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 import {EntityService} from "@app/components/entity-page/entity.service";
-import {EntityFormComponent} from "@app/components/entity-page/form/entity-form.component";
+import {EntityFormComponentBaseClass} from "@app/components/entity-page/form/entity-form-component-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
 import {User} from "@shared/user";
@@ -13,7 +13,7 @@ import {UsersClientService} from "@app/module/pages/users/users-client.service";
 	templateUrl: './user-form.component.html',
 	styleUrls: ['../../../components/entity-page/form/entity-form.component.scss', './user-form.component.scss']
 })
-export class UserFormComponent extends EntityFormComponent<User, UsersUiConfig, UsersClientService> {
+export class UserFormComponent extends EntityFormComponentBaseClass<User, UsersUiConfig, UsersClientService> {
 
 	constructor(public entityService: EntityService, public sharedService: AppSharedService) {
 		super(User, entityService, sharedService);

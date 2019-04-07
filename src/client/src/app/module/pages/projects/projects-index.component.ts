@@ -2,7 +2,7 @@ import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef
 import {DomSanitizer} from "@angular/platform-browser";
 
 import {AppSharedService} from "@app/core/app-shared.service";
-import {EntityIndexComponent} from "@app/components/entity-page/index/entity-index.component";
+import {EntityIndexComponentBaseClass} from "@app/components/entity-page/index/entity-index-component-base-class";
 import {EntityService} from "@app/components/entity-page/entity.service";
 
 import {Project} from "@shared/project";
@@ -15,7 +15,7 @@ import {ProjectFormComponent} from "@app/module/pages/projects/project-form.comp
 	templateUrl: "../../../components/entity-page/index/entity-index.component.html",
 	styleUrls: ["../../../components/entity-page/index/entity-index.component.scss", "./projects-index.component.scss"]
 })
-export class ProjectsIndexComponent extends EntityIndexComponent<Project, ProjectsUiConfig, ProjectsClientService> implements OnInit {
+export class ProjectsIndexComponent extends EntityIndexComponentBaseClass<Project, ProjectsUiConfig, ProjectsClientService> implements OnInit {
 
 	constructor(appShared: AppSharedService,
 				public service: ProjectsClientService,

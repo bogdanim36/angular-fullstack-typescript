@@ -7,8 +7,9 @@ import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {DomSanitizer, SafeStyle} from "@angular/platform-browser";
 import {EntityService} from "@app/components/entity-page/entity.service";
 import {TableColumn} from "@app/core/table-column";
+import {ServerResponse} from "@app/core/server.response";
 
-export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageComponent implements OnInit {
+export class EntityIndexComponentBaseClass<M, C extends EntityUiConfig, S> extends PageComponent implements OnInit {
 	isNewItem = false;
 	form: { item: M, errorMessages: Array<string> };
 	protected service: ClientServiceBaseClass<M>;
@@ -26,8 +27,8 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 
 	// ref: any;
 
-	constructor(protected appShared: AppSharedService, uiConfig, protected sanitizer: DomSanitizer, protected entityService: EntityService) {
-		super(appShared);
+	constructor(protected appSharedService: AppSharedService, uiConfig, protected sanitizer: DomSanitizer, protected entityService: EntityService) {
+		super(appSharedService);
 		// this.ref = this;
 		this.entityService.formPanelIsVisible = true;
 		this.componentsToLoad = 1 === 1 ? ['gridForm', 'data'] : ['gridToolbar', 'gridForm', 'data'];
@@ -72,7 +73,7 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 
 	ngOnInit() {
 		this.service.getAll().then((data) => {
-			if (this.appShared.isHandset) {
+			if (this.appSharedService.isHandset) {
 				this.service.data.first();
 			} else {
 				setTimeout(() => {
@@ -113,4 +114,32 @@ export class EntityIndexComponent<M, C extends EntityUiConfig, S> extends PageCo
 		this.gridWidth = this.sanitizer.bypassSecurityTrustStyle("calc(100% - " + this.formPanelWidth + ")");
 	}
 
+	handleEdit(event: { item: M, isNewItem: boolean }) {
+		if (this.appSharedService.isHandset) {
+			if (this.isNewItem) {
+				let columnName = this.service.primaryKey;
+				let index = this.service.data.findIndexByColumn(columnName, event.item[columnName]);
+				this.service.data.setCurrent(index);
+			}
+		} else {
+			if (event.isNewItem) {
+				this.grid.api.updateRowData({add: [event.item], addIndex: 0});
+				this.grid.api.selectIndex(0, false, null);
+			} else {
+				let nodes = this.grid.api.getSelectedNodes();
+				if (nodes.length) {
+					let selectedGridRowNode = nodes[0];
+					selectedGridRowNode.setData(event.item);
+					selectedGridRowNode.setSelected(true);
+				}
+			}
+		}
+	}
+
+	handleDelete(event: { response: ServerResponse, item: M }) {
+		if (this.grid) {
+			this.grid.api.updateRowData({remove: [event.item]});
+			this.grid.api.selectNode(this.grid.api.getRenderedNodes()[0]);
+		}
+	}
 }

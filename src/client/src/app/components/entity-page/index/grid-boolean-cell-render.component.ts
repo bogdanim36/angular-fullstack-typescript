@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {ICellRendererAngularComp} from "ag-grid-angular";
-import {ColDef, GridOptions} from "ag-grid-community";
+import {ColDef} from "ag-grid-community";
 
 @Component({
 	selector: 'boolean-cell-render',

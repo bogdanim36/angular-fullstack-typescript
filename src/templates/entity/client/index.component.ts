@@ -53,6 +53,8 @@ export class <%= entities.pascalCase %>IndexComponent extends EntityIndexCompone
 			gridForm.grid = this.grid;
 			gridForm.service = this.service;
 			gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
+			gridForm.editEvent.subscribe(this.handleEdit.bind(this));
+			gridForm.deleteEvent.subscribe(this.handleDelete.bind(this));
 			this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
 			gridForm.setCurrentItem(this.grid);
 			gridForm.componentLoaded();

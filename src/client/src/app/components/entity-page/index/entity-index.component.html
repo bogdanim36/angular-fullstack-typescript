@@ -1,8 +1,8 @@
-<div *ngIf="appShared.isHandset">
+<div *ngIf="appSharedService.isHandset">
 	<ng-container #handsetForm class="handset-scroller">
 	</ng-container>
 </div>
-<div *ngIf="!appShared.isHandset" class="table-container">
+<div *ngIf="!appSharedService.isHandset" class="table-container">
 	<mat-spinner [style.visibility]="componentsToLoad.length===0?'hidden':'visible'" diameter="20">
 	</mat-spinner>
 	<div class="grid-panel" [style.width]="gridWidth" [style.visibility]="componentsToLoad.length>0?'hidden':'visible'">
@@ -51,7 +51,10 @@
 	<mat-card class="form-panel"
 				 [style.visibility]="componentsToLoad.length>0?'hidden':'visible'"
 				 *ngIf="entityService.formPanelIsVisible" [style.width]="formPanelWidth">
-		<ng-container #gridForm>
+		<ng-container #gridForm
+						  (editEvent)="handleEdit($event)"
+						  (deleteEvent)="handleDelete($event)"
+		>
 		</ng-container>
 	</mat-card>
 </div>

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {GridOptions} from 'ag-grid-community';
 
 import {EntityService} from "@app/components/entity-page/entity.service";
-import {EntityFormComponent} from "@app/components/entity-page/form/entity-form.component";
+import {EntityFormComponentBaseClass} from "@app/components/entity-page/form/entity-form-component-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
 import {Project} from "@shared/project";
@@ -15,7 +15,7 @@ import {AutocompleteConfig} from "@app/core/autocomplete-config";
 	templateUrl: './project-form.component.html',
 	styleUrls: ['../../../components/entity-page/form/entity-form.component.scss', './project-form.component.scss']
 })
-export class ProjectFormComponent extends EntityFormComponent<Project, ProjectsUiConfig, ProjectsClientService> {
+export class ProjectFormComponent extends EntityFormComponentBaseClass<Project, ProjectsUiConfig, ProjectsClientService> {
 	parentAutocomplete:AutocompleteConfig<Project>;
 
 	constructor(public entityService: EntityService, public sharedService: AppSharedService) {
