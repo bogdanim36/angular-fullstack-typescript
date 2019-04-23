@@ -1,0 +1,8 @@
+<h2>Projects list</h2>
+<spk-grid>
+	<spk-grid-template>
+		<spk-table-template master="true" [data]="service.items">
+			<spk-table-column-template *ngFor="let column of uiConfig.columns" [def]="column"></spk-table-column-template>
+		</spk-table-template>
+	</spk-grid-template>
+</spk-grid>

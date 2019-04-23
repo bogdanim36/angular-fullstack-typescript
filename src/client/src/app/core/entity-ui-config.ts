@@ -4,6 +4,7 @@ import {Translation} from "@app/core/translation";
 
 export class EntityUiConfig {
 	columns: TableColumn[] = [];
+	currentId=0;
 	components: any;
 	gridRowActionsMenu: { title: string, actionName: String }[];
 	gridContext: any;
@@ -42,7 +43,19 @@ export class EntityUiConfig {
 		specific: {}
 	};
 
+	constructor() {
+		this.columnId();
+	}
+
+	*columnId() {
+		while (true){
+			this.currentId = this.currentId+1;
+			yield this.currentId ;
+		}
+	}
+
 	addColumn(column: Partial<TableColumn>) {
+		column.id = this.columnId().next().value;
 		this.columns.push(new TableColumn(column));
 	}
 

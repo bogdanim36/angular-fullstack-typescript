@@ -1,0 +1,12 @@
+<table border="1">
+	<thead >
+	<tr>
+		<th *ngFor="let column of def.columns">{{column.def.headerName}}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr *ngFor="let record of def.data">
+		<td *ngFor="let column of def.columns">{{record[column.def.field]}}</td>
+	</tr>
+	</tbody>
+</table>

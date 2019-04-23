@@ -38,9 +38,9 @@ export class ServerController {
 
     get(req: Request, res: Response) {
         if (!this.isAuthenticated(req, res)) return;
-        if (!req.params.id) ServerResponse.error(res, {message: 'No id provided as parameter'});
+        if (!req.params.columnId) ServerResponse.error(res, {message: 'No id provided as parameter'});
         else {
-            const id = req.params.id;
+            const id = req.params.columnId;
             let response = {
                 status: true,
                 data: null,

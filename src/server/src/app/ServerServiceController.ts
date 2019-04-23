@@ -20,9 +20,9 @@ export class ServerServiceController<M, S extends ServerService<M, R>, R extends
 
     delete(req: Request, res: Response) {
         if (!this.isAuthenticated(req, res)) return;
-        if (!req.params.id) ServerResponse.error(res, {message: 'No id provided as parameter'});
+        if (!req.params.columnId) ServerResponse.error(res, {message: 'No id provided as parameter'});
         try {
-            this.service.delete(req.params.id)
+            this.service.delete(req.params.columnId)
                 .then(data => {
                         // console.error('service success response', data);
                         ServerResponse.success(res, data);
@@ -38,10 +38,10 @@ export class ServerServiceController<M, S extends ServerService<M, R>, R extends
     }
     post(req: Request, res: Response) {
         if (!this.isAuthenticated(req, res)) return;
-        if (!req.params.id) ServerResponse.error(res, {message: 'No id provided as parameter'});
+        if (!req.params.columnId) ServerResponse.error(res, {message: 'No id provided as parameter'});
         if (!req.body.item) ServerResponse.error(res, {message: 'No item provided as parameter'});
         try {
-            this.service.update(req.params.id, req.body.item)
+            this.service.update(req.params.columnId, req.body.item)
                 .then(data => {
                         // console.error('service success response', data);
                         ServerResponse.success(res, data);

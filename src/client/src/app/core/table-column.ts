@@ -5,6 +5,7 @@ import {GetQuickFilterTextParams, ColGroupDef} from "ag-grid-community/src/ts/en
 
 export class TableColumn implements ColDef {
 	field: string;
+	id?:string|number;
 	headerName: string ;
 	filter?: string | boolean;
 	sortable: boolean;

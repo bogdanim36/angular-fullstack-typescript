@@ -33,7 +33,7 @@
 			</mat-error>
 		</mat-form-field>
 		<mat-form-field>
-			<mat-label>{{uiConfig.labels.specific['name']}}</mat-label>
+			<mat-label>{{uiConfig.labels.specific['columnName']}}</mat-label>
 			<input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['name']"/>
 			<mat-error *ngIf="errors['name']">
 				<p *ngFor="let msg of errors['name']">{{msg}}</p>
