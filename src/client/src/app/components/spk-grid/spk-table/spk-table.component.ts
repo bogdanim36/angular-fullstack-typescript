@@ -7,7 +7,7 @@ import {SpkTableColumnTemplateDirective} from "@app/components/spk-grid/spk-grid
 	styleUrls: ['./spk-table.component.scss']
 })
 export class SpkTableComponent implements OnInit, OnChanges {
-	@Input() def: {columns:SpkTableColumnTemplateDirective[], data:Array<any>};
+	@Input() def: { columns: SpkTableColumnTemplateDirective[], data: Array<any> };
 	master: boolean;
 
 	constructor() {
@@ -21,5 +21,9 @@ export class SpkTableComponent implements OnInit, OnChanges {
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes.def) {
 		}
+	}
+
+	gridAction(...params) {
+		console.log('grid action', ...params, this.def);
 	}
 }
