@@ -1,29 +1,45 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {SpkTableColumnTemplateDirective} from "@app/components/spk-grid/spk-grid-template/spk-table-template/spk-table-column-template.directive";
+import {AfterContentInit, Component, ComponentFactoryResolver, ContentChildren, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewContainerRef} from '@angular/core';
+import {SpkTableColumnDirective} from "@app/components/spk-grid/spk-table/spk-table-column.directive";
 
 @Component({
-	selector: 'app-spk-table',
+	selector: 'spk-table',
 	templateUrl: './spk-table.component.html',
 	styleUrls: ['./spk-table.component.scss']
 })
-export class SpkTableComponent implements OnInit, OnChanges {
-	@Input() def: { columns: SpkTableColumnTemplateDirective[], data: Array<any> };
-	master: boolean;
+export class SpkTableComponent implements OnInit, OnChanges, AfterContentInit {
+	def: {
+		columns?: SpkTableColumnDirective[],
+	};
+	@Input() data: Array<any>;
+	@Input() master:boolean;
+	@ContentChildren(SpkTableColumnDirective) columnsTemplates: QueryList<SpkTableColumnDirective>;
+	componentsToLoad: Array<string>;
 
-	constructor() {
+	constructor(protected componentFactoryResolver: ComponentFactoryResolver) {
 		this.master = true;
+		this.componentsToLoad = ['topToolbar'];
+		this.def = {};
+		this.data=[];
 	}
 
 	ngOnInit() {
-		console.log('table def', this.def);
+	}
+
+	ngAfterContentInit(): void {
+		if (this.columnsTemplates) {
+			this.def.columns = this.columnsTemplates.map((column: SpkTableColumnDirective) => {
+				return column;
+			});
+		}
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes.def) {
+			console.log('table def changed', changes.def);
 		}
 	}
-
-	gridAction(...params) {
-		console.log('grid action', ...params, this.def);
+	testClick(event){
+		const test = this.master;
+		console.log('test click', event);
 	}
 }

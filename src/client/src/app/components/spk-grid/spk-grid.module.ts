@@ -10,23 +10,22 @@ import {
 	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule, MatTooltipModule,
 	MatAutocompleteModule
 } from "@angular/material";
-import {SpkTableTemplateDirective} from "@app/components/spk-grid/spk-grid-template/spk-table-template/spk-table-template.directive";
 import {SpkGridComponent} from "@app/components/spk-grid/spk-grid.component";
-import {SpkTableColumnTemplateDirective} from "@app/components/spk-grid/spk-grid-template/spk-table-template/spk-table-column-template.directive";
-import {SpkGridTemplateDirective} from "@app/components/spk-grid/spk-grid-template/spk-grid-template.directive";
+import {SpkTableColumnDirective} from "@app/components/spk-grid/spk-table/spk-table-column.directive";
 import { SpkTableComponent } from './spk-table/spk-table.component';
+import { SpkTableToolbarComponent } from './spk-table/spk-table-toolbar/spk-table-toolbar.component';
 
 
 @NgModule({
 	entryComponents: [
-		SpkTableComponent
+		SpkTableComponent,
+		SpkTableToolbarComponent,
 	],
 	declarations: [
-		SpkTableTemplateDirective,
+		SpkTableColumnDirective,
 		SpkGridComponent,
-		SpkTableColumnTemplateDirective,
-		SpkGridTemplateDirective,
 		SpkTableComponent,
+		SpkTableToolbarComponent,
 	],
 	providers: [],
 	imports: [
@@ -51,9 +50,9 @@ import { SpkTableComponent } from './spk-table/spk-table.component';
 		ScrollingModule
 	],
 	exports:[
-		SpkTableColumnTemplateDirective,
-		SpkTableTemplateDirective,
-		SpkGridTemplateDirective,
+		SpkTableColumnDirective,
+		SpkTableToolbarComponent,
+		SpkTableComponent,
 		SpkGridComponent,
 	]
 })

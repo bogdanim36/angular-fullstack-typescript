@@ -1,12 +1,15 @@
+Spk Table
+<ng-content select="spk-table-toolbar[top=true]" ></ng-content>
 <table border="1">
 	<thead >
 	<tr>
-		<th *ngFor="let column of def.columns">{{column.def.headerName}}</th>
+		<th *ngFor="let column of def?.columns">{{column.def.headerName}}</th>
 	</tr>
 	</thead>
 	<tbody>
-	<tr *ngFor="let record of def.data">
+	<tr *ngFor="let record of data">
 		<td *ngFor="let column of def.columns">{{record[column.def.field]}}</td>
 	</tr>
 	</tbody>
 </table>
+<ng-content select="spk-table-toolbar[bottom=true]" ></ng-content>

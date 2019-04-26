@@ -9,7 +9,6 @@ import {ProjectsUiConfig} from "@app/module/pages/projects/projects-ui-config";
 	styleUrls: ['./projects2.component.scss']
 })
 export class Projects2Component implements OnInit {
-
 	constructor(appShared: AppSharedService,
 				public service: ProjectsClientService,
 				public uiConfig: ProjectsUiConfig,

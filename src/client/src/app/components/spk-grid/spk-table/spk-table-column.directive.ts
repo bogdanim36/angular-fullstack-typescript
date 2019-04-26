@@ -2,10 +2,10 @@ import {Directive, Input, OnInit} from '@angular/core';
 import {TableColumn} from "@app/core/table-column";
 
 @Directive({
-	selector: 'spk-table-column-template',
+	selector: 'spk-table-column',
 })
 
-export class SpkTableColumnTemplateDirective implements OnInit{
+export class SpkTableColumnDirective implements OnInit{
 	@Input() def: TableColumn;
 
 	constructor() {

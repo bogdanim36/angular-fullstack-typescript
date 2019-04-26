@@ -1,7 +1,7 @@
 {
+  "extends": "../../../tsconfig.json",
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "../../dist",
     "sourceMap": true,
     "declaration": false,
@@ -10,6 +10,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
+    "baseUrl": "./",
     "paths": {
       "@app/*": [
         "./app/*"
