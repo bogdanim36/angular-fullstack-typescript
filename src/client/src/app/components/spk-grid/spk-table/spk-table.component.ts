@@ -40,7 +40,6 @@ export class SpkTableComponent implements OnInit, OnChanges, AfterContentInit {
 		}
 	}
 	testClick(event){
-		const test = this.master;
-		console.log('test click', event);
+		console.log('test click', arguments);
 	}
 }

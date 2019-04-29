@@ -9,7 +9,7 @@
 								 [def]="column"
 								 [viewTemplate]="viewTemplate">
 			<ng-template #viewTemplate let-rowData="rowData" let-column="column">
-				{{rowData[column.field]}}
+				{{rowData[column.field]}} <button (click)="masterTable.testClick(rowData,column.field)">Save</button>
 			</ng-template>
 		</spk-table-column>
 	</spk-table>
