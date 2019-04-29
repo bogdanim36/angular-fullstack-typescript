@@ -1,2 +1,2 @@
-<ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{rowData:rowData, column:column}">
-</ng-template>
+<ng-container *ngTemplateOutlet="templateRef; context: {rowData:rowData, column:column}">
+</ng-container>
