@@ -1,17 +1,11 @@
-import {Directive, Input, OnInit} from '@angular/core';
+import {Directive, Input, TemplateRef} from '@angular/core';
 import {TableColumn} from "@app/core/table-column";
 
 @Directive({
 	selector: 'spk-table-column',
 })
 
-export class SpkTableColumnDirective implements OnInit{
+export class SpkTableColumnDirective {
 	@Input() def: TableColumn;
-
-	constructor() {
-	}
-
-	ngOnInit() {
-	}
-
+	@Input('viewTemplate') viewTemplate: TemplateRef<any>;
 }

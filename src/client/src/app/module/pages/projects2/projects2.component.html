@@ -2,9 +2,15 @@
 <spk-grid>
 	<spk-table master [data]="service.items" #masterTable>
 		<spk-table-toolbar [top]="true">
-			Toolbar <button (click)="masterTable.testClick($event)">Test</button>
+			Toolbar
+			<button (click)="masterTable.testClick($event)">Test</button>
 		</spk-table-toolbar>
 		<spk-table-column *ngFor="let column of uiConfig.columns"
-												[def]="column"></spk-table-column>
+								 [def]="column"
+								 [viewTemplate]="viewTemplate">
+			<ng-template #viewTemplate let-rowData="rowData" let-column="column">
+				{{rowData[column.field]}}
+			</ng-template>
+		</spk-table-column>
 	</spk-table>
 </spk-grid>

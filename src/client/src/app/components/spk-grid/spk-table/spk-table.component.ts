@@ -30,6 +30,7 @@ export class SpkTableComponent implements OnInit, OnChanges, AfterContentInit {
 			this.def.columns = this.columnsTemplates.map((column: SpkTableColumnDirective) => {
 				return column;
 			});
+			console.log('this.def',this.def.columns);
 		}
 	}
 

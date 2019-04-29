@@ -1,15 +1,22 @@
 Spk Table
-<ng-content select="spk-table-toolbar[top=true]" ></ng-content>
+<ng-content select="spk-table-toolbar[top=true]"></ng-content>
 <table border="1">
-	<thead >
+	<thead>
 	<tr>
 		<th *ngFor="let column of def?.columns">{{column.def.headerName}}</th>
 	</tr>
 	</thead>
 	<tbody>
-	<tr *ngFor="let record of data">
-		<td *ngFor="let column of def.columns">{{record[column.def.field]}}</td>
+	<tr *ngFor="let rowDataSource of data">
+		<td *ngFor="let columnDef of def.columns">
+			<spk-table-body-cell [templateRef]="columnDef.viewTemplate?columnDef.viewTemplate:bodyCellTemplate"
+										[rowData]="rowDataSource"
+										[column]="columnDef.def"
+										>
+				<ng-template #bodyCellTemplate >{{rowDataSource[columnDef.def.field]}}--bbb</ng-template>
+			</spk-table-body-cell>
+		</td>
 	</tr>
 	</tbody>
 </table>
-<ng-content select="spk-table-toolbar[bottom=true]" ></ng-content>
+<ng-content select="spk-table-toolbar[bottom=true]"></ng-content>

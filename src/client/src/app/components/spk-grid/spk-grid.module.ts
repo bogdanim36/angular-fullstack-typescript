@@ -11,9 +11,10 @@ import {
 	MatAutocompleteModule
 } from "@angular/material";
 import {SpkGridComponent} from "@app/components/spk-grid/spk-grid.component";
-import {SpkTableColumnDirective} from "@app/components/spk-grid/spk-table/spk-table-column.directive";
 import { SpkTableComponent } from './spk-table/spk-table.component';
 import { SpkTableToolbarComponent } from './spk-table/spk-table-toolbar/spk-table-toolbar.component';
+import {SpkTableColumnDirective} from "@app/components/spk-grid/spk-table/spk-table-column.directive";
+import { SpkTableBodyCellComponent } from './spk-table/spk-table-body-cell/spk-table-body-cell.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { SpkTableToolbarComponent } from './spk-table/spk-table-toolbar/spk-tabl
 		SpkGridComponent,
 		SpkTableComponent,
 		SpkTableToolbarComponent,
+		SpkTableBodyCellComponent,
 	],
 	providers: [],
 	imports: [
