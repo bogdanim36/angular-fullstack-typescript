@@ -1,6 +1,7 @@
 /dist
 /logs
 /node_modules
+/resources
 /src/server/node_modules
 /src/server/dist
 /src/client/node_modules
