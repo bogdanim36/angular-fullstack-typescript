@@ -12,8 +12,7 @@ import {AppSharedService} from '@app/core/app-shared.service';
 import {UsersPageModule} from '@app/module/pages/users/users-page.module';
 import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.component';
 import {ProjectsPageModule} from '@app/module/pages/projects/projects-page.module';
-import {environment} from "../environments/environment";
-
+import {firebaseConfig} from "../environments/secrets";
 
 
 @NgModule({
@@ -25,7 +24,7 @@ import {environment} from "../environments/environment";
 	imports: [BrowserModule,
 		HttpClientModule,
 		AppRoutingModule,
-		AngularFireModule.initializeApp(environment.firebaseConfig),
+		AngularFireModule.initializeApp(firebaseConfig),
 		AngularFireAuthModule,
 		AppLayoutModule,
 		UsersPageModule,
