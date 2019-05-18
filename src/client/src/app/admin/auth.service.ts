@@ -21,6 +21,7 @@ export class AuthService {
 		this.afAuth.authState.subscribe(user => {
 			if (user) {
 				this.userData = user;
+				console.log("user is auth", user);
 				localStorage.setItem('user', JSON.stringify(this.userData));
 				JSON.parse(localStorage.getItem('user'));
 			} else {
@@ -121,7 +122,7 @@ export class AuthService {
 	SignOut() {
 		return this.afAuth.auth.signOut().then(() => {
 			localStorage.removeItem('user');
-			this.router.navigate(['sign-in']);
+			this.router.navigate(['admin/login']);
 		});
 	}
 }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {AuthService} from "@app/admin/auth.service";
 
 @Injectable({
 	providedIn: 'root',
@@ -10,7 +11,7 @@ export class AppSharedService {
 	isHandset: boolean;
 	observableIsHandset: Observable<boolean>;
 
-	constructor(private breakpointObserver: BreakpointObserver) {
+	constructor(private breakpointObserver: BreakpointObserver, public authService: AuthService) {
 		this.observableIsHandset = this.breakpointObserver
 			.observe(['(max-width: 800px)'])
 		.pipe(
