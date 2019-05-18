@@ -2,6 +2,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireAuthModule} from "@angular/fire/auth";
+
 import {AppComponent} from './app.component';
 
 import {AppLayoutModule} from '@app/layout/app-layout.module';
@@ -9,6 +12,9 @@ import {AppSharedService} from '@app/core/app-shared.service';
 import {UsersPageModule} from '@app/module/pages/users/users-page.module';
 import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.component';
 import {ProjectsPageModule} from '@app/module/pages/projects/projects-page.module';
+import {environment} from "../environments/environment";
+
+
 
 @NgModule({
 	declarations: [
@@ -16,10 +22,11 @@ import {ProjectsPageModule} from '@app/module/pages/projects/projects-page.modul
 		ModalConfirmComponent,
 	],
 
-	
-imports : [BrowserModule,
+	imports: [BrowserModule,
 		HttpClientModule,
 		AppRoutingModule,
+		AngularFireModule.initializeApp(environment.firebaseConfig),
+		AngularFireAuthModule,
 		AppLayoutModule,
 		UsersPageModule,
 		ProjectsPageModule
