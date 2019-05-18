@@ -9,10 +9,10 @@ import {AppComponent} from './app.component';
 
 import {AppLayoutModule} from '@app/layout/app-layout.module';
 import {AppSharedService} from '@app/core/app-shared.service';
+import {AdminModule} from "@app/admin/admin.module";
 import {UsersPageModule} from '@app/module/pages/users/users-page.module';
 import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.component';
 import {ProjectsPageModule} from '@app/module/pages/projects/projects-page.module';
-import {firebaseConfig} from "../environments/secrets";
 
 
 @NgModule({
@@ -21,14 +21,14 @@ import {firebaseConfig} from "../environments/secrets";
 		ModalConfirmComponent,
 	],
 
-	imports: [BrowserModule,
+	imports: [
+		BrowserModule,
 		HttpClientModule,
 		AppRoutingModule,
-		AngularFireModule.initializeApp(firebaseConfig),
-		AngularFireAuthModule,
 		AppLayoutModule,
 		UsersPageModule,
-		ProjectsPageModule
+		ProjectsPageModule,
+		AdminModule
 	],
 	bootstrap: [AppComponent],
 	providers: [AppSharedService]
