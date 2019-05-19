@@ -6,6 +6,7 @@ export class User extends Model {
 	email?: string;
 	firstName?: string;
 	lastName?: string;
+	fullName?: string;
 
 	constructor(source: Partial<User>, extra = {}) {
 		super(source, extra);

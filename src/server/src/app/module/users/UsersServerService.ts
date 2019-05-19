@@ -10,4 +10,12 @@ export class UsersServerService extends ServerService<User, UsersServerRepositor
 		super(User, store);
 		this.repository = new UsersServerRepository(store);
 	}
+
+	getOneByEmail(email): Promise<any> {
+		return this.repository.getOneByEmail(email).then((data: any) => {
+			console.log('get one by email response', data);
+			if (data && data.length === 1) return this.createInstance(data[0]);
+			else return false;
+		});
+	}
 }

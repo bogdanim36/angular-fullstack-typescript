@@ -70,7 +70,6 @@ export class ClientServiceBaseClass<M> {
 		const response = await this.http.get<ServerResponse>(url).toPromise<ServerResponse>();
 		if (response.status) return this.createInstance(response.data);
 		else return null;
-
 	}
 
 	get items(): M[] {

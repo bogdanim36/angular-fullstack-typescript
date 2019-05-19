@@ -73,6 +73,5 @@ export class ServerServiceController<M, S extends ServerService<M, R>, R extends
             ServerResponse.error(res, e);
         }
     }
-
 }
 

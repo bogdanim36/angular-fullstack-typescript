@@ -20,21 +20,13 @@ export class ServerController {
         this.app[method](url, callback.bind(this));
     }
 
-    getAll(req: Request, res: Response, next: NextFunction) {
+    getAll(req: Request, res: Response, next: NextFunction) {}
 
-    }
+    post(req: Request, res: Response, next: NextFunction) {}
 
-    post(req: Request, res: Response, next: NextFunction) {
+    put(req: Request, res: Response, next: NextFunction) {}
 
-    }
-
-    put(req: Request, res: Response, next: NextFunction) {
-
-    }
-
-    delete(req: Request, res: Response, next: NextFunction) {
-
-    }
+    delete(req: Request, res: Response, next: NextFunction) {}
 
     get(req: Request, res: Response) {
         if (!this.isAuthenticated(req, res)) return;

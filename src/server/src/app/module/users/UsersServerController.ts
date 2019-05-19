@@ -12,14 +12,18 @@ export class UsersServerController extends ServerServiceController<User, UsersSe
 	constructor(protected app, private store: ServerStore) {
 		super(app, "users");
 		this.service = new UsersServerService(this.store);
+		this.addRoute('users/checkUserExistence', 'post', this.checkUserExistence);
 		this.setDefaultRoutes();
 	}
-	checkUserExistence(req: Request, res: Response) {
-        if (!this.isAuthenticated(req, res)) return;
-        if (!req.params.email) ServerResponse.error(res, {message: 'No email provided as parameter'});
-        else if (!req.params.displayName) ServerResponse.error(res, {message: 'No displayName provided as parameter'});
-        else {
 
+	checkUserExistence(req: Request, res: Response) {
+		if (!this.isAuthenticated(req, res)) return;
+		if (!req.body.email) ServerResponse.error(res, {message: 'No email provided as parameter'});
+		else if (!req.body.displayName) ServerResponse.error(res, {message: 'No displayName provided as parameter'});
+		else {
+			this.service.getOneByEmail(req.body.email).then(response => {
+				ServerResponse.success(res, response);
+			}, error => ServerResponse(res, error));
 		}
 	}
 }

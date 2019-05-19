@@ -9,5 +9,9 @@ export class UsersServerRepository extends ServerRepository {
 	constructor(protected store: ServerStore) {
 		super(store);
 	}
+	getOneByEmail(email): Promise<any> {
+        const query = 'select * from ?? where ??=?';
+        return this.db.runPromiseQuery(query, [this.tableName, 'email', email]);
+    }
 }
 
