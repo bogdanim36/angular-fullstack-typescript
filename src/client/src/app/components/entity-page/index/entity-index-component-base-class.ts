@@ -62,7 +62,7 @@ export class EntityIndexComponentBaseClass<M, C extends EntityUiConfig, S> exten
 		let index = this.componentsToLoad.indexOf(componentName);
 		if (index === -1) throw new Error(componentName + ' is not a valid componentName');
 		this.componentsToLoad.splice(index, 1);
-		console.log('component loaded', componentName);
+		// console.log('component loaded', componentName);
 		return false;
 	}
 

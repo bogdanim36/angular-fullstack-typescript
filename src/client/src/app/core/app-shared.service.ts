@@ -11,16 +11,16 @@ import {LoginComponent} from "@app/admin/login/login.component";
 export class AppSharedService {
 	isHandset: boolean;
 	hideAppFrame;
-	observableIsHandset: Observable<boolean>;
+	isHandset$: Observable<boolean>;
 
 	constructor(private breakpointObserver: BreakpointObserver, public authService: AuthService) {
-		this.observableIsHandset = this.breakpointObserver
+		this.isHandset$ = this.breakpointObserver
 			.observe(['(max-width: 800px)'])
 			.pipe(
 				map((result: BreakpointState) => result.matches)
 			);
 
-		this.observableIsHandset.subscribe(value => {
+		this.isHandset$.subscribe(value => {
 			this.isHandset = value;
 			if (this.isHandset) {
 				// console.log('Viewport is  less than 500px !');
@@ -45,6 +45,6 @@ export class AppSharedService {
 		} else {
 			this.hideAppFrame = false;
 		}
-		console.log("route activate", event, this.hideAppFrame);
+		// console.log("route activate", event, this.hideAppFrame);
 	}
 }

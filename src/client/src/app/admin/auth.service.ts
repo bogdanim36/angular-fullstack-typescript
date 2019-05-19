@@ -4,12 +4,15 @@ import {AngularFireAuth} from "@angular/fire/auth";
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from "@angular/router";
 import {AuthUser} from "@app/admin/auth.user";
+import {Subject} from "rxjs";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AuthService {
 	userData: AuthUser; // Save logged in user data
+	login$: Subject<AuthUser> = new Subject();
+
 	constructor(
 		public afs: AngularFirestore,   // Inject Firestore service
 		public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -36,7 +39,6 @@ export class AuthService {
 		return this.afAuth.auth.signInWithEmailAndPassword(email, password)
 			.then((result) => {
 				this.SetUserData(result.user);
-				console.log('logged', this.userData);
 				this.ngZone.run(() => {
 					this.router.navigate(['/']);
 				});
@@ -92,6 +94,8 @@ export class AuthService {
 		return this.afAuth.auth.signInWithPopup(provider)
 			.then((result) => {
 				console.log('logged', result);
+				this.login$.next(this.userData);
+
 				this.ngZone.run(() => {
 					this.router.navigate(['/']);
 				});

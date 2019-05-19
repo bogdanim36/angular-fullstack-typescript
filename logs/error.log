@@ -1,0 +1,16 @@
+2019-2-17 08:15:42 server-response-error ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: 'Project3' for column 'parentId' at row 1
+2019-2-17 08:15:52 server-response-error ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: 'Project2' for column 'parentId' at row 1
+2019-2-17 08:16:02 server-response-error No item retrieved for id 14 for model Project
+2019-2-17 09:18:32 server-response-error ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: 'Project 1' for column 'parentId' at row 1
+2019-2-17 09:28:19 server-response-error ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: '' for column 'parentId' at row 1
+2019-3-23 10:44:33 server-response-error ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+2019-3-23 10:45:44 server-response-error ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+2019-3-23 11:07:49 server-response-error ER_DUP_ENTRY: Duplicate entry 'bogdan@ionescu.io' for key 'users_email_uindex'
+2019-5-19 07:27:25 server-response-error No id provided as parameter
+2019-5-19 07:27:25 server-response-error No item retrieved for id undefined for model Project
+2019-5-19 07:29:37 server-response-error No id provided as parameter
+2019-5-19 07:29:37 server-response-error No item retrieved for id undefined for model Project
+2019-5-19 07:30:37 server-response-error No id provided as parameter
+2019-5-19 07:30:37 server-response-error No item retrieved for id undefined for model Project
+2019-5-19 07:47:52 server-response-error No id provided as parameter
+2019-5-19 07:47:52 server-response-error No item retrieved for id undefined for model Project
