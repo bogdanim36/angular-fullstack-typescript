@@ -14,9 +14,9 @@ export class SideMenuComponent implements OnDestroy, OnInit {
 	@ViewChild('drawer') drawer: MatSidenav;
 	isHandset$: Observable<boolean>;
 
-	constructor(public appShared: AppSharedService,
+	constructor(public appSharedService: AppSharedService,
 				router: Router, ) {
-		this.isHandset$ = appShared.observableIsHandset;
+		this.isHandset$ = appSharedService.observableIsHandset;
 		router.events.pipe(
 			withLatestFrom(this.isHandset$),
 			filter(([a, b]) => b && a instanceof NavigationEnd)

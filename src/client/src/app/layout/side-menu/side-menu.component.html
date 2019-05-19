@@ -1,5 +1,5 @@
-<div class="app-container" [class.is-mobile]="appShared.isHandset">
-	<mat-toolbar color="primary" class="app-toolbar">
+<div class="app-container" [class.is-mobile]="appSharedService.isHandset">
+	<mat-toolbar color="primary" class="app-toolbar" *ngIf="!appSharedService.hideAppFrame">
 		<button mat-icon-button (click)="snav.toggle()">
 			<mat-icon>menu</mat-icon>
 		</button>
@@ -10,12 +10,13 @@
 		<mat-sidenav #snav [mode]="isHandset ? 'over' : 'side'" opened
 						 style="width:250px"
 						 role="navigation"
+						 *ngIf="!appSharedService.hideAppFrame"
 						 [fixedInViewport]="isHandset"
 		>
 			<app-tree-menu></app-tree-menu>
 		</mat-sidenav>
 		<mat-sidenav-content>
-			<router-outlet></router-outlet>
+			<router-outlet (activate)="appSharedService.onRouteActivate($event)"></router-outlet>
 		</mat-sidenav-content>
 	</mat-sidenav-container>
 </div>

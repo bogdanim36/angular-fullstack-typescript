@@ -22,7 +22,6 @@ export class GridBooleanCellRenderComponent implements ICellRendererAngularComp 
 			this.iconChecked =cellRenderDef.iconChecked;
 			this.iconUnchecked =cellRenderDef.iconUnchecked;
 		}
-		console.log("grid params", params);
 	}
 
 	public invokeParentMethod(method) {
