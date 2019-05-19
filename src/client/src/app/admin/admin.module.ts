@@ -11,6 +11,7 @@ import {AuthService} from "@app/admin/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AngularFirestore} from "@angular/fire/firestore";
 import {AngularFireAuth} from "@angular/fire/auth";
+import {MatButtonModule} from "@angular/material";
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,7 @@ import {AngularFireAuth} from "@angular/fire/auth";
 		CommonModule,
 		HttpClientModule,
 		AdminRoutingModule,
+		MatButtonModule,
 		AngularFireModule.initializeApp(firebaseConfig),
 	],
 	providers:[

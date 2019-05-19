@@ -3,6 +3,9 @@
 				class="language-select">
 	<mat-option *ngFor="let language of languages" [value]="language.id">{{language.name}}</mat-option>
 </mat-select>
-<a class="nav-link" style="margin-left:auto;margin-right:10px" (click)="appSharedService.authService.SignOut()">
-	<i class="fa fa-sign-out"></i>
-</a>
+<div style="margin-left:auto;margin-right:10px;display:inline-flex">
+	<div style="margin-right:5px;">{{appSharedService.authService.userData?.displayName}}</div>
+	<a class="nav-link" style="cursor: pointer" (click)="appSharedService.authService.SignOut()">
+		<i class="fa fa-sign-out"></i>
+	</a>
+</div>
