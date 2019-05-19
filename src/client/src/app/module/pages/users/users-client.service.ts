@@ -6,6 +6,8 @@ import {User} from '@shared/user';
 import {AuthService} from "@app/admin/auth.service";
 import {ServerResponse} from "@app/core/server.response";
 import {AuthUser} from "@app/admin/auth.user";
+import {SpkHelper} from "@app/core/spk-helper";
+import ObjectAssign = SpkHelper.ObjectAssign;
 
 @Injectable({providedIn: 'root'})
 export class UsersClientService extends ClientServiceBaseClass<User> {
@@ -28,31 +30,34 @@ export class UsersClientService extends ClientServiceBaseClass<User> {
 	async checkUserExistence(user: AuthUser): Promise<any> {
 		const url = `${this.baseRoute}/checkUserExistence`;
 		const response = await this.http.post<ServerResponse>(url, user).toPromise<ServerResponse>();
+		let {firstName, lastName} = this.splitFullName(user.displayName);
 		if (response.status) {
 			if (!response.data) {
 				//create user
-				let {firstName, lastName} = this.splitFullName(user.displayName);
-				let createResponse = await this.create({email:user.email, firstName, lastName});
-				if (createResponse.status){
+				let createResponse = await this.create({email: user.email, firstName, lastName});
+				if (createResponse.status) {
 					console.log("user created", createResponse.data);
-				} else{
+				} else {
 					console.error("user cannot be created", createResponse);
 				}
 			} else {
 				let userFound = this.createInstance(response.data);
 				if (userFound.fullName !== user.displayName) {
+					let editedUser = ObjectAssign(userFound, {firstName, lastName});
+					let updateResponse = this.update(userFound, editedUser);
 					//update fullname;
 				}
 			}
 		} else return null;
 
 	}
-	splitFullName(fullName){
+
+	splitFullName(fullName) {
 		let parts = fullName.split(" ");
 		let firstNameParts = parts.slice(0);
-		firstNameParts.splice(parts.length-1,1);
+		firstNameParts.splice(parts.length - 1, 1);
 		let firstName = firstNameParts.join(" ");
-		let lastName = parts[parts.length-1];
-		return {firstName,lastName};
+		let lastName = parts[parts.length - 1];
+		return {firstName, lastName};
 	}
 }
