@@ -19,7 +19,6 @@ import {<%= entity.pascalCase %>FormComponent} from "@app/module/pages/<%= entit
 import {<%= entity.pascalCase %>RoutingModule} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-routing.module";
 import {GridBooleanCellRenderComponent, GridBooleanCellRenderModule } from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 import {EntityService} from "@app/components/entity-page/entity.service";
-import {<%= entity.pascalCase %>RoutingModule} from "@app/module/pages/teams/teams-routing.module";
 
 <%= uiConfig.module.imports %>
 
