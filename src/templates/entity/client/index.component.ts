@@ -8,10 +8,7 @@ import {EntityService} from "@app/components/entity-page/entity.service";
 import {<%= entity.pascalCase %>} from "@shared/<%= entity.paramCase %>";
 import {<%= entities.pascalCase %>UiConfig} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-ui-config";
 import {<%= entities.pascalCase %>ClientService} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-client.service";
-import {
-import {EntityIndexComponentBaseClass} from "../../../client/src/app/components/entity-page/index/entity-index-component-base-class";
-
-<%= entity.pascalCase %>FormComponent} from "@app/module/pages/<%= entities.paramCase %>/<%= entity.paramCase %>-form.component";
+import {<%= entity.pascalCase %>FormComponent} from "@app/module/pages/<%= entities.paramCase %>/<%= entity.paramCase %>-form.component";
 
 @Component({
 	selector: "app-<%= entities.paramCase %>-list",
