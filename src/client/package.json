@@ -36,6 +36,7 @@
     "ngx-mat-select-search": "^1.5.2",
     "node-sass": "^4.11.0",
     "rxjs": "^6.4.0",
+    "typescript": "^3.1.6",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {

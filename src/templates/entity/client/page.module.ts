@@ -16,6 +16,11 @@ import {<%= entities.pascalCase %>IndexComponent} from "@app/module/pages/<%= en
 import {<%= entities.pascalCase %>ClientService} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-client.service";
 import {<%= entities.pascalCase %>UiConfig} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-ui-config";
 import {<%= entity.pascalCase %>FormComponent} from "@app/module/pages/<%= entities.paramCase %>/<%= entity.paramCase %>-form.component";
+import {<%= entity.pascalCase %>RoutingModule} from "@app/module/pages/<%= entities.paramCase %>/<%= entities.paramCase %>-routing.module";
+import {GridBooleanCellRenderComponent, GridBooleanCellRenderModule } from "@app/components/entity-page/index/grid-boolean-cell-render.component";
+import {EntityService} from "@app/components/entity-page/entity.service";
+import {<%= entity.pascalCase %>RoutingModule} from "@app/module/pages/teams/teams-routing.module";
+
 <%= uiConfig.module.imports %>
 
 @NgModule({
@@ -29,11 +34,10 @@ import {<%= entity.pascalCase %>FormComponent} from "@app/module/pages/<%= entit
 	],
 	providers: [
 		<%= entities.pascalCase %>ClientService,
-		<%= entities.pascalCase %>UiConfig
+		<%= entities.pascalCase %>UiConfig,
+		EntityService
 	],
 	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
 		AngularFontAwesomeModule,
 		CommonModule,
 		EntityPageModule,
@@ -50,8 +54,9 @@ import {<%= entity.pascalCase %>FormComponent} from "@app/module/pages/<%= entit
 		MatDividerModule,
 		MatSelectModule,
 		MatSlideToggleModule,
-		ScrollingModule,
-		AgGridModule.withComponents([])
+		ScrollingModule,GridBooleanCellRenderModule,
+		AgGridModule.withComponents([GridBooleanCellRenderComponent ]),
+		<%= entity.pascalCase %>RoutingModule,
 	]
 })
 
