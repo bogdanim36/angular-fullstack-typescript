@@ -16,7 +16,8 @@
     "server:build-prod": "webpack --config webpack.config.js --env.production",
     "server:start-prod": "SET prod = true && SET port=8010 && node ./dist/server.js",
     "create-users": "gulp gen:entity --config ./src/templates/entity/configs/users.js",
-    "create-projects": "gulp gen:entity --config ./src/templates/entity/configs/projects.js"
+    "create-projects": "gulp gen:entity --config ./src/templates/entity/configs/projects.js",
+    "create-teams": "gulp gen:entity --config ./src/templates/entity/configs/teams.js"
   },
   "ntl": {
     "descriptions": {

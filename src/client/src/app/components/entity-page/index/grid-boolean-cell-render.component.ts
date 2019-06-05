@@ -1,6 +1,16 @@
-import {Component} from "@angular/core";
+import {Component, NgModule} from "@angular/core";
 import {ICellRendererAngularComp} from "ag-grid-angular";
 import {ColDef} from "ag-grid-community";
+import {AppComponent} from "@app/app.component";
+import {ModalConfirmComponent} from "@app/components/modal-confirm/modal-confirm.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from "@angular/common/http";
+import {AppRoutingModule} from "@app/app-routing.module";
+import {AppLayoutModule} from "@app/layout/app-layout.module";
+import {MatIconModule} from "@angular/material";
+import {AdminModule} from "@app/admin/admin.module";
+import {ProjectsPageModule} from "@app/module/pages/projects/projects-page.module";
+import {AppSharedService} from "@app/core/app-shared.service";
 
 @Component({
 	selector: 'boolean-cell-render',
@@ -31,4 +41,13 @@ export class GridBooleanCellRenderComponent implements ICellRendererAngularComp 
 	refresh(): boolean {
 		return false;
 	}
+}
+
+@NgModule({
+	declarations: [
+		GridBooleanCellRenderComponent
+	],
+	imports: [MatIconModule],
+})
+export class GridBooleanCellRenderModule {
 }

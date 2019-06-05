@@ -23,7 +23,7 @@ export class UsersServerController extends ServerServiceController<User, UsersSe
 		else {
 			this.service.getOneByEmail(req.body.email).then(response => {
 				ServerResponse.success(res, response);
-			}, error => ServerResponse(res, error));
+			}, error => ServerResponse.error(res, error));
 		}
 	}
 }

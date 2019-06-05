@@ -5,7 +5,7 @@ import {ClientServiceBaseClass} from '@app/core/client-service-base-class';
 import {<%= entity.pascalCase %>} from '@shared/<%= entity.paramCase %>';
 
 @Injectable({providedIn: 'root'})
-export class <%= entities.pascalCase %>ClientService extends ClientServiceBAseClass<<%= entity.pascalCase %>> {
+export class <%= entities.pascalCase %>ClientService extends ClientServiceBaseClass<<%= entity.pascalCase %>> {
 
 	constructor(protected http: HttpClient) {
 		super(http, <%= entity.pascalCase %>, 'api/<%= entities.paramCase %>');

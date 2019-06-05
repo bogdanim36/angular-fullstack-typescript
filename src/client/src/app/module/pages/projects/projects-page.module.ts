@@ -17,7 +17,10 @@ import {ProjectsIndexComponent} from "@app/module/pages/projects/projects-index.
 import {ProjectsClientService} from "@app/module/pages/projects/projects-client.service";
 import {ProjectsUiConfig} from "@app/module/pages/projects/projects-ui-config";
 import {ProjectFormComponent} from "@app/module/pages/projects/project-form.component";
-import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
+import {GridBooleanCellRenderComponent, GridBooleanCellRenderModule} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
+import {EntityService} from "@app/components/entity-page/entity.service";
+import {ProjectsRoutingModule} from "@app/module/pages/projects/projects-routing.module";
+
 
 
 @NgModule({
@@ -25,17 +28,15 @@ import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/
 		ProjectFormComponent,
 	],
 	declarations: [
-		ProjectsIndexComponent
-		,ProjectFormComponent
-		,GridBooleanCellRenderComponent
+		ProjectsIndexComponent,
+		ProjectFormComponent
 	],
 	providers: [
 		ProjectsClientService,
-		ProjectsUiConfig
+		ProjectsUiConfig,
+		EntityService
 	],
 	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
 		AngularFontAwesomeModule,
 		CommonModule,
 		EntityPageModule,
@@ -54,7 +55,9 @@ import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/
 		MatSlideToggleModule,
 		MatAutocompleteModule,
 		ScrollingModule,
-		AgGridModule.withComponents([])
+		ProjectsRoutingModule,
+		GridBooleanCellRenderModule,
+		AgGridModule.withComponents([GridBooleanCellRenderComponent])
 	]
 })
 

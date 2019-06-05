@@ -1,17 +1,16 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {UsersIndexComponent} from '@app/module/pages/users/users-index.component';
-import {ProjectsIndexComponent} from '@app/module/pages/projects/projects-index.component';
 import {AuthGuard} from "@app/admin/guard/auth.guard";
 
-const routes: Routes     = [
-	{path: 'users', component:UsersIndexComponent, canActivate: [AuthGuard] },
-	{path: 'projects', component:ProjectsIndexComponent, canActivate: [AuthGuard]},
-	{path: '', redirectTo:'projects', pathMatch:"full"}
-	];
+const routes: Routes = [
+	// {path: '', redirectTo: 'projects', pathMatch: "full"},
+	{path: 'users', loadChildren: () => import('./module/pages/users/users-page.module').then(mod => mod.UsersPageModule), canActivate: [AuthGuard]},
+	{path: 'projects', loadChildren: () => import('./module/pages/projects/projects-page.module').then(mod => mod.ProjectsPageModule),  canActivate: [AuthGuard]},
+	{path: 'teams', loadChildren: () => import('./module/pages/teams/teams-page.module').then(mod => mod.TeamsPageModule),  canActivate: [AuthGuard]}
+];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes, {enableTracing:false})],
+	imports: [RouterModule.forRoot(routes, {enableTracing: false})],
 	exports: [RouterModule]
 })
 export class AppRoutingModule {

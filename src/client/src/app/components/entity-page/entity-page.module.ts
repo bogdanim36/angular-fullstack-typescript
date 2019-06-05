@@ -15,8 +15,6 @@ import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/
 	exports: [
 	],
 	imports: [
-		BrowserModule,
-		CommonModule,
 		FormsModule,
 		MatButtonModule,
 		MatIconModule,

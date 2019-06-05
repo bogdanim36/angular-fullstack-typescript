@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+
 import {CommonModule} from "@angular/common";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
@@ -14,7 +14,9 @@ import {UsersIndexComponent} from "@app/module/pages/users/users-index.component
 import {UsersClientService} from "@app/module/pages/users/users-client.service";
 import {UsersUiConfig} from "@app/module/pages/users/users-ui-config";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";
-import {AppSharedService} from "@app/core/app-shared.service";
+import {EntityService} from "@app/components/entity-page/entity.service";
+import {GridBooleanCellRenderComponent, GridBooleanCellRenderModule} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
+import {UsersRoutingModule} from "@app/module/pages/users/users-routing.module";
 
 @NgModule({
 	entryComponents: [
@@ -22,16 +24,14 @@ import {AppSharedService} from "@app/core/app-shared.service";
 	],
 	declarations: [
 		UsersIndexComponent,
-		UserFormComponent,
+		UserFormComponent
 	],
 	providers: [
 		UsersClientService,
-		AppSharedService,
-		UsersUiConfig
+		UsersUiConfig,
+		EntityService
 	],
 	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
 		AngularFontAwesomeModule,
 		CommonModule,
 		EntityPageModule,
@@ -48,7 +48,9 @@ import {AppSharedService} from "@app/core/app-shared.service";
 		MatDividerModule,
 		MatSelectModule,
 		ScrollingModule,
-		AgGridModule.withComponents([])
+		UsersRoutingModule,
+		GridBooleanCellRenderModule,
+		AgGridModule.withComponents([GridBooleanCellRenderComponent ])
 	]
 })
 
