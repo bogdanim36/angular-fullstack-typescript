@@ -16,10 +16,9 @@ import {TeamsIndexComponent} from "@app/module/pages/teams/teams-index.component
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
 import {TeamsUiConfig} from "@app/module/pages/teams/teams-ui-config";
 import {TeamFormComponent} from "@app/module/pages/teams/team-form.component";
-import {TeamRoutingModule} from "@app/module/pages/teams/teams-routing.module";
 import {GridBooleanCellRenderComponent, GridBooleanCellRenderModule } from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 import {EntityService} from "@app/components/entity-page/entity.service";
-import {TeamRoutingModule} from "@app/module/pages/teams/teams-routing.module";
+import {TeamsRoutingModule} from "@app/module/pages/teams/teams-routing.module";
 
 
 
@@ -56,7 +55,7 @@ import {TeamRoutingModule} from "@app/module/pages/teams/teams-routing.module";
 		MatSlideToggleModule,
 		ScrollingModule,GridBooleanCellRenderModule,
 		AgGridModule.withComponents([GridBooleanCellRenderComponent ]),
-		TeamRoutingModule,
+		TeamsRoutingModule,
 	]
 })
 

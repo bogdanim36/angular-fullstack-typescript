@@ -10,8 +10,8 @@ import {AdminModule} from "@app/admin/admin.module";
 import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ProjectsPageModule} from "@app/module/pages/projects/projects-page.module";
-import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 import {MatIconModule} from "@angular/material";
+import {TeamsPageModule} from '@app/module/pages/teams/teams-page.module';
 
 
 @NgModule({
@@ -19,14 +19,15 @@ import {MatIconModule} from "@angular/material";
 		AppComponent,
 		ModalConfirmComponent
 	],
-	imports: [
-		BrowserAnimationsModule,
+	
+imports : [BrowserAnimationsModule,
 		HttpClientModule,
 		AppRoutingModule,
 		AppLayoutModule,
 		MatIconModule,
 		AdminModule,
-		ProjectsPageModule
+		ProjectsPageModule,
+		TeamsPageModule
 	],
 	bootstrap: [AppComponent],
 	providers: [AppSharedService]
