@@ -1,7 +1,8 @@
 import {NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
-
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CommonModule} from "@angular/common";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {
@@ -15,12 +16,11 @@ import {TeamsIndexComponent} from "@app/module/pages/teams/teams-index.component
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
 import {TeamsUiConfig} from "@app/module/pages/teams/teams-ui-config";
 import {TeamFormComponent} from "@app/module/pages/teams/team-form.component";
+import {TeamRoutingModule} from "@app/module/pages/teams/teams-routing.module";
+import {GridBooleanCellRenderComponent, GridBooleanCellRenderModule } from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 import {EntityService} from "@app/components/entity-page/entity.service";
-import {
-	GridBooleanCellRenderComponent,
-	GridBooleanCellRenderModule
-} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
-import {TeamsRoutingModule} from "@app/module/pages/teams/teams-routing.module";
+import {TeamRoutingModule} from "@app/module/pages/teams/teams-routing.module";
+
 
 
 @NgModule({
@@ -54,10 +54,9 @@ import {TeamsRoutingModule} from "@app/module/pages/teams/teams-routing.module";
 		MatDividerModule,
 		MatSelectModule,
 		MatSlideToggleModule,
-		ScrollingModule,
-		GridBooleanCellRenderModule,
+		ScrollingModule,GridBooleanCellRenderModule,
 		AgGridModule.withComponents([GridBooleanCellRenderComponent ]),
-		TeamsRoutingModule,
+		TeamRoutingModule,
 	]
 })
 
