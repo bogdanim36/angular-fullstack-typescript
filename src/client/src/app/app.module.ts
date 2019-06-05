@@ -9,28 +9,25 @@ import {AppSharedService} from '@app/core/app-shared.service';
 import {AdminModule} from "@app/admin/admin.module";
 import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ProjectsPageModule} from "@app/module/pages/projects/projects-page.module";
 import {MatIconModule} from "@angular/material";
-import {TeamsPageModule} from '@app/module/pages/teams/teams-page.module';
 
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		ModalConfirmComponent
-	],
-	
-imports : [BrowserAnimationsModule,
-		HttpClientModule,
-		AppRoutingModule,
-		AppLayoutModule,
-		MatIconModule,
-		AdminModule,
-		ProjectsPageModule,
-		TeamsPageModule
-	],
-	bootstrap: [AppComponent],
-	providers: [AppSharedService]
+    declarations: [
+        AppComponent,
+        ModalConfirmComponent
+    ],
+
+    imports: [
+        BrowserAnimationsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        AppLayoutModule,
+        MatIconModule,
+        AdminModule
+    ],
+    bootstrap: [AppComponent],
+    providers: [AppSharedService]
 })
 export class AppModule {
 }

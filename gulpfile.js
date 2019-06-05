@@ -72,8 +72,8 @@ gulp.task("gen:entity", (callback) => {
 			.pipe(gulp.dest(config.paths.destRoot + module.dest + (module.entitiesSubdir ? config.entities.paramCase : "")));
 		if (moduleName === 'server') addControllerToServerIndex(config);
 		if (moduleName === 'client') {
-			addClientRooting(config);
-			addClientModule(config);
+			// addClientRooting(config);
+			// addClientModule(config);
 		}
 	});
 
