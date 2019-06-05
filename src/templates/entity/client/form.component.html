@@ -93,7 +93,7 @@
 			<button mat-flat-button
 					  color="accent"
 					  *ngIf="entityService.isEditing"
-					  (click)='save(isNewItem, source, item)'>
+					  (click)='save()'>
 				<mat-icon>check</mat-icon>
 				{{uiConfig.labels.save}}
 			</button>
