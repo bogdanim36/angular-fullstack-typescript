@@ -4,9 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AgGridModule} from 'ag-grid-angular';
 import {MatButtonModule, MatCardModule, MatIconModule, MatToolbarModule} from "@angular/material";
 import {GridActionColumnComponent} from "@app/components/entity-page/index/grid-action-column.component";
-import {CommonModule} from "@angular/common";
 import {AppSharedService} from "@app/core/app-shared.service";
-import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 
 @NgModule({
 	declarations: [
@@ -20,7 +18,7 @@ import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/
 		MatIconModule,
 		MatToolbarModule,
 		MatCardModule,
-		AgGridModule.withComponents([GridActionColumnComponent, GridBooleanCellRenderComponent])
+		AgGridModule.withComponents([])
 	],
 	providers: [AppSharedService]
 })

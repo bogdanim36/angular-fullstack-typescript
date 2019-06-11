@@ -1,10 +1,15 @@
 import {ServerApp} from '@server/app/ServerApp';
 import {UsersServerController} from '@module/users/UsersServerController';
 import {ProjectsServerController} from '@module/projects/ProjectsServerController';
-import {TeamsServerController} from '@module/teams/TeamsServerController';const server = new ServerApp();
+import {TeamsServerController} from '@module/teams/TeamsServerController';
+import {DepartmentsServerController} from '@module/departments/DepartmentsServerController';
+import {DailyReportServerController} from "@module/daily-report/DailyReportServerController";
+const server = new ServerApp();
 const app = server.getApp();
 const Users = new UsersServerController(app, server.store);
 const Projects = new ProjectsServerController(app, server.store);
 const Teams = new TeamsServerController(app, server.store);
+const Departments = new DepartmentsServerController(app, server.store);
+const DailyReport = new DailyReportServerController(app, server.store);
 server.start();
 export { app };
