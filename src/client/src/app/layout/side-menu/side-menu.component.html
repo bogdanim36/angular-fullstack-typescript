@@ -1,13 +1,13 @@
 <div class="app-container" [class.is-mobile]="appSharedService.isHandset">
 	<mat-toolbar color="primary" class="app-toolbar" *ngIf="!appSharedService.hideAppFrame">
-		<button mat-icon-button (click)="snav.toggle()">
+		<button mat-icon-button (click)="sidenav.toggle()">
 			<mat-icon>menu</mat-icon>
 		</button>
 		<app-main-toolbar class="mat-toolbar mat-toolbar-single-row"></app-main-toolbar>
 	</mat-toolbar>
 
 	<mat-sidenav-container class="sidenav-container" #drawer>
-		<mat-sidenav #snav [mode]="isHandset ? 'over' : 'side'" opened
+		<mat-sidenav #sidenav [mode]="isHandset ? 'over' : 'side'" opened
 						 style="width:250px"
 						 role="navigation"
 						 *ngIf="!appSharedService.hideAppFrame"

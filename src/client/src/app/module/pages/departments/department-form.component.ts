@@ -9,13 +9,13 @@ import {DepartmentsUiConfig} from "@app/module/pages/departments/departments-ui-
 import {DepartmentsClientService} from "@app/module/pages/departments/departments-client.service";
 
 @Component({
-	selector: 'app-entity-form',
-	templateUrl: './department-form.component.html',
-	styleUrls: ['../../../components/entity-page/form/entity-form.component.scss', './department-form.component.scss']
+    selector: 'app-entity-form',
+    templateUrl: './department-form.component.html',
+    styleUrls: ['../../../components/entity-page/form/entity-form.component.scss', './department-form.component.scss']
 })
 export class DepartmentFormComponent extends EntityFormComponentBaseClass<Department, DepartmentsUiConfig, DepartmentsClientService> {
 
-	constructor(public entityService: EntityService, public sharedService: AppSharedService) {
-		super(Department, entityService, sharedService);
-	}
+    constructor(public entityService: EntityService, public sharedService: AppSharedService) {
+        super(Department, entityService, sharedService);
+    }
 }

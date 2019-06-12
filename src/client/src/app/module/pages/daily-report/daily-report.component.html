@@ -1,1 +1,67 @@
-Daily Report
+<mat-toolbar class="grid-toolbar box-shadow" role="heading">
+    <span class="grid-title" [innerHTML]="uiConfig.labels.itemDetails"></span>
+</mat-toolbar>
+
+<div class="form-body box-shadow">
+    <mat-spinner [style.visibility]="working?'visible':'hidden'" diameter="20">
+    </mat-spinner>
+
+    <mat-card-content>
+        <mat-form-field >
+            <mat-label >{{uiConfig.labels.specific['date']}}</mat-label>
+            <input matInput autocomplete="off"
+                   [matDatepicker]="reportDate"
+                   [disabled]="!entityService.isEditing" [(ngModel)]="item['date']"/>
+            <mat-datepicker-toggle matSuffix [for]="reportDate"></mat-datepicker-toggle>
+            <mat-datepicker #reportDate></mat-datepicker>
+            <mat-error *ngIf="errors['date']">
+                <p *ngFor="let msg of errors['date']">{{msg}}</p>
+            </mat-error>
+        </mat-form-field>
+        <div *ngIf="errorMessages.length" class="errors">
+            <ul class="ui-corner-all">
+                <li *ngFor="let message of errorMessages">{{message}}</li>
+            </ul>
+        </div>
+        <div *ngIf="successMessages.length" class="success">
+            <ul class="ui-corner-all">
+                <li *ngFor="let message of successMessages">{{message}}</li>
+            </ul>
+        </div>
+    </mat-card-content>
+    <mat-toolbar class="grid-toolbar" role="footer">
+        <div class="right-side">
+            <!--add button-->
+            <button mat-icon-button
+                    *ngIf="!entityService.isEditing "
+                    color="primary"
+                    (click)='newItem()'>
+                <mat-icon>add</mat-icon>
+            </button>
+            <!--modify button-->
+            <button mat-icon-button
+                    *ngIf="!entityService.isEditing"
+                    [disabled]="!hasItem"
+                    color="primary"
+                    (click)='modify()'>
+                <mat-icon>edit</mat-icon>
+            </button>
+            <!--save button-->
+            <button mat-flat-button
+                    color="accent"
+                    *ngIf="entityService.isEditing"
+                    (click)='save()'>
+                <mat-icon>check</mat-icon>
+                {{uiConfig.labels.save}}
+            </button>
+            <!--cancel button-->
+            <button mat-flat-button
+                    color="warn"
+                    *ngIf="entityService.isEditing"
+                    (click)='cancel()'>
+                <mat-icon>cancel</mat-icon>
+                {{uiConfig.labels.cancel}}
+            </button>
+        </div>
+    </mat-toolbar>
+</div>

@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
 })
 export class SideMenuComponent implements OnDestroy, OnInit {
 	@ViewChild('drawer') drawer: MatSidenav;
+	@ViewChild('sidenav') sidenav: MatSidenav;
 	isHandset$: Observable<boolean>;
 
 	constructor(public appSharedService: AppSharedService,

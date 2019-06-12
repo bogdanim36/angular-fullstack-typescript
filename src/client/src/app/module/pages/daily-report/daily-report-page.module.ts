@@ -6,7 +6,7 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 import {
 	MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
 	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule, MatTooltipModule,
-	MatAutocompleteModule
+	MatAutocompleteModule, MatNativeDateModule, MatDatepickerModule
 } from "@angular/material";
 import {AgGridModule} from "ag-grid-angular";
 
@@ -18,6 +18,8 @@ import {
 	GridBooleanCellRenderComponent,
 	GridBooleanCellRenderModule
 } from "@app/components/entity-page/index/grid-boolean-cell-render.component";
+import {DailyReportUiConfig} from "@app/module/pages/daily-report/daily-report-ui-config";
+import {EntityService} from "@app/components/entity-page/entity.service";
 
 
 
@@ -31,6 +33,8 @@ import {
 	],
 	providers: [
 		DailyReportClientService,
+		DailyReportUiConfig,
+		EntityService
 	],
 	imports: [
 		AngularFontAwesomeModule,
@@ -53,6 +57,8 @@ import {
 		ScrollingModule,
 		DailyReportRoutingModule,
 		GridBooleanCellRenderModule,
+		MatDatepickerModule,
+		MatNativeDateModule,
 		AgGridModule.withComponents([GridBooleanCellRenderComponent])
 	]
 })
