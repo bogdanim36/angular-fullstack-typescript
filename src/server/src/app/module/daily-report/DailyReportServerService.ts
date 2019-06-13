@@ -1,7 +1,7 @@
 import {ServerService} from '@server/app/ServerService';
-import {DailyReportServerRepository} from './DepartmentsServerRepository';
 import {ServerStore} from '@server/app/ServerStore';
 import {DailyReport} from "@shared/daily-report";
+import {DailyReportServerRepository} from "@module/daily-report/DailyReportServerRepository";
 
 export class DailyReportServerService extends ServerService<DailyReport, DailyReportServerRepository> {
 	public repository: DailyReportServerRepository;

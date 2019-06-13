@@ -1,15 +1,15 @@
 import {ServerServiceController} from '@server/app/ServerServiceController';
 import {ServerStore} from '@server/app/ServerStore';
-import {DepartmentsServerService} from '@module/departments/DepartmentsServerService';
-import {DepartmentsServerRepository} from '@module/departments/DepartmentsServerRepository';
 import {DailyReport} from "@shared/daily-report";
+import {DailyReportServerService} from "@module/daily-report/DailyReportServerService";
+import {DailyReportServerRepository} from "@module/daily-report/DailyReportServerRepository";
 
-export class DailyReportServerController extends ServerServiceController<DailyReport, DepartmentsServerService, DepartmentsServerRepository> {
-	service: DepartmentsServerService;
+export class DailyReportServerController extends ServerServiceController<DailyReport, DailyReportServerService, DailyReportServerRepository> {
+	service: DailyReportServerService;
 
 	constructor(protected app, private store: ServerStore) {
 		super(app, "daily-report");
-		this.service = new DepartmentsServerService(this.store);
+		this.service = new DailyReportServerService(this.store);
 		this.setDefaultRoutes();
 	}
 }

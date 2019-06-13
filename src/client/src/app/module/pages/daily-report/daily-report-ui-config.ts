@@ -10,7 +10,10 @@ export class DailyReportUiConfig extends EntityUiConfig {
 		this.labels.list = new Translation('List of Departments', 'Lista de Departamente');
 		this.labels.itemDetails = new Translation('Daily Report', 'Raportul zilei');
 		this.labels.specific = {
-			date: new Translation('Date', 'Data')
+			date: new Translation('Date', 'Data'),
+			departmentId: new Translation('Department', 'Departament'),
+			teamId: new Translation('Team', 'Echipa'),
+			projectId: new Translation('Project', 'Proiect')
 		};
 	}
 }

@@ -3,7 +3,7 @@ import {Model} from './model';
 export class DailyReport extends Model {
 
     id?: number;
-    date?: string;
+    date?: Date;
     userId?: number;
     departmentId?: number;
     projectId?: number;

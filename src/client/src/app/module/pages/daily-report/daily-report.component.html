@@ -7,38 +7,93 @@
     </mat-spinner>
 
     <mat-card-content>
-        <mat-form-field >
-            <mat-label >{{uiConfig.labels.specific.date}}</mat-label>
-            <input matInput
-						 autocomplete="off"
-                   [matDatepicker]="reportDate"
-                   [disabled]="!entityService.isEditing"
-						 [(ngModel)]="item.date"/>
-            <mat-datepicker-toggle matSuffix [for]="reportDate"></mat-datepicker-toggle>
-            <mat-datepicker #reportDate></mat-datepicker>
-            <mat-error *ngIf="errors['date']">
-                <p *ngFor="let msg of errors['date']">{{msg}}</p>
-            </mat-error>
-        </mat-form-field>
-		  <mat-form-field >
-            <mat-label >{{uiConfig.labels.specific['date']}}</mat-label>
-            <input matInput
-						 autocomplete="off"
-                   [disabled]="!entityService.isEditing" [(ngModel)]="item.name"/>
-            <mat-error *ngIf="errors['name']">
-                <p *ngFor="let msg of errors['name']">{{msg}}</p>
-            </mat-error>
-        </mat-form-field>
-        <div *ngIf="errorMessages.length" class="errors">
-            <ul class="ui-corner-all">
-                <li *ngFor="let message of errorMessages">{{message}}</li>
-            </ul>
+        <div style="display: flex;flex-direction: row">
+            <div style="width:200px;display: flex;flex-direction: column;margin-right:10px">
+                <mat-form-field>
+                    <mat-label>{{uiConfig.labels.specific.date}}</mat-label>
+                    <input matInput
+                           autocomplete="off"
+                           [matDatepicker]="reportDate"
+                           [disabled]="!entityService.isEditing"
+                           [(ngModel)]="item.date"/>
+                    <mat-datepicker-toggle matSuffix [for]="reportDate"></mat-datepicker-toggle>
+                    <mat-datepicker #reportDate></mat-datepicker>
+                    <mat-error *ngIf="errors['date']">
+                        <p *ngFor="let msg of errors['date']">{{msg}}</p>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{uiConfig.labels.specific['departmentId']}}</mat-label>
+                    <input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
+                           (ngModelChange)="departmentAutocomplete.search($event)"
+                           [(ngModel)]="item['departmentId']" [matAutocomplete]="departmentAutocompleteRef"/>
+                    <button mat-button *ngIf="item['departmentId'] && entityService.isEditing" matSuffix mat-icon-button
+                            aria-label="Clear"
+                            (click)="item['departmentId']=null;departmentAutocomplete.search(null, this.item.id)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-autocomplete #departmentAutocompleteRef="matAutocomplete"
+                                      [displayWith]="departmentAutocomplete.display()">
+                        <mat-option *ngFor="let option of departmentAutocomplete.filteredItems"
+                                    [value]="option.id">{{option.name}}</mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="errors['departmentId']">
+                        <p *ngFor="let msg of errors['departmentId']">{{msg}}</p>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div style="width:200px;display: flex;flex-direction: column">
+                <mat-form-field>
+                    <mat-label>{{uiConfig.labels.specific['teamId']}}</mat-label>
+                    <input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
+                           (ngModelChange)="teamAutocomplete.search($event)"
+                           [(ngModel)]="item['teamId']" [matAutocomplete]="teamAutocompleteRef"/>
+                    <button mat-button *ngIf="item['teamId'] && entityService.isEditing" matSuffix mat-icon-button
+                            aria-label="Clear"
+                            (click)="item['teamId']=null;teamAutocomplete.search(null, this.item.id)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-autocomplete #teamAutocompleteRef="matAutocomplete" [displayWith]="teamAutocomplete.display()">
+                        <mat-option *ngFor="let option of teamAutocomplete.filteredItems"
+                                    [value]="option.id">{{option.name}}</mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="errors['teamId']">
+                        <p *ngFor="let msg of errors['teamId']">{{msg}}</p>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{uiConfig.labels.specific['projectId']}}</mat-label>
+                    <input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
+                           (ngModelChange)="projectAutocomplete.search($event)"
+                           [(ngModel)]="item['projectId']" [matAutocomplete]="projectAutocompleteRef"/>
+                    <button mat-button *ngIf="item['projectId'] && entityService.isEditing" matSuffix mat-icon-button
+                            aria-label="Clear"
+                            (click)="item['projectId']=null;projectAutocomplete.search(null, this.item.id)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-autocomplete #projectAutocompleteRef="matAutocomplete"
+                                      [displayWith]="projectAutocomplete.display()">
+                        <mat-option *ngFor="let option of projectAutocomplete.filteredItems"
+                                    [value]="option.id">{{option.name}}</mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="errors['projectId']">
+                        <p *ngFor="let msg of errors['projectId']">{{msg}}</p>
+                    </mat-error>
+                </mat-form-field>
+
+                <div *ngIf="errorMessages.length" class="errors">
+                    <ul class="ui-corner-all">
+                        <li *ngFor="let message of errorMessages">{{message}}</li>
+                    </ul>
+                </div>
+                <div *ngIf="successMessages.length" class="success">
+                    <ul class="ui-corner-all">
+                        <li *ngFor="let message of successMessages">{{message}}</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div *ngIf="successMessages.length" class="success">
-            <ul class="ui-corner-all">
-                <li *ngFor="let message of successMessages">{{message}}</li>
-            </ul>
-        </div>
+
     </mat-card-content>
     <mat-toolbar class="grid-toolbar" role="footer">
         <div class="right-side">

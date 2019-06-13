@@ -18,7 +18,8 @@
     "create-users": "gulp gen:entity --config ./src/templates/entity/configs/users.js",
     "create-projects": "gulp gen:entity --config ./src/templates/entity/configs/projects.js",
     "create-teams": "gulp gen:entity --config ./src/templates/entity/configs/teams.js",
-    "create-departments": "gulp gen:entity --config ./src/templates/entity/configs/departments.js"
+    "create-departments": "gulp gen:entity --config ./src/templates/entity/configs/departments.js",
+    "create-daily-report-details": "gulp gen:entity --config ./src/templates/entity/configs/daily-report-details.js"
   },
   "ntl": {
     "descriptions": {
