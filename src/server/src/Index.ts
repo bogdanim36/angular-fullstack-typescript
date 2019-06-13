@@ -4,6 +4,7 @@ import {ProjectsServerController} from '@module/projects/ProjectsServerControlle
 import {TeamsServerController} from '@module/teams/TeamsServerController';
 import {DepartmentsServerController} from '@module/departments/DepartmentsServerController';
 import {DailyReportServerController} from "@module/daily-report/DailyReportServerController";
+import {DailyReportDetailsServerController} from '@module/daily-report-details/DailyReportDetailsServerController';
 const server = new ServerApp();
 const app = server.getApp();
 const Users = new UsersServerController(app, server.store);
@@ -11,5 +12,6 @@ const Projects = new ProjectsServerController(app, server.store);
 const Teams = new TeamsServerController(app, server.store);
 const Departments = new DepartmentsServerController(app, server.store);
 const DailyReport = new DailyReportServerController(app, server.store);
+const DailyReportDetails = new DailyReportDetailsServerController(app, server.store);
 server.start();
 export { app };

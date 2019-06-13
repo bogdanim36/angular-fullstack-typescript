@@ -8,18 +8,18 @@ module.exports = function () {
 	config.script.primaryKey = 'id';
 	config.script.build = function () {
 		config.script.column('id', 'int(11)', false, null, true);
-		config.script.column('dailyDeportId', 'int(11)', false, null, false);
+		config.script.column('dailyReportId', 'int(11)', false, null, false);
 		config.script.column('status', 'varchar(20)', false, null, false);
 		config.script.column('percent', 'varchar(20)', false, null, false);
 		config.script.column('taiga', 'varchar(15)', true, null, false);
-		config.script.column('subsection', 'varchar(100)', true, null, false);
+		config.script.column('subsection', 'varchar(300)', true, null, false);
 	};
 	config.model.build = function () {
 		config.model.regular("id", true, "number");
 		config.model.regular("status", true, "string");
 		config.model.regular("percent", true, "string");
 		config.model.regular("taiga", true, "string");
-		config.model.regular("subsection", true, "subsection");
+		config.model.regular("subsection", true, "string");
 	};
 	config.uiConfig.build = function () {
 		config.uiConfig.formPanelWidth = '400px';
