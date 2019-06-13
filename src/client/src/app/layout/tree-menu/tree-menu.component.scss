@@ -18,8 +18,16 @@
   padding:0;
   position: relative;
   display:inline-flex;
-  &.activeLink:before{
-    //content:">"
+  > .hide{
+    display:none;
+  }
+  &.activeLink[ng-reflect-router-link]>mat-icon.cursor{
+    display: initial !important;
+    font-size:24px;
+    width:20px;
+    line-height: 30px;
+    margin-right:-18px;
+    margin-left:-2px;
   }
   &.activeLink{
     background-color: #c8c8ec;
@@ -30,7 +38,7 @@
   line-height: 30px;
 }
 :host ::ng-deep .node-label{
-  padding: 0 10px;
+  padding: 0 10px 0 20px;
   cursor: pointer;
   width:100%;
 }

@@ -4,6 +4,7 @@
 				  [routerLink]="node.data.routerLink"
 				  routerLinkActive="activeLink"
 				  [routerLinkActiveOptions]="{exact:true}" >
+			<mat-icon class="mat-icon material-icons mat-icon-no-color hide cursor" role="img" aria-hidden="true">arrow_right</mat-icon>
 			<div class="node-label" [ngClass]="'level'+node.level">{{node.data.label.text}}</div>
 			<mat-icon *ngIf="node.data.items?.length"
 				class="mat-icon material-icons mat-icon-no-color expandable" role="img" aria-hidden="true">keyboard_arrow_up</mat-icon>
