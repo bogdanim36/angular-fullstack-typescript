@@ -5,7 +5,7 @@ import {DailyReportComponent} from "@app/module/pages/daily-report/daily-report.
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'add',
         component: DailyReportComponent
     }
 ];

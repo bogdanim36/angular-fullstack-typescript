@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `departments`
+--
+
+DROP TABLE IF EXISTS `departments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `departments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `departments`
+--
+
+LOCK TABLES `departments` WRITE;
+/*!40000 ALTER TABLE `departments` DISABLE KEYS */;
+INSERT INTO `departments` VALUES (16,'PHP','php');
+/*!40000 ALTER TABLE `departments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `projects`
 --
 
@@ -44,83 +69,28 @@ INSERT INTO `projects` VALUES (2,'Project 1','my first project\nzdfvasga\nsdafhs
 UNLOCK TABLES;
 
 --
--- Table structure for table `task-status`
+-- Table structure for table `teams`
 --
 
-DROP TABLE IF EXISTS `task-status`;
+DROP TABLE IF EXISTS `teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `task-status` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `task-status`
---
-
-LOCK TABLES `task-status` WRITE;
-/*!40000 ALTER TABLE `task-status` DISABLE KEYS */;
-INSERT INTO `task-status` VALUES (1,'new','new'),(2,'work in progress','work in progress'),(3,'rejected','rejected'),(4,'rezolved','rezolved'),(5,'closed','closed');
-/*!40000 ALTER TABLE `task-status` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `task-types`
---
-
-DROP TABLE IF EXISTS `task-types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `task-types` (
+CREATE TABLE `teams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `task-types`
---
-
-LOCK TABLES `task-types` WRITE;
-/*!40000 ALTER TABLE `task-types` DISABLE KEYS */;
-INSERT INTO `task-types` VALUES (16,'bug','bug'),(17,'task','task'),(19,'test','test');
-/*!40000 ALTER TABLE `task-types` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tasks`
---
-
-DROP TABLE IF EXISTS `tasks`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tasks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `description` text,
-  `type` varchar(10) NOT NULL,
-  `projectId` int(11) DEFAULT NULL,
-  `parentId` int(11) DEFAULT NULL,
-  `closed` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `tasks_name_uindex` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tasks`
+-- Dumping data for table `teams`
 --
 
-LOCK TABLES `tasks` WRITE;
-/*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (16,'Task1','description','bug',NULL,NULL,1),(17,'Task2','descprition','task',NULL,NULL,0);
-/*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
+LOCK TABLES `teams` WRITE;
+/*!40000 ALTER TABLE `teams` DISABLE KEYS */;
+INSERT INTO `teams` VALUES (17,'777.ch','777.ch');
+/*!40000 ALTER TABLE `teams` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -186,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-05  7:13:50
+-- Dump completed on 2019-06-13  8:00:51

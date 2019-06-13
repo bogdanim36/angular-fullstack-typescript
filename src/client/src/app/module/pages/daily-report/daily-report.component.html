@@ -8,14 +8,25 @@
 
     <mat-card-content>
         <mat-form-field >
-            <mat-label >{{uiConfig.labels.specific['date']}}</mat-label>
-            <input matInput autocomplete="off"
+            <mat-label >{{uiConfig.labels.specific.date}}</mat-label>
+            <input matInput
+						 autocomplete="off"
                    [matDatepicker]="reportDate"
-                   [disabled]="!entityService.isEditing" [(ngModel)]="item['date']"/>
+                   [disabled]="!entityService.isEditing"
+						 [(ngModel)]="item.date"/>
             <mat-datepicker-toggle matSuffix [for]="reportDate"></mat-datepicker-toggle>
             <mat-datepicker #reportDate></mat-datepicker>
             <mat-error *ngIf="errors['date']">
                 <p *ngFor="let msg of errors['date']">{{msg}}</p>
+            </mat-error>
+        </mat-form-field>
+		  <mat-form-field >
+            <mat-label >{{uiConfig.labels.specific['date']}}</mat-label>
+            <input matInput
+						 autocomplete="off"
+                   [disabled]="!entityService.isEditing" [(ngModel)]="item.name"/>
+            <mat-error *ngIf="errors['name']">
+                <p *ngFor="let msg of errors['name']">{{msg}}</p>
             </mat-error>
         </mat-form-field>
         <div *ngIf="errorMessages.length" class="errors">

@@ -18,6 +18,11 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     @ViewChild(MatDatepicker) reportDate: MatDatepicker<Date>;
     constructor(public entityService: EntityService, public sharedService: AppSharedService, public uiConfig: DailyReportUiConfig, public service: DailyReportClientService,) {
         super(DailyReport, entityService, sharedService);
+        this.createItem();
         this.entityService.isEditing = true;
     }
+    createItem(){
+    	this.item = new DailyReport({date: Date(), name:'test'});
+    	console.log(this.item);
+	}
 }

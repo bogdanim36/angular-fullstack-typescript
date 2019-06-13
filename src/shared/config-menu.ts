@@ -13,7 +13,7 @@ export const noRoleMenu: MenuItem[] = [
 	{
 		label: new Translation('Daily Report', 'Raport Zilnic'), expanded: true, items:
 			[
-				{label: new Translation('Daily Report', "Raportul Zilei"), routerLink: 'daily-report', icon: 'fa fa-caret-right'}
+				{label: new Translation('Add', "Adaugare"), routerLink: 'daily-report/add', icon: 'fa fa-caret-right'}
 			]
 
 	}];
