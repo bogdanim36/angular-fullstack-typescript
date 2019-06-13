@@ -11,7 +11,7 @@
 			<span class="info"> ({{service.items.length}} {{uiConfig.labels.records}})</span>
 
 			<div class="right-side info">
-				<mat-form-field class="global-search" appearance="fill">
+				<mat-form-field class="global-search" appearance="fill" *ngIf="!entityService.formPanelIsVisible">
 					<input matInput autocomplete="off"
 							 [disabled]="entityService.isEditing"
 							 (ngModelChange)="globalSearchValueChanged($event)"

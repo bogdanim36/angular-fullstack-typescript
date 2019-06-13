@@ -8,8 +8,8 @@ export class DailyReportDetailsUiConfig extends EntityUiConfig {
 		this.formPanelWidth = '400px';
 		this.gridContext = {};
 
-		this.labels.list = new Translation('List of Tasks','Lista de taskuri');
-		this.labels.itemDetails = new Translation('tasks','Taskuri');
+		this.labels.list = new Translation('Tasks','Taskuri');
+		this.labels.itemDetails = new Translation('Task','Task');
 
 		this.labels.specific.status = new Translation('Status','Status');
 		this.labels.specific.percent = new Translation('Percent','Procent');
