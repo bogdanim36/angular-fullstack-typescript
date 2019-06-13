@@ -17,6 +17,10 @@
   background-color: transparent;
   padding:0;
   position: relative;
+  display:inline-flex;
+  &.activeLink:before{
+    //content:">"
+  }
   &.activeLink{
     background-color: #c8c8ec;
   }
@@ -28,6 +32,7 @@
 :host ::ng-deep .node-label{
   padding: 0 10px;
   cursor: pointer;
+  width:100%;
 }
 :host ::ng-deep .nav-node-btn > mat-icon.expandable{
   position: absolute;

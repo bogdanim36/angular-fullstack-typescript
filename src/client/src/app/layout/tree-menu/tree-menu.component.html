@@ -1,6 +1,9 @@
 <tree-root [nodes]="menuItems" [focused]="true" [options]="options">
 	<ng-template #treeNodeTemplate let-node let-index="index">
-		<button class="nav-node-btn" [routerLinkActive]="['activeLink']" [routerLink]="node.data.routerLink">
+		<button class="nav-node-btn"
+				  [routerLink]="node.data.routerLink"
+				  routerLinkActive="activeLink"
+				  [routerLinkActiveOptions]="{exact:true}" >
 			<div class="node-label" [ngClass]="'level'+node.level">{{node.data.label.text}}</div>
 			<mat-icon *ngIf="node.data.items?.length"
 				class="mat-icon material-icons mat-icon-no-color expandable" role="img" aria-hidden="true">keyboard_arrow_up</mat-icon>
