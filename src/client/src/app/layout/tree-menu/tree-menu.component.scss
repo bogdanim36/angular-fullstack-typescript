@@ -15,7 +15,11 @@
   border:none;
   outline: none;
   background-color: transparent;
-  padding:0
+  padding:0;
+  position: relative;
+  &.activeLink{
+    background-color: #c8c8ec;
+  }
 }
 :host ::ng-deep .level1{
   background-color: lightgray;

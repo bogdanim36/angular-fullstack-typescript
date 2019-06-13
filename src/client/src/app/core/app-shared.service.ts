@@ -40,11 +40,7 @@ export class AppSharedService {
 	}
 
 	onRouteActivate(event) {
-		if (event instanceof LoginComponent) {
-			this.hideAppFrame = true;
-		} else {
-			this.hideAppFrame = false;
-		}
+		this.hideAppFrame = event instanceof LoginComponent;
 		// console.log("route activate", event, this.hideAppFrame);
 	}
 }
