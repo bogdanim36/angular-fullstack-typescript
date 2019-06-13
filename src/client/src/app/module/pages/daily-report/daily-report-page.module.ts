@@ -24,6 +24,7 @@ import {DailyReportDetailsIndexComponent} from "@app/module/pages/daily-report/d
 import {DailyReportDetailFormComponent} from "@app/module/pages/daily-report/daily-report-details/daily-report-detail-form.component";
 import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-ui-config";
 import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-client.service";
+import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
 
 
 
@@ -43,6 +44,7 @@ import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/da
 		DailyReportUiConfig,
 		DailyReportDetailsUiConfig,
 		DailyReportDetailsClientService,
+		DailyReportDetailsEntityService,
 		EntityService
 	],
 	imports: [

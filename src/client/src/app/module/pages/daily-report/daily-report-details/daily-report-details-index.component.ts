@@ -9,6 +9,7 @@ import {DailyReportDetail} from "@shared/daily-report-detail";
 import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-ui-config";
 import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-client.service";
 import {DailyReportDetailFormComponent} from "@app/module/pages/daily-report/daily-report-details/daily-report-detail-form.component";
+import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
 
 @Component({
 	selector: "app-daily-report-details",
@@ -22,7 +23,7 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
 				public uiConfig: DailyReportDetailsUiConfig,
 				protected componentFactoryResolver: ComponentFactoryResolver,
 				protected sanitizer: DomSanitizer,
-				protected entityService: EntityService) {
+				protected entityService: DailyReportDetailsEntityService) {
 		super(appShared, uiConfig, sanitizer, entityService);
 	}
 	ngOnInit() {

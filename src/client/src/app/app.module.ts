@@ -17,7 +17,6 @@ import {MatIconModule} from "@angular/material";
         AppComponent,
         ModalConfirmComponent
     ],
-
     imports: [
         BrowserAnimationsModule,
         HttpClientModule,
