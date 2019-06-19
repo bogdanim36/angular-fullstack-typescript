@@ -14,7 +14,7 @@ export class MainToolbarComponent implements OnInit {
 	language: string;
 	languages: any[];
 
-	constructor(private appSharedService: AppSharedService) {
+	constructor(public appSharedService: AppSharedService) {
 		this.appTitle = appInfo.name;
 		this.language = environment.language;
 		this.languages = environment.languages;

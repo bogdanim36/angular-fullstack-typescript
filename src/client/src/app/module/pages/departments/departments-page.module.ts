@@ -4,8 +4,19 @@ import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {CommonModule} from "@angular/common";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {
-	MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
-	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule, MatTooltipModule
+	MatButtonModule,
+	MatCardModule,
+	MatDividerModule,
+	MatFormFieldModule,
+	MatIconModule,
+	MatInputModule,
+	MatMenuModule,
+	MatOptionModule,
+	MatProgressSpinnerModule,
+	MatSelectModule,
+	MatSlideToggleModule,
+	MatToolbarModule,
+	MatTooltipModule
 } from "@angular/material";
 import {AgGridModule} from "ag-grid-angular";
 
@@ -50,6 +61,7 @@ import {EntityService} from "@app/components/entity-page/entity.service";
 		MatProgressSpinnerModule,
 		MatDividerModule,
 		MatSelectModule,
+		MatOptionModule,
 		MatSlideToggleModule,
 		ScrollingModule,
 		GridBooleanCellRenderModule,

@@ -8,7 +8,7 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 import {
 	MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
 	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule, MatTooltipModule,
-	MatAutocompleteModule
+	MatAutocompleteModule, MatOptionModule
 } from "@angular/material";
 import {AgGridModule} from "ag-grid-angular";
 
@@ -51,9 +51,10 @@ import {ProjectsRoutingModule} from "@app/module/pages/projects/projects-routing
 		MatTooltipModule,
 		MatProgressSpinnerModule,
 		MatDividerModule,
-		MatSelectModule,
 		MatSlideToggleModule,
 		MatAutocompleteModule,
+		MatSelectModule,
+		MatOptionModule,
 		ScrollingModule,
 		ProjectsRoutingModule,
 		GridBooleanCellRenderModule,

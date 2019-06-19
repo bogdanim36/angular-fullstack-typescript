@@ -1,5 +1,7 @@
 import {NativeDateAdapter} from "@angular/material";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class AppDateAdapter extends NativeDateAdapter {
 
     parse(value: any): Date | null {

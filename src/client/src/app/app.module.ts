@@ -9,21 +9,18 @@ import {AppSharedService} from '@app/core/app-shared.service';
 import {AdminModule} from "@app/admin/admin.module";
 import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatIconModule} from "@angular/material";
-
 
 @NgModule({
     declarations: [
         AppComponent,
-        ModalConfirmComponent
+        ModalConfirmComponent,
     ],
     imports: [
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
         AppLayoutModule,
-        MatIconModule,
-        AdminModule
+        AdminModule,
     ],
     bootstrap: [AppComponent],
     providers: [AppSharedService]

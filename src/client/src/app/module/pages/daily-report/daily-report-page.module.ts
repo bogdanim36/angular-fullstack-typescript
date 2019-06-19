@@ -6,7 +6,7 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 import {
 	MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
 	MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule, MatTooltipModule,
-	MatAutocompleteModule, MatNativeDateModule, MatDatepickerModule
+	MatAutocompleteModule, MatNativeDateModule, MatDatepickerModule, MatOptionModule
 } from "@angular/material";
 import {AgGridModule} from "ag-grid-angular";
 
@@ -63,6 +63,7 @@ import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/da
 		MatProgressSpinnerModule,
 		MatDividerModule,
 		MatSelectModule,
+		MatOptionModule,
 		MatSlideToggleModule,
 		MatAutocompleteModule,
 		ScrollingModule,

@@ -27,7 +27,7 @@ export class EntityIndexComponentBaseClass<M, C extends EntityUiConfig, S> exten
 
 	// ref: any;
 
-	constructor(protected appSharedService: AppSharedService, uiConfig, protected sanitizer: DomSanitizer, protected entityService: EntityService) {
+	constructor(public appSharedService: AppSharedService, uiConfig, protected sanitizer: DomSanitizer, protected entityService: EntityService) {
 		super(appSharedService);
 		// this.ref = this;
 		this.entityService.formPanelIsVisible = true;
