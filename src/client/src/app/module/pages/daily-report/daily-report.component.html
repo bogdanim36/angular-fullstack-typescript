@@ -14,7 +14,7 @@
                        autocomplete="off"
                        [matDatepicker]="reportDate"
                        [disabled]="!entityService.isEditing"
-                       [(ngModel)]="item.date"/>
+                       [(ngModel)]="moduleService.item.date"/>
                 <mat-datepicker-toggle matSuffix [for]="reportDate"></mat-datepicker-toggle>
                 <mat-datepicker #reportDate></mat-datepicker>
                 <mat-error *ngIf="errors['date']">
@@ -25,10 +25,10 @@
                 <mat-label>{{uiConfig.labels.specific['departmentId']}}</mat-label>
                 <input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
                        (ngModelChange)="departmentAutocomplete.search($event)"
-                       [(ngModel)]="item['departmentId']" [matAutocomplete]="departmentAutocompleteRef"/>
-                <button mat-button *ngIf="item['departmentId'] && entityService.isEditing" matSuffix mat-icon-button
+                       [(ngModel)]="moduleService.item['departmentId']" [matAutocomplete]="departmentAutocompleteRef"/>
+                <button mat-button *ngIf="moduleService.item['departmentId'] && entityService.isEditing" matSuffix mat-icon-button
                         aria-label="Clear"
-                        (click)="item['departmentId']=null;departmentAutocomplete.search(null, this.item.id)">
+                        (click)="moduleService.item['departmentId']=null;departmentAutocomplete.search(null, moduleService.item.id)">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-autocomplete #departmentAutocompleteRef="matAutocomplete"
@@ -44,10 +44,10 @@
                 <mat-label>{{uiConfig.labels.specific['teamId']}}</mat-label>
                 <input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
                        (ngModelChange)="teamAutocomplete.search($event)"
-                       [(ngModel)]="item['teamId']" [matAutocomplete]="teamAutocompleteRef"/>
-                <button mat-button *ngIf="item['teamId'] && entityService.isEditing" matSuffix mat-icon-button
+                       [(ngModel)]="moduleService.item['teamId']" [matAutocomplete]="teamAutocompleteRef"/>
+                <button mat-button *ngIf="moduleService.item['teamId'] && entityService.isEditing" matSuffix mat-icon-button
                         aria-label="Clear"
-                        (click)="item['teamId']=null;teamAutocomplete.search(null, this.item.id)">
+                        (click)="moduleService.item['teamId']=null;teamAutocomplete.search(null, moduleService.item.id)">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-autocomplete #teamAutocompleteRef="matAutocomplete" [displayWith]="teamAutocomplete.display()">
@@ -62,10 +62,10 @@
                 <mat-label>{{uiConfig.labels.specific['projectId']}}</mat-label>
                 <input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
                        (ngModelChange)="projectAutocomplete.search($event)"
-                       [(ngModel)]="item['projectId']" [matAutocomplete]="projectAutocompleteRef"/>
-                <button mat-button *ngIf="item['projectId'] && entityService.isEditing" matSuffix mat-icon-button
+                       [(ngModel)]="moduleService.item['projectId']" [matAutocomplete]="projectAutocompleteRef"/>
+                <button mat-button *ngIf="moduleService.item['projectId'] && entityService.isEditing" matSuffix mat-icon-button
                         aria-label="Clear"
-                        (click)="item['projectId']=null;projectAutocomplete.search(null, this.item.id)">
+                        (click)="moduleService.item['projectId']=null;projectAutocomplete.search(null, moduleService.item.id)">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-autocomplete #projectAutocompleteRef="matAutocomplete"

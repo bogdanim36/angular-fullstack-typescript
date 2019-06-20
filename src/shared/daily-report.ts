@@ -1,4 +1,5 @@
 import {Model} from './model';
+import {DailyReportDetail} from "@shared/daily-report-detail";
 
 export class DailyReport extends Model {
 
@@ -7,6 +8,7 @@ export class DailyReport extends Model {
     userId?: number;
     departmentId?: number;
     projectId?: number;
+    tasks?: DailyReportDetail[];
 
     constructor(source: Partial<DailyReport>, extra = {}) {
         super(source, extra);

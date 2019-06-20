@@ -7,7 +7,7 @@ import {DailyReportClientService} from "@app/module/pages/daily-report/daily-rep
 import {DailyReportUiConfig} from "@app/module/pages/daily-report/daily-report-ui-config";
 import {EntityService} from "@app/components/entity-page/entity.service";
 import {EntityFormComponentBaseClass} from "@app/components/entity-page/form/entity-form-component-base-class";
-import {DateAdapter, MAT_DATE_LOCALE, MatDatepicker, NativeDateAdapter} from "@angular/material";
+import {DateAdapter, MatDatepicker} from "@angular/material";
 import {MAT_DATE_FORMATS} from '@angular/material';
 import {DATE_FORMAT} from "@app/app.constants";
 import {AppDateAdapter} from "@app/core/AppDateAdapter";
@@ -18,25 +18,29 @@ import {DepartmentsClientService} from "@app/module/pages/departments/department
 import {ProjectsClientService} from "@app/module/pages/projects/projects-client.service";
 import {Team} from "@shared/team";
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
+import {DailyReportDetail} from "@shared/daily-report-detail";
+import {DailyReportModuleService} from "@app/module/pages/daily-report/DailyReportModuleService";
 
 @Component({
     selector: "app-entity-form",
     templateUrl: "./daily-report.component.html",
     styleUrls: ["../../../components/entity-page/form/entity-form.component.scss", "./daily-report.component.scss"],
     providers: [
-        { provide: DateAdapter, useClass: AppDateAdapter },
+        {provide: DateAdapter, useClass: AppDateAdapter},
         {provide: MAT_DATE_FORMATS, useValue: DATE_FORMAT}
     ]
 })
 export class DailyReportComponent extends EntityFormComponentBaseClass<DailyReport, DailyReportUiConfig, DailyReportClientService> {
     @ViewChild(MatDatepicker) reportDate: MatDatepicker<Date>;
-    departmentAutocomplete:AutocompleteConfig<Department>;
-    teamAutocomplete:AutocompleteConfig<Team>;
-    projectAutocomplete:AutocompleteConfig<Project>;
+    departmentAutocomplete: AutocompleteConfig<Department>;
+    teamAutocomplete: AutocompleteConfig<Team>;
+    projectAutocomplete: AutocompleteConfig<Project>;
+
     constructor(public entityService: EntityService,
                 public sharedService: AppSharedService,
                 public uiConfig: DailyReportUiConfig,
                 public service: DailyReportClientService,
+                public moduleService: DailyReportModuleService,
                 public departmentsService: DepartmentsClientService,
                 public teamsService: TeamsClientService,
                 public projectsService: ProjectsClientService) {
@@ -49,7 +53,10 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     }
 
     createItem() {
-        this.item = new DailyReport({date: new Date()});
+        this.moduleService.item = new DailyReport({
+            date: new Date(),
+            tasks: [new DailyReportDetail({status: "In progress", percent: "0"})]
+        });
         console.log(this.item);
     }
 }

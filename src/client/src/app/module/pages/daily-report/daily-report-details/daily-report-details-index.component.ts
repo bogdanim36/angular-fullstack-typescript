@@ -3,7 +3,6 @@ import {DomSanitizer} from "@angular/platform-browser";
 
 import {AppSharedService} from "@app/core/app-shared.service";
 import {EntityIndexComponentBaseClass} from "@app/components/entity-page/index/entity-index-component-base-class";
-import {EntityService} from "@app/components/entity-page/entity.service";
 
 import {DailyReportDetail} from "@shared/daily-report-detail";
 import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-ui-config";
@@ -27,21 +26,21 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
 		super(appShared, uiConfig, sanitizer, entityService);
 	}
 	ngOnInit() {
-		super.ngOnInit();
+		this.service.getAll().then((data) => {
+			if (this.appSharedService.isHandset) {
+				this.service.data.first();
+			} else {
+				setTimeout(() => {
+					this.componentIsLoaded('data');
+					let nodes = this.grid.api.getRenderedNodes();
+					if (nodes.length) {
+						nodes[0].setSelected(true);
+						this.grid.api.setFocusedCell(0, '1');
+					}
+				});
+			}
+		}, console.error);
 	}
-
-	// @ViewChild('gridToolbar', {read: ViewContainerRef}) set gridToolbarContent(content: ViewContainerRef) {
-	// 	this.gridToolbar = content;
-	// 	if (!content) return;
-	// 	setTimeout(() => {
-	// 		let componentFactory = this.componentFactoryResolver.resolveComponentFactory(UsersGridToolbarComponent);
-	// 		this.gridToolbar.clear();
-	// 		let componentRef = this.gridToolbar.createComponent(componentFactory);
-	// 		componentRef.instance.uiConfig = this.uiConfig;
-	// 		componentRef.instance.grid = this.grid;
-	// 		this.componentIsLoaded('gridToolbar');
-	// 	});
-	// }
 
 	@ViewChild('gridForm', {read: ViewContainerRef}) set gridFormContent(content: ViewContainerRef) {
 		this.gridForm = content;
