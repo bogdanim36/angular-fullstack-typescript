@@ -9,7 +9,8 @@ CREATE TABLE `daily-report-details`
     `status`        VARCHAR(20) NOT NULL,
     `percent`       VARCHAR(20) NOT NULL,
     `taiga`         VARCHAR(15),
-    `subsection`    VARCHAR(300),
+    `subsection`    VARCHAR(150),
+    `description`    VARCHAR(400),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 16

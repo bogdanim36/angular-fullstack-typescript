@@ -46,8 +46,7 @@ import {DailyReportModuleService} from "@app/module/pages/daily-report/DailyRepo
 		DailyReportDetailsUiConfig,
 		DailyReportDetailsClientService,
 		DailyReportDetailsEntityService,
-		EntityService,
-		DailyReportModuleService
+		EntityService
 	],
 	imports: [
 		AngularFontAwesomeModule,

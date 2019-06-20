@@ -3,8 +3,9 @@ import {Injectable} from '@angular/core';
 
 import {ClientServiceBaseClass} from '@app/core/client-service-base-class';
 import {DailyReport} from '@shared/daily-report';
+import {DailyReportPageModule} from "@app/module/pages/daily-report/daily-report-page.module";
 
-@Injectable({providedIn: 'root'})
+@Injectable({providedIn: DailyReportPageModule})
 export class DailyReportClientService extends ClientServiceBaseClass<DailyReport> {
 
 	constructor(protected http: HttpClient) {

@@ -7,6 +7,7 @@ export class DailyReportDetail extends Model {
 	percent?: string;
 	taiga?: string;
 	subsection?: string;
+	description?: string;
 
 	constructor(source: Partial<DailyReportDetail>, extra = {}) {
 		super(source, extra);

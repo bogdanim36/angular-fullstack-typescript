@@ -9,69 +9,72 @@ import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-r
 import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-client.service";
 import {DailyReportDetailFormComponent} from "@app/module/pages/daily-report/daily-report-details/daily-report-detail-form.component";
 import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
+import {DailyReportModuleService} from "@app/module/pages/daily-report/DailyReportModuleService";
 
 @Component({
-	selector: "app-daily-report-details",
-	templateUrl: "../../../../components/entity-page/index/entity-index.component.html",
-	styleUrls: ["../../../../components/entity-page/index/entity-index.component.scss", "./daily-report-details-index.component.scss"]
+    selector: "app-daily-report-details",
+    templateUrl: "../../../../components/entity-page/index/entity-index.component.html",
+    styleUrls: ["../../../../components/entity-page/index/entity-index.component.scss", "./daily-report-details-index.component.scss"]
 })
 export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseClass<DailyReportDetail, DailyReportDetailsUiConfig, DailyReportDetailsClientService> implements OnInit {
 
-	constructor(appShared: AppSharedService,
-				public service: DailyReportDetailsClientService,
-				public uiConfig: DailyReportDetailsUiConfig,
-				protected componentFactoryResolver: ComponentFactoryResolver,
-				protected sanitizer: DomSanitizer,
-				protected entityService: DailyReportDetailsEntityService) {
-		super(appShared, uiConfig, sanitizer, entityService);
-	}
-	ngOnInit() {
-		this.service.getAll().then((data) => {
-			if (this.appSharedService.isHandset) {
-				this.service.data.first();
-			} else {
-				setTimeout(() => {
-					this.componentIsLoaded('data');
-					let nodes = this.grid.api.getRenderedNodes();
-					if (nodes.length) {
-						nodes[0].setSelected(true);
-						this.grid.api.setFocusedCell(0, '1');
-					}
-				});
-			}
-		}, console.error);
-	}
+    constructor(appShared: AppSharedService,
+                public service: DailyReportDetailsClientService,
+                public uiConfig: DailyReportDetailsUiConfig,
+                protected componentFactoryResolver: ComponentFactoryResolver,
+                protected sanitizer: DomSanitizer,
+                protected entityService: DailyReportDetailsEntityService,
+                public moduleService: DailyReportModuleService) {
+        super(appShared, uiConfig, sanitizer, entityService);
+    }
 
-	@ViewChild('gridForm', {read: ViewContainerRef}) set gridFormContent(content: ViewContainerRef) {
-		this.gridForm = content;
-		if (!content) return;
-		setTimeout(() => {
-			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(DailyReportDetailFormComponent);
-			this.gridForm.clear();
-			let gridForm = this.gridForm.createComponent(componentFactory).instance;
-			gridForm.uiConfig = this.uiConfig;
-			gridForm.grid = this.grid;
-			gridForm.service = this.service;
-			gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
-			gridForm.editEvent.subscribe(this.handleEdit.bind(this));
-			gridForm.deleteEvent.subscribe(this.handleDelete.bind(this));
-			this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
-			gridForm.setCurrentItem(this.grid);
-			gridForm.componentLoaded();
-			this.componentIsLoaded('gridForm');
-		});
-	}
+    getTasks(item) {
+        this.service.data.items = item.tasks;
+        setTimeout(() => {
+            let nodes = this.grid.api.getRenderedNodes();
+            if (nodes.length) {
+                nodes[0].setSelected(true);
+                this.grid.api.setFocusedCell(0, '1');
+            }
+        });
+    }
 
-	@ViewChild('handsetForm', {read: ViewContainerRef}) set handsetFormContent(content: ViewContainerRef) {
-		this.handsetForm = content;
-		if (!content) return;
-		setTimeout(() => {
-			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(DailyReportDetailFormComponent);
-			this.handsetForm.clear();
-			let handsetForm = this.handsetForm.createComponent(componentFactory).instance;
-			handsetForm.uiConfig = this.uiConfig;
-			handsetForm.service = this.service;
-			handsetForm.setCurrentItem();
-		});
-	}
+    ngOnInit() {
+        this.componentIsLoaded('data');
+        if (this.moduleService.item) this.getTasks(this.moduleService.item);
+        this.moduleService.item$.subscribe(this.getTasks);
+    }
+
+    @ViewChild('gridForm', {read: ViewContainerRef}) set gridFormContent(content: ViewContainerRef) {
+        this.gridForm = content;
+        if (!content) return;
+        setTimeout(() => {
+            let componentFactory = this.componentFactoryResolver.resolveComponentFactory(DailyReportDetailFormComponent);
+            this.gridForm.clear();
+            let gridForm = this.gridForm.createComponent(componentFactory).instance;
+            gridForm.uiConfig = this.uiConfig;
+            gridForm.grid = this.grid;
+            gridForm.service = this.service;
+            gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
+            gridForm.editEvent.subscribe(this.handleEdit.bind(this));
+            gridForm.deleteEvent.subscribe(this.handleDelete.bind(this));
+            this.gridSelectionChanged = gridForm.gridSelectionChanged.bind(gridForm);
+            gridForm.setCurrentItem(this.grid);
+            gridForm.componentLoaded();
+            this.componentIsLoaded('gridForm');
+        });
+    }
+
+    @ViewChild('handsetForm', {read: ViewContainerRef}) set handsetFormContent(content: ViewContainerRef) {
+        this.handsetForm = content;
+        if (!content) return;
+        setTimeout(() => {
+            let componentFactory = this.componentFactoryResolver.resolveComponentFactory(DailyReportDetailFormComponent);
+            this.handsetForm.clear();
+            let handsetForm = this.handsetForm.createComponent(componentFactory).instance;
+            handsetForm.uiConfig = this.uiConfig;
+            handsetForm.service = this.service;
+            handsetForm.setCurrentItem();
+        });
+    }
 }

@@ -15,7 +15,6 @@ export class UsersClientService extends ClientServiceBaseClass<User> {
 	constructor(protected http: HttpClient, private authService: AuthService) {
 		super(http, User, 'api/users');
 		authService.login$.subscribe(authUser => {
-			console.log("11111");
 			this.checkUserExistence(authUser);
 		});
 	}

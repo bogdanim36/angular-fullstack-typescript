@@ -53,10 +53,9 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     }
 
     createItem() {
-        this.moduleService.item = new DailyReport({
+        this.moduleService.item$.next( new DailyReport({
             date: new Date(),
             tasks: [new DailyReportDetail({status: "In progress", percent: "0"})]
-        });
-        console.log(this.item);
+        }));
     }
 }
