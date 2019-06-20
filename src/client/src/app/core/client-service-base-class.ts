@@ -4,7 +4,6 @@ import {environment} from '@app/../environments/environment';
 import {Datasource} from "@app/core/datasource";
 
 export class ClientServiceBaseClass<M> {
-	_items: M[] = [];
 	data: Datasource;
 	urls: any = {};
 	primaryKey: string = 'id';

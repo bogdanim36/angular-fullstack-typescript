@@ -10,13 +10,14 @@ import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/da
 import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
 
 @Component({
-	selector: 'app-entity-form',
-	templateUrl: './daily-report-detail-form.component.html',
-	styleUrls: ['../../../../components/entity-page/form/entity-form.component.scss', './daily-report-detail-form.component.scss']
+    selector: 'app-entity-form',
+    templateUrl: './daily-report-detail-form.component.html',
+    styleUrls: ['../../../../components/entity-page/form/entity-form.component.scss', './daily-report-detail-form.component.scss']
 })
 export class DailyReportDetailFormComponent extends EntityFormComponentBaseClass<DailyReportDetail, DailyReportDetailsUiConfig, DailyReportDetailsClientService> {
+    public remote = false;
 
-	constructor(public entityService: DailyReportDetailsEntityService, public sharedService: AppSharedService) {
-		super(DailyReportDetail, entityService, sharedService);
-	}
+    constructor(public entityService: DailyReportDetailsEntityService, public sharedService: AppSharedService) {
+        super(DailyReportDetail, entityService, sharedService);
+    }
 }
