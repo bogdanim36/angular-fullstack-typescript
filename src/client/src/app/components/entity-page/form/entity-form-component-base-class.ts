@@ -4,7 +4,6 @@ import {GridOptions, RowNode} from 'ag-grid-community';
 import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {ClientServiceBaseClass} from "@app/core/client-service-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
-import {DailyReport} from "@shared/daily-report";
 
 export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends ClientServiceBaseClass<M>> {
 
@@ -138,23 +137,22 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
                 this.cancel();
             } else {
                 if (response.message) this.errorMessages.push(response.message);
-                if (response.erros) this.errors = response.errors;
+                if (response.errors) this.errors = response.errors;
                 console.error('save error', response);
             }
         });
     }
 
-    serviceSave(isNewItem, source, edited): Promise<{status, data}> {
+    serviceSave(isNewItem, source, edited): Promise<{status, data, message?, errors?}> {
         if (this.remote) {
             if (isNewItem)
                 return this.service.create(edited);
             else
                 return this.service.update(source, edited);
         } else {
-            let promise = new Promise<{status, data}>((resolve) => {
-                resolve({status: true, data: edited});
+            return new Promise<{status, data, message?, errors?}>((resolve) => {
+                resolve({status: true, data: edited, errors:null, message:null});
             });
-            return promise;
         }
     }
 
