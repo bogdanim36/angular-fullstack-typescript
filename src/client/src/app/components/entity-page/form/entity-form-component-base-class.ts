@@ -75,12 +75,14 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
         this.editing();
     }
 
+    gridSupressRowSelection() {
+        this.grid.rowSelection = "";
+        this.grid.suppressRowClickSelection = true;
+    }
+
     editing() {
-        if (this.appSharedService.isHandset) {
-        } else {
-            if (this.remote) this.grid.rowSelection = "";
-            this.grid.suppressRowClickSelection = this.remote;
-        }
+        if (!this.appSharedService.isHandset && this.remote) this.gridSupressRowSelection();
+
         this.item = this.createInstance(this.source);
         this.entityService.isEditing = true;
         this.successMessages = [];
@@ -145,15 +147,15 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
         });
     }
 
-    serviceSave(isNewItem, source, edited): Promise<{status, data, message?, errors?}> {
+    serviceSave(isNewItem, source, edited): Promise<{ status, data, message?, errors? }> {
         if (this.remote) {
             if (isNewItem)
                 return this.service.create(edited);
             else
                 return this.service.update(source, edited);
         } else {
-            return new Promise<{status, data, message?, errors?}>((resolve) => {
-                resolve({status: true, data: edited, errors:null, message:null});
+            return new Promise<{ status, data, message?, errors? }>((resolve) => {
+                resolve({status: true, data: edited, errors: null, message: null});
             });
         }
     }
