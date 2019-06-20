@@ -65,6 +65,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     }
 
     modify() {
+        console.log('mopdify', this.item);
         if (this.appSharedService.isHandset) {
             this.source = this.item;
         } else {
@@ -77,8 +78,8 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     editing() {
         if (this.appSharedService.isHandset) {
         } else {
-            this.grid.rowSelection = "";
-            this.grid.suppressRowClickSelection = true;
+            if (this.remote) this.grid.rowSelection = "";
+            this.grid.suppressRowClickSelection = this.remote;
         }
         this.item = this.createInstance(this.source);
         this.entityService.isEditing = true;
@@ -111,12 +112,13 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     }
 
     gridSelectionChanged(grid: GridOptions) {
-        // console.log('selection changed', event.api.getSelectedRows(), this.item);
+        console.log('selection changed', this.item);
         let nodes = grid.api.getSelectedNodes();
         if (nodes.length) this.selectedGridRowNode = nodes[0];
         else this.selectedGridRowNode = null;
         if (this.selectedGridRowNode) this.item = this.selectedGridRowNode.data;
         else this.item = this.createInstance({});
+        if (!this.remote) this.modify();
     }
 
     showSuccessMsg(msg) {

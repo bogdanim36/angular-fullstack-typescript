@@ -18,28 +18,28 @@
 
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['status']}}</mat-label>
-            <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['status']"/>
+            <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['status']" (blur)="save()"/>
             <mat-error *ngIf="errors['status']">
                 <p *ngFor="let msg of errors['status']">{{msg}}</p>
             </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['percent']}}</mat-label>
-            <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['percent']"/>
+            <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['percent']" (blur)="save()"/>
             <mat-error *ngIf="errors['percent']">
                 <p *ngFor="let msg of errors['percent']">{{msg}}</p>
             </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['taiga']}}</mat-label>
-            <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['taiga']"/>
+            <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['taiga']" (blur)="save()"/>
             <mat-error *ngIf="errors['taiga']">
                 <p *ngFor="let msg of errors['taiga']">{{msg}}</p>
             </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['subsection']}}</mat-label>
-            <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['subsection']"/>
+            <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['subsection']" (blur)="save()"/>
             <mat-error *ngIf="errors['subsection']">
                 <p *ngFor="let msg of errors['subsection']">{{msg}}</p>
             </mat-error>
@@ -47,7 +47,7 @@
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['description']}}</mat-label>
             <textarea matInput matAutosizeMaxRows="4" autocomplete="off" matTextareaAutosize="true"
-                      [disabled]="!entityService.isEditing" [(ngModel)]="item['description']"></textarea>
+                      [disabled]="!entityService.isEditing" [(ngModel)]="item['description']" (blur)="save()"></textarea>
             <mat-error *ngIf="errors['description']">
                 <p *ngFor="let msg of errors['description']">{{msg}}</p>
             </mat-error>
@@ -68,21 +68,21 @@
         <div class="right-side">
             <!--add button-->
             <button mat-icon-button
-                    *ngIf="!entityService.isEditing "
+                    *ngIf="!entityService.isEditing || !remote"
                     color="primary"
                     (click)='newItem()'>
                 <mat-icon>add</mat-icon>
             </button>
             <!--modify button-->
             <button mat-icon-button
-                    *ngIf="!entityService.isEditing"
+                    *ngIf="!entityService.isEditing && remote"
                     [disabled]="!hasItem"
                     color="primary"
                     (click)='modify()'>
                 <mat-icon>edit</mat-icon>
             </button>
             <!--delete button-->
-            <div *ngIf="!entityService.isEditing" style="display: inline-block">
+            <div *ngIf="!entityService.isEditing || !remote" style="display: inline-block">
                 <mat-menu #deleteMenu="matMenu">
                     <div style="display: flex;flex-direction: column;margin:0 10px">
                         <button mat-flat-button
@@ -129,7 +129,7 @@
             <!--save button-->
             <button mat-flat-button
                     color="accent"
-                    *ngIf="entityService.isEditing"
+                    *ngIf="entityService.isEditing && remote"
                     (click)='save()'>
                 <mat-icon>check</mat-icon>
                 {{uiConfig.labels.save}}
@@ -137,7 +137,7 @@
             <!--cancel button-->
             <button mat-flat-button
                     color="warn"
-                    *ngIf="entityService.isEditing"
+                    *ngIf="entityService.isEditing && remote"
                     (click)='cancel()'>
                 <mat-icon>cancel</mat-icon>
                 {{uiConfig.labels.cancel}}
