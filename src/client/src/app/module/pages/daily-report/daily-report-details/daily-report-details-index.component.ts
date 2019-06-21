@@ -10,6 +10,7 @@ import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/da
 import {DailyReportDetailFormComponent} from "@app/module/pages/daily-report/daily-report-details/daily-report-detail-form.component";
 import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: "app-daily-report-details",
@@ -17,6 +18,7 @@ import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-rep
     styleUrls: ["../../../../components/entity-page/index/entity-index.component.scss", "./daily-report-details-index.component.scss"]
 })
 export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseClass<DailyReportDetail, DailyReportDetailsUiConfig, DailyReportDetailsClientService> implements OnInit, OnDestroy {
+    itemSubscription: Subscription;
 
     constructor(appShared: AppSharedService,
                 public service: DailyReportDetailsClientService,
@@ -29,7 +31,8 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
     }
 
     getTasks(item) {
-        this.service.data.items = item.tasks;
+        if (this.service) this.service.data.items = item.tasks;
+        if (!this.grid) return;
         setTimeout(() => {
             let nodes = this.grid.api.getRenderedNodes();
             if (nodes.length) {
@@ -42,11 +45,11 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
     ngOnInit() {
         this.componentIsLoaded('data');
         if (this.moduleService.item) this.getTasks(this.moduleService.item);
-        this.moduleService.item$.subscribe(this.getTasks);
+        this.itemSubscription = this.moduleService.item$.subscribe(this.getTasks);
     }
 
     ngOnDestroy(): void {
-        this.moduleService.item$.unsubscribe();
+        this.itemSubscription.unsubscribe();
     }
 
     @ViewChild('gridForm', {read: ViewContainerRef}) set gridFormContent(content: ViewContainerRef) {

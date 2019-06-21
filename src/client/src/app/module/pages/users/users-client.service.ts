@@ -34,18 +34,22 @@ export class UsersClientService extends ClientServiceBaseClass<User> {
 			if (!response.data) {
 				//create user
 				let createResponse = await this.create({email: user.email, firstName, lastName});
-				if (createResponse.status) {
-					console.log("user created", createResponse.data);
-				} else {
-					console.error("user cannot be created", createResponse);
-				}
+				// if (createResponse.status) {
+				// 	console.log("user created", createResponse.data);
+				// } else {
+				// 	console.error("user cannot be created", createResponse);
+				// }
+				return createResponse;
 			} else {
 				let userFound = this.createInstance(response.data);
 				if (userFound.fullName !== user.displayName) {
 					let editedUser = ObjectAssign(userFound, {firstName, lastName});
-					let updateResponse = this.update(userFound, editedUser);
+					let updateResponse = await this.update(userFound, editedUser);
 					//update fullname;
-				}
+					return updateResponse;
+				} else
+					return {status:true, data: userFound};
+
 			}
 		} else return null;
 

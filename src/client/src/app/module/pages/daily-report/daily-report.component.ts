@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from "@angular/core";
+import {Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
 
 import {AppSharedService} from "@app/core/app-shared.service";
 
@@ -20,6 +20,8 @@ import {Team} from "@shared/team";
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
 import {DailyReportDetail} from "@shared/daily-report-detail";
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
+import {Subscription} from "rxjs";
+
 
 @Component({
     selector: "app-entity-form",
@@ -30,11 +32,12 @@ import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-rep
         {provide: MAT_DATE_FORMATS, useValue: DATE_FORMAT}
     ]
 })
-export class DailyReportComponent extends EntityFormComponentBaseClass<DailyReport, DailyReportUiConfig, DailyReportClientService> implements OnDestroy {
+export class DailyReportComponent extends EntityFormComponentBaseClass<DailyReport, DailyReportUiConfig, DailyReportClientService> implements OnDestroy, OnInit {
     @ViewChild(MatDatepicker) reportDate: MatDatepicker<Date>;
     departmentAutocomplete: AutocompleteConfig<Department>;
     teamAutocomplete: AutocompleteConfig<Team>;
     projectAutocomplete: AutocompleteConfig<Project>;
+    itemSubscription: Subscription;
 
     constructor(public entityService: EntityService,
                 public sharedService: AppSharedService,
@@ -43,29 +46,40 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
                 public moduleService: DailyReportModuleService,
                 public departmentsService: DepartmentsClientService,
                 public teamsService: TeamsClientService,
-                public projectsService: ProjectsClientService) {
+                public projectsService: ProjectsClientService,
+                private dateAdapter: AppDateAdapter) {
         super(DailyReport, entityService, sharedService);
         this.createItem();
         this.departmentAutocomplete = new AutocompleteConfig<Department>('id', 'name', this.departmentsService);
         this.teamAutocomplete = new AutocompleteConfig<Team>('id', 'name', this.teamsService);
         this.projectAutocomplete = new AutocompleteConfig<Project>('id', 'name', this.projectsService);
         this.entityService.isEditing = true;
-        this.moduleService.item$.subscribe(item => this.item = item);
+        if (this.moduleService.item) this.item = this.moduleService.item;
+        this.itemSubscription = this.moduleService.item$.subscribe(item => {
+            this.item = item;
+            console.log('item subscription');
+        });
+    }
+
+    ngOnInit(): void {
     }
 
     createItem() {
         this.moduleService.item$.next(new DailyReport({
+            userId: this.appSharedService.currentUser.id,
             date: new Date(),
             tasks: [new DailyReportDetail({status: "In progress", percent: ""})]
         }));
     }
 
     ngOnDestroy(): void {
-        this.moduleService.item$.unsubscribe();
+        this.itemSubscription.unsubscribe();
     }
 
     save() {
         console.log("item to save", this.item);
-        super.save();
+        let item: any = Object.assign({}, this.item);
+        item.date = this.dateAdapter.format(this.item.date, 'YYYY-MM-DD');
+        super.save(item);
     }
 }

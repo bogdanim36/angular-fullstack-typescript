@@ -129,9 +129,9 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
         }, 2000);
     }
 
-    save() {
+    save(source?) {
         this.working = true;
-        this.serviceSave(this.isNewItem, this.source, this.item).then(response => {
+        this.serviceSave(this.isNewItem, this.source, source || this.item).then(response => {
             this.working = false;
             if (response.status) {
                 this.showSuccessMsg(this.uiConfig.labels.itemIsSaved);

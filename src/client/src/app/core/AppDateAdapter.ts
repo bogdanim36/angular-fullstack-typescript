@@ -21,6 +21,8 @@ export class AppDateAdapter extends NativeDateAdapter {
         const year = date.getFullYear();
         if (displayFormat === "input") {
             return this._to2digit(day) + '.' + this._to2digit(month) + '.' + year;
+        } else if (displayFormat === "YYYY-MM-DD") {
+            return year + '-' + this._to2digit(month) + '-' + this._to2digit(day) ;
         } else if (displayFormat === "inputMonth") {
             return  this._to2digit(month) + '.' + year;
         } else {

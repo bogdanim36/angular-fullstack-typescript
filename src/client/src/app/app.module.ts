@@ -9,6 +9,7 @@ import {AppSharedService} from '@app/core/app-shared.service';
 import {AdminModule} from "@app/admin/admin.module";
 import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {UsersClientService} from "@app/module/pages/users/users-client.service";
 
 @NgModule({
     declarations: [
@@ -23,7 +24,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         AdminModule,
     ],
     bootstrap: [AppComponent],
-    providers: [AppSharedService]
+    providers: [AppSharedService, UsersClientService]
 })
 export class AppModule {
 }

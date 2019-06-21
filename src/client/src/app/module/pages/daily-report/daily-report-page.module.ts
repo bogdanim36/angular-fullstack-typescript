@@ -25,6 +25,7 @@ import {DailyReportDetailFormComponent} from "@app/module/pages/daily-report/dai
 import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-ui-config";
 import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-client.service";
 import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
+import {AppDateAdapter} from "@app/core/AppDateAdapter";
 
 
 
@@ -37,7 +38,7 @@ import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/da
 	declarations: [
 		DailyReportComponent,
 		DailyReportDetailsIndexComponent,
-		DailyReportDetailFormComponent
+		DailyReportDetailFormComponent,
 	],
 	providers: [
 		DailyReportClientService,
@@ -45,7 +46,8 @@ import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/da
 		DailyReportDetailsUiConfig,
 		DailyReportDetailsClientService,
 		DailyReportDetailsEntityService,
-		EntityService
+		EntityService,
+		AppDateAdapter
 	],
 	imports: [
 		AngularFontAwesomeModule,

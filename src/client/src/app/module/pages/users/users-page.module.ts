@@ -30,7 +30,6 @@ import {UsersGridToolbarComponent} from "@app/module/pages/users/users-grid-tool
 		UsersGridToolbarComponent
 	],
 	providers: [
-		UsersClientService,
 		UsersUiConfig,
 		EntityService
 	],
