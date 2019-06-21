@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 
-import {EntityService} from "@app/components/entity-page/entity.service";
 import {EntityFormComponentBaseClass} from "@app/components/entity-page/form/entity-form-component-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
@@ -19,5 +18,10 @@ export class DailyReportDetailFormComponent extends EntityFormComponentBaseClass
 
     constructor(public entityService: DailyReportDetailsEntityService, public sharedService: AppSharedService) {
         super(DailyReportDetail, entityService, sharedService);
+    }
+    newItem() {
+        this.source = this.createInstance({status:"In progress"});
+        this.isNewItem = true;
+        this.editing();
     }
 }
