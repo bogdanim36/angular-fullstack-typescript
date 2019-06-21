@@ -65,7 +65,6 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     }
 
     modify() {
-        console.log('mopdify', this.item);
         if (this.appSharedService.isHandset) {
             this.source = this.item;
         } else {
@@ -75,14 +74,15 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
         this.editing();
     }
 
-    gridSupressRowSelection() {
-        this.grid.rowSelection = "";
-        this.grid.suppressRowClickSelection = true;
+    gridSuppressRowSelection(value) {
+        if (!this.grid) return;
+        this.grid.rowSelection = value? "": "single";
+        this.grid.suppressRowClickSelection = value;
+        this.grid.suppressCellSelection = value;
     }
 
     editing() {
-        if (!this.appSharedService.isHandset && this.remote) this.gridSupressRowSelection();
-
+        if (!this.appSharedService.isHandset && this.remote) this.gridSuppressRowSelection(true);
         this.item = this.createInstance(this.source);
         this.entityService.isEditing = true;
         this.successMessages = [];
@@ -98,8 +98,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
             if (this.service.data.currentItem) this.item = this.service.data.currentItem;
             else this.item = this.createInstance({});
         } else {
-            this.grid.suppressRowClickSelection = false;
-            this.grid.rowSelection = "single";
+            this.gridSuppressRowSelection(false);
             this.gridSelectionChanged(this.grid);
         }
     }
