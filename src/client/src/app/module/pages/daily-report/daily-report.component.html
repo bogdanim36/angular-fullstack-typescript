@@ -26,7 +26,8 @@
                 <input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
                        (ngModelChange)="departmentAutocomplete.search($event)"
                        [(ngModel)]="moduleService.item['departmentId']" [matAutocomplete]="departmentAutocompleteRef"/>
-                <button mat-button *ngIf="moduleService.item['departmentId'] && entityService.isEditing" matSuffix mat-icon-button
+                <button mat-button *ngIf="moduleService.item['departmentId'] && entityService.isEditing" matSuffix
+                        mat-icon-button
                         aria-label="Clear"
                         (click)="moduleService.item['departmentId']=null;departmentAutocomplete.search(null, moduleService.item.id)">
                     <mat-icon>close</mat-icon>
@@ -45,7 +46,8 @@
                 <input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
                        (ngModelChange)="teamAutocomplete.search($event)"
                        [(ngModel)]="moduleService.item['teamId']" [matAutocomplete]="teamAutocompleteRef"/>
-                <button mat-button *ngIf="moduleService.item['teamId'] && entityService.isEditing" matSuffix mat-icon-button
+                <button mat-button *ngIf="moduleService.item['teamId'] && entityService.isEditing" matSuffix
+                        mat-icon-button
                         aria-label="Clear"
                         (click)="moduleService.item['teamId']=null;teamAutocomplete.search(null, moduleService.item.id)">
                     <mat-icon>close</mat-icon>
@@ -63,7 +65,8 @@
                 <input matInput autocomplete="off" type="text" [disabled]="!entityService.isEditing"
                        (ngModelChange)="projectAutocomplete.search($event)"
                        [(ngModel)]="moduleService.item['projectId']" [matAutocomplete]="projectAutocompleteRef"/>
-                <button mat-button *ngIf="moduleService.item['projectId'] && entityService.isEditing" matSuffix mat-icon-button
+                <button mat-button *ngIf="moduleService.item['projectId'] && entityService.isEditing" matSuffix
+                        mat-icon-button
                         aria-label="Clear"
                         (click)="moduleService.item['projectId']=null;projectAutocomplete.search(null, moduleService.item.id)">
                     <mat-icon>close</mat-icon>
@@ -78,18 +81,19 @@
                 </mat-error>
             </mat-form-field>
 
-            <div *ngIf="errorMessages.length" class="errors">
-                <ul class="ui-corner-all">
-                    <li *ngFor="let message of errorMessages">{{message}}</li>
-                </ul>
-            </div>
-            <div *ngIf="successMessages.length" class="success">
-                <ul class="ui-corner-all">
-                    <li *ngFor="let message of successMessages">{{message}}</li>
-                </ul>
-            </div>
+
         </div>
         <app-daily-report-details style="position: relative;height:500px"></app-daily-report-details>
+        <div *ngIf="errorMessages.length" class="errors">
+            <ul class="ui-corner-all">
+                <li *ngFor="let message of errorMessages">{{message}}</li>
+            </ul>
+        </div>
+        <div *ngIf="successMessages.length" class="success">
+            <ul class="ui-corner-all">
+                <li *ngFor="let message of successMessages">{{message}}</li>
+            </ul>
+        </div>
     </mat-card-content>
     <mat-toolbar class="grid-toolbar" role="footer">
         {{uiConfig.labels.itemDetails}}
