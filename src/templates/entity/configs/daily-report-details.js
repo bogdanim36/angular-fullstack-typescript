@@ -12,7 +12,8 @@ module.exports = function () {
 		config.script.column('status', 'varchar(20)', false, null, false);
 		config.script.column('percent', 'varchar(20)', false, null, false);
 		config.script.column('taiga', 'varchar(15)', true, null, false);
-		config.script.column('subsection', 'varchar(300)', true, null, false);
+		config.script.column('subsection', 'varchar(200)', true, null, false);
+		config.script.column('subsection', 'varchar(500)', true, null, false);
 	};
 	config.model.build = function () {
 		config.model.regular("id", true, "number");
@@ -20,6 +21,7 @@ module.exports = function () {
 		config.model.regular("percent", true, "string");
 		config.model.regular("taiga", true, "string");
 		config.model.regular("subsection", true, "string");
+		config.model.regular("description", true, "string");
 	};
 	config.uiConfig.build = function () {
 		config.uiConfig.formPanelWidth = '400px';
@@ -31,17 +33,20 @@ module.exports = function () {
 		config.uiConfig.specific("percent", "Percent", "Procent");
 		config.uiConfig.specific("taiga", "Taiga#", "Taiga#");
 		config.uiConfig.specific("subsection", "Subsection", "Sectiune");
+		config.uiConfig.specific("description", "Description", "Descriere");
 
 		config.uiConfig.column('status', 100, true);
 		config.uiConfig.column('percent', 100, true);
 		config.uiConfig.column('taiga', 100, true);
-		config.uiConfig.column('subsection', 300, false);
+		config.uiConfig.column('subsection', 250, false);
+		config.uiConfig.column('description', 500, false);
 	};
 	config.form.build = function () {
 		config.form.inputText('content', 'status');
 		config.form.inputText('content', 'percent');
 		config.form.inputText('content', 'taiga');
-		config.form.inputTextarea('content', 'subsection', false, false, 4);
+		config.form.inputText('content', 'subsection');
+		config.form.inputTextarea('content', 'description', false, false, 4);
 	};
 	return config;
 };

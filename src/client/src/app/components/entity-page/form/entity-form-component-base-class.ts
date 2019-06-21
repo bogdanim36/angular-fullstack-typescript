@@ -78,7 +78,8 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
         if (!this.grid) return;
         this.grid.rowSelection = value? "": "single";
         this.grid.suppressRowClickSelection = value;
-        this.grid.suppressCellSelection = value;
+        // this.grid.suppressCellSelection = value;
+        this.grid.suppressCellSelection = true;
     }
 
     editing() {

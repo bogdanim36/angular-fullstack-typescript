@@ -6,6 +6,7 @@ export class EntityUiConfig {
 	columns: TableColumn[] = [];
 	components: any;
 	gridRowActionsMenu: { title: string, actionName: String }[];
+	gridSuppressCellSelection = true;
 	gridContext: any;
 	gridRowHeight: number = 30;
 	gridRowHeaderHeight: number = 36;
@@ -56,6 +57,7 @@ export class EntityUiConfig {
 	}
 
 	setGridOptions(grid: GridOptions) {
+		grid.suppressCellSelection = this.gridSuppressCellSelection;
 		grid.rowHeight = this.gridRowHeight;
 		grid.headerHeight = this.gridRowHeaderHeight;
 		grid.columnDefs = this.columns;
