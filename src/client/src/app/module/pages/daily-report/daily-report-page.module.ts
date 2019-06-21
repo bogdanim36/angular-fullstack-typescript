@@ -25,7 +25,6 @@ import {DailyReportDetailFormComponent} from "@app/module/pages/daily-report/dai
 import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-ui-config";
 import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-client.service";
 import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
-import {DailyReportModuleService} from "@app/module/pages/daily-report/DailyReportModuleService";
 
 
 

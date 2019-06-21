@@ -19,7 +19,7 @@ import {ProjectsClientService} from "@app/module/pages/projects/projects-client.
 import {Team} from "@shared/team";
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
 import {DailyReportDetail} from "@shared/daily-report-detail";
-import {DailyReportModuleService} from "@app/module/pages/daily-report/DailyReportModuleService";
+import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
 
 @Component({
     selector: "app-entity-form",

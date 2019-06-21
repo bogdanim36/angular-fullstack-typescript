@@ -13,7 +13,6 @@ export class DailyReportModuleService {
     constructor() {
         this.item$.subscribe(item => {
             this.item = item;
-            console.log("set new item", item);
         });
     }
 }

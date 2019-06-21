@@ -113,7 +113,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     }
 
     gridSelectionChanged(grid: GridOptions) {
-        console.log('selection changed', this.item);
+        // console.log('selection changed', this.item);
         let nodes = grid.api.getSelectedNodes();
         if (nodes.length) this.selectedGridRowNode = nodes[0];
         else this.selectedGridRowNode = null;
