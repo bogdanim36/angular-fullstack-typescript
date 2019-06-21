@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
+import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import {DomSanitizer} from "@angular/platform-browser";
 
 import {AppSharedService} from "@app/core/app-shared.service";
@@ -16,7 +16,7 @@ import {DailyReportModuleService} from "@app/module/pages/daily-report/DailyRepo
     templateUrl: "../../../../components/entity-page/index/entity-index.component.html",
     styleUrls: ["../../../../components/entity-page/index/entity-index.component.scss", "./daily-report-details-index.component.scss"]
 })
-export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseClass<DailyReportDetail, DailyReportDetailsUiConfig, DailyReportDetailsClientService> implements OnInit {
+export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseClass<DailyReportDetail, DailyReportDetailsUiConfig, DailyReportDetailsClientService> implements OnInit, OnDestroy {
 
     constructor(appShared: AppSharedService,
                 public service: DailyReportDetailsClientService,
@@ -43,6 +43,10 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
         this.componentIsLoaded('data');
         if (this.moduleService.item) this.getTasks(this.moduleService.item);
         this.moduleService.item$.subscribe(this.getTasks);
+    }
+
+    ngOnDestroy(): void {
+        this.moduleService.item$.unsubscribe();
     }
 
     @ViewChild('gridForm', {read: ViewContainerRef}) set gridFormContent(content: ViewContainerRef) {

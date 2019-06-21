@@ -1,4 +1,4 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component, OnDestroy, ViewChild} from "@angular/core";
 
 import {AppSharedService} from "@app/core/app-shared.service";
 
@@ -30,7 +30,7 @@ import {DailyReportModuleService} from "@app/module/pages/daily-report/DailyRepo
         {provide: MAT_DATE_FORMATS, useValue: DATE_FORMAT}
     ]
 })
-export class DailyReportComponent extends EntityFormComponentBaseClass<DailyReport, DailyReportUiConfig, DailyReportClientService> {
+export class DailyReportComponent extends EntityFormComponentBaseClass<DailyReport, DailyReportUiConfig, DailyReportClientService> implements OnDestroy {
     @ViewChild(MatDatepicker) reportDate: MatDatepicker<Date>;
     departmentAutocomplete: AutocompleteConfig<Department>;
     teamAutocomplete: AutocompleteConfig<Team>;
@@ -50,15 +50,20 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
         this.teamAutocomplete = new AutocompleteConfig<Team>('id', 'name', this.teamsService);
         this.projectAutocomplete = new AutocompleteConfig<Project>('id', 'name', this.projectsService);
         this.entityService.isEditing = true;
+        this.moduleService.item$.subscribe(item => this.item = item);
     }
 
     createItem() {
-        this.moduleService.item$.subscribe(item=>this.item=item);
-        this.moduleService.item$.next( new DailyReport({
+        this.moduleService.item$.next(new DailyReport({
             date: new Date(),
             tasks: [new DailyReportDetail({status: "In progress", percent: ""})]
         }));
     }
+
+    ngOnDestroy(): void {
+        this.moduleService.item$.unsubscribe();
+    }
+
     save() {
         console.log("item to save", this.item);
         super.save();
