@@ -17,6 +17,7 @@ export class UsersServerController extends ServerServiceController<User, UsersSe
 	}
 
 	checkUserExistence(req: Request, res: Response) {
+		console.log('route:', req.route, 'body:',  req.body, 'params', req.params );
 		if (!this.isAuthenticated(req, res)) return;
 		if (!req.body.email) ServerResponse.error(res, {message: 'No email provided as parameter'});
 		else if (!req.body.displayName) ServerResponse.error(res, {message: 'No displayName provided as parameter'});
