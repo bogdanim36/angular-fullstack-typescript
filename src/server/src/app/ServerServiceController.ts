@@ -13,12 +13,14 @@ export class ServerServiceController<M, S extends ServerService<M, R>, R extends
     }
 
     getAll(req: Request, res: Response, next: NextFunction) {
+        console.log('get all', req );
         this.service.getAll().then((data: Array<M>) => {
             ServerResponse.success(res, data);
         }, (error) => ServerResponse.error(res, error ));
     }
 
     delete(req: Request, res: Response) {
+        console.log('delete', req );
         if (!this.isAuthenticated(req, res)) return;
         if (!req.params.id) ServerResponse.error(res, {message: 'No id provided as parameter'});
         try {
@@ -37,6 +39,7 @@ export class ServerServiceController<M, S extends ServerService<M, R>, R extends
         }
     }
     post(req: Request, res: Response) {
+        console.log('post', req );
         if (!this.isAuthenticated(req, res)) return;
         if (!req.params.id) ServerResponse.error(res, {message: 'No id provided as parameter'});
         if (!req.body.item) ServerResponse.error(res, {message: 'No item provided as parameter'});
@@ -56,6 +59,7 @@ export class ServerServiceController<M, S extends ServerService<M, R>, R extends
         }
     }
     put(req: Request, res: Response) {
+        console.log('put', req );
         if (!this.isAuthenticated(req, res)) return;
         if (!req.body.item) ServerResponse.error(res, {message: 'No item provided as parameter'});
         try {

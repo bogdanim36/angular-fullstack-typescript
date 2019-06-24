@@ -76,9 +76,9 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
 
     gridSuppressRowSelection(value) {
         if (!this.grid) return;
-        this.grid.rowSelection = value? "": "single";
+        this.grid.rowSelection = value ? "" : "single";
         this.grid.suppressRowClickSelection = value;
-        this.grid.suppressCellSelection = value? this.uiConfig.gridSuppressCellSelection: false;
+        this.grid.suppressCellSelection = value ? this.uiConfig.gridSuppressCellSelection : false;
     }
 
     editing() {
@@ -97,7 +97,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
         if (this.appSharedService.isHandset) {
             if (this.service.data.currentItem) this.item = this.service.data.currentItem;
             else this.item = this.createInstance({});
-        } else {
+        } else if (this.grid) {
             this.gridSuppressRowSelection(false);
             this.gridSelectionChanged(this.grid);
         }
@@ -131,8 +131,10 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
 
     save(source?) {
         this.working = true;
+        this.errorMessages= [];
         this.serviceSave(this.isNewItem, this.source, source || this.item).then(response => {
             this.working = false;
+            console.log("response", response);
             if (response.status) {
                 this.showSuccessMsg(this.uiConfig.labels.itemIsSaved);
                 let item = this.createInstance(response.data);

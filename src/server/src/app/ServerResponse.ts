@@ -14,9 +14,10 @@ export class ServerResponse {
     static error(res: Response, err ) {
         const response = {
             status: false,
-            data: err,
             message: err.message || 'Server internal error'
         };
+        if (err.message && err.errors) response.errors=err.errors;
+        else response.errors = err;
         console.error("server-response-error", err.message);
         res.send(response);
     }
