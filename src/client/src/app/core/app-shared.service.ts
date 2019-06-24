@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {AuthService} from "@app/admin/auth.service";
 import {LoginComponent} from "@app/admin/login/login.component";
@@ -15,6 +15,7 @@ export class AppSharedService {
 	hideAppFrame;
 	isHandset$: Observable<boolean>;
 	currentUser: User;
+	currentUser$: Subject<User> = new Subject();
 
 	constructor(private breakpointObserver: BreakpointObserver, public authService: AuthService, public userService: UsersClientService) {
 		console.log('new instance !!!!!!');
@@ -37,12 +38,14 @@ export class AppSharedService {
 				console.log('Viewport is big enough !');
 			}
 		});
+		this.currentUser$.subscribe(user=>this.currentUser =user);
 		let userSubscription = this.authService.afAuth.authState.subscribe(authUser => {
 			userService.checkUserExistence(authUser).then(response => {
 				if (response.status) {
-					this.currentUser = response.data;
+					this.currentUser$.next(response.data);
+					// this.currentUser = response.data;
 					console.log('check user exists', authUser, response);
-					userSubscription.unsubscribe();
+					// userSubscription.unsubscribe();
 				}
 			});
 		});

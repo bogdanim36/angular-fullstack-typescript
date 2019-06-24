@@ -7,9 +7,9 @@ CREATE TABLE `daily-report`
     `id`           INT(11) NOT NULL AUTO_INCREMENT,
     `userId`       INT(11) NOT NULL,
     `date`         DATE    NOT NULL,
-    `departmentId` DATE    NOT NULL,
-    `teamId`       DATE    NOT NULL,
-    `projectId`    DATE    NOT NULL,
+    `departmentId` INT(11) NOT NULL,
+    `teamId`       INT(11) NOT NULL,
+    `projectId`    INT(11) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 16

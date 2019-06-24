@@ -38,6 +38,7 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     teamAutocomplete: AutocompleteConfig<Team>;
     projectAutocomplete: AutocompleteConfig<Project>;
     itemSubscription: Subscription;
+    currentUserSubscription: Subscription;
 
     constructor(public entityService: EntityService,
                 public sharedService: AppSharedService,
@@ -49,7 +50,8 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
                 public projectsService: ProjectsClientService,
                 private dateAdapter: AppDateAdapter) {
         super(DailyReport, entityService, sharedService);
-        this.createItem();
+        if (this.appSharedService.currentUser) this.createItem(this.appSharedService.currentUser);
+        else this.currentUserSubscription = this.appSharedService.currentUser$.subscribe(user=>this.createItem(user));
         this.departmentAutocomplete = new AutocompleteConfig<Department>('id', 'name', this.departmentsService);
         this.teamAutocomplete = new AutocompleteConfig<Team>('id', 'name', this.teamsService);
         this.projectAutocomplete = new AutocompleteConfig<Project>('id', 'name', this.projectsService);
@@ -64,9 +66,9 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     ngOnInit(): void {
     }
 
-    createItem() {
+    createItem(user) {
         this.moduleService.item$.next(new DailyReport({
-            userId: this.appSharedService.currentUser.id,
+            userId: user.id,
             date: new Date(),
             tasks: [new DailyReportDetail({status: "In progress", percent: ""})]
         }));

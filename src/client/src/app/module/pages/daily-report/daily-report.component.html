@@ -3,10 +3,10 @@
 </mat-toolbar>
 
 <div class="form-body box-shadow">
-    <mat-spinner [style.visibility]="working?'visible':'hidden'" diameter="20">
+    <mat-spinner [style.visibility]="working || !moduleService.item?'visible':'hidden'" diameter="20">
     </mat-spinner>
 
-    <mat-card-content>
+    <mat-card-content *ngIf="moduleService.item">
         <div style="display: inline;" class="master">
             <mat-form-field>
                 <mat-label>{{uiConfig.labels.specific.date}}</mat-label>
