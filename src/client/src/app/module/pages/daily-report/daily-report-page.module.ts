@@ -27,8 +27,6 @@ import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/da
 import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
 import {AppDateAdapter} from "@app/core/AppDateAdapter";
 
-
-
 @NgModule({
 	entryComponents: [
 		DailyReportComponent,

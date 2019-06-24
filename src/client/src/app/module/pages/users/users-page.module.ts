@@ -12,7 +12,6 @@ import {AgGridModule} from "ag-grid-angular";
 
 import {EntityPageModule} from "@app/components/entity-page/entity-page.module";
 import {UsersIndexComponent} from "@app/module/pages/users/users-index.component";
-import {UsersClientService} from "@app/module/pages/users/users-client.service";
 import {UsersUiConfig} from "@app/module/pages/users/users-ui-config";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";
 import {EntityService} from "@app/components/entity-page/entity.service";

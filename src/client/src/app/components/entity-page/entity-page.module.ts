@@ -10,9 +10,7 @@ import {
 	MatToolbarModule
 } from "@angular/material";
 import {GridActionColumnComponent} from "@app/components/entity-page/index/grid-action-column.component";
-import {AppSharedService} from "@app/core/app-shared.service";
 import {GridRowActionsMenuColumnComponent} from "@app/components/entity-page/index/grid-row-actions-menu-column.component";
-import {BrowserModule} from "@angular/platform-browser";
 import {CommonModule} from "@angular/common";
 
 @NgModule({
@@ -35,7 +33,7 @@ import {CommonModule} from "@angular/common";
 		MatOptionModule,
 		AgGridModule.withComponents([])
 	],
-	providers: [AppSharedService]
+	providers: []
 })
 
 export class EntityPageModule {

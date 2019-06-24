@@ -5,11 +5,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
 import {AppLayoutModule} from '@app/layout/app-layout.module';
-import {AppSharedService} from '@app/core/app-shared.service';
 import {AdminModule} from "@app/admin/admin.module";
 import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {UsersClientService} from "@app/module/pages/users/users-client.service";
+import {AppSharedModule} from "@app/core/app-shared.module";
 
 @NgModule({
     declarations: [
@@ -22,9 +21,10 @@ import {UsersClientService} from "@app/module/pages/users/users-client.service";
         AppRoutingModule,
         AppLayoutModule,
         AdminModule,
+		AppSharedModule
     ],
     bootstrap: [AppComponent],
-    providers: [AppSharedService, UsersClientService]
+    providers: []
 })
 export class AppModule {
 }

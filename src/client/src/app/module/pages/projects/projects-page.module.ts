@@ -1,8 +1,6 @@
 import {NgModule} from "@angular/core";
-import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CommonModule} from "@angular/common";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {
@@ -20,7 +18,6 @@ import {ProjectFormComponent} from "@app/module/pages/projects/project-form.comp
 import {GridBooleanCellRenderComponent, GridBooleanCellRenderModule} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 import {EntityService} from "@app/components/entity-page/entity.service";
 import {ProjectsRoutingModule} from "@app/module/pages/projects/projects-routing.module";
-
 
 
 @NgModule({

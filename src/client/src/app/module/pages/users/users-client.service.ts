@@ -28,6 +28,7 @@ export class UsersClientService extends ClientServiceBaseClass<User> {
 
 	async checkUserExistence(user: AuthUser): Promise<any> {
 		const url = `${this.baseRoute}/checkUserExistence`;
+		if (!user) return {status:false };
 		const response = await this.http.post<ServerResponse>(url, user).toPromise<ServerResponse>();
 		let {firstName, lastName} = this.splitFullName(user.displayName);
 		if (response.status) {
