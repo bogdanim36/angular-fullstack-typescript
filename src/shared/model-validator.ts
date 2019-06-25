@@ -13,9 +13,11 @@ export class ModelValidator<M> {
         this.item = item;
     }
 
-    getRuleForField(field, rule) {
+    getRuleForField(field, ruleName, overwrite?:Partial<ValidatorRule>) {
         if (!this.rules[field]) this.rules[field] = [];
-        this.rules[field].push(new this.existingRules[rule](this.item, field));
+        let ruleObj = new this.existingRules[ruleName](this.item, field);
+        if (typeof overwrite === "object") Object.assign(ruleObj,overwrite);
+        this.rules[field].push(ruleObj);
     }
 
     pass(): boolean {
