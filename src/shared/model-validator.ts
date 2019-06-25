@@ -1,29 +1,38 @@
 export class ModelValidator<M> {
 
-    existingRules= {
+    existingRules = {
         required: RequiredValidatorRule,
         integer: IntegerValidatorRule
     };
     rules: any;
     errors: any;
+    item: M;
 
-    constructor(protected modelClass: M & Function) {
+    constructor(item) {
+        this.rules = {};
+        this.item = item;
     }
 
-    createInstance(source: Partial<M>, extra?: any): M {
-        return new this.modelClass.prototype.constructor(source, extra);
+    getRuleForField(field, rule) {
+        if (!this.rules[field]) this.rules[field] = [];
+        this.rules[field].push(new this.existingRules[rule](this.item, field));
     }
 
-    pass():boolean {
-        let stopProcessing=false;
-        Object.keys(this.rules).forEach(key=>{
+    pass(): boolean {
+        let errors = {};
+        Object.keys(this.rules).forEach(key => {
             let rules = this.rules[key];
-            rules.forEach(rule:ValidatorRule=>{
-                if (rule.pass())return true;
-                if (rule.)
-            })
-        })
-        return true;
+            errors[key] = [];
+            rules.find((rule: ValidatorRule) => {
+                if (rule.pass()) return false;
+                errors[key].push(rule.message);
+                return rule.stopProcessing;
+            });
+            if (errors[key].length === 0) delete errors[key];
+        });
+        if (Object.keys(errors).length === 0) return true;
+        this.errors = errors;
+        return false;
     }
 
 }
@@ -33,6 +42,7 @@ export class ValidatorRule {
     item: any;
     field: string;
     message: string;
+    stopProcessing = false;
 
     pass(): boolean {
         return true;
@@ -41,12 +51,14 @@ export class ValidatorRule {
 
 export class RequiredValidatorRule extends ValidatorRule {
     name = 'required';
-    message = `${this.field} is required!`;
+    message: string;
+    stopProcessing = true;
 
     constructor(item, field) {
         super();
         this.item = item;
         this.field = field;
+        this.message = `${this.field} is required!`;
     }
 
     pass() {
@@ -57,16 +69,21 @@ export class RequiredValidatorRule extends ValidatorRule {
 
 export class IntegerValidatorRule extends ValidatorRule {
     name = 'integer';
-    message = `${this.field} is integer!`;
+    message: string;
+    stopProcessing = true;
 
     constructor(item, field) {
         super();
         this.item = item;
         this.field = field;
+        this.message = `${this.field} must be an integer!`;
     }
 
     pass() {
-        if (this.item[this.field] === undefined) return false;
-        return this.item[this.field] !== null;
+        let value = this.item[this.field];
+        if (value === undefined) return false;
+        if (value === null) return false;
+        if (typeof value !== "number") return false;
+        return parseInt(value.toString(), 10) === value;
     }
 }

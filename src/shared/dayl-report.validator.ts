@@ -1,13 +1,13 @@
-import {ModelValidator, ValidatorRule} from "@shared/model-validator";
+import {ModelValidator} from "@shared/model-validator";
 import {DailyReport} from "@shared/daily-report";
 
 export class DailyReportValidator extends ModelValidator<DailyReport> {
 
     constructor(item) {
-        super(DailyReport);
-        console.log('required', item);
-        let userId = this.rules['userId'] = [];
-        userId.push(new this.existingRules.required('userId', item));
-        userId.push(new this.existingRules.integer('userId', item));
+        super(item);
+        this.getRuleForField('userId', 'required');
+        this.getRuleForField('userId', 'integer');
+        this.getRuleForField('departmentId', 'required');
+        this.getRuleForField('departmentId', 'integer');
     }
 }
