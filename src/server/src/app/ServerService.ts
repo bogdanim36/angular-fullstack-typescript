@@ -4,7 +4,6 @@ import {OkPacket} from '@server/app/OkPacket';
 
 export class ServerService<M, R extends ServerRepository> {
     public repository: R;
-    public children: any;
 
     constructor(protected modelClass: M & Function, protected store: ServerStore) {
     }
@@ -44,7 +43,7 @@ export class ServerService<M, R extends ServerRepository> {
         });
     }
 
-    itemValidation(item): { status: boolean, error: any } {
+    itemValidation(item): { status: boolean, errors: any } {
         return {status: false, errors: {errors: {a: "1", b: "2"}, message: 'Item validation failed'}};
     }
 

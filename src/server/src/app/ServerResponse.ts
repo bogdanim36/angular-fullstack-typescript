@@ -14,6 +14,7 @@ export class ServerResponse {
     static error(res: Response, err ) {
         const response = {
             status: false,
+            errors:null,
             message: err.message || 'Server internal error'
         };
         if (err.message && err.errors) response.errors=err.errors;
