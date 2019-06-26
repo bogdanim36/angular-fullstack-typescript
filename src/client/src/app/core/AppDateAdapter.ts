@@ -15,16 +15,19 @@ export class AppDateAdapter extends NativeDateAdapter {
         const timestamp = typeof value === 'number' ? value : Date.parse(value);
         return isNaN(timestamp) ? null : new Date(timestamp);
     }
+
     format(date: Date, displayFormat: string): string {
+        if (date === null) return '';
+        if (date === undefined) return '';
         const day = date.getDate();
         const month = date.getMonth() + 1;
         const year = date.getFullYear();
         if (displayFormat === "input") {
             return this._to2digit(day) + '.' + this._to2digit(month) + '.' + year;
         } else if (displayFormat === "YYYY-MM-DD") {
-            return year + '-' + this._to2digit(month) + '-' + this._to2digit(day) ;
+            return year + '-' + this._to2digit(month) + '-' + this._to2digit(day);
         } else if (displayFormat === "inputMonth") {
-            return  this._to2digit(month) + '.' + year;
+            return this._to2digit(month) + '.' + year;
         } else {
             return date.toDateString();
         }

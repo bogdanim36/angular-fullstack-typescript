@@ -7,7 +7,13 @@ export class DailyReportValidator extends ModelValidator<DailyReport> {
         super(item);
         this.getRuleForField('userId', 'required');
         this.getRuleForField('userId', 'integer');
+        this.getRuleForField('date', 'required');
+        this.getRuleForField('date', 'date');
         this.getRuleForField('departmentId', 'required');
         this.getRuleForField('departmentId', 'integer');
+        this.getRuleForField('teamId', 'required');
+        this.getRuleForField('teamId', 'integer');
+        this.getRuleForField('projectId', 'required');
+        this.getRuleForField('projectId', 'integer');
     }
 }

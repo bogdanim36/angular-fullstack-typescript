@@ -17,9 +17,9 @@
                        [(ngModel)]="moduleService.item.date"/>
                 <mat-datepicker-toggle matSuffix [for]="reportDate"></mat-datepicker-toggle>
                 <mat-datepicker #reportDate></mat-datepicker>
-                <mat-error *ngIf="errors['date']">
+                <div class="form-field-error" *ngIf="errors['date']">
                     <p *ngFor="let msg of errors['date']">{{msg}}</p>
-                </mat-error>
+                </div>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>{{uiConfig.labels.specific['departmentId']}}</mat-label>
@@ -37,9 +37,9 @@
                     <mat-option *ngFor="let option of departmentAutocomplete.filteredItems"
                                 [value]="option.id">{{option.name}}</mat-option>
                 </mat-autocomplete>
-                <mat-error *ngIf="errors['departmentId']">
-                    <p *ngFor="let msg of errors['departmentId']">{{msg}}</p>
-                </mat-error>
+                <div class="form-field-error" *ngIf="errors.departmentId">
+                    <p *ngFor="let msg of errors.departmentId">{{msg}}</p>
+                </div>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>{{uiConfig.labels.specific['teamId']}}</mat-label>
@@ -56,9 +56,9 @@
                     <mat-option *ngFor="let option of teamAutocomplete.filteredItems"
                                 [value]="option.id">{{option.name}}</mat-option>
                 </mat-autocomplete>
-                <mat-error *ngIf="errors['teamId']">
+                <div class="form-field-error"  *ngIf="errors['teamId']">
                     <p *ngFor="let msg of errors['teamId']">{{msg}}</p>
-                </mat-error>
+                </div>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>{{uiConfig.labels.specific['projectId']}}</mat-label>
@@ -76,9 +76,9 @@
                     <mat-option *ngFor="let option of projectAutocomplete.filteredItems"
                                 [value]="option.id">{{option.name}}</mat-option>
                 </mat-autocomplete>
-                <mat-error *ngIf="errors['projectId']">
+                <div class="form-field-error" *ngIf="errors['projectId']">
                     <p *ngFor="let msg of errors['projectId']">{{msg}}</p>
-                </mat-error>
+                </div>
             </mat-form-field>
 
 

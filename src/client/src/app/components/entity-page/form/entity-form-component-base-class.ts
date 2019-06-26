@@ -132,6 +132,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     save(source?) {
         this.working = true;
         this.errorMessages= [];
+        this.errors=null;
         this.serviceSave(this.isNewItem, this.source, source || this.item).then(response => {
             this.working = false;
             console.log("response", response);
@@ -141,7 +142,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
                 this.editEvent.emit({item: item, isNewItem: this.isNewItem});
                 this.cancel();
             } else {
-                if (response.message) this.errorMessages.push(response.message);
+                if (response.message && !response.errors) this.errorMessages.push(response.message);
                 if (response.errors) this.errors = response.errors;
                 console.error('save error', response);
             }
