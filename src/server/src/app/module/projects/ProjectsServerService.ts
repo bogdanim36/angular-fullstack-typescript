@@ -1,13 +1,13 @@
 import {ServerService} from '@server/app/ServerService';
 import {ProjectsServerRepository} from './ProjectsServerRepository';
 import {ServerStore} from '@server/app/ServerStore';
-import {Project} from '@shared/models/project';
+import {Project} from '@shared/models/project/project';
+import {ProjectModelExtended} from "@shared/models/project/project.model-extended";
 
-export class ProjectsServerService extends ServerService<Project, ProjectsServerRepository> {
+export class ProjectsServerService extends ServerService<Project, ProjectModelExtended,  ProjectsServerRepository> {
 	public repository: ProjectsServerRepository;
 
 	constructor(protected store: ServerStore) {
-		super(Project, store);
-		this.repository = new ProjectsServerRepository(store);
+		super(Project, ProjectModelExtended, ProjectsServerRepository, store);
 	}
 }

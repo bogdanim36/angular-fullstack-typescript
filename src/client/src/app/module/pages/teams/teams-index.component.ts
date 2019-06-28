@@ -5,7 +5,7 @@ import {AppSharedService} from "@app/core/app-shared.service";
 import {EntityIndexComponentBaseClass} from "@app/components/entity-page/index/entity-index-component-base-class";
 import {EntityService} from "@app/components/entity-page/entity.service";
 
-import {Team} from "@shared/models/team";
+import {Team} from "@shared/models/team/team";
 import {TeamsUiConfig} from "@app/module/pages/teams/teams-ui-config";
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
 import {TeamFormComponent} from "@app/module/pages/teams/team-form.component";

@@ -1,14 +1,14 @@
 import {ServerService} from '@server/app/ServerService';
 import {UsersServerRepository} from './UsersServerRepository';
 import {ServerStore} from '@server/app/ServerStore';
-import {User} from '@shared/models/user';
+import {User} from '@shared/models/user/user';
+import {UserModelExtended} from "@shared/models/user/user.model-extended";
 
-export class UsersServerService extends ServerService<User, UsersServerRepository> {
+export class UsersServerService extends ServerService<User, UserModelExtended, UsersServerRepository> {
 	public repository: UsersServerRepository;
 
 	constructor(protected store: ServerStore) {
-		super(User, store);
-		this.repository = new UsersServerRepository(store);
+		super(User, UserModelExtended, UsersServerRepository, store);
 	}
 
 	getOneByEmail(email): Promise<any> {

@@ -4,7 +4,7 @@ import {EntityService} from "@app/components/entity-page/entity.service";
 import {EntityFormComponentBaseClass} from "@app/components/entity-page/form/entity-form-component-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
-import {User} from "@shared/models/user";
+import {User} from "@shared/models/user/user";
 import {UsersUiConfig} from "@app/module/pages/users/users-ui-config";
 import {UsersClientService} from "@app/module/pages/users/users-client.service";
 

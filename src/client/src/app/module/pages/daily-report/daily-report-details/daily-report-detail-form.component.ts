@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {EntityFormComponentBaseClass} from "@app/components/entity-page/form/entity-form-component-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
-import {DailyReportDetail} from "@shared/models/daily-report-detail";
+import {DailyReportDetail} from "@shared/models/daily-report-detail/daily-report-detail";
 import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-ui-config";
 import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-client.service";
 import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";

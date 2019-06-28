@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 import {ClientServiceBaseClass} from '@app/core/client-service-base-class';
-import {DailyReportDetail} from '@shared/models/daily-report-detail';
+import {DailyReportDetail} from '@shared/models/daily-report-detail/daily-report-detail';
 
 @Injectable({providedIn: 'root'})
 export class DailyReportDetailsClientService extends ClientServiceBaseClass<DailyReportDetail> {

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
+import {Routes, RouterModule, NoPreloading} from '@angular/router';
 import {AuthGuard} from "@app/admin/guard/auth.guard";
 const routes: Routes = [
 	{path: '', redirectTo: 'daily-report/add', pathMatch: "full"},
@@ -11,7 +11,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes, {enableTracing: false, preloadingStrategy:PreloadAllModules})],
+	imports: [RouterModule.forRoot(routes, {enableTracing: false, preloadingStrategy:NoPreloading})],
 	exports: [RouterModule]
 })
 export class AppRoutingModule {

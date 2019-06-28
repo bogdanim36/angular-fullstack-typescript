@@ -5,7 +5,7 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {Router} from "@angular/router";
 import {AuthUser} from "@app/admin/auth.user";
 import {Subject} from "rxjs";
-import {User} from "@shared/models/user";
+import {User} from "@shared/models/user/user";
 
 @Injectable({
 	providedIn: 'root'

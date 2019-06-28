@@ -1,4 +1,4 @@
-import {DailyReport} from "@shared/models/daily-report";
+import {DailyReport} from "@shared/models/daily-report/daily-report";
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs";
 import {DailyReportPageModule} from "@app/module/pages/daily-report/daily-report-page.module";

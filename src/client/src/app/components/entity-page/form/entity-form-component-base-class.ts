@@ -132,7 +132,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     save(source?) {
         this.working = true;
         this.errorMessages= [];
-        this.errors=null;
+        this.errors = this.createInstance({});
         this.serviceSave(this.isNewItem, this.source, source || this.item).then(response => {
             this.working = false;
             console.log("response", response);

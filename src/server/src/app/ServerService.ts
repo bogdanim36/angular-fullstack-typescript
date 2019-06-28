@@ -2,15 +2,22 @@ import {ServerStore} from '@server/app/ServerStore';
 import {ServerRepository} from '@server/app/ServerRepository';
 import {OkPacket} from '@server/app/OkPacket';
 
-export class ServerService<M, R extends ServerRepository> {
+export class ServerService<M, X, R extends ServerRepository> {
     public repository: R;
+    public modelExtended: any;
 
-    constructor(protected modelClass: M & Function, protected store: ServerStore) {
+    constructor(private modelClass: new (source,extra)=> M ,
+                private modelExtendedClass: new ()=> X,
+                private repositoryClass: new (store)=> R,
+                protected store: ServerStore) {
+        this.modelExtended = new modelExtendedClass();
+        this.repository = new this.repositoryClass(store);
     }
 
     createInstance(source: Partial<M>, extra?: any): M {
-        return new this.modelClass.prototype.constructor(source, extra);
+        return new this.modelClass(source, extra);
     }
+
 
     injectModelInCollection(input) {
         let output = [];
@@ -43,8 +50,9 @@ export class ServerService<M, R extends ServerRepository> {
         });
     }
 
-    itemValidation(item): { status: boolean, errors: any } {
-        return {status: false, errors: {errors: {a: "1", b: "2"}, message: 'Item validation failed'}};
+    itemValidation(item): { status: boolean, errors?: any } {
+        return {status: true};
+        // return {status: false, errors: {errors: {a: "1", b: "2"}, message: 'Item validation failed'}};
     }
 
     create(item): Promise<M> {

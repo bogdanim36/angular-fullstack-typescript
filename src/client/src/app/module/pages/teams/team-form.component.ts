@@ -4,7 +4,7 @@ import {EntityService} from "@app/components/entity-page/entity.service";
 import {EntityFormComponentBaseClass} from "@app/components/entity-page/form/entity-form-component-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
-import {Team} from "@shared/models/team";
+import {Team} from "@shared/models/team/team";
 import {TeamsUiConfig} from "@app/module/pages/teams/teams-ui-config";
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
 

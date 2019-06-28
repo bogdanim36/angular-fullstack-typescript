@@ -1,11 +1,11 @@
 import {Application, NextFunction, Request, Response} from 'express';
 import {ServerResponse} from '@server/app/ServerResponse';
 import {ServerController} from '@server/app/ServerController';
-import {ServerService} from '@server/app/ServerService';
 import {ServerRepository} from '@server/app/ServerRepository';
+import {ServerService} from "@server/app/ServerService";
 
 
-export class ServerServiceController<M, S extends ServerService<M, R>, R extends ServerRepository> extends ServerController {
+export class ServerServiceController<M, S extends ServerService<M, any, R>, R extends ServerRepository> extends ServerController {
     protected service: S;
 
     constructor(protected app: Application, controllerRoute) {
