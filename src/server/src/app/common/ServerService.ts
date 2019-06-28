@@ -51,7 +51,7 @@ export class ServerService<M, X, R extends ServerRepository> {
 
     itemValidation(item): { status: boolean; errors?: any, message?:string } {
         let validator = this.modelExtended.createValidator();
-        if (validator.pass(item)) return {status:true, errors:null};
+        if (validator.pass(item, this.modelExtended.relations)) return {status:true, errors:null};
         else return {status: false, errors: validator.errors, message: 'Item validation failed!'};
     }
     create(item): Promise<M> {

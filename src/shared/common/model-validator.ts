@@ -19,7 +19,7 @@ export class ModelValidator<M> {
         this.rules[field].push(ruleObj);
     }
 
-    pass(item): boolean {
+    pass(item, relations): boolean {
         let errors = {};
         Object.keys(this.rules).forEach(key => {
             let rules = this.rules[key];
@@ -31,9 +31,19 @@ export class ModelValidator<M> {
             });
             if (errors[key].length === 0) delete errors[key];
         });
-        if (Object.keys(errors).length === 0) return true;
+        if (Object.keys(errors).length === 0) return this.validateRelations(item, relations, errors);
         this.errors = errors;
         return false;
+    }
+
+    private validateRelations(item, relations, errors): boolean {
+        Object.keys(relations).forEach(relation => {
+            let relationData: {class, type} = item[relation];
+            if (!relationData) return;
+            let relationClass = relationData.class;
+            let relationType = relationData.type;
+        });
+        return true;
     }
 
 }
@@ -110,7 +120,7 @@ export class DateTypeValidatorRule extends ValidatorRule {
         let year = parseInt(value.substring(0, 4), 10);
         let month = parseInt(value.substring(5, 7), 10);
         let day = parseInt(value.substring(8, 10), 10);
-        let validYear = year >0 ;
+        let validYear = year > 0;
         let validMonth = month > 0 && month < 12;
         let validDay = day > 0 && day < 31;
         return (!(!validYear || !validMonth || !validDay));
