@@ -3,8 +3,8 @@ import {DailyReport} from "./daily-report";
 
 export class DailyReportValidator extends ModelValidator<DailyReport> {
 
-    constructor(item) {
-        super(item);
+    constructor() {
+        super();
         this.getRuleForField('userId', 'required');
         this.getRuleForField('userId', 'integer');
         this.getRuleForField('date', 'required');

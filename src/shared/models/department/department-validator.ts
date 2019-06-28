@@ -3,8 +3,8 @@ import {Department} from "@shared/models/department/department";
 
 export class DepartmentValidator extends ModelValidator<Department> {
 
-    constructor(item) {
-        super(item);
+    constructor() {
+        super();
         this.getRuleForField('name', 'required');
     }
 }

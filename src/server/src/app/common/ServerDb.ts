@@ -1,8 +1,8 @@
 import mysql = require('mysql');
 import {SharedHelper} from '@shared/shared-helper';
 import {ConfigDb} from '@server/ConfigDb';
-import {ServerStore} from '@server/app/ServerStore';
-import {TableStructureRowData} from '@server/app/TableStructureRowData';
+import {ServerStore} from '@server/app/common/ServerStore';
+import {TableStructureRowData} from '@server/app/common/TableStructureRowData';
 
 export class ServerDb {
     config: ConfigDb;

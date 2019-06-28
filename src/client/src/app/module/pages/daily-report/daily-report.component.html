@@ -96,7 +96,6 @@
         </div>
     </mat-card-content>
     <mat-toolbar class="grid-toolbar" role="footer">
-        {{uiConfig.labels.itemDetails}}
         <div class="right-side">
             <!--add button-->
             <button mat-icon-button
@@ -107,7 +106,7 @@
             </button>
             <!--modify button-->
             <button mat-icon-button
-                    *ngIf="!entityService.isEditing"
+                    *ngIf="!entityService.isEditing || false"
                     [disabled]="!hasItem"
                     color="primary"
                     (click)='modify()'>

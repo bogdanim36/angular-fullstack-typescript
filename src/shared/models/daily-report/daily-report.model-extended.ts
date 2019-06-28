@@ -1,15 +1,16 @@
-import {ModelExtended, RelationType} from "../../common/model-extended";
-import {DailyReport} from "./daily-report";
+import {RelationType} from "../../common/model-extended";
 import {DailyReportValidator} from "./daily-report.validator";
 import {DailyReportDetail} from "../daily-report-detail/daily-report-detail";
+import {DailyReport} from "@shared/models/daily-report/daily-report";
 
-export class DailyReportModelExtended extends ModelExtended<DailyReport, DailyReportValidator> {
+export class DailyReportModelExtended {
+    modelClass: DailyReport;
     relations = {
         tasks: {type: RelationType.many, class: DailyReportDetail}
     };
 
-    constructor() {
-        super();
+    createValidator(): DailyReportValidator {
+        return new DailyReportValidator();
     }
 
 }

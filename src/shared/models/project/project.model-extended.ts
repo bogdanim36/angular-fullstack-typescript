@@ -1,12 +1,11 @@
-import {ModelExtended} from "@shared/common/model-extended";
 import {Project} from "@shared/models/project/project";
 import {ProjectValidator} from "@shared/models/project/project-validator";
 
-export class ProjectModelExtended extends ModelExtended<Project, ProjectValidator> {
+export class ProjectModelExtended {
     relations = {};
 
-    constructor() {
-        super();
+    createValidator(): ProjectValidator {
+        return new ProjectValidator();
     }
 
 }

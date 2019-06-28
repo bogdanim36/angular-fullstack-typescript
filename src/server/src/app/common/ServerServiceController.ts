@@ -1,8 +1,8 @@
 import {Application, NextFunction, Request, Response} from 'express';
-import {ServerResponse} from '@server/app/ServerResponse';
-import {ServerController} from '@server/app/ServerController';
-import {ServerRepository} from '@server/app/ServerRepository';
-import {ServerService} from "@server/app/ServerService";
+import {ServerResponse} from '@server/app/common/ServerResponse';
+import {ServerController} from '@server/app/common/ServerController';
+import {ServerRepository} from '@server/app/common/ServerRepository';
+import {ServerService} from "@server/app/common/ServerService";
 
 
 export class ServerServiceController<M, S extends ServerService<M, any, R>, R extends ServerRepository> extends ServerController {

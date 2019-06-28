@@ -3,8 +3,8 @@ import {Team} from "@shared/models/team/team";
 
 export class TeamValidator extends ModelValidator<Team> {
 
-    constructor(item) {
-        super(item);
+    constructor() {
+        super();
         this.getRuleForField('name', 'required');
     }
 }

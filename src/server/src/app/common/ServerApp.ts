@@ -2,8 +2,8 @@ import * as express from 'express';
 import {ConfigApi} from '@server/ConfigApi';
 import bodyParser = require('body-parser');
 import {Application} from 'express';
-import {ServerStore} from '@server/app/ServerStore';
-import {ServerLog} from '@server/app/ServerLog';
+import {ServerStore} from '@server/app/common/ServerStore';
+import {ServerLog} from '@server/app/common/ServerLog';
 
 export class ServerApp {
     private app: express.Application;

@@ -1,10 +1,10 @@
-import {ServerServiceController} from '@server/app/ServerServiceController';
-import {ServerStore} from '@server/app/ServerStore';
+import {ServerServiceController} from '@server/app/common/ServerServiceController';
+import {ServerStore} from '@server/app/common/ServerStore';
 import {User} from '@shared/models/user/user';
 import {UsersServerService} from '@module/users/UsersServerService';
 import {UsersServerRepository} from '@module/users/UsersServerRepository';
 import {Request, Response} from "express";
-import {ServerResponse} from "@server/app/ServerResponse";
+import {ServerResponse} from "@server/app/common/ServerResponse";
 
 export class UsersServerController extends ServerServiceController<User, UsersServerService, UsersServerRepository> {
 	service: UsersServerService;

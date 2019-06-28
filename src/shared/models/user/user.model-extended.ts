@@ -1,12 +1,10 @@
-import {ModelExtended} from "@shared/common/model-extended";
 import {UserValidator} from "@shared/models/user/user-validator";
 import {User} from "@shared/models/user/user";
 
-export class UserModelExtended extends ModelExtended<User, UserValidator> {
+export class UserModelExtended  {
     relations = {};
 
-    constructor() {
-        super();
+    createValidator(): UserValidator {
+        return new UserValidator();
     }
-
 }

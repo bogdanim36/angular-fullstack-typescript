@@ -7,27 +7,25 @@ export class ModelValidator<M> {
     };
     rules: any;
     errors: any;
-    item: M;
 
-    constructor(item) {
+    constructor() {
         this.rules = {};
-        this.item = item;
     }
 
     getRuleForField(field, ruleName, overwrite?: Partial<ValidatorRule>) {
         if (!this.rules[field]) this.rules[field] = [];
-        let ruleObj = new this.existingRules[ruleName](this.item, field);
+        let ruleObj = new this.existingRules[ruleName](field);
         if (typeof overwrite === "object") Object.assign(ruleObj, overwrite);
         this.rules[field].push(ruleObj);
     }
 
-    pass(): boolean {
+    pass(item): boolean {
         let errors = {};
         Object.keys(this.rules).forEach(key => {
             let rules = this.rules[key];
             errors[key] = [];
             rules.find((rule: ValidatorRule) => {
-                if (rule.pass()) return false;
+                if (rule.pass(item)) return false;
                 errors[key].push(rule.message);
                 return rule.stopProcessing;
             });
@@ -47,7 +45,7 @@ export class ValidatorRule {
     message: string;
     stopProcessing = false;
 
-    pass(): boolean {
+    pass(item): boolean {
         return true;
     }
 }
@@ -57,15 +55,14 @@ export class RequiredValidatorRule extends ValidatorRule {
     message: string;
     stopProcessing = true;
 
-    constructor(item, field) {
+    constructor(field) {
         super();
-        this.item = item;
         this.field = field;
         this.message = `Value is required!`;
     }
 
-    pass() {
-        let value = this.item[this.field];
+    pass(item) {
+        let value = item[this.field];
         if (value === undefined) return false;
         // if (typeof value === 'string' && value.length === 0) return false;
         return value !== null;
@@ -77,15 +74,14 @@ export class IntegerTypeValidatorRule extends ValidatorRule {
     message: string;
     stopProcessing = true;
 
-    constructor(item, field) {
+    constructor(field) {
         super();
-        this.item = item;
         this.field = field;
         this.message = `Value must be an integer!`;
     }
 
-    pass() {
-        let value = this.item[this.field];
+    pass(item) {
+        let value = item[this.field];
         if (value === undefined) return false;
         if (value === null) return false;
         if (typeof value !== "number") return false;
@@ -98,15 +94,14 @@ export class DateTypeValidatorRule extends ValidatorRule {
     message: string;
     stopProcessing = true;
 
-    constructor(item, field) {
+    constructor(field) {
         super();
-        this.item = item;
         this.field = field;
         this.message = `Value must be a date!`;
     }
 
-    pass() {
-        let value = this.item[this.field];
+    pass(item) {
+        let value = item[this.field];
         console.log('date value', value);
         if (value === undefined) return false;
         if (value === null) return false;

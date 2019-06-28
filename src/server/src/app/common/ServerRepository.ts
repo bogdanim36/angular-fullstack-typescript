@@ -1,5 +1,5 @@
-import {ServerStore} from '@server/app/ServerStore';
-import {ServerDb} from '@server/app/ServerDb';
+import {ServerStore} from '@server/app/common/ServerStore';
+import {ServerDb} from '@server/app/common/ServerDb';
 
 export class ServerRepository {
     tableName: string;

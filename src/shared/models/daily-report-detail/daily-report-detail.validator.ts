@@ -3,8 +3,8 @@ import {DailyReportDetail} from "@shared/models/daily-report-detail/daily-report
 
 export class DailyReportDetailValidator extends ModelValidator<DailyReportDetail> {
 
-    constructor(item) {
-        super(item);
+    constructor() {
+        super();
         this.getRuleForField('status', 'required');
         this.getRuleForField('percent', 'required');
         this.getRuleForField('subsection', 'required');

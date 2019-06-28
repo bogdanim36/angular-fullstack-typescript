@@ -1,4 +1,4 @@
-import {ServerApp} from '@server/app/ServerApp';
+import {ServerApp} from '@server/app/common/ServerApp';
 import {UsersServerController} from '@module/users/UsersServerController';
 import {ProjectsServerController} from '@module/projects/ProjectsServerController';
 import {TeamsServerController} from '@module/teams/TeamsServerController';

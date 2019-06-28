@@ -3,8 +3,8 @@ import {User} from "@shared/models/user/user";
 
 export class UserValidator extends ModelValidator<User> {
 
-    constructor(item) {
-        super(item);
+    constructor() {
+        super();
         this.getRuleForField('email', 'required');
         this.getRuleForField('firstName', 'required');
         this.getRuleForField('lastName', 'required');

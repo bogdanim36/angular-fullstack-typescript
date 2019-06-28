@@ -1,5 +1,5 @@
-import {ServerServiceController} from '@server/app/ServerServiceController';
-import {ServerStore} from '@server/app/ServerStore';
+import {ServerServiceController} from '@server/app/common/ServerServiceController';
+import {ServerStore} from '@server/app/common/ServerStore';
 import {Project} from '@shared/models/project/project';
 import {ProjectsServerService} from '@module/projects/ProjectsServerService';
 import {ProjectsServerRepository} from '@module/projects/ProjectsServerRepository';

@@ -1,5 +1,5 @@
 import {Application, NextFunction, Request, Response} from 'express';
-import {ServerResponse} from '@server/app/ServerResponse';
+import {ServerResponse} from '@server/app/common/ServerResponse';
 
 export class ServerController {
 
