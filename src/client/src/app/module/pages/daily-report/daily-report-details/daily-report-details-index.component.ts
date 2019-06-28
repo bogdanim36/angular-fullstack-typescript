@@ -4,7 +4,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {AppSharedService} from "@app/core/app-shared.service";
 import {EntityIndexComponentBaseClass} from "@app/components/entity-page/index/entity-index-component-base-class";
 
-import {DailyReportDetail} from "@shared/daily-report-detail";
+import {DailyReportDetail} from "@shared/models/daily-report-detail";
 import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-ui-config";
 import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-client.service";
 import {DailyReportDetailFormComponent} from "@app/module/pages/daily-report/daily-report-details/daily-report-detail-form.component";

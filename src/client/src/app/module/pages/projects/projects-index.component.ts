@@ -5,7 +5,7 @@ import {AppSharedService} from "@app/core/app-shared.service";
 import {EntityIndexComponentBaseClass} from "@app/components/entity-page/index/entity-index-component-base-class";
 import {EntityService} from "@app/components/entity-page/entity.service";
 
-import {Project} from "@shared/project";
+import {Project} from "@shared/models/project";
 import {ProjectsUiConfig} from "@app/module/pages/projects/projects-ui-config";
 import {ProjectsClientService} from "@app/module/pages/projects/projects-client.service";
 import {ProjectFormComponent} from "@app/module/pages/projects/project-form.component";

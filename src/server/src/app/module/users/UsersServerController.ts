@@ -1,6 +1,6 @@
 import {ServerServiceController} from '@server/app/ServerServiceController';
 import {ServerStore} from '@server/app/ServerStore';
-import {User} from '@shared/user';
+import {User} from '@shared/models/user';
 import {UsersServerService} from '@module/users/UsersServerService';
 import {UsersServerRepository} from '@module/users/UsersServerRepository';
 import {Request, Response} from "express";

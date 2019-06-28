@@ -1,4 +1,4 @@
-import {Model} from './model';
+import {Model} from '../common/model';
 
 export class User extends Model {
 

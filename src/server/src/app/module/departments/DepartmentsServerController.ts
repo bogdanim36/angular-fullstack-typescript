@@ -1,6 +1,6 @@
 import {ServerServiceController} from '@server/app/ServerServiceController';
 import {ServerStore} from '@server/app/ServerStore';
-import {Department} from '@shared/department';
+import {Department} from '@shared/models/department';
 import {DepartmentsServerService} from '@module/departments/DepartmentsServerService';
 import {DepartmentsServerRepository} from '@module/departments/DepartmentsServerRepository';
 

@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
 
 import {AppSharedService} from "@app/core/app-shared.service";
 
-import {DailyReport} from "@shared/daily-report";
+import {DailyReport} from "@shared/models/daily-report";
 import {DailyReportClientService} from "@app/module/pages/daily-report/daily-report-client.service";
 import {DailyReportUiConfig} from "@app/module/pages/daily-report/daily-report-ui-config";
 import {EntityService} from "@app/components/entity-page/entity.service";
@@ -12,13 +12,13 @@ import {MAT_DATE_FORMATS} from '@angular/material';
 import {DATE_FORMAT} from "@app/app.constants";
 import {AppDateAdapter} from "@app/core/AppDateAdapter";
 import {AutocompleteConfig} from "@app/core/autocomplete-config";
-import {Project} from "@shared/project";
-import {Department} from "@shared/department";
+import {Project} from "@shared/models/project";
+import {Department} from "@shared/models/department";
 import {DepartmentsClientService} from "@app/module/pages/departments/departments-client.service";
 import {ProjectsClientService} from "@app/module/pages/projects/projects-client.service";
-import {Team} from "@shared/team";
+import {Team} from "@shared/models/team";
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
-import {DailyReportDetail} from "@shared/daily-report-detail";
+import {DailyReportDetail} from "@shared/models/daily-report-detail";
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
 import {Subscription} from "rxjs";
 

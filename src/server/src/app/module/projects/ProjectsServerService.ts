@@ -1,7 +1,7 @@
 import {ServerService} from '@server/app/ServerService';
 import {ProjectsServerRepository} from './ProjectsServerRepository';
 import {ServerStore} from '@server/app/ServerStore';
-import {Project} from '@shared/project';
+import {Project} from '@shared/models/project';
 
 export class ProjectsServerService extends ServerService<Project, ProjectsServerRepository> {
 	public repository: ProjectsServerRepository;

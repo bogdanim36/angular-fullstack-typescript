@@ -1,7 +1,7 @@
 import {ServerService} from '@server/app/ServerService';
 import {UsersServerRepository} from './UsersServerRepository';
 import {ServerStore} from '@server/app/ServerStore';
-import {User} from '@shared/user';
+import {User} from '@shared/models/user';
 
 export class UsersServerService extends ServerService<User, UsersServerRepository> {
 	public repository: UsersServerRepository;

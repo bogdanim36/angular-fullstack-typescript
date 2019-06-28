@@ -5,7 +5,7 @@ import {AppSharedService} from "@app/core/app-shared.service";
 import {EntityIndexComponentBaseClass} from "@app/components/entity-page/index/entity-index-component-base-class";
 import {EntityService} from "@app/components/entity-page/entity.service";
 
-import {User} from "@shared/user";
+import {User} from "@shared/models/user";
 import {UsersUiConfig} from "@app/module/pages/users/users-ui-config";
 import {UsersClientService} from "@app/module/pages/users/users-client.service";
 import {UserFormComponent} from "@app/module/pages/users/user-form.component";

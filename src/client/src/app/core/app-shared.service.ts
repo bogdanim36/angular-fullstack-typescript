@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {AuthService} from "@app/admin/auth.service";
 import {LoginComponent} from "@app/admin/login/login.component";
 import {UsersClientService} from "@app/module/pages/users/users-client.service";
-import {User} from "@shared/user";
+import {User} from "@shared/models/user";
 import {AppSharedModule} from "@app/core/app-shared.module";
 
 @Injectable({providedIn: AppSharedModule})

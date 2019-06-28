@@ -5,7 +5,7 @@ import {EntityService} from "@app/components/entity-page/entity.service";
 import {EntityFormComponentBaseClass} from "@app/components/entity-page/form/entity-form-component-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
-import {Project} from "@shared/project";
+import {Project} from "@shared/models/project";
 import {ProjectsUiConfig} from "@app/module/pages/projects/projects-ui-config";
 import {ProjectsClientService} from "@app/module/pages/projects/projects-client.service";
 import {AutocompleteConfig} from "@app/core/autocomplete-config";

@@ -1,5 +1,5 @@
-import {Model} from './model';
-import {DailyReportDetail} from "@shared/daily-report-detail";
+import {Model} from '../common/model';
+import {DailyReportDetail} from "@shared/models/daily-report-detail";
 
 export class DailyReport extends Model {
 

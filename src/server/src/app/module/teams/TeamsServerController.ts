@@ -1,6 +1,6 @@
 import {ServerServiceController} from '@server/app/ServerServiceController';
 import {ServerStore} from '@server/app/ServerStore';
-import {Team} from '@shared/team';
+import {Team} from '@shared/models/team';
 import {TeamsServerService} from '@module/teams/TeamsServerService';
 import {TeamsServerRepository} from '@module/teams/TeamsServerRepository';
 

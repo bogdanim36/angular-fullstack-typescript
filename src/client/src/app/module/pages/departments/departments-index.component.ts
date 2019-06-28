@@ -5,7 +5,7 @@ import {AppSharedService} from "@app/core/app-shared.service";
 import {EntityIndexComponentBaseClass} from "@app/components/entity-page/index/entity-index-component-base-class";
 import {EntityService} from "@app/components/entity-page/entity.service";
 
-import {Department} from "@shared/department";
+import {Department} from "@shared/models/department";
 import {DepartmentsUiConfig} from "@app/module/pages/departments/departments-ui-config";
 import {DepartmentsClientService} from "@app/module/pages/departments/departments-client.service";
 import {DepartmentFormComponent} from "@app/module/pages/departments/department-form.component";

@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 import {ClientServiceBaseClass} from '@app/core/client-service-base-class';
-import {User} from '@shared/user';
+import {User} from '@shared/models/user';
 import {AuthService} from "@app/admin/auth.service";
 import {ServerResponse} from "@app/core/server.response";
 import {AuthUser} from "@app/admin/auth.user";
