@@ -25,7 +25,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     componentIsLoaded = false;
     public remote = true;
 
-    constructor(protected modelClass: M & Function,
+    constructor(protected modelClass: new (source, extra)=> M,
                 protected entityService: EntityService,
                 protected appSharedService: AppSharedService,
                 protected modelExtended: new ()=> any) {
@@ -43,7 +43,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
         });
         let x = new this.modelExtended();
         let v = new x.validator();
-        let g = new x.modelClass();
+        let g = new x.modelClass({},null);
         console.log('x', x);
     }
 
@@ -54,7 +54,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     }
 
     createInstance(source: Partial<M>, extra?: any): M {
-        return new this.modelClass.prototype.constructor(source, extra);
+        return new this.modelClass(source, extra);
     }
 
     formTitle(): string {

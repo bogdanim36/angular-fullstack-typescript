@@ -18,7 +18,6 @@ export class AppSharedService {
 	currentUser$: Subject<User> = new Subject();
 
 	constructor(private breakpointObserver: BreakpointObserver, public authService: AuthService, public userService: UsersClientService) {
-		console.log('new instance !!!!!!');
 		if (AppSharedService.instance !== undefined) {
 			throw new Error('Import SharedModule only once.');
 		}
@@ -33,9 +32,9 @@ export class AppSharedService {
 		this.isHandset$.subscribe(value => {
 			this.isHandset = value;
 			if (this.isHandset) {
-				console.log('Viewport is  less than 500px !');
+				// console.log('Viewport is  less than 500px !');
 			} else {
-				console.log('Viewport is big enough !');
+				// console.log('Viewport is big enough !');
 			}
 		});
 		this.currentUser$.subscribe(user=>this.currentUser =user);
