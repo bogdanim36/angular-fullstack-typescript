@@ -36,14 +36,25 @@ export class ModelValidator<M> {
         return false;
     }
 
-    private validateRelations(item, relations, errors): boolean {
+    private validateRelations(item, relations: Array<{ class, type, validator }>, errors): boolean {
         Object.keys(relations).forEach(relation => {
-            let relationData: {class, type} = item[relation];
+            let relationData = item[relation];
             if (!relationData) return;
-            let relationClass = relationData.class;
-            let relationType = relationData.type;
+            let modelExtend  = relations[relation];
+            let relationType = modelExtend.type;
+            console.log(relations[relation], relationType, relationData);
+            if (relationType === 'many') {
+                errors[relation]=[];
+                relationData.forEach(itemData => {
+                    let validator = new modelExtend.validator();
+                    let error= validator.pass(itemData, modelExtend.relations)? []: validator.errors;
+                    errors[relation].push(error);
+                });
+            }
         });
-        return true;
+        if (Object.keys(errors).length === 0) return true;
+        this.errors = errors;
+        return false;
     }
 
 }
@@ -74,7 +85,7 @@ export class RequiredValidatorRule extends ValidatorRule {
     pass(item) {
         let value = item[this.field];
         if (value === undefined) return false;
-        // if (typeof value === 'string' && value.length === 0) return false;
+        if (typeof value === 'string' && value.length === 0) return false;
         return value !== null;
     }
 }

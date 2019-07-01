@@ -19,7 +19,7 @@ export class ServerResponse {
         };
         if (err.message && err.errors) response.errors=err.errors;
         else response.errors = err;
-        console.error("server-response-error", err.message);
+        console.error("server-response-error message", err.message);
         res.send(response);
     }
 
