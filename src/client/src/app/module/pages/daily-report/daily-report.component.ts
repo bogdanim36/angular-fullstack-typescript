@@ -21,6 +21,7 @@ import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
 import {DailyReportDetail} from "@shared/models/daily-report-detail/daily-report-detail";
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
 import {Subscription} from "rxjs";
+import {DailyReportModelExtended} from "@shared/models/daily-report/daily-report.model-extended";
 
 
 @Component({
@@ -39,6 +40,7 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     projectAutocomplete: AutocompleteConfig<Project>;
     itemSubscription: Subscription;
     currentUserSubscription: Subscription;
+    modelExtended: DailyReportModelExtended;
 
     constructor(public entityService: EntityService,
                 public sharedService: AppSharedService,
@@ -49,7 +51,7 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
                 public teamsService: TeamsClientService,
                 public projectsService: ProjectsClientService,
                 private dateAdapter: AppDateAdapter) {
-        super(DailyReport, entityService, sharedService);
+        super(DailyReport, entityService, sharedService, DailyReportModelExtended);
         if (this.appSharedService.currentUser) this.createItem(this.appSharedService.currentUser);
         else this.currentUserSubscription = this.appSharedService.currentUser$.subscribe(user=>this.createItem(user));
         this.departmentAutocomplete = new AutocompleteConfig<Department>('id', 'name', this.departmentsService);

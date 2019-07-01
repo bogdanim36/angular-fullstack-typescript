@@ -27,7 +27,8 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
 
     constructor(protected modelClass: M & Function,
                 protected entityService: EntityService,
-                protected appSharedService: AppSharedService) {
+                protected appSharedService: AppSharedService,
+                protected modelExtended: new ()=> any) {
         this.item = this.createInstance({});
         this.errors = this.createInstance({});
         Object.defineProperty(this, 'hasItem', {
@@ -40,6 +41,10 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
                 return appSharedService.isHandset && !entityService.isEditing;
             }
         });
+        let x = new this.modelExtended();
+        let v = new x.validator();
+        let g = new x.modelClass();
+        console.log('x', x);
     }
 
     //callback fired after entity-form.component is injected in entity-index.component

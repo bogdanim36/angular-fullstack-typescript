@@ -5,7 +5,8 @@ import {DailyReport} from "@shared/models/daily-report/daily-report";
 import {DailyReportDetailValidator} from "@shared/models/daily-report-detail/daily-report-detail.validator";
 
 export class DailyReportModelExtended {
-    modelClass: DailyReport;
+    modelClass = DailyReport;
+    validator = DailyReportValidator;
     relations = {
         tasks: {type: RelationType.many, class: DailyReportDetail, validator: DailyReportDetailValidator}
     };

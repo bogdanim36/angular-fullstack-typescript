@@ -11,12 +11,14 @@ export class DailyReportDetailsUiConfig extends EntityUiConfig {
 		this.labels.list = new Translation('Tasks','Taskuri');
 		this.labels.itemDetails = new Translation('Task','Task');
 
+		this.labels.specific.errors = new Translation('Errors','Erori');
 		this.labels.specific.status = new Translation('Status','Status');
 		this.labels.specific.percent = new Translation('Percent','Procent');
 		this.labels.specific.taiga = new Translation('Taiga#','Taiga#');
 		this.labels.specific.subsection = new Translation('Subsection','Sectiune');
 		this.labels.specific.description = new Translation('Description','Descriere');
 
+		this.addColumn({field: 'errors', headerName: this.labels.specific.errors, sortable: true, width: 100});
 		this.addColumn({field: 'status', headerName: this.labels.specific.status, sortable: true, width: 100});
 		this.addColumn({field: 'percent', headerName: this.labels.specific.percent, sortable: true, width: 100});
 		this.addColumn({field: 'taiga', headerName: this.labels.specific.taiga, sortable: true, width: 100});
