@@ -33,14 +33,13 @@ import {DailyReportModelExtended} from "@shared/models/daily-report/daily-report
         {provide: MAT_DATE_FORMATS, useValue: DATE_FORMAT}
     ]
 })
-export class DailyReportComponent extends EntityFormComponentBaseClass<DailyReport, DailyReportUiConfig, DailyReportClientService> implements OnDestroy, OnInit {
+export class DailyReportComponent extends EntityFormComponentBaseClass<DailyReportModelExtended, DailyReportUiConfig, DailyReportClientService> implements OnDestroy, OnInit {
     @ViewChild(MatDatepicker) reportDate: MatDatepicker<Date>;
     departmentAutocomplete: AutocompleteConfig<Department>;
     teamAutocomplete: AutocompleteConfig<Team>;
     projectAutocomplete: AutocompleteConfig<Project>;
     itemSubscription: Subscription;
     currentUserSubscription: Subscription;
-    modelExtended: DailyReportModelExtended;
 
     constructor(public entityService: EntityService,
                 public sharedService: AppSharedService,
@@ -51,7 +50,7 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
                 public teamsService: TeamsClientService,
                 public projectsService: ProjectsClientService,
                 private dateAdapter: AppDateAdapter) {
-        super(DailyReport, entityService, sharedService, DailyReportModelExtended);
+        super(DailyReportModelExtended, entityService, sharedService );
         if (this.appSharedService.currentUser) this.createItem(this.appSharedService.currentUser);
         else this.currentUserSubscription = this.appSharedService.currentUser$.subscribe(user=>this.createItem(user));
         this.departmentAutocomplete = new AutocompleteConfig<Department>('id', 'name', this.departmentsService);

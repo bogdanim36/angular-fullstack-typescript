@@ -4,9 +4,6 @@
 //     constructor(private validatorClass: new (item) => V) {
 //     }
 //
-//     createValidator(item: any): V {
-//         return new this.validatorClass(item);
-//     }
 //
 // }
 

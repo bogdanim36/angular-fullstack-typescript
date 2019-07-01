@@ -1,4 +1,4 @@
-import {ModelValidator} from "../../common/model-validator";
+import {ModelValidator} from "@shared/common/model-validator";
 import {DailyReportDetail} from "@shared/models/daily-report-detail/daily-report-detail";
 
 export class DailyReportDetailValidator extends ModelValidator<DailyReportDetail> {

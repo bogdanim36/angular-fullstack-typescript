@@ -5,7 +5,7 @@ import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {ClientServiceBaseClass} from "@app/core/client-service-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
-export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends ClientServiceBaseClass<M>> {
+export class EntityFormComponentBaseClass<ME, C extends EntityUiConfig, S extends ClientServiceBaseClass<M>> {
 
     @Input() uiConfig: C;
     @Input() grid: GridOptions;
@@ -24,11 +24,13 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     working = false;
     componentIsLoaded = false;
     public remote = true;
+    public modelExtended: { modelClass, validator, relations: any };
 
-    constructor(protected modelClass: new (source, extra)=> M,
+    constructor(protected modelExtendedClass: new () => any,
                 protected entityService: EntityService,
-                protected appSharedService: AppSharedService,
-                protected modelExtended: new ()=> any) {
+                protected appSharedService: AppSharedService
+    ) {
+        this.modelExtended = new modelExtendedClass();
         this.item = this.createInstance({});
         this.errors = this.createInstance({});
         Object.defineProperty(this, 'hasItem', {
@@ -41,10 +43,10 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
                 return appSharedService.isHandset && !entityService.isEditing;
             }
         });
-        let x = new this.modelExtended();
-        let v = new x.validator();
-        let g = new x.modelClass({},null);
-        console.log('x', x);
+        // let x = new this.modelExtended();
+        // let v = new x.validator();
+        // let g = new x.modelClass({},null);
+        // console.log('x', x);
     }
 
     //callback fired after entity-form.component is injected in entity-index.component
@@ -54,7 +56,7 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
     }
 
     createInstance(source: Partial<M>, extra?: any): M {
-        return new this.modelClass(source, extra);
+        return new this.modelExtended.modelClass(source, extra);
     }
 
     formTitle(): string {
@@ -133,12 +135,19 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
             this.successMessages = [];
         }, 2000);
     }
+clearErrors(item){
+    this.errorMessages = [];
+    this.errors = this.createInstance({});
+    Object.keys(this.modelExtended.relations).forEach(relation => {
+        item[relation].forEach(detailRow=>{detailRow.$errors = undefined;});
+    });
 
+}
     save(source?) {
         this.working = true;
-        this.errorMessages= [];
-        this.errors = this.createInstance({});
-        this.serviceSave(this.isNewItem, this.source, source || this.item).then(response => {
+        let itemData = source || this.item;
+        this.clearErrors(itemData);
+        this.serviceSave(this.isNewItem, this.source, itemData).then(response => {
             this.working = false;
             console.log("response", response);
             if (response.status) {
@@ -148,7 +157,16 @@ export class EntityFormComponentBaseClass<M, C extends EntityUiConfig, S extends
                 this.cancel();
             } else {
                 if (response.message && !response.errors) this.errorMessages.push(response.message);
-                if (response.errors) this.errors = response.errors;
+                if (response.errors) {
+                    this.errors = response.errors;
+                    Object.keys(this.modelExtended.relations).forEach(relation => {
+                        if (!response.errors[relation]) return;
+                        response.errors[relation].forEach((error, index)=>{
+                            source[relation][index].$errors = error;
+                        });
+                    });
+                }
+                console.log('errrrr', source);
                 console.error('save error', response);
             }
         });

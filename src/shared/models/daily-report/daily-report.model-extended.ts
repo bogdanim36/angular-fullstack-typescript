@@ -10,9 +10,4 @@ export class DailyReportModelExtended {
     relations = {
         tasks: {type: RelationType.many, class: DailyReportDetail, validator: DailyReportDetailValidator}
     };
-
-    createValidator(): DailyReportValidator {
-        return new DailyReportValidator();
-    }
-
 }

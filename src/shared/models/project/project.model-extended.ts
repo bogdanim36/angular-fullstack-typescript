@@ -3,9 +3,6 @@ import {ProjectValidator} from "@shared/models/project/project-validator";
 
 export class ProjectModelExtended {
     relations = {};
-
-    createValidator(): ProjectValidator {
-        return new ProjectValidator();
-    }
-
+    modelClass = Project;
+    validator = ProjectValidator;
 }
