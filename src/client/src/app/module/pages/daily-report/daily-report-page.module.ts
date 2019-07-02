@@ -26,6 +26,10 @@ import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-r
 import {DailyReportDetailsClientService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-client.service";
 import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
 import {AppDateAdapter} from "@app/core/AppDateAdapter";
+import {
+	GridErrorsCellRenderComponent,
+	GridErrorsCellRenderModule
+} from "@app/components/entity-page/index/grid-errors-cell-render.component";
 
 @NgModule({
 	entryComponents: [
@@ -69,9 +73,10 @@ import {AppDateAdapter} from "@app/core/AppDateAdapter";
 		ScrollingModule,
 		DailyReportRoutingModule,
 		GridBooleanCellRenderModule,
+		GridErrorsCellRenderModule,
 		MatDatepickerModule,
 		MatNativeDateModule,
-		AgGridModule.withComponents([GridBooleanCellRenderComponent])
+		AgGridModule.withComponents([GridBooleanCellRenderComponent, GridErrorsCellRenderComponent])
 	]
 })
 

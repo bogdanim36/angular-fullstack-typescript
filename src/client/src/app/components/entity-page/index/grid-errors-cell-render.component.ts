@@ -4,24 +4,23 @@ import {ColDef} from "ag-grid-community";
 import {MatIconModule} from "@angular/material";
 
 @Component({
-	selector: 'boolean-cell-render',
+	selector: 'errors-cell',
 	template: `
-		 <mat-icon style="height: 100%;width:100%;text-align: center">{{params.value ? iconChecked : iconUnchecked}}</mat-icon>`,
+		 <mat-icon style="height: 100%;width:100%;text-align: center" color="warn">{{show ? 'warning' : ''}}</mat-icon>`,
 	styles: []
 })
-export class GridBooleanCellRenderComponent implements ICellRendererAngularComp {
+export class GridErrorsCellRenderComponent implements ICellRendererAngularComp {
 	public params: any;
 	colDef: ColDef;
-	iconChecked: string;
-	iconUnchecked: string;
+	show=false;
 
 	agInit(params: any): void {
 		this.params = params;
 		this.colDef = params.colDef;
 		if (this.params.context.cellRenders[this.colDef.field]){
-			let cellRenderDef = this.params.context.cellRenders[this.colDef.field];
-			this.iconChecked =cellRenderDef.iconChecked;
-			this.iconUnchecked =cellRenderDef.iconUnchecked;
+			let errors = params.data[this.colDef.field] || {};
+			this.show=Object.keys(errors).length>0;
+			console.log("error render", errors, this.show);
 		}
 	}
 
@@ -36,9 +35,9 @@ export class GridBooleanCellRenderComponent implements ICellRendererAngularComp 
 
 @NgModule({
 	declarations: [
-		GridBooleanCellRenderComponent
+		GridErrorsCellRenderComponent
 	],
 	imports: [MatIconModule],
 })
-export class GridBooleanCellRenderModule {
+export class GridErrorsCellRenderModule {
 }

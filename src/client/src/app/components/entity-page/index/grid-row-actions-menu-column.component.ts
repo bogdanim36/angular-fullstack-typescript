@@ -1,6 +1,5 @@
 import {Component} from "@angular/core";
 import {ICellRendererAngularComp} from "ag-grid-angular";
-import {MatSelect, MatOption} from "@angular/material";
 
 @Component({
 	selector: 'actions-cell',

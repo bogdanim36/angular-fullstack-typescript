@@ -20,7 +20,7 @@ import {Team} from "@shared/models/team/team";
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
 import {DailyReportDetail} from "@shared/models/daily-report-detail/daily-report-detail";
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {DailyReportModelExtended} from "@shared/models/daily-report/daily-report.model-extended";
 
 
@@ -40,6 +40,7 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     projectAutocomplete: AutocompleteConfig<Project>;
     itemSubscription: Subscription;
     currentUserSubscription: Subscription;
+    detailsDataUpdate$: Subject<DailyReport[]> = new Subject();
 
     constructor(public entityService: EntityService,
                 public sharedService: AppSharedService,
@@ -70,6 +71,9 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     createItem(user) {
         this.moduleService.item$.next(new DailyReport({
             userId: user.id,
+            departmentId:16,
+            teamId:16,
+            projectId:2,
             date: new Date(),
             tasks: [new DailyReportDetail({status: "In progress", percent: ""})]
         }));
@@ -83,6 +87,11 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
         console.log("item to save", this.item);
         let item: any = Object.assign({}, this.item);
         item.date = this.dateAdapter.format(this.item.date, 'YYYY-MM-DD');
-        super.save(item);
+        return super.save(item).then(response=>{console.log("super response", response);
+        if (!response.status && response.errors) {
+            detailsDataUpdate$.next()
+        }
+        });
+
     }
 }

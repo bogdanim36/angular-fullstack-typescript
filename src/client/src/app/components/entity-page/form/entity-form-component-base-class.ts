@@ -143,11 +143,11 @@ clearErrors(item){
     });
 
 }
-    save(source?) {
+    save(source?):Promise<any> {
         this.working = true;
         let itemData = source || this.item;
         this.clearErrors(itemData);
-        this.serviceSave(this.isNewItem, this.source, itemData).then(response => {
+        return this.serviceSave(this.isNewItem, this.source, itemData).then(response => {
             this.working = false;
             console.log("response", response);
             if (response.status) {
@@ -157,18 +157,23 @@ clearErrors(item){
                 this.cancel();
             } else {
                 if (response.message && !response.errors) this.errorMessages.push(response.message);
+                if (response.message && response.errors) this.errorMessages.push('You have errors on data send!');
                 if (response.errors) {
                     this.errors = response.errors;
-                    Object.keys(this.modelExtended.relations).forEach(relation => {
-                        if (!response.errors[relation]) return;
-                        response.errors[relation].forEach((error, index)=>{
-                            source[relation][index].$errors = error;
+                    if (this.modelExtended.relations) {
+                        response.detailsUpdate={};
+                        Object.keys(this.modelExtended.relations).forEach(relation => {
+                            if (!response.errors[relation]) return;
+                            response.errors[relation].forEach((error, index) => {
+                                source[relation][index].$errors = error;
+                            });
+                            response.detailsUpdate[relation] =source[relation];
                         });
-                    });
+                    }
                 }
-                console.log('errrrr', source);
                 console.error('save error', response);
             }
+            return response;
         });
     }
 
