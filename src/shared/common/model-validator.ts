@@ -31,7 +31,7 @@ export class ModelValidator<M> {
             });
             if (errors[key].length === 0) delete errors[key];
         });
-        if (Object.keys(errors).length === 0 && relations) return this.validateRelations(item, relations, errors);
+        if (Object.keys(errors).length === 0) if (!relations) return true; else return this.validateRelations(item, relations, errors);
         this.errors = errors;
         return false;
     }
@@ -40,16 +40,21 @@ export class ModelValidator<M> {
         Object.keys(relations).forEach(relation => {
             let relationData = item[relation];
             if (!relationData) return;
-            let modelExtend  = relations[relation];
+            let modelExtend = relations[relation];
             let relationType = modelExtend.type;
             console.log(relations[relation], relationType, relationData);
             if (relationType === 'many') {
-                errors[relation]=[];
+                errors[relation] = [];
+                let errorsCount = 0;
                 relationData.forEach(itemData => {
                     let validator = new modelExtend.validator();
-                    let error= validator.pass(itemData, modelExtend.relations)? []: validator.errors;
+                    let isValid = validator.pass(itemData, modelExtend.relations);
+                    let error = isValid ? [] : validator.errors;
+                    errorsCount += isValid ? 0 : 1;
                     errors[relation].push(error);
                 });
+                if (errorsCount === 0) delete errors[relation];
+                console.log('errors', errorsCount, errors[relation]);
             }
         });
         if (Object.keys(errors).length === 0) return true;
