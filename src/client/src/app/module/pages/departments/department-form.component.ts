@@ -17,6 +17,6 @@ import {DepartmentModelExtended} from "@shared/models/department/department.mode
 export class DepartmentFormComponent extends EntityFormComponentBaseClass<Department, DepartmentModelExtended, DepartmentsUiConfig, DepartmentsClientService> {
 
     constructor(public entityService: EntityService, public sharedService: AppSharedService) {
-        super(Department, entityService, sharedService);
+        super(DepartmentModelExtended, entityService, sharedService);
     }
 }

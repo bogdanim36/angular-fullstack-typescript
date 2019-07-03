@@ -17,6 +17,6 @@ import {TeamModelExtended} from "@shared/models/team/team.model-extended";
 export class TeamFormComponent extends EntityFormComponentBaseClass<Team, TeamModelExtended, TeamsUiConfig, TeamsClientService> {
 
 	constructor(public entityService: EntityService, public sharedService: AppSharedService) {
-		super(Team, entityService, sharedService);
+		super(TeamModelExtended, entityService, sharedService);
 	}
 }

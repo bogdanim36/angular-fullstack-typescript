@@ -20,7 +20,7 @@ export class ProjectFormComponent extends EntityFormComponentBaseClass<Project, 
 	parentAutocomplete:AutocompleteConfig<Project>;
 
 	constructor(public entityService: EntityService, public sharedService: AppSharedService) {
-		super(Project, entityService, sharedService);
+		super(ProjectModelExtended, entityService, sharedService);
 	}
 
 	componentLoaded() {
