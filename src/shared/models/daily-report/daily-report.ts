@@ -7,6 +7,7 @@ export class DailyReport extends Model {
     date?: Date;
     userId?: number;
     departmentId?: number;
+    teamId?: number;
     projectId?: number;
     tasks?: DailyReportDetail[];
 

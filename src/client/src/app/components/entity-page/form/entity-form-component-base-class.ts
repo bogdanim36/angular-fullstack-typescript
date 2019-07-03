@@ -5,7 +5,7 @@ import {EntityUiConfig} from "@app/core/entity-ui-config";
 import {ClientServiceBaseClass} from "@app/core/client-service-base-class";
 import {AppSharedService} from "@app/core/app-shared.service";
 
-export class EntityFormComponentBaseClass<ME, C extends EntityUiConfig, S extends ClientServiceBaseClass<M>> {
+export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S extends ClientServiceBaseClass<M>> {
 
     @Input() uiConfig: C;
     @Input() grid: GridOptions;
@@ -135,15 +135,19 @@ export class EntityFormComponentBaseClass<ME, C extends EntityUiConfig, S extend
             this.successMessages = [];
         }, 2000);
     }
-clearErrors(item){
-    this.errorMessages = [];
-    this.errors = this.createInstance({});
-    Object.keys(this.modelExtended.relations).forEach(relation => {
-        item[relation].forEach(detailRow=>{detailRow.$errors = undefined;});
-    });
 
-}
-    save(source?):Promise<any> {
+    clearErrors(item) {
+        this.errorMessages = [];
+        this.errors = this.createInstance({});
+        Object.keys(this.modelExtended.relations).forEach(relation => {
+            item[relation].forEach(detailRow => {
+                delete detailRow.$errors ;
+            });
+        });
+
+    }
+
+    save(source?): Promise<any> {
         this.working = true;
         let itemData = source || this.item;
         this.clearErrors(itemData);
@@ -157,17 +161,17 @@ clearErrors(item){
                 this.cancel();
             } else {
                 if (response.message && !response.errors) this.errorMessages.push(response.message);
-                if (response.message && response.errors) this.errorMessages.push('You have errors on data send!');
+                if (response.message && response.errors) this.errorMessages.push('You have validation errors!');
                 if (response.errors) {
                     this.errors = response.errors;
                     if (this.modelExtended.relations) {
-                        response.detailsUpdate={};
+                        response.detailsUpdate = {};
                         Object.keys(this.modelExtended.relations).forEach(relation => {
                             if (!response.errors[relation]) return;
                             response.errors[relation].forEach((error, index) => {
                                 source[relation][index].$errors = error;
                             });
-                            response.detailsUpdate[relation] =source[relation];
+                            response.detailsUpdate[relation] = source[relation];
                         });
                     }
                 }
@@ -177,7 +181,7 @@ clearErrors(item){
         });
     }
 
-    serviceSave(isNewItem, source, edited): Promise<{ status, data, message?, errors? }> {
+    serviceSave(isNewItem, source, edited): Promise<{ status, data, message?, errors?, detailsUpdate? }> {
         if (this.remote) {
             if (isNewItem)
                 return this.service.create(edited);

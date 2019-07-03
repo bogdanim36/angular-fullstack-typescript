@@ -33,14 +33,14 @@ import {DailyReportModelExtended} from "@shared/models/daily-report/daily-report
         {provide: MAT_DATE_FORMATS, useValue: DATE_FORMAT}
     ]
 })
-export class DailyReportComponent extends EntityFormComponentBaseClass<DailyReportModelExtended, DailyReportUiConfig, DailyReportClientService> implements OnDestroy, OnInit {
+export class DailyReportComponent extends EntityFormComponentBaseClass<DailyReport, DailyReportModelExtended, DailyReportUiConfig, DailyReportClientService> implements OnDestroy, OnInit {
     @ViewChild(MatDatepicker) reportDate: MatDatepicker<Date>;
     departmentAutocomplete: AutocompleteConfig<Department>;
     teamAutocomplete: AutocompleteConfig<Team>;
     projectAutocomplete: AutocompleteConfig<Project>;
     itemSubscription: Subscription;
     currentUserSubscription: Subscription;
-    detailsDataUpdate$: Subject<DailyReport[]> = new Subject();
+
 
     constructor(public entityService: EntityService,
                 public sharedService: AppSharedService,
@@ -51,9 +51,9 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
                 public teamsService: TeamsClientService,
                 public projectsService: ProjectsClientService,
                 private dateAdapter: AppDateAdapter) {
-        super(DailyReportModelExtended, entityService, sharedService );
+        super(DailyReportModelExtended, entityService, sharedService);
         if (this.appSharedService.currentUser) this.createItem(this.appSharedService.currentUser);
-        else this.currentUserSubscription = this.appSharedService.currentUser$.subscribe(user=>this.createItem(user));
+        else this.currentUserSubscription = this.appSharedService.currentUser$.subscribe(user => this.createItem(user));
         this.departmentAutocomplete = new AutocompleteConfig<Department>('id', 'name', this.departmentsService);
         this.teamAutocomplete = new AutocompleteConfig<Team>('id', 'name', this.teamsService);
         this.projectAutocomplete = new AutocompleteConfig<Project>('id', 'name', this.projectsService);
@@ -71,9 +71,9 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     createItem(user) {
         this.moduleService.item$.next(new DailyReport({
             userId: user.id,
-            departmentId:16,
-            teamId:16,
-            projectId:2,
+            departmentId: 16,
+            teamId: 16,
+            projectId: 2,
             date: new Date(),
             tasks: [new DailyReportDetail({status: "In progress", percent: ""})]
         }));
@@ -87,10 +87,11 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
         console.log("item to save", this.item);
         let item: any = Object.assign({}, this.item);
         item.date = this.dateAdapter.format(this.item.date, 'YYYY-MM-DD');
-        return super.save(item).then(response=>{console.log("super response", response);
-        if (!response.status && response.errors) {
-            detailsDataUpdate$.next()
-        }
+        return super.save(item).then(response => {
+            console.log("super response", response);
+            if (!response.status && response.errors) {
+                this.moduleService.detailsDataUpdate$.next(response.detailsUpdate);
+            }
         });
 
     }

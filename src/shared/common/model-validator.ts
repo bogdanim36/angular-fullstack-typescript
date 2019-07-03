@@ -31,7 +31,7 @@ export class ModelValidator<M> {
             });
             if (errors[key].length === 0) delete errors[key];
         });
-        if (Object.keys(errors).length === 0) return this.validateRelations(item, relations, errors);
+        if (Object.keys(errors).length === 0 && relations) return this.validateRelations(item, relations, errors);
         this.errors = errors;
         return false;
     }

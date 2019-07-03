@@ -8,7 +8,7 @@ export class DailyReportDetailsUiConfig extends EntityUiConfig {
 	constructor() {
 		super();
 		this.formPanelWidth = '400px';
-		this.gridContext = {"cellRenders":{"errors":{}}};
+		this.gridContext = {"cellRenders":{"$errors":{}}};
 
 		this.labels.list = new Translation('Tasks','Taskuri');
 		this.labels.itemDetails = new Translation('Task','Task');
@@ -20,7 +20,7 @@ export class DailyReportDetailsUiConfig extends EntityUiConfig {
 		this.labels.specific.subsection = new Translation('Subsection','Sectiune');
 		this.labels.specific.description = new Translation('Description','Descriere');
 
-		this.addColumn({field: 'errors', headerName: this.labels.specific.errors, sortable: true, width: 80, cellRendererFramework: GridErrorsCellRenderComponent});
+		this.addColumn({field: '$errors', headerName: this.labels.specific.errors, sortable: true, width: 80, cellRendererFramework: GridErrorsCellRenderComponent});
 		this.addColumn({field: 'status', headerName: this.labels.specific.status, sortable: true, width: 100});
 		this.addColumn({field: 'percent', headerName: this.labels.specific.percent, sortable: true, width: 100});
 		this.addColumn({field: 'taiga', headerName: this.labels.specific.taiga, sortable: true, width: 100});

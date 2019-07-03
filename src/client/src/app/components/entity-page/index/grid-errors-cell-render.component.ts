@@ -6,7 +6,7 @@ import {MatIconModule} from "@angular/material";
 @Component({
 	selector: 'errors-cell',
 	template: `
-		 <mat-icon style="height: 100%;width:100%;text-align: center" color="warn">{{show ? 'warning' : ''}}</mat-icon>`,
+		 <mat-icon style="height: 100%;width:100%;text-align: center" color="warn">{{show ? 'error' : ''}}</mat-icon>`,
 	styles: []
 })
 export class GridErrorsCellRenderComponent implements ICellRendererAngularComp {
@@ -20,7 +20,7 @@ export class GridErrorsCellRenderComponent implements ICellRendererAngularComp {
 		if (this.params.context.cellRenders[this.colDef.field]){
 			let errors = params.data[this.colDef.field] || {};
 			this.show=Object.keys(errors).length>0;
-			console.log("error render", errors, this.show);
+			console.log("error render show", errors, this.show);
 		}
 	}
 

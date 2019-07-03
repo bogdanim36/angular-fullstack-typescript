@@ -46,6 +46,11 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
         this.componentIsLoaded('data');
         if (this.moduleService.item) this.getTasks(this.moduleService.item);
         this.itemSubscription = this.moduleService.item$.subscribe(this.getTasks);
+        this.moduleService.detailsDataUpdate$.subscribe(data => {
+            let response = this.grid.api.updateRowData({update: data.tasks});
+            // console.log('grid update', response);
+            // this.grid.api.refreshCells();
+        });
     }
 
     ngOnDestroy(): void {
@@ -84,4 +89,13 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
             handsetForm.setCurrentItem();
         });
     }
+
+    getGridData() {
+        let rowData = [];
+        this.grid.api.forEachNode(function (node) {
+            rowData.push(node.data);
+        });
+        return rowData;
+    }
+
 }

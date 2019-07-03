@@ -9,13 +9,14 @@ import {Project} from "@shared/models/project/project";
 import {ProjectsUiConfig} from "@app/module/pages/projects/projects-ui-config";
 import {ProjectsClientService} from "@app/module/pages/projects/projects-client.service";
 import {AutocompleteConfig} from "@app/core/autocomplete-config";
+import {ProjectModelExtended} from "@shared/models/project/project.model-extended";
 
 @Component({
 	selector: 'app-entity-form',
 	templateUrl: './project-form.component.html',
 	styleUrls: ['../../../components/entity-page/form/entity-form.component.scss', './project-form.component.scss']
 })
-export class ProjectFormComponent extends EntityFormComponentBaseClass<Project, ProjectsUiConfig, ProjectsClientService> {
+export class ProjectFormComponent extends EntityFormComponentBaseClass<Project, ProjectModelExtended, ProjectsUiConfig, ProjectsClientService> {
 	parentAutocomplete:AutocompleteConfig<Project>;
 
 	constructor(public entityService: EntityService, public sharedService: AppSharedService) {

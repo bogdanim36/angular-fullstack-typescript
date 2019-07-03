@@ -14,7 +14,7 @@ import {UserModelExtended} from "@shared/models/user/user.model-extended";
 	templateUrl: './user-form.component.html',
 	styleUrls: ['../../../components/entity-page/form/entity-form.component.scss', './user-form.component.scss']
 })
-export class UserFormComponent extends EntityFormComponentBaseClass<UserModelExtended, UsersUiConfig, UsersClientService> {
+export class UserFormComponent extends EntityFormComponentBaseClass<User, UserModelExtended, UsersUiConfig, UsersClientService> {
 
 	constructor(public entityService: EntityService, public sharedService: AppSharedService) {
 		super(UserModelExtended, entityService, sharedService);
