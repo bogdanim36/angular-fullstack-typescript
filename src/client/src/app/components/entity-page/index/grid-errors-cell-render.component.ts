@@ -20,7 +20,7 @@ export class GridErrorsCellRenderComponent implements ICellRendererAngularComp {
 		if (this.params.context.cellRenders[this.colDef.field]){
 			let errors = params.data[this.colDef.field] || {};
 			this.show=Object.keys(errors).length>0;
-			console.log("error render show", errors, this.show);
+			// console.log("error render show", errors, this.show);
 		}
 	}
 

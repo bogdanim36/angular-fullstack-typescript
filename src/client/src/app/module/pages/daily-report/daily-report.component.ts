@@ -61,7 +61,7 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
         if (this.moduleService.item) this.item = this.moduleService.item;
         this.itemSubscription = this.moduleService.item$.subscribe(item => {
             this.item = item;
-            console.log('item subscription');
+            // console.log('item subscription');
         });
     }
 
@@ -84,11 +84,11 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     }
 
     save() {
-        console.log("item to save", this.item);
+        // console.log("item to save", this.item);
         let item: any = Object.assign({}, this.item);
         item.date = this.dateAdapter.format(this.item.date, 'YYYY-MM-DD');
         return super.save(item).then(response => {
-            console.log("super response", response);
+            // console.log("super response", response);
             if (!response.status && response.errors) {
                 this.moduleService.detailsDataUpdate$.next(response.detailsUpdate);
             }

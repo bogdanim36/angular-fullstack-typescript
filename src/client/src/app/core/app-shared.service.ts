@@ -43,7 +43,7 @@ export class AppSharedService {
 				if (response.status) {
 					this.currentUser$.next(response.data);
 					// this.currentUser = response.data;
-					console.log('check user exists', authUser, response);
+					// console.log('check user exists', authUser, response);
 					// userSubscription.unsubscribe();
 				}
 			});

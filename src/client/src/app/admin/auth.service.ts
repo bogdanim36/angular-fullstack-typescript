@@ -5,7 +5,6 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {Router} from "@angular/router";
 import {AuthUser} from "@app/admin/auth.user";
 import {Subject} from "rxjs";
-import {User} from "@shared/models/user/user";
 
 @Injectable({
 	providedIn: 'root'
@@ -25,7 +24,7 @@ export class AuthService {
 		this.afAuth.authState.subscribe(user => {
 			if (user) {
 				this.userData = user;
-				console.log("user is auth", user);
+				// console.log("user is auth", user);
 				localStorage.setItem('user', JSON.stringify(this.userData));
 				// JSON.parse(localStorage.getItem('user'));
 			} else {
@@ -94,7 +93,7 @@ export class AuthService {
 	AuthLogin(provider) {
 		return this.afAuth.auth.signInWithPopup(provider)
 			.then((result) => {
-				console.log('logged', result);
+				// console.log('logged', result);
 				this.login$.next(this.userData);
 
 				this.ngZone.run(() => {

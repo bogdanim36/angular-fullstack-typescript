@@ -153,7 +153,7 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
         this.clearErrors(itemData);
         return this.serviceSave(this.isNewItem, this.source, itemData).then(response => {
             this.working = false;
-            console.log("response", response);
+            // console.log("response", response);
             if (response.status) {
                 this.showSuccessMsg(this.uiConfig.labels.itemIsSaved);
                 let item = this.createInstance(response.data);
@@ -175,7 +175,7 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
                         });
                     }
                 }
-                console.error('save error', response);
+                // console.error('save error', response);
             }
             return response;
         });
