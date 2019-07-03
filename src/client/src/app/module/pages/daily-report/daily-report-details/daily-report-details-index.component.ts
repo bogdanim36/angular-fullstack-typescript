@@ -19,6 +19,7 @@ import {Subscription} from "rxjs";
 })
 export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseClass<DailyReportDetail, DailyReportDetailsUiConfig, DailyReportDetailsClientService> implements OnInit, OnDestroy {
     itemSubscription: Subscription;
+    detailsDataUpdateSubscription: Subscription;
 
     constructor(appShared: AppSharedService,
                 public service: DailyReportDetailsClientService,
@@ -46,15 +47,17 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
         this.componentIsLoaded('data');
         if (this.moduleService.item) this.getTasks(this.moduleService.item);
         this.itemSubscription = this.moduleService.item$.subscribe(this.getTasks);
-        this.moduleService.detailsDataUpdate$.subscribe(data => {
+        this.detailsDataUpdateSubscription = this.moduleService.detailsDataUpdate$.subscribe(data => {
             let response = this.grid.api.updateRowData({update: data.tasks});
-            // console.log('grid update', response);
+            this.gridSelectionChanged(this.grid);
+            console.log('grid update', response);
             // this.grid.api.refreshCells();
         });
     }
 
     ngOnDestroy(): void {
         this.itemSubscription.unsubscribe();
+        this.detailsDataUpdateSubscription.unsubscribe();
     }
 
     @ViewChild('gridForm', {read: ViewContainerRef}) set gridFormContent(content: ViewContainerRef) {

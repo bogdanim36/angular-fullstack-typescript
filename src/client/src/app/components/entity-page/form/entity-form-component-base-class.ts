@@ -93,6 +93,9 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
         this.item = this.createInstance(this.source);
         this.entityService.isEditing = true;
         this.successMessages = [];
+        if (this.item.$errors) this.errors = this.item.$errors;
+        else this.errors = this.createInstance({});
+
     }
 
     cancel() {
@@ -115,6 +118,8 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
             if (this.service.data.currentItem) this.item = this.service.data.currentItem;
             this.service.data.currentItemChanged.subscribe(item => {
                 this.item = item;
+                if (item.$errors) this.errors = item.$errors;
+                else this.errors = this.createInstance({});
             });
         } else this.gridSelectionChanged(grid);
     }
