@@ -19,38 +19,38 @@
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['status']}}</mat-label>
             <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['status']" (blur)="save()"/>
-            <mat-error *ngIf="errors['status']">
+            <div class="form-field-error" *ngIf="errors['status']">
                 <p *ngFor="let msg of errors['status']">{{msg}}</p>
-            </mat-error>
+            </div>
         </mat-form-field>
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['percent']}}</mat-label>
             <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['percent']" (blur)="save()"/>
-            <mat-error *ngIf="errors['percent']">
+            <div class="form-field-error" *ngIf="errors['percent']">
                 <p *ngFor="let msg of errors['percent']">{{msg}}</p>
-            </mat-error>
+            </div>
         </mat-form-field>
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['taiga']}}</mat-label>
             <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['taiga']" (blur)="save()"/>
-            <mat-error *ngIf="errors['taiga']">
+            <div class="form-field-error" *ngIf="errors['taiga']">
                 <p *ngFor="let msg of errors['taiga']">{{msg}}</p>
-            </mat-error>
+            </div>
         </mat-form-field>
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['subsection']}}</mat-label>
             <input matInput autocomplete="off" [disabled]="!entityService.isEditing" [(ngModel)]="item['subsection']" (blur)="save()"/>
-            <mat-error *ngIf="errors['subsection']">
+            <div class="form-field-error" *ngIf="errors['subsection']">
                 <p *ngFor="let msg of errors['subsection']">{{msg}}</p>
-            </mat-error>
+            </div>
         </mat-form-field>
         <mat-form-field>
             <mat-label>{{uiConfig.labels.specific['description']}}</mat-label>
             <textarea matInput matAutosizeMaxRows="4" autocomplete="off" matTextareaAutosize="true"
                       [disabled]="!entityService.isEditing" [(ngModel)]="item['description']" (blur)="save()"></textarea>
-            <mat-error *ngIf="errors['description']">
+            <div class="form-field-error" *ngIf="errors['description']">
                 <p *ngFor="let msg of errors['description']">{{msg}}</p>
-            </mat-error>
+            </div>
         </mat-form-field>
         <div *ngIf="errorMessages.length" class="errors">
             <ul class="ui-corner-all">
