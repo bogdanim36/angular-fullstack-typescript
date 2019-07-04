@@ -1,6 +1,5 @@
 import {EntityUiConfig} from '@app/core/entity-ui-config';
 import {Translation} from "@app/core/translation";
-import {GridBooleanCellRenderComponent} from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 import {GridErrorsCellRenderComponent} from "@app/components/entity-page/index/grid-errors-cell-render.component";
 
 export class DailyReportDetailsUiConfig extends EntityUiConfig {
@@ -26,6 +25,5 @@ export class DailyReportDetailsUiConfig extends EntityUiConfig {
 		this.addColumn({field: 'taiga', headerName: this.labels.specific.taiga, sortable: true, width: 100});
 		this.addColumn({field: 'subsection', headerName: this.labels.specific.subsection, sortable: false, width: 200});
 		this.addColumn({field: 'description', headerName: this.labels.specific.description, sortable: false, width: 400});
-
 	}
 }

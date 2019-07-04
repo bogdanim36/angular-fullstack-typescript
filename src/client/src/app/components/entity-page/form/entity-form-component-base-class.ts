@@ -12,7 +12,7 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
     @Input() service: S;
     @Output() editEvent: EventEmitter<any> = new EventEmitter();
     @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
-    public item: M;
+    public item: any;
     public source: M;
     public errorMessages: Array<string> = [];
     public successMessages: Array<string> = [];

@@ -36,6 +36,7 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
         if (!this.grid) return;
         setTimeout(() => {
             let nodes = this.grid.api.getRenderedNodes();
+            console.log('nodes',nodes );
             if (nodes.length) {
                 nodes[0].setSelected(true);
                 this.grid.api.setFocusedCell(0, '1');
@@ -69,6 +70,7 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
             let gridForm = this.gridForm.createComponent(componentFactory).instance;
             gridForm.uiConfig = this.uiConfig;
             gridForm.grid = this.grid;
+            gridForm.grid.getRowNodeId = data=>data.id;
             gridForm.service = this.service;
             gridForm.toggleShowPanel = this.toggleShowPanel.bind(this);
             gridForm.editEvent.subscribe(this.handleEdit.bind(this));

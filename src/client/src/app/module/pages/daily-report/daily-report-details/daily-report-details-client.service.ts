@@ -10,11 +10,4 @@ export class DailyReportDetailsClientService extends ClientServiceBaseClass<Dail
 	constructor(protected http: HttpClient) {
 		super(http, DailyReportDetail, 'api/daily-report-details');
 	}
-
-	getAll(params?, reload: boolean = false): Promise<any> {
-		return super.getAll(params, reload).then((response) => {
-			this.data.items = response;
-			return response;
-		});
-	}
 }

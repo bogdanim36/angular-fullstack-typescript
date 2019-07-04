@@ -6,9 +6,9 @@ export class ServerService<M, X, R extends ServerRepository> {
     public repository: R;
     public modelExtended: any;
 
-    constructor(private modelClass: new (source,extra)=> M ,
-                private modelExtendedClass: new ()=> X,
-                private repositoryClass: new (store)=> R,
+    constructor(private modelClass: new (source, extra) => M,
+                private modelExtendedClass: new () => X,
+                private repositoryClass: new (store) => R,
                 protected store: ServerStore) {
         this.modelExtended = new modelExtendedClass();
         this.repository = new this.repositoryClass(store);
@@ -49,11 +49,12 @@ export class ServerService<M, X, R extends ServerRepository> {
         });
     }
 
-    itemValidation(item): { status: boolean; errors?: any, message?:string } {
-        let validator = new  this.modelExtended.validator();
-        if (validator.pass(item, this.modelExtended.relations)) return {status:true, errors:null};
+    itemValidation(item): { status: boolean; errors?: any, message?: string } {
+        let validator = new this.modelExtended.validator();
+        if (validator.pass(item, this.modelExtended.relations)) return {status: true, errors: null};
         else return {status: false, errors: validator.errors, message: 'Item validation failed!'};
     }
+
     create(item): Promise<M> {
         if (!item) throw new Error('No item provided for service.create!');
         let validated = this.itemValidation(item);
@@ -70,11 +71,18 @@ export class ServerService<M, X, R extends ServerRepository> {
     }
 
     update(id, item): Promise<M> {
+        if (id === undefined || id === null) throw new Error('No item provided for service.update ');
         if (!item) throw new Error('No item provided for service.update ');
+        let validated = this.itemValidation(item);
+        if (!validated.status) throw validated.errors;
         return this.repository.update(id, item)
             .then((response: OkPacket) => {
-                if (response.affectedRows === 1) return this.getOne(id);
-                else throw new Error('Update error');
+                if (response.affectedRows === 1) {
+                    if (this.modelExtended.relations){
+                        console.log(item, this.modelExtended.relations);
+                    }
+                    return this.getOne(id);
+                } else throw new Error('Update error');
             })
             .catch(error => {
                 throw error;
