@@ -130,8 +130,8 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
         if (nodes.length) this.selectedGridRowNode = nodes[0];
         else this.selectedGridRowNode = null;
         if (this.selectedGridRowNode) this.item = this.selectedGridRowNode.data;
-        else this.item = this.createInstance({});
-        if (!this.remote) this.modify();
+        // else this.item = this.createInstance({});
+        if (!this.item && this.remote) this.modify();
     }
 
     showSuccessMsg(msg) {

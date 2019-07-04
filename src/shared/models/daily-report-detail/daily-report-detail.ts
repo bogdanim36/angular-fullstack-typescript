@@ -2,15 +2,15 @@ import {Model} from '../../common/model';
 
 export class DailyReportDetail extends Model {
 
-	id?: number;
-	status?: string;
-	percent?: string;
-	taiga?: string;
-	subsection?: string;
-	description?: string;
+    id?: any;
+    status?: string;
+    percent?: string;
+    taiga?: string;
+    subsection?: string;
+    description?: string;
 
-	constructor(source: Partial<DailyReportDetail>, extra = {}) {
-		super(source, extra);
-	}
+    constructor(source: Partial<DailyReportDetail>, extra = {}) {
+        super(source, extra);
+    }
 }
 

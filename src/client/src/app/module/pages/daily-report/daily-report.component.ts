@@ -75,7 +75,7 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
             teamId: 16,
             projectId: 2,
             date: new Date(),
-            tasks: [new DailyReportDetail({status: "In progress", percent: "", id: this.moduleService.nextDetailId++})]
+            tasks: []
         }));
     }
 
