@@ -144,6 +144,7 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
     clearErrors(item) {
         this.errorMessages = [];
         this.errors = this.createInstance({});
+        delete item.$errors;
         Object.keys(this.modelExtended.relations).forEach(relation => {
             item[relation].forEach(detailRow => {
                 delete detailRow.$errors ;
@@ -152,12 +153,17 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
 
     }
 
-    save(source?): Promise<any> {
+    save(source?):Promise<any> {
         this.working = true;
         let itemData = source || this.item;
         this.clearErrors(itemData);
         return this.serviceSave(this.isNewItem, this.source, itemData).then(response => {
             this.working = false;
+            if (!this.remote) {
+                this.editEvent.emit({item: source, isNewItem: this.isNewItem});
+                // this.gridSelectionChanged(this.grid);
+                return response;
+            }
             // console.log("response", response);
             if (response.status) {
                 this.showSuccessMsg(this.uiConfig.labels.itemIsSaved);

@@ -22,7 +22,7 @@ export class DailyReportDetailFormComponent extends EntityFormComponentBaseClass
         super(DailyReportDetailModelExtended, entityService, sharedService );
     }
     newItem() {
-        this.source = this.createInstance({status:"In progress", id: this.moduleService.guid()});
+        this.source = this.createInstance({status:"In progress", id: this.appSharedService.guid()});
         this.isNewItem = true;
         this.editing();
     }

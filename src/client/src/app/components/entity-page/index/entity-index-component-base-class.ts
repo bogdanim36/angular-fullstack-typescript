@@ -139,7 +139,12 @@ export class EntityIndexComponentBaseClass<M, C extends EntityUiConfig, S> exten
 	handleDelete(event: { response: ServerResponse, item: M }) {
 		if (this.grid) {
 			this.grid.api.updateRowData({remove: [event.item]});
-			this.grid.api.selectNode(this.grid.api.getRenderedNodes()[0]);
+			let nodes = this.grid.api.getRenderedNodes();
+			if (nodes.length) this.grid.api.selectNode(this.grid.api.getRenderedNodes()[0]);
+			else {
+				this.gridSelectionChanged(this.grid);
+				console.log('shit');
+			}
 		}
 	}
 }
