@@ -82,7 +82,7 @@
                 <mat-icon>edit</mat-icon>
             </button>
             <!--delete button-->
-            <div *ngIf="!entityService.isEditing || !remote" style="display: inline-block">
+            <div *ngIf="(!entityService.isEditing || !remote) && !this.isNewItem && item.id" style="display: inline-block">
                 <mat-menu #deleteMenu="matMenu">
                     <div style="display: flex;flex-direction: column;margin:0 10px">
                         <button mat-flat-button

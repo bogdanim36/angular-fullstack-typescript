@@ -28,7 +28,7 @@ export class DailyReportDetailFormComponent extends EntityFormComponentBaseClass
     }
     save(source?): Promise<any> {
         return super.save(source).then(response=>{
-            // console.log('task details promise response', response);
+            console.log('task details promise response', response);
             if(response.status){
                 let tasks = [];
                 this.grid.api.forEachNode(function(node) {

@@ -130,7 +130,9 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
         if (nodes.length) this.selectedGridRowNode = nodes[0];
         else this.selectedGridRowNode = null;
         if (this.selectedGridRowNode) this.item = this.selectedGridRowNode.data;
-        // else this.item = this.createInstance({});
+        else this.item = this.createInstance({});
+        if (this.item.$errors) this.errors = this.item.$errors;
+        else this.errors = this.createInstance({});
         if (!this.item && this.remote) this.modify();
     }
 
@@ -160,8 +162,9 @@ export class EntityFormComponentBaseClass<M, ME, C extends EntityUiConfig, S ext
         return this.serviceSave(this.isNewItem, this.source, itemData).then(response => {
             this.working = false;
             if (!this.remote) {
-                this.editEvent.emit({item: source, isNewItem: this.isNewItem});
-                // this.gridSelectionChanged(this.grid);
+                this.editEvent.emit({item: itemData, isNewItem: this.isNewItem});
+                this.gridSelectionChanged(this.grid);
+                this.isNewItem = false;
                 return response;
             }
             // console.log("response", response);
