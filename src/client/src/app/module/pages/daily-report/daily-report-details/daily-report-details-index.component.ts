@@ -11,6 +11,7 @@ import {DailyReportDetailFormComponent} from "@app/module/pages/daily-report/dai
 import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-entity.service";
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
 import {Subscription} from "rxjs";
+import {DailyReportEntityService} from "@app/module/pages/daily-report/daily-report-entity.service";
 
 @Component({
     selector: "app-daily-report-details",
@@ -26,6 +27,7 @@ export class DailyReportDetailsIndexComponent extends EntityIndexComponentBaseCl
                 public uiConfig: DailyReportDetailsUiConfig,
                 protected componentFactoryResolver: ComponentFactoryResolver,
                 protected sanitizer: DomSanitizer,
+                public dailyReportEntityService: DailyReportEntityService,
                 protected entityService: DailyReportDetailsEntityService,
                 public moduleService: DailyReportModuleService) {
         super(appShared, uiConfig, sanitizer, entityService);

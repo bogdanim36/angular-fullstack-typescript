@@ -12,6 +12,7 @@ export class DailyReportModuleService {
     item$: Subject<DailyReport> = new Subject();
     detailsDataUpdate$: Subject<{tasks}> = new Subject();
     tasksChanged$: Subject<DailyReportDetail[]> = new Subject();
+    masterEditing
 
     constructor() {
         this.item$.subscribe(item => {
