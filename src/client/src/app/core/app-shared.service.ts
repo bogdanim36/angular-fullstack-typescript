@@ -6,10 +6,9 @@ import {AuthService} from "@app/admin/auth.service";
 import {LoginComponent} from "@app/admin/login/login.component";
 import {UsersClientService} from "@app/module/pages/users/users-client.service";
 import {User} from "@shared/models/user/user";
-import {AppSharedModule} from "@app/core/app-shared.module";
 import {Guid} from "@app/core/guid";
 
-@Injectable({providedIn: AppSharedModule})
+@Injectable()
 export class AppSharedService {
     static instance?: AppSharedService;
     isHandset: boolean;

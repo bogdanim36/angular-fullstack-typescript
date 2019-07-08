@@ -51,8 +51,6 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
                 public projectsService: ProjectsClientService,
                 private dateAdapter: AppDateAdapter) {
         super(DailyReportModelExtended, entityService, sharedService);
-        if (this.appSharedService.currentUser) this.createItem(this.appSharedService.currentUser);
-        else this.currentUserSubscription = this.appSharedService.currentUser$.subscribe(user => this.createItem(user));
         this.departmentAutocomplete = new AutocompleteConfig<Department>('id', 'name', this.departmentsService);
         this.teamAutocomplete = new AutocompleteConfig<Team>('id', 'name', this.teamsService);
         this.projectAutocomplete = new AutocompleteConfig<Project>('id', 'name', this.projectsService);
@@ -60,11 +58,14 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
         if (this.moduleService.item) this.item = this.moduleService.item;
         this.itemSubscription = this.moduleService.item$.subscribe(item => {
             this.item = item;
-            // console.log('item subscription');
+            console.log('item subscription', item);
         });
     }
 
     ngOnInit(): void {
+    	console.log('auth', this.appSharedService.currentUser);
+        if (this.appSharedService.currentUser) this.createItem(this.appSharedService.currentUser);
+        else this.currentUserSubscription = this.appSharedService.currentUser$.subscribe(user => this.createItem(user));
     }
 
     createItem(user) {

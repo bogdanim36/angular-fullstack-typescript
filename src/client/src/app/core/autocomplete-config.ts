@@ -24,6 +24,7 @@ export class AutocompleteConfig<M> {
 		return (id => {
 			if (id) {
 				let found = this.findItemById(id);
+				console.log('id', id, this.allItems);
 				return found ? found[this.displayField] : 'item not found';
 			} else return '';
 		});
