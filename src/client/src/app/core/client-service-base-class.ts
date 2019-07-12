@@ -2,6 +2,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServerResponse} from './server.response';
 import {environment} from '@app/../environments/environment';
 import {Datasource} from "@app/core/datasource";
+import {Observable} from "rxjs";
 
 export class ClientServiceBaseClass<M> {
 	data: Datasource;
@@ -16,7 +17,7 @@ export class ClientServiceBaseClass<M> {
 		return new this.modelClass.prototype.constructor(source, extra);
 	}
 
-	injectModelInCollection(input) {
+	injectModelInCollection(input):M[] {
 		let output = [];
 		input.forEach(item => {
 			let modelInstance = this.createInstance(item);
@@ -51,11 +52,11 @@ export class ClientServiceBaseClass<M> {
 		return httpParams;
 	}
 
-	async getAll(params ?, reload = false): Promise<M[]> {
+	async getAll(params ?, reload = false): Observable<M[]> {
 		params = params === undefined ? this.getAllApiArgs() : params;
 		const httpParams = this.getHttpParams(params);
 		const url = this.buildUrl('');
-		const response = await this.http.get<ServerResponse>(url, {params: httpParams}).toPromise<ServerResponse>();
+		const response = await this.http.get<ServerResponse>(url, {params: httpParams}).pipe(items=>this.injectModelInCollection(response.data));
 		if (response && response.status) {
 			return this.injectModelInCollection(response.data);
 		} else {

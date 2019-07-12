@@ -34,7 +34,7 @@
                 </button>
                 <mat-autocomplete #departmentAutocompleteRef="matAutocomplete"
                                   [displayWith]="departmentAutocomplete.display()">
-                    <mat-option *ngFor="let option of departmentAutocomplete.filteredItems"
+                    <mat-option *ngFor="let option of departmentAutocomplete.filteredItems | async"
                                 [value]="option.id">{{option.name}}</mat-option>
                 </mat-autocomplete>
                 <div class="form-field-error" *ngIf="errors.departmentId">
