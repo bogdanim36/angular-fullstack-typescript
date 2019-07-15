@@ -31,6 +31,7 @@ import {
 } from "@app/components/entity-page/index/grid-errors-cell-render.component";
 import {DailyReportEntityService} from "@app/module/pages/daily-report/daily-report-entity.service";
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
+import {EntityService} from "@app/components/entity-page/entity.service";
 
 @NgModule({
 	entryComponents: [
@@ -51,6 +52,7 @@ import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-rep
 		DailyReportDetailsEntityService,
 		DailyReportEntityService,
 		DailyReportModuleService,
+		EntityService,
 		AppDateAdapter
 	],
 	imports: [

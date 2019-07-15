@@ -18,9 +18,9 @@ import {DepartmentsClientService} from "@app/module/pages/departments/department
 import {ProjectsClientService} from "@app/module/pages/projects/projects-client.service";
 import {Team} from "@shared/models/team/team";
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
-import {DailyReportDetail} from "@shared/models/daily-report-detail/daily-report-detail";
+
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
-import {Subject, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {DailyReportModelExtended} from "@shared/models/daily-report/daily-report.model-extended";
 
 

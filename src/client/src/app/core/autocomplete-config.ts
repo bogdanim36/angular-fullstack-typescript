@@ -1,9 +1,8 @@
 import {ClientServiceBaseClass} from "@app/core/client-service-base-class";
-import {Observable} from "rxjs";
 
 export class AutocompleteConfig<M> {
-	allItems: Observable<M[]>;
-	filteredItems: Observable<M[]>;
+	allItems:M[] = [];
+	filteredItems:M[] = [];
 	displayField: string;
 	idField: string;
 	itemsLoaded = false;
@@ -11,16 +10,21 @@ export class AutocompleteConfig<M> {
 	constructor(idField: string, displayField: string, private service?: ClientServiceBaseClass<M>, items?: []) {
 		this.idField = idField;
 		this.displayField = displayField;
-		if (service) this.allItems = service.getAll();
-		this.allItems.subscribe(response => {
+		if (service) service.getAll().then(response => {
+			this.allItems = response;
 			this.itemsLoaded = true;
 		});
+		if (items) {
+			this.allItems = items;
+			this.itemsLoaded = true;
+		}
 	}
 
 	display() {
 		return (id => {
-			if (id && this.itemsLoaded) {
+			if (id) {
 				let found = this.findItemById(id);
+				console.log('id', id, this.allItems);
 				return found ? found[this.displayField] : 'item not found';
 			} else return '';
 		});
@@ -30,7 +34,7 @@ export class AutocompleteConfig<M> {
 		return this.allItems.find(item => item[this.idField] === id);
 	}
 
-	filter(searchBy: any, currentItemId?: number): M[] {
+	filter(searchBy: any, currentItemId?:number):M[] {
 		if (searchBy === '' || searchBy === null || searchBy === undefined) searchBy = '';
 		if (typeof searchBy === "number") return [this.findItemById(searchBy)];
 		searchBy = searchBy.toLowerCase().trim();
