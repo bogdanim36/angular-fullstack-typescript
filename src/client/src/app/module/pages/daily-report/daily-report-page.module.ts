@@ -19,7 +19,6 @@ import {
 	GridBooleanCellRenderModule
 } from "@app/components/entity-page/index/grid-boolean-cell-render.component";
 import {DailyReportUiConfig} from "@app/module/pages/daily-report/daily-report-ui-config";
-import {EntityService} from "@app/components/entity-page/entity.service";
 import {DailyReportDetailsIndexComponent} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-index.component";
 import {DailyReportDetailFormComponent} from "@app/module/pages/daily-report/daily-report-details/daily-report-detail-form.component";
 import {DailyReportDetailsUiConfig} from "@app/module/pages/daily-report/daily-report-details/daily-report-details-ui-config";

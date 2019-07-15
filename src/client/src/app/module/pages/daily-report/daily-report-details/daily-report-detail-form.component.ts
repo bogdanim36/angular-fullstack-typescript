@@ -9,7 +9,6 @@ import {DailyReportDetailsEntityService} from "@app/module/pages/daily-report/da
 import {DailyReportDetailModelExtended} from "@shared/models/daily-report-detail/daily-report-detail.model-extended";
 import {DailyReportDetail} from "@shared/models/daily-report-detail/daily-report-detail";
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
-import {DailyReportEntityService} from "@app/module/pages/daily-report/daily-report-entity.service";
 
 @Component({
     selector: 'app-entity-form',
@@ -19,10 +18,7 @@ import {DailyReportEntityService} from "@app/module/pages/daily-report/daily-rep
 export class DailyReportDetailFormComponent extends EntityFormComponentBaseClass<DailyReportDetail, DailyReportDetailModelExtended, DailyReportDetailsUiConfig, DailyReportDetailsClientService> {
     public remote = false;
 
-    constructor(public entityService: DailyReportDetailsEntityService,
-                public sharedService: AppSharedService,
-                public dailyReportEntityService: DailyReportEntityService,
-                private moduleService: DailyReportModuleService) {
+    constructor(public entityService: DailyReportDetailsEntityService, public sharedService: AppSharedService, private moduleService: DailyReportModuleService) {
         super(DailyReportDetailModelExtended, entityService, sharedService );
     }
     newItem() {

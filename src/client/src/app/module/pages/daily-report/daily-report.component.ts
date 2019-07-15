@@ -5,6 +5,7 @@ import {AppSharedService} from "@app/core/app-shared.service";
 import {DailyReport} from "@shared/models/daily-report/daily-report";
 import {DailyReportClientService} from "@app/module/pages/daily-report/daily-report-client.service";
 import {DailyReportUiConfig} from "@app/module/pages/daily-report/daily-report-ui-config";
+import {EntityService} from "@app/components/entity-page/entity.service";
 import {EntityFormComponentBaseClass} from "@app/components/entity-page/form/entity-form-component-base-class";
 import {DateAdapter, MatDatepicker} from "@angular/material";
 import {MAT_DATE_FORMATS} from '@angular/material';
@@ -17,10 +18,10 @@ import {DepartmentsClientService} from "@app/module/pages/departments/department
 import {ProjectsClientService} from "@app/module/pages/projects/projects-client.service";
 import {Team} from "@shared/models/team/team";
 import {TeamsClientService} from "@app/module/pages/teams/teams-client.service";
+import {DailyReportDetail} from "@shared/models/daily-report-detail/daily-report-detail";
 import {DailyReportModuleService} from "@app/module/pages/daily-report/daily-report-module.service";
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {DailyReportModelExtended} from "@shared/models/daily-report/daily-report.model-extended";
-import {DailyReportEntityService} from "@app/module/pages/daily-report/daily-report-entity.service";
 
 
 @Component({
@@ -41,7 +42,7 @@ export class DailyReportComponent extends EntityFormComponentBaseClass<DailyRepo
     currentUserSubscription: Subscription;
 
 
-    constructor(public entityService: DailyReportEntityService,
+    constructor(public entityService: EntityService,
                 public sharedService: AppSharedService,
                 public uiConfig: DailyReportUiConfig,
                 public service: DailyReportClientService,
